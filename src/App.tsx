@@ -1,23 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { TestingPlatform } from './components/TestingPlatform'
-import { Documentation } from './pages/Documentation'
-import { Dashboard } from './pages/Dashboard'
-import { ThemeProvider } from './contexts/ThemeContext'
+import { Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./contexts/ThemeProvider";
+import HomePage from "./components/HomePage";
+import TestingPlatform from "./components/TestingPlatform";
+import MentalHealthTestingPlatform from "./components/MentalHealthTestingPlatform";
 
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <div className="testing-interface">
-          <Routes>
-            <Route path="/" element={<TestingPlatform />} />
-            <Route path="/docs" element={<Documentation />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </div>
-      </Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/platform" element={<TestingPlatform />} />
+        <Route
+          path="/mental-health"
+          element={<MentalHealthTestingPlatform />}
+        />
+        <Route path="/demo" element={<MentalHealthTestingPlatform />} />
+        <Route
+          path="/docs"
+          element={<div className="p-8">Documentation coming soon...</div>}
+        />
+        <Route
+          path="/dashboard"
+          element={<div className="p-8">Dashboard coming soon...</div>}
+        />
+      </Routes>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;

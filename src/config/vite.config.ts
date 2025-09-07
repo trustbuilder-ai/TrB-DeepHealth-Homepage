@@ -1,14 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from 'path'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  root: '../',
+  root: "../",
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, '../'),
+      "@": path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../"),
     },
   },
   server: {
@@ -16,12 +17,12 @@ export default defineConfig({
     open: true,
   },
   build: {
-    outDir: 'dist',
+    outDir: "dist",
     sourcemap: true,
   },
   test: {
     globals: true,
-    environment: 'jsdom',
-    setupFiles: ['./test/setup.ts'],
+    environment: "jsdom",
+    setupFiles: ["./test/setup.ts"],
   },
-})
+});

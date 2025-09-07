@@ -95,7 +95,7 @@ src/
 #### 🎨 Theme System
 
 - **Clinical Trust**: Professional medical interface theme
-- **Warm Community**: Approachable, community-focused theme  
+- **Warm Community**: Approachable, community-focused theme
 - **Dark Mode**: Dark professional interface
 - Seamless theme switching with persistent preferences
 
@@ -123,7 +123,7 @@ node run.js test
 The platform uses CSS custom properties for theming:
 
 - `--primary`: Primary brand color
-- `--secondary`: Secondary brand color  
+- `--secondary`: Secondary brand color
 - `--accent`: Accent color for highlights
 - `--destructive`: Error/warning color
 - `--background`: Main background
@@ -146,7 +146,7 @@ The platform uses CSS custom properties for theming:
 - **Real-time Detection**: Immediate flagging of crisis language
 - **Professional Escalation**: Clear pathways to human intervention
 
-### Privacy & Security  
+### Privacy & Security
 
 - **No PHI Storage**: Platform doesn't store personal health information
 - **Testing Only**: Designed for evaluation, not treatment
@@ -180,7 +180,7 @@ The platform uses CSS custom properties for theming:
 ### Available Routes
 
 - `/` - Main testing interface
-- `/docs` - Comprehensive documentation  
+- `/docs` - Comprehensive documentation
 - `/dashboard` - Testing analytics and metrics
 
 ### API Structure (Future)
@@ -198,7 +198,7 @@ The platform is designed to support future API integration:
 2. **Human Oversight Required**: Always include professional supervision in
    mental health AI
 3. **Crisis Escalation**: High-risk situations must route to 988 Lifeline or
-   emergency services  
+   emergency services
 4. **No PHI**: Do not process personal health information during testing
 5. **Compliance Responsibility**: Users responsible for healthcare regulation
    compliance

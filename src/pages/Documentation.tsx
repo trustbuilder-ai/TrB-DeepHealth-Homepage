@@ -1,12 +1,22 @@
-import { ArrowLeft, BookOpen, Shield, Code, Users, AlertTriangle } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import {
+  ArrowLeft,
+  BookOpen,
+  Shield,
+  Code,
+  Users,
+  AlertTriangle,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 export function Documentation() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-4xl mx-auto px-6 py-8">
         <div className="mb-8">
-          <Link to="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
+          <Link
+            to="/"
+            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Testing Platform
           </Link>
@@ -18,7 +28,8 @@ export function Documentation() {
             <h1 className="text-3xl font-bold">TrB-DeepHealth Documentation</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Comprehensive guide to testing LLMs for mental health product development
+            Comprehensive guide to testing LLMs for mental health product
+            development
           </p>
         </div>
 
@@ -29,7 +40,9 @@ export function Documentation() {
               <h2 className="text-xl font-semibold">Safety Testing</h2>
             </div>
             <p className="text-muted-foreground mb-4">
-              Learn how our platform evaluates LLM responses for crisis detection, medical boundary compliance, and emotional appropriateness.
+              Learn how our platform evaluates LLM responses for crisis
+              detection, medical boundary compliance, and emotional
+              appropriateness.
             </p>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center space-x-2">
@@ -53,7 +66,8 @@ export function Documentation() {
               <h2 className="text-xl font-semibold">Testing Scenarios</h2>
             </div>
             <p className="text-muted-foreground mb-4">
-              Explore our comprehensive test scenarios designed to validate LLM behavior in mental health contexts.
+              Explore our comprehensive test scenarios designed to validate LLM
+              behavior in mental health contexts.
             </p>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center space-x-2">
@@ -77,9 +91,12 @@ export function Documentation() {
             <h2 className="text-2xl font-semibold mb-4">Platform Purpose</h2>
             <div className="prose max-w-none">
               <p className="text-muted-foreground leading-relaxed">
-                TrB-DeepHealth is designed specifically for <strong>testing and evaluating</strong> Large Language Models 
-                before they are deployed in mental health products. This platform is <strong>not a mental health service</strong> 
-                - it's a comprehensive testing environment for developers, researchers, and healthcare organizations.
+                TrB-DeepHealth is designed specifically for{" "}
+                <strong>testing and evaluating</strong> Large Language Models
+                before they are deployed in mental health products. This
+                platform is <strong>not a mental health service</strong>- it's a
+                comprehensive testing environment for developers, researchers,
+                and healthcare organizations.
               </p>
             </div>
           </section>
@@ -92,7 +109,8 @@ export function Documentation() {
                 <div>
                   <h3 className="font-medium">Developers</h3>
                   <p className="text-sm text-muted-foreground">
-                    Validate LLMs before integrating into mental health applications
+                    Validate LLMs before integrating into mental health
+                    applications
                   </p>
                 </div>
               </div>
@@ -120,18 +138,35 @@ export function Documentation() {
           <section className="bg-destructive/10 border border-destructive/20 rounded-lg p-6">
             <div className="flex items-center space-x-3 mb-4">
               <AlertTriangle className="h-6 w-6 text-destructive" />
-              <h2 className="text-xl font-semibold text-destructive">Important Disclaimers</h2>
+              <h2 className="text-xl font-semibold text-destructive">
+                Important Disclaimers
+              </h2>
             </div>
             <ul className="space-y-2 text-sm text-destructive">
-              <li>• This platform is for testing purposes only - not for providing mental health services</li>
-              <li>• Always include human oversight in mental health AI applications</li>
-              <li>• Crisis detection should always route to professional resources (988 Lifeline)</li>
-              <li>• No personal health information should be processed during testing</li>
-              <li>• Compliance with healthcare regulations (HIPAA, etc.) is the user's responsibility</li>
+              <li>
+                • This platform is for testing purposes only - not for providing
+                mental health services
+              </li>
+              <li>
+                • Always include human oversight in mental health AI
+                applications
+              </li>
+              <li>
+                • Crisis detection should always route to professional resources
+                (988 Lifeline)
+              </li>
+              <li>
+                • No personal health information should be processed during
+                testing
+              </li>
+              <li>
+                • Compliance with healthcare regulations (HIPAA, etc.) is the
+                user's responsibility
+              </li>
             </ul>
           </section>
         </div>
       </div>
     </div>
-  )
+  );
 }

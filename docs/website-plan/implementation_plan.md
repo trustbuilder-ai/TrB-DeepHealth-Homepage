@@ -99,7 +99,7 @@ npm install
 # Core dependencies
 npm install react-router-dom axios lucide-react
 npm install tailwindcss @tailwindcss/forms @tailwindcss/typography
-npm install recharts react-hook-form zustand
+npm install recharts react-hook-form
 npm install @testing-library/react @testing-library/jest-dom vitest
 ```
 
@@ -136,15 +136,15 @@ src/
 │   ├── llmTesting.ts                # LLM API integration
 │   ├── scenarioLoader.ts            # Test scenario management
 │   └── resultsExporter.ts           # Export functionality
-├── store/
-│   ├── testStore.ts                 # Test state management
-│   └── metricsStore.ts              # Metrics storage
+├── contexts/
+│   ├── TestContext.tsx              # Test state context with React built-in state
+│   └── MetricsContext.tsx           # Metrics context with React built-in state
 ├── styles/
 │   ├── themes/
-│   │   ├── clinical-trust.css       # Professional theme
-│   │   ├── warm-community.css       # Approachable theme
-│   │   └── dark-mode.css           # Dark mode styles
-│   └── globals.css                  # Global styles
+│   │   ├── clinical-trust.css       # Professional theme with crisis support
+│   │   ├── warm-community.css       # Approachable theme with emotional design
+│   │   └── dark-mode.css           # Dark mode with accessibility focus
+│   └── globals.css                  # Global styles with mental health typography
 ├── types/
 │   ├── test.types.ts                # Test-related types
 │   └── metrics.types.ts             # Metrics types
@@ -279,8 +279,8 @@ Metrics:
 
 - **Framework**: React 18 with TypeScript
 - **Build Tool**: Vite (for fast development)
-- **Styling**: Tailwind CSS with custom themes
-- **State Management**: Zustand
+- **Styling**: Tailwind CSS with custom mental health themes
+- **State Management**: React built-in (useState, useContext, useReducer)
 - **Routing**: React Router v6
 - **Icons**: Lucide React
 - **Charts**: Recharts
@@ -308,6 +308,20 @@ GET /api/metrics/aggregate
 
 ## Safety & Compliance
 
+### Mental Health UI Design Integration
+
+1. **Crisis Support Integration** 
+   - Non-dismissible 988 crisis banner on all components
+   - Calming teal/blue-green color palette (#005C65, #017A8D)
+   - Warm accent colors for emotional connection (#ECA97C, #F3B890)
+   - Trauma-informed design avoiding harsh contrasts
+
+2. **Trust Building Elements**
+   - Human oversight messaging throughout interface
+   - Safety badges and compliance indicators
+   - Clear AI limitations and professional boundaries
+   - Validation-first language patterns
+
 ### Critical Safety Features
 
 1. **Real-time Crisis Detection**
@@ -331,7 +345,8 @@ GET /api/metrics/aggregate
 - GDPR data protection
 - Mental health industry standards
 - AI ethics guidelines
-- Accessibility standards (WCAG 2.1)
+- Accessibility standards (WCAG 2.1 AA minimum)
+- Mental health UI design standards (trauma-informed, crisis support)
 
 ## Success Metrics
 
@@ -382,17 +397,19 @@ GET /api/metrics/aggregate
 
 This implementation plan transforms TrB-DeepHealth from a health advice
 validation tool into a comprehensive **LLM testing platform for mental health
-product development**. The focus is clearly on:
+product development** with **mental health UI design principles** integrated 
+throughout. The focus is clearly on:
 
 1. **Testing and evaluation**, not providing mental health services
 2. **Developer and researcher tools**, not end-user therapy
 3. **Safety validation**, not treatment delivery
 4. **Compliance verification**, not medical advice
+5. **Mental health UI design**, applying therapeutic design principles to testing interfaces
 
 The platform serves as a critical gateway for ensuring LLMs are safe,
 appropriate, and effective before being integrated into mental health products,
-protecting both developers and end-users while advancing the responsible
-development of AI in mental healthcare.
+while demonstrating proper mental health UI design through crisis support
+integration, trauma-informed design, and emotional safety principles.
 
 ---
 
