@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, TestTube, Menu } from 'lucide-react';
 import { ThemeSwitcher } from './ThemeSwitcher';
-import { Theme } from '../../hooks/useTheme';
+import type { Theme } from '../../hooks/useTheme';
 
 interface HeaderProps {
   currentTheme: Theme;

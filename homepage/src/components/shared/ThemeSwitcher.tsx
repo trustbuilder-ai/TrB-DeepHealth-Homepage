@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Palette, Check, ChevronDown } from 'lucide-react';
-import { Theme } from '../../hooks/useTheme';
+import type { Theme } from '../../hooks/useTheme';
 
 interface ThemeSwitcherProps {
   currentTheme: Theme;

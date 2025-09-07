@@ -9,7 +9,6 @@ import { ScenariosPage } from './pages/ScenariosPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { DocumentationPage } from './pages/DocumentationPage';
 import { useTheme } from './hooks/useTheme';
-import './styles/globals.css';
 
 function App() {
   const { theme, toggleTheme } = useTheme();
