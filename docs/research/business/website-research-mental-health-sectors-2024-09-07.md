@@ -5,18 +5,18 @@
 
 ## Source Index
 
-1. **Galen Growth** - https://www.galengrowth.com/mental-healths-investment-resurgence-a-market-ripe-for-innovation/ - Authority: H
-2. **GrowthList** - https://growthlist.co/mental-health-startups/ - Authority: M
-3. **StartUs Insights** - https://www.startus-insights.com/innovators-guide/mental-health-report/ - Authority: H
-4. **Lyra Health** - https://www.lyrahealth.com/ - Authority: H
-5. **UC Davis Health** - https://health.ucdavis.edu/psychiatry/research/ - Authority: H
-6. **Columbia Psychiatry** - https://www.columbiapsychiatry.org/research - Authority: H
-7. **NAMI** - https://www.nami.org/ - Authority: H
-8. **Mental Health America** - https://mhanational.org/ - Authority: H
-9. **AFSP** - https://afsp.org/ - Authority: H
-10. **NIMH** - https://www.nimh.nih.gov/ - Authority: H
-11. **SAMHSA** - https://www.samhsa.gov/ - Authority: H
-12. **Wellcome Trust** - https://wellcome.org/research-funding/schemes/mental-health-award - Authority: H
+1. **Galen Growth** - <https://www.galengrowth.com/mental-healths-investment-resurgence-a-market-ripe-for-innovation/> - Authority: H
+2. **GrowthList** - <https://growthlist.co/mental-health-startups/> - Authority: M
+3. **StartUs Insights** - <https://www.startus-insights.com/innovators-guide/mental-health-report/> - Authority: H
+4. **Lyra Health** - <https://www.lyrahealth.com/> - Authority: H
+5. **UC Davis Health** - <https://health.ucdavis.edu/psychiatry/research/> - Authority: H
+6. **Columbia Psychiatry** - <https://www.columbiapsychiatry.org/research> - Authority: H
+7. **NAMI** - <https://www.nami.org/> - Authority: H
+8. **Mental Health America** - <https://mhanational.org/> - Authority: H
+9. **AFSP** - <https://afsp.org/> - Authority: H
+10. **NIMH** - <https://www.nimh.nih.gov/> - Authority: H
+11. **SAMHSA** - <https://www.samhsa.gov/> - Authority: H
+12. **Wellcome Trust** - <https://wellcome.org/research-funding/schemes/mental-health-award> - Authority: H
 
 ## Top 3 Cross-Sector Synergy Insights
 
