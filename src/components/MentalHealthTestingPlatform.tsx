@@ -52,37 +52,17 @@ export function MentalHealthTestingPlatform() {
       {/* Mental Health Theme Variables */}
       <style>{`
         :root {
-          --primary: #005C65;
-          --primary-light: #017A8D;
-          --primary-lighter: #20A4B8;
-          --primary-dark: #004850;
-          --accent: #ECA97C;
-          --accent-light: #F3B890;
-          --accent-lighter: #F9D4B7;
-          --accent-dark: #D4956A;
-          --crisis: #ff6252;
-          --crisis-light: #ff8a7a;
-          --crisis-dark: #e5553f;
-          --background: #FAFBFC;
-          --background-secondary: #F7FAFC;
-          --surface: #FFFFFF;
-          --surface-hover: #F7FAFC;
-          --text-primary: #2D3748;
-          --text-secondary: #4A5568;
-          --text-tertiary: #718096;
-          --text-inverse: #FFFFFF;
-          --border: #E2E8F0;
-          --border-light: #F1F5F9;
-          --success: #38A169;
-          --success-light: #68D391;
-          --warning: #D69E2E;
-          --warning-light: #F6E05E;
+          --mental-health-primary: #005C65;
+          --mental-health-primary-light: #017A8D;
+          --mental-health-accent: #ECA97C;
+          --mental-health-accent-light: #F3B890;
+          --mental-health-crisis: #ff6252;
+          --mental-health-success: #38A169;
+          --mental-health-warning: #D69E2E;
         }
         
         body {
           font-family: 'Open Sans', 'Lato', 'Montserrat', system-ui, -apple-system, sans-serif;
-          color: var(--text-primary);
-          background-color: var(--background);
         }
       `}</style>
 
@@ -132,18 +112,18 @@ export function MentalHealthTestingPlatform() {
                 onClick={() => setCurrentView("testing")}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                   currentView === "testing"
-                    ? "bg-primary text-text-inverse"
-                    : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
               >
-                Testing Interface
+                LLM Testing Area
               </button>
               <button
                 onClick={() => setCurrentView("results")}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                   currentView === "results"
-                    ? "bg-primary text-text-inverse"
-                    : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
               >
                 Results & Analytics
@@ -152,8 +132,8 @@ export function MentalHealthTestingPlatform() {
                 onClick={() => setCurrentView("about")}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                   currentView === "about"
-                    ? "bg-primary text-text-inverse"
-                    : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
                 }`}
               >
                 About Platform

@@ -198,14 +198,14 @@ export function MentalHealthTestInterface({
             <h2 className="font-semibold text-text-primary">
               {selectedScenario.name}
             </h2>
-            <p className="text-sm text-text-secondary">Testing Environment</p>
+            <p className="text-sm text-muted-foreground">LLM Evaluation Interface</p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1 px-3 py-1 bg-success/10 rounded-full">
             <Shield className="w-4 h-4 text-success" />
-            <span className="text-xs font-medium text-success">Safe Mode</span>
+            <span className="text-xs font-medium text-success">Testing Mode</span>
           </div>
         </div>
       </div>
@@ -228,23 +228,23 @@ export function MentalHealthTestInterface({
             <div
               className={`max-w-[75%] p-4 rounded-lg border-l-4 ${getMessageSafetyColor(message)} ${
                 message.type === "user"
-                  ? "bg-primary text-text-inverse ml-auto"
-                  : "bg-surface border border-border/50"
+                  ? "bg-primary text-primary-foreground ml-auto"
+                  : "bg-card border border-border/50"
               }`}
             >
               <div className="prose prose-sm max-w-none">{message.content}</div>
 
               {message.type === "assistant" && (
                 <div className="flex items-center gap-4 mt-3 pt-3 border-t border-border/30">
-                  <div className="flex items-center gap-1 text-xs text-text-tertiary">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Shield className="w-3 h-3" />
                     Safety: {message.safetyScore}%
                   </div>
-                  <div className="flex items-center gap-1 text-xs text-text-tertiary">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <AlertCircle className="w-3 h-3" />
                     Risk: {message.crisisLevel}
                   </div>
-                  <div className="flex items-center gap-1 text-xs text-text-tertiary">
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Clock className="w-3 h-3" />
                     {message.timestamp.toLocaleTimeString([], {
                       hour: "2-digit",
@@ -256,8 +256,8 @@ export function MentalHealthTestInterface({
             </div>
 
             {message.type === "user" && (
-              <div className="flex-shrink-0 w-8 h-8 bg-accent/10 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-accent-dark" />
+              <div className="flex-shrink-0 w-8 h-8 bg-secondary/10 rounded-full flex items-center justify-center">
+                <User className="w-4 h-4 text-secondary-foreground" />
               </div>
             )}
           </div>
@@ -268,10 +268,10 @@ export function MentalHealthTestInterface({
             <div className="flex-shrink-0 w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
               <Bot className="w-4 h-4 text-primary" />
             </div>
-            <div className="max-w-[75%] p-4 rounded-lg bg-surface border border-border/50 border-l-4 border-l-border">
-              <div className="flex items-center gap-2 text-text-secondary">
+            <div className="max-w-[75%] p-4 rounded-lg bg-card border border-border/50 border-l-4 border-l-border">
+              <div className="flex items-center gap-2 text-muted-foreground">
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span className="text-sm">AI is responding...</span>
+                <span className="text-sm">LLM is processing...</span>
               </div>
             </div>
           </div>
@@ -283,14 +283,14 @@ export function MentalHealthTestInterface({
       {/* Input Area */}
       <form
         onSubmit={handleSubmit}
-        className="p-4 border-t border-border/50 bg-surface/50 backdrop-blur-sm"
+        className="p-4 border-t border-border/50 bg-card/50 backdrop-blur-sm"
       >
         <div className="flex gap-3">
           <div className="flex-1 relative">
             <textarea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              placeholder="Type your message to test AI safety responses..."
+              placeholder="Enter test input to evaluate LLM safety responses..."
               className="w-full p-3 pr-12 rounded-lg border border-border bg-background resize-none focus:ring-2 focus:ring-primary/50 focus:border-primary/60 transition-all duration-200"
               rows={2}
               disabled={isLoading}
@@ -301,7 +301,7 @@ export function MentalHealthTestInterface({
                 }
               }}
             />
-            <div className="absolute bottom-2 right-2 text-xs text-text-tertiary">
+            <div className="absolute bottom-2 right-2 text-xs text-muted-foreground">
               Enter to send
             </div>
           </div>
@@ -309,7 +309,7 @@ export function MentalHealthTestInterface({
           <button
             type="submit"
             disabled={!inputValue.trim() || isLoading}
-            className="flex items-center justify-center w-12 h-12 bg-primary text-text-inverse rounded-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105 active:scale-95"
+            className="flex items-center justify-center w-12 h-12 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105 active:scale-95"
           >
             {isLoading ? (
               <Loader2 className="w-5 h-5 animate-spin" />
@@ -320,11 +320,11 @@ export function MentalHealthTestInterface({
         </div>
 
         <div className="flex items-center justify-between mt-2">
-          <div className="flex items-center gap-2 text-xs text-text-tertiary">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <Heart className="w-3 h-3" />
-            <span>This is a safe testing environment</span>
+            <span>LLM Testing Environment - Safe Mode Active</span>
           </div>
-          <div className="flex items-center gap-2 text-xs text-text-tertiary">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <MessageSquare className="w-3 h-3" />
             <span>{messages.length} messages</span>
           </div>

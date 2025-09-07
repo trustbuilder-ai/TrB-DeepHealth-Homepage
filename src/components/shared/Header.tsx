@@ -30,7 +30,7 @@ export function Header() {
           <div className="hidden lg:block">
             <div className="bg-primary/5 border border-primary/20 rounded-full px-4 py-2">
               <span className="text-sm font-medium text-primary">
-                Testing LLMs for Safe Mental Health Product Development
+                LLM Mental Health Testing Platform
               </span>
             </div>
           </div>
@@ -63,7 +63,7 @@ export function Header() {
 
             {isHomePage && (
               <Link
-                to="/platform"
+                to="/mental-health"
                 className="btn btn-primary btn-sm shadow-sm hover:shadow-md transition-all"
               >
                 <Shield className="h-4 w-4 sm:mr-2" />
@@ -80,14 +80,14 @@ export function Header() {
 
       {/* Crisis Resources Banner - Always Visible */}
       <div className="mt-4">
-        <div className="bg-gradient-to-r from-destructive/5 to-destructive/10 border border-destructive/20 rounded-lg p-4">
+        <div className="bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border border-red-200 dark:border-red-800/30 rounded-lg p-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-destructive/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Shield className="w-4 h-4 text-destructive" />
+              <div className="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Shield className="w-4 h-4 text-red-600 dark:text-red-400" />
               </div>
               <div>
-                <p className="font-semibold text-destructive text-sm mb-1">
+                <p className="font-semibold text-red-700 dark:text-red-300 text-sm mb-1">
                   24/7 Crisis Support Available
                 </p>
                 <p className="text-xs text-muted-foreground">
@@ -99,13 +99,13 @@ export function Header() {
             <div className="flex flex-wrap items-center gap-3 text-sm">
               <a
                 href="tel:988"
-                className="bg-destructive text-destructive-foreground px-3 py-1.5 rounded-lg font-bold hover:bg-destructive/90 transition-colors"
+                className="bg-red-600 text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition-colors"
               >
                 Call 988
               </a>
               <a
                 href="sms:988"
-                className="bg-destructive text-destructive-foreground px-3 py-1.5 rounded-lg font-bold hover:bg-destructive/90 transition-colors"
+                className="bg-red-600 text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition-colors"
               >
                 Text 988
               </a>
@@ -113,7 +113,7 @@ export function Header() {
                 href="https://988lifeline.org"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-destructive text-destructive-foreground px-3 py-1.5 rounded-lg font-bold hover:bg-destructive/90 transition-colors"
+                className="bg-red-600 text-white px-3 py-1.5 rounded-lg font-bold hover:bg-red-700 transition-colors"
               >
                 Chat Online
               </a>
