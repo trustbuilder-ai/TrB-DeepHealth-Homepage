@@ -8,6 +8,16 @@ setup_claude_code:  ## Setup claude code CLI, node.js and npm have to be present
 	npm install -gs @anthropic-ai/claude-code
 	echo "Claude Code CLI version: $$(claude --version)"
 
+setup_md_lint:  ##  Setup markdiwnlint-cli, node.js and npm have to be present
+	npm install -gs markdownlint-cli
+
+run_markdownlint:  ## Lint markdown files. Usage from root dir: make run_markdownlint INPUT_FILES="docs/**/*.md"
+	if [ -z "$(INPUT_FILES)" ]; then
+		echo "Error: No input files specified. Use INPUT_FILES=\"docs/**/*.md\""
+		exit 1
+	fi
+	markdownlint $(INPUT_FILES) --fix
+
 help:  ## Displays this message with available recipes
 	# TODO add stackoverflow source
 	echo "Usage: make [recipe]"

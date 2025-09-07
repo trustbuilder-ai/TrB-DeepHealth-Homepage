@@ -1,0 +1,37 @@
+  Research mental health websites across private and public sectors to analyze design patterns for LLM
+   integration testing. Focus on:
+
+  PRIVATE SECTOR TARGETS:
+  - BetterHelp, Talkspace, Cerebral, Headspace Health
+  - Calm, Mindfulness apps with web interfaces
+  - Corporate wellness platforms (Lyra Health, Modern Health)
+  - Therapy practice websites and booking platforms
+
+  PUBLIC SECTOR TARGETS:
+  - SAMHSA.gov, NIMH.nih.gov, CDC mental health pages
+  - State/local mental health department websites
+  - Crisis hotline and resource websites
+  - Government mental health information portals
+
+  DESIGN ANALYSIS FOCUS:
+  - Content presentation patterns for sensitive mental health information
+  - User flow designs for intake/assessment forms
+  - Visual design choices that build trust and reduce anxiety
+  - Typography and color psychology for mental health contexts
+  - Information architecture for complex mental health resources
+  - Chat interfaces and conversational UI patterns
+  - Privacy/security messaging and visual cues
+
+  SPECIFIC EXTRACTION NEEDED:
+  - Exact wording of mental health disclaimers and safety warnings
+  - Question formats used in mental health assessments
+  - Language patterns for sensitive topic discussions
+  - Visual design elements that convey empathy and professionalism
+  - Navigation structures for crisis resources vs. general information
+
+  The goal is to understand design patterns that could inform how LLMs should present mental health
+  information, handle sensitive conversations, and integrate into mental health websites while
+  maintaining appropriate boundaries and safety standards.
+
+  Analyze how these sites balance accessibility with clinical appropriateness, and identify design
+  patterns that could guide LLM interface design for mental health applications.

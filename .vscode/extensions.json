@@ -2,6 +2,7 @@
     "recommendations": [
         "anthropic.claude-code",
         "saoudrizwan.claude-dev",
+        "iganbold.superdesign",
 
         "davidanson.vscode-markdownlint",
         "donjayamanne.githistory",
