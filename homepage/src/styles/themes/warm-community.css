@@ -1,0 +1,53 @@
+/* Warm Community Theme - Approachable theme with emotional design */
+
+:root[data-theme="warm-community"] {
+  /* Primary colors emphasizing warmth and approachability */
+  --color-primary: theme('colors.warm-peach.400');
+  --color-primary-hover: theme('colors.warm-peach.500');
+  --color-secondary: theme('colors.trust-teal.400');
+  --color-secondary-hover: theme('colors.trust-teal.500');
+  
+  /* Background colors for warmth */
+  --color-bg-primary: #fefefe;
+  --color-bg-secondary: theme('colors.warm-peach.25');
+  --color-bg-accent: theme('colors.warm-peach.50');
+  
+  /* Text colors for friendly readability */
+  --color-text-primary: theme('colors.gray.800');
+  --color-text-secondary: theme('colors.gray.600');
+  --color-text-muted: theme('colors.gray.500');
+  
+  /* Crisis support colors (maintained for safety) */
+  --color-crisis: theme('colors.coral-alert.500');
+  --color-crisis-bg: theme('colors.coral-alert.50');
+  --color-crisis-border: theme('colors.coral-alert.200');
+}
+
+[data-theme="warm-community"] {
+  body {
+    background-color: var(--color-bg-secondary);
+  }
+  
+  .crisis-banner {
+    background-color: var(--color-crisis-bg);
+    border-left-color: var(--color-crisis);
+    color: var(--color-crisis);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+  
+  .card {
+    background-color: var(--color-bg-primary);
+    border-color: theme('colors.warm-peach.200');
+  }
+  
+  h1, h2 {
+    color: theme('colors.warm-peach.700');
+  }
+}

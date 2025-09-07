@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mental Health UI Design - Global Styles */
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    line-height: 1.6;
+  }
+  
+  /* Therapeutic Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-therapeutic;
+    line-height: 1.2;
+  }
+  
+  h1 {
+    @apply text-3xl font-semibold text-trust-teal-600;
+  }
+  
+  h2 {
+    @apply text-2xl font-medium text-trust-teal-700;
+  }
+  
+  h3 {
+    @apply text-xl font-medium text-gray-800;
+  }
+  
+  /* Body text optimized for readability */
+  p {
+    line-height: 1.5;
+    @apply text-gray-700;
+  }
+  
+  /* Crisis text styling */
+  .crisis-text {
+    @apply text-crisis text-coral-alert-500 font-semibold;
+  }
+  
+  /* Accessible focus states */
+  *:focus {
+    @apply outline-none ring-2 ring-trust-teal-500 ring-offset-2;
+  }
+  
+  /* Reduced motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Crisis Banner Component */
+  .crisis-banner {
+    @apply bg-coral-alert-50 border-l-4 border-coral-alert-500 p-4 mb-6;
+    @apply text-coral-alert-800 font-medium;
+  }
+  
+  /* Trust-building buttons */
+  .btn-primary {
+    @apply bg-trust-teal-500 hover:bg-trust-teal-600 text-white;
+    @apply px-6 py-3 rounded-therapeutic font-medium;
+    @apply transition-colors duration-200 shadow-gentle;
+    @apply focus:ring-2 focus:ring-trust-teal-500 focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-warm-peach-100 hover:bg-warm-peach-200 text-warm-peach-800;
+    @apply px-6 py-3 rounded-therapeutic font-medium;
+    @apply transition-colors duration-200 shadow-gentle;
+    @apply focus:ring-2 focus:ring-warm-peach-400 focus:ring-offset-2;
+  }
+  
+  /* Card components with gentle shadows */
+  .card {
+    @apply bg-white rounded-therapeutic shadow-gentle p-6;
+    @apply border border-gray-100;
+  }
+  
+  .card-trust {
+    @apply bg-white rounded-therapeutic shadow-trust p-6;
+    @apply border border-trust-teal-100;
+  }
+  
+  /* Input styling for forms */
+  .input-therapeutic {
+    @apply block w-full rounded-therapeutic border-gray-300;
+    @apply focus:border-trust-teal-500 focus:ring-trust-teal-500;
+    @apply text-gray-900 placeholder-gray-500;
+  }
+  
+  /* Safety indicators */
+  .safety-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+    @apply bg-medical-green-100 text-medical-green-800;
+  }
+  
+  /* Emotional regulation helpers */
+  .breathing-prompt {
+    @apply text-center p-6 bg-calm-blue-50 rounded-therapeutic;
+    @apply border border-calm-blue-200;
+  }
+}
+
+@layer utilities {
+  /* Text color utilities for mental health context */
+  .text-therapeutic {
+    @apply text-gray-700;
+  }
+  
+  .text-trust {
+    @apply text-trust-teal-600;
+  }
+  
+  .text-warm {
+    @apply text-warm-peach-600;
+  }
+  
+  .text-crisis {
+    @apply text-coral-alert-600;
+  }
+  
+  /* Background utilities */
+  .bg-therapeutic {
+    @apply bg-gray-50;
+  }
+  
+  .bg-trust {
+    @apply bg-trust-teal-50;
+  }
+  
+  .bg-warm {
+    @apply bg-warm-peach-50;
+  }
+}

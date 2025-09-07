@@ -1,0 +1,67 @@
+/* Dark Mode Theme - Dark mode with accessibility focus */
+
+:root[data-theme="dark"] {
+  /* Primary colors adapted for dark backgrounds */
+  --color-primary: theme('colors.trust-teal.400');
+  --color-primary-hover: theme('colors.trust-teal.300');
+  --color-secondary: theme('colors.warm-peach.300');
+  --color-secondary-hover: theme('colors.warm-peach.200');
+  
+  /* Dark background colors */
+  --color-bg-primary: theme('colors.gray.900');
+  --color-bg-secondary: theme('colors.gray.800');
+  --color-bg-accent: theme('colors.gray.700');
+  
+  /* High contrast text colors for accessibility */
+  --color-text-primary: theme('colors.gray.100');
+  --color-text-secondary: theme('colors.gray.300');
+  --color-text-muted: theme('colors.gray.400');
+  
+  /* Crisis support colors (high contrast for visibility) */
+  --color-crisis: theme('colors.coral-alert.400');
+  --color-crisis-bg: theme('colors.coral-alert.900');
+  --color-crisis-border: theme('colors.coral-alert.600');
+}
+
+[data-theme="dark"] {
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+  }
+  
+  .crisis-banner {
+    background-color: var(--color-crisis-bg);
+    border-left-color: var(--color-crisis);
+    color: var(--color-crisis);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-bg-primary);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+  
+  .card {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-bg-accent);
+    color: var(--color-text-primary);
+  }
+  
+  .card-trust {
+    background-color: var(--color-bg-secondary);
+    border-color: var(--color-primary);
+  }
+  
+  h1, h2, h3 {
+    color: var(--color-text-primary);
+  }
+  
+  /* Enhanced focus states for dark mode accessibility */
+  *:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 4px rgba(1, 122, 141, 0.2);
+  }
+}
