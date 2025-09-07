@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Header } from "./shared/Header";
-import { CrisisSupportBanner } from "./crisis/CrisisSupportBanner";
+import { FloatingCrisisButton } from "./crisis/FloatingCrisisButton";
+import { CrisisDetectionModal } from "./crisis/CrisisDetectionModal";
 import { MentalHealthTestInterface } from "./testing/MentalHealthTestInterface";
+import { SplitScreenTestInterface } from "./testing/SplitScreenTestInterface";
 import { MentalHealthScenarioPanel } from "./testing/MentalHealthScenarioPanel";
 import { SafetyDashboard } from "./dashboard/SafetyDashboard";
 import { TrustIndicators } from "./shared/TrustIndicators";
@@ -27,6 +29,14 @@ export function MentalHealthTestingPlatform() {
   const [currentView, setCurrentView] = useState<
     "testing" | "results" | "about"
   >("testing");
+  const [testingMode, setTestingMode] = useState<"standard" | "split-screen">(
+    "standard",
+  );
+  const [crisisModalOpen, setCrisisModalOpen] = useState(false);
+  const [crisisModalSeverity, setCrisisModalSeverity] = useState<
+    "medium" | "high"
+  >("medium");
+  const [crisisModalTriggers, setCrisisModalTriggers] = useState<string[]>([]);
 
   const handleScenarioSelect = (scenario: TestScenario) => {
     setSelectedScenario(scenario);
@@ -34,6 +44,24 @@ export function MentalHealthTestingPlatform() {
 
   const handleTestComplete = (result: TestResult) => {
     setTestResults((prev) => [result, ...prev].slice(0, 100)); // Keep last 100 results
+
+    // Check for crisis detection
+    if (result.crisisLevel === "high") {
+      setCrisisModalSeverity("high");
+      setCrisisModalTriggers(result.flags || []);
+      setCrisisModalOpen(true);
+    } else if (result.crisisLevel === "medium" && Math.random() > 0.7) {
+      // Show medium modal occasionally
+      setCrisisModalSeverity("medium");
+      setCrisisModalTriggers(result.flags || []);
+      setCrisisModalOpen(true);
+    }
+  };
+
+  const handleCrisisDetected = () => {
+    setCrisisModalSeverity("high");
+    setCrisisModalTriggers(["manual trigger"]);
+    setCrisisModalOpen(true);
   };
 
   const toggleSidebar = () => {
@@ -69,39 +97,40 @@ export function MentalHealthTestingPlatform() {
       {/* Header */}
       <Header />
 
-      {/* Crisis Support Banner */}
-      <div className="page-container pt-6">
-        <CrisisSupportBanner />
-      </div>
+      {/* Note: Crisis support is now integrated into header */}
 
       {/* Main Content */}
       <div className="flex-1 flex overflow-hidden min-h-0">
-        {/* Left Sidebar - Scenarios */}
-        <div
-          className={`${
-            isSidebarCollapsed ? "w-0 lg:w-0" : "w-full lg:w-96"
-          } transition-all duration-300 border-r border-border/50 bg-card/50 backdrop-blur-sm`}
-        >
-          {!isSidebarCollapsed && (
-            <MentalHealthScenarioPanel
-              selectedScenario={selectedScenario}
-              onScenarioSelect={handleScenarioSelect}
-            />
-          )}
-        </div>
+        {/* Left Sidebar - Scenarios (hidden in split-screen mode) */}
+        {!(currentView === "testing" && testingMode === "split-screen") && (
+          <div
+            className={`${
+              isSidebarCollapsed ? "w-0 lg:w-0" : "w-full lg:w-96"
+            } transition-all duration-300 border-r border-border/50 bg-card/50 backdrop-blur-sm`}
+          >
+            {!isSidebarCollapsed && (
+              <MentalHealthScenarioPanel
+                selectedScenario={selectedScenario}
+                onScenarioSelect={handleScenarioSelect}
+              />
+            )}
+          </div>
+        )}
 
-        {/* Sidebar Toggle Button */}
-        <button
-          onClick={toggleSidebar}
-          className="hidden lg:flex items-center justify-center w-8 bg-card/80 hover:bg-card border-r border-border/50 text-muted-foreground hover:text-foreground transition-all duration-200 hover:shadow-sm"
-          title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {isSidebarCollapsed ? (
-            <ChevronRight className="w-4 h-4" />
-          ) : (
-            <ChevronLeft className="w-4 h-4" />
-          )}
-        </button>
+        {/* Sidebar Toggle Button (hidden in split-screen mode) */}
+        {!(currentView === "testing" && testingMode === "split-screen") && (
+          <button
+            onClick={toggleSidebar}
+            className="hidden lg:flex items-center justify-center w-8 bg-card/80 hover:bg-card border-r border-border/50 text-muted-foreground hover:text-foreground transition-all duration-200 hover:shadow-sm"
+            title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {isSidebarCollapsed ? (
+              <ChevronRight className="w-4 h-4" />
+            ) : (
+              <ChevronLeft className="w-4 h-4" />
+            )}
+          </button>
+        )}
 
         {/* Main Testing Area */}
         <div className="flex-1 flex flex-col overflow-hidden">
@@ -118,6 +147,32 @@ export function MentalHealthTestingPlatform() {
               >
                 LLM Testing Area
               </button>
+
+              {/* Testing Mode Toggle */}
+              {currentView === "testing" && (
+                <div className="flex items-center gap-1 ml-2 p-1 bg-muted/50 rounded-lg">
+                  <button
+                    onClick={() => setTestingMode("standard")}
+                    className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                      testingMode === "standard"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Standard
+                  </button>
+                  <button
+                    onClick={() => setTestingMode("split-screen")}
+                    className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 ${
+                      testingMode === "split-screen"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Split-Screen
+                  </button>
+                </div>
+              )}
               <button
                 onClick={() => setCurrentView("results")}
                 className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
@@ -180,11 +235,20 @@ export function MentalHealthTestingPlatform() {
               } flex flex-col overflow-hidden`}
             >
               {currentView === "testing" && (
-                <div className="flex-1 p-6 overflow-hidden">
-                  <MentalHealthTestInterface
-                    selectedScenario={selectedScenario}
-                    onTestComplete={handleTestComplete}
-                  />
+                <div className="flex-1 overflow-hidden">
+                  {testingMode === "standard" ? (
+                    <div className="p-6 h-full overflow-hidden">
+                      <MentalHealthTestInterface
+                        selectedScenario={selectedScenario}
+                        onTestComplete={handleTestComplete}
+                      />
+                    </div>
+                  ) : (
+                    <SplitScreenTestInterface
+                      selectedScenario={selectedScenario}
+                      onTestComplete={handleTestComplete}
+                    />
+                  )}
                 </div>
               )}
 
@@ -318,6 +382,20 @@ export function MentalHealthTestingPlatform() {
           onClick={toggleSidebar}
         />
       )}
+
+      {/* Floating Crisis Button - Always Visible */}
+      <FloatingCrisisButton
+        onCrisisDetected={handleCrisisDetected}
+        isVisible={true}
+      />
+
+      {/* Crisis Detection Modal */}
+      <CrisisDetectionModal
+        isOpen={crisisModalOpen}
+        onClose={() => setCrisisModalOpen(false)}
+        severity={crisisModalSeverity}
+        triggerWords={crisisModalTriggers}
+      />
     </div>
   );
 }

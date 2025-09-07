@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Lato:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 @import url("./themes/clinical-trust.css");
 @import url("./themes/warm-community.css");
 @import url("./themes/dark-mode.css");
@@ -7,6 +7,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Mental Health Research-Based Color Scheme */
+:root {
+  /* Trust-building primary colors (Research-based teal/blue-green range) */
+  --mental-health-primary: #005c65;
+  --mental-health-primary-light: #017a8d;
+  --mental-health-primary-hover: #025a80;
+  --mental-health-primary-subtle: #00a3ff;
+
+  /* Medical authority greens */
+  --mental-health-authority: #01382e;
+  --mental-health-authority-light: #068262;
+
+  /* Calming blue gradients */
+  --mental-health-calm: #223eac;
+  --mental-health-calm-light: #869ffe;
+
+  /* Emotional warmth accents */
+  --mental-health-warm: #eca97c;
+  --mental-health-warm-light: #f3b890;
+  --mental-health-coral: #ff6252;
+
+  /* Safety levels */
+  --mental-health-success: #38a169;
+  --mental-health-warning: #d69e2e;
+  --mental-health-crisis: #dc2626;
+
+  /* Enhanced backdrop blur effect */
+  --glass-backdrop-blur: blur(16px);
+  --glass-bg-light: rgba(255, 255, 255, 0.85);
+  --glass-bg-dark: rgba(15, 23, 42, 0.85);
+  --glass-border-light: rgba(255, 255, 255, 0.2);
+  --glass-border-dark: rgba(255, 255, 255, 0.1);
+}
 
 /* Global base styles */
 @layer base {
@@ -21,7 +55,16 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-sans);
+    font-family:
+      "Open Sans",
+      "Lato",
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
@@ -36,7 +79,13 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-sans);
+    font-family:
+      "Open Sans",
+      "Lato",
+      "Montserrat",
+      system-ui,
+      -apple-system,
+      sans-serif;
     font-weight: 600;
     letter-spacing: -0.025em;
   }
@@ -234,7 +283,16 @@
   }
 
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-400 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  /* Enhanced hover effects for mental health context */
+  .hover-lift-gentle {
+    @apply transition-all duration-500 hover:-translate-y-0.5 hover:shadow-md;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105 active:scale-95;
   }
 
   .focus-ring {
@@ -242,26 +300,54 @@
   }
 
   .glass-effect {
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: var(--glass-backdrop-blur);
+    background: var(--glass-bg-light);
+    border: 1px solid var(--glass-border-light);
   }
 
   .dark .glass-effect {
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg-dark);
+    border: 1px solid var(--glass-border-dark);
+  }
+
+  /* Enhanced glass effects for mental health platform */
+  .glass-card {
+    @apply glass-effect rounded-2xl shadow-lg transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    backdrop-filter: var(--glass-backdrop-blur) saturate(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(0, 92, 101, 0.1);
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.4s ease-out;
+    animation: fadeIn 0.5s ease-out;
   }
 
   .animate-slide-up {
-    animation: slideUp 0.5s ease-out;
+    animation: slideUp 0.4s ease-out;
   }
 
   .animate-bounce-in {
-    animation: bounceIn 0.6s ease-out;
+    animation: bounceIn 0.5s ease-out;
+  }
+
+  /* Breathing animation for calming effect */
+  .animate-breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
   }
 
   @keyframes fadeIn {
