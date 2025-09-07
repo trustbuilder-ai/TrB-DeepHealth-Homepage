@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "anthropic.claude-code",
+        "saoudrizwan.claude-dev",
+
+        "davidanson.vscode-markdownlint",
+        "donjayamanne.githistory",
+        "gruntfuggly.todo-tree",
+        "mhutchie.git-graph",
+        "redhat.vscode-yaml",
+        "yzhang.markdown-all-in-one"
+    ]
+}
