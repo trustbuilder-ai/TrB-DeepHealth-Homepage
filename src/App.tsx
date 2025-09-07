@@ -15,14 +15,8 @@ function App() {
           element={<MentalHealthTestingPlatform />}
         />
         <Route path="/demo" element={<MentalHealthTestingPlatform />} />
-        <Route
-          path="/docs"
-          element={<Documentation />}
-        />
-        <Route
-          path="/dashboard"
-          element={<Dashboard />}
-        />
+        <Route path="/docs" element={<Documentation />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </ThemeProvider>
   );

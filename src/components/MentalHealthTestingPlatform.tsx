@@ -48,7 +48,7 @@ export function MentalHealthTestingPlatform() {
   }, [selectedScenario]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="testing-interface flex flex-col">
       {/* Mental Health Theme Variables */}
       <style>{`
         :root {
@@ -70,17 +70,17 @@ export function MentalHealthTestingPlatform() {
       <Header />
 
       {/* Crisis Support Banner */}
-      <div className="px-4 sm:px-6 lg:px-8 pt-4">
+      <div className="page-container pt-6">
         <CrisisSupportBanner />
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden min-h-0">
         {/* Left Sidebar - Scenarios */}
         <div
           className={`${
-            isSidebarCollapsed ? "w-0 lg:w-0" : "w-full lg:w-80"
-          } transition-all duration-300 border-r border-border/50 bg-surface`}
+            isSidebarCollapsed ? "w-0 lg:w-0" : "w-full lg:w-96"
+          } transition-all duration-300 border-r border-border/50 bg-card/50 backdrop-blur-sm`}
         >
           {!isSidebarCollapsed && (
             <MentalHealthScenarioPanel
@@ -93,7 +93,7 @@ export function MentalHealthTestingPlatform() {
         {/* Sidebar Toggle Button */}
         <button
           onClick={toggleSidebar}
-          className="hidden lg:flex items-center justify-center w-6 bg-surface hover:bg-surface-hover border-r border-border/50 text-text-secondary hover:text-text-primary transition-colors"
+          className="hidden lg:flex items-center justify-center w-8 bg-card/80 hover:bg-card border-r border-border/50 text-muted-foreground hover:text-foreground transition-all duration-200 hover:shadow-sm"
           title={isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {isSidebarCollapsed ? (
@@ -106,34 +106,34 @@ export function MentalHealthTestingPlatform() {
         {/* Main Testing Area */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* View Navigation */}
-          <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border/50 bg-surface/50">
-            <div className="flex items-center gap-1">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-border/50 bg-card/80 backdrop-blur-sm">
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => setCurrentView("testing")}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                   currentView === "testing"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                 }`}
               >
                 LLM Testing Area
               </button>
               <button
                 onClick={() => setCurrentView("results")}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                   currentView === "results"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                 }`}
               >
                 Results & Analytics
               </button>
               <button
                 onClick={() => setCurrentView("about")}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
+                className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
                   currentView === "about"
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                 }`}
               >
                 About Platform
@@ -146,10 +146,10 @@ export function MentalHealthTestingPlatform() {
                 <>
                   <button
                     onClick={() => setShowDashboard(!showDashboard)}
-                    className={`p-2 rounded-lg text-sm transition-colors ${
+                    className={`p-3 rounded-lg text-sm transition-all duration-200 ${
                       showDashboard
-                        ? "bg-primary/10 text-primary"
-                        : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
+                        ? "bg-primary/10 text-primary shadow-sm"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
                     }`}
                     title={showDashboard ? "Hide dashboard" : "Show dashboard"}
                   >
@@ -163,7 +163,7 @@ export function MentalHealthTestingPlatform() {
               )}
 
               {currentView === "results" && (
-                <button className="flex items-center gap-2 px-3 py-1.5 text-sm bg-primary text-text-inverse rounded-lg hover:bg-primary-dark transition-colors">
+                <button className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-md">
                   <Download className="w-4 h-4" />
                   Export
                 </button>
@@ -180,7 +180,7 @@ export function MentalHealthTestingPlatform() {
               } flex flex-col overflow-hidden`}
             >
               {currentView === "testing" && (
-                <div className="flex-1 p-4 sm:p-6 overflow-hidden">
+                <div className="flex-1 p-6 overflow-hidden">
                   <MentalHealthTestInterface
                     selectedScenario={selectedScenario}
                     onTestComplete={handleTestComplete}
@@ -189,49 +189,51 @@ export function MentalHealthTestingPlatform() {
               )}
 
               {currentView === "results" && (
-                <div className="flex-1 p-4 sm:p-6 overflow-y-auto space-y-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <BarChart3 className="w-6 h-6 text-primary" />
-                    <h2 className="text-xl font-semibold text-text-primary">
-                      Testing Results & Analytics
-                    </h2>
+                <div className="flex-1 p-6 overflow-y-auto space-y-8">
+                  <div className="section-header">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <BarChart3 className="w-6 h-6 text-primary" />
+                      <h2 className="section-title">
+                        Testing Results & Analytics
+                      </h2>
+                    </div>
                   </div>
 
                   <SafetyDashboard recentTests={testResults} />
 
                   {testResults.length > 0 && (
-                    <div className="bg-surface rounded-lg border border-border/50 p-6">
-                      <h3 className="font-semibold text-text-primary mb-4">
+                    <div className="mental-health-card">
+                      <h3 className="text-xl font-semibold text-foreground mb-6">
                         Recent Test Results
                       </h3>
-                      <div className="space-y-3">
+                      <div className="space-y-4">
                         {testResults.slice(0, 10).map((result) => (
                           <div
                             key={result.id}
-                            className="p-3 bg-background/50 rounded-lg border border-border/30"
+                            className="p-4 bg-muted/30 rounded-lg border border-border/30 hover:border-primary/30 transition-colors"
                           >
                             <div className="flex items-center justify-between">
                               <div>
-                                <div className="font-medium text-text-primary">
+                                <div className="font-medium text-foreground mb-1">
                                   {result.scenarioName}
                                 </div>
-                                <div className="text-sm text-text-secondary truncate max-w-md">
+                                <div className="text-sm text-muted-foreground truncate max-w-md">
                                   {result.input}
                                 </div>
                               </div>
                               <div className="text-right">
                                 <div
-                                  className={`text-sm font-medium ${
+                                  className={`text-sm font-semibold mb-1 ${
                                     result.safetyScore >= 90
-                                      ? "text-success"
+                                      ? "text-green-600"
                                       : result.safetyScore >= 75
-                                        ? "text-warning"
-                                        : "text-crisis"
+                                        ? "text-amber-600"
+                                        : "text-red-600"
                                   }`}
                                 >
                                   {result.safetyScore.toFixed(1)}% Safe
                                 </div>
-                                <div className="text-xs text-text-tertiary">
+                                <div className="text-xs text-muted-foreground">
                                   {result.timestamp.toLocaleTimeString()}
                                 </div>
                               </div>
@@ -245,16 +247,16 @@ export function MentalHealthTestingPlatform() {
               )}
 
               {currentView === "about" && (
-                <div className="flex-1 p-4 sm:p-6 overflow-y-auto">
-                  <div className="max-w-4xl mx-auto space-y-8">
-                    <div className="text-center mb-8">
-                      <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="flex-1 p-6 overflow-y-auto">
+                  <div className="max-w-5xl mx-auto space-y-10">
+                    <div className="section-header">
+                      <div className="w-20 h-20 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-6">
                         <Info className="w-8 h-8 text-primary" />
                       </div>
-                      <h1 className="text-3xl font-bold text-text-primary mb-2">
+                      <h1 className="section-title">
                         Mental Health AI Testing Platform
                       </h1>
-                      <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+                      <p className="section-description">
                         A comprehensive testing environment for evaluating AI
                         safety and effectiveness in mental health conversations.
                       </p>
@@ -262,11 +264,11 @@ export function MentalHealthTestingPlatform() {
 
                     <TrustIndicators variant="detailed" />
 
-                    <div className="bg-surface rounded-lg border border-border/50 p-6">
-                      <h3 className="font-semibold text-text-primary mb-4">
+                    <div className="mental-health-card">
+                      <h3 className="text-xl font-semibold text-foreground mb-6">
                         Research Methodology
                       </h3>
-                      <div className="prose prose-sm max-w-none text-text-secondary">
+                      <div className="prose prose-base max-w-none text-muted-foreground">
                         <p>
                           This platform uses evidence-based testing scenarios
                           developed in collaboration with mental health
@@ -282,11 +284,11 @@ export function MentalHealthTestingPlatform() {
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-accent/10 to-primary/10 rounded-lg border border-accent/20 p-6">
-                      <h3 className="font-semibold text-text-primary mb-2">
+                    <div className="mental-health-card bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border-amber-200 dark:border-amber-800/30">
+                      <h3 className="text-xl font-semibold text-foreground mb-4">
                         Important Notice
                       </h3>
-                      <p className="text-text-secondary">
+                      <p className="text-muted-foreground leading-relaxed">
                         This platform is designed for research and testing
                         purposes only. If you or someone you know is
                         experiencing a mental health crisis, please contact a
@@ -301,7 +303,7 @@ export function MentalHealthTestingPlatform() {
 
             {/* Right Sidebar - Dashboard */}
             {showDashboard && currentView === "testing" && (
-              <div className="w-full lg:w-96 border-l border-border/50 bg-surface p-4 overflow-y-auto">
+              <div className="w-full lg:w-96 border-l border-border/50 bg-card/50 backdrop-blur-sm p-6 overflow-y-auto">
                 <SafetyDashboard recentTests={testResults} />
               </div>
             )}
@@ -312,7 +314,7 @@ export function MentalHealthTestingPlatform() {
       {/* Mobile Sidebar Overlay */}
       {!isSidebarCollapsed && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden backdrop-blur-sm"
           onClick={toggleSidebar}
         />
       )}

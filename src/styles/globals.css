@@ -1,6 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
-
-/* Import theme CSS files first */
 @import url("./themes/clinical-trust.css");
 @import url("./themes/warm-community.css");
 @import url("./themes/dark-mode.css");
@@ -139,19 +137,12 @@
 
   .btn-primary {
     @apply bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95;
-    background: linear-gradient(
-      135deg,
-      var(--primary) 0%,
-      color-mix(in srgb, var(--primary) 90%, black 10%) 100%
-    );
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .btn-primary:hover {
-    background: linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--primary) 95%, white 5%) 0%,
-      color-mix(in srgb, var(--primary) 85%, black 15%) 100%
-    );
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
@@ -183,7 +174,7 @@
   }
 
   .form-input {
-    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200;
+    @apply flex h-12 w-full rounded-lg border border-input bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200;
   }
 
   .form-input:focus {
@@ -191,11 +182,48 @@
   }
 
   .form-textarea {
-    @apply flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 resize-none;
+    @apply flex min-h-[100px] w-full rounded-lg border border-input bg-background px-4 py-3 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 resize-none;
   }
 
   .form-textarea:focus {
     @apply border-primary/60 bg-background shadow-sm;
+  }
+
+  /* Mental Health Specific Components */
+  .mental-health-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .crisis-banner {
+    @apply bg-gradient-to-r from-red-50 to-orange-50 dark:from-red-950/20 dark:to-orange-950/20 border border-red-200 dark:border-red-800/30 rounded-xl p-6 mb-6;
+  }
+
+  .scenario-card {
+    @apply mental-health-card hover:border-primary/30 cursor-pointer transition-all duration-200;
+  }
+
+  .scenario-card.active {
+    @apply border-primary bg-primary/5 shadow-md;
+  }
+
+  .testing-interface {
+    @apply min-h-screen bg-gradient-to-br from-background via-background to-muted/20;
+  }
+
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-header {
+    @apply mb-8 text-center;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold text-foreground mb-4;
+  }
+
+  .section-description {
+    @apply text-lg text-muted-foreground max-w-2xl mx-auto;
   }
 }
 
