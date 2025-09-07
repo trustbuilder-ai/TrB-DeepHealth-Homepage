@@ -2,25 +2,25 @@
 
 :root[data-theme="clinical-trust"] {
   /* Primary colors emphasizing medical authority */
-  --color-primary: theme('colors.medical-green.600');
-  --color-primary-hover: theme('colors.medical-green.700');
-  --color-secondary: theme('colors.trust-teal.500');
-  --color-secondary-hover: theme('colors.trust-teal.600');
+  --color-primary: #01382E;
+  --color-primary-hover: #15803d;
+  --color-secondary: #017A8D;
+  --color-secondary-hover: #005C65;
   
   /* Background colors for clinical feel */
   --color-bg-primary: #ffffff;
-  --color-bg-secondary: theme('colors.gray.50');
-  --color-bg-accent: theme('colors.medical-green.50');
+  --color-bg-secondary: #f9fafb;
+  --color-bg-accent: #f0fdf4;
   
   /* Text colors for professional readability */
-  --color-text-primary: theme('colors.gray.900');
-  --color-text-secondary: theme('colors.gray.700');
-  --color-text-muted: theme('colors.gray.500');
+  --color-text-primary: #111827;
+  --color-text-secondary: #374151;
+  --color-text-muted: #6b7280;
   
   /* Crisis support colors */
-  --color-crisis: theme('colors.coral-alert.500');
-  --color-crisis-bg: theme('colors.coral-alert.50');
-  --color-crisis-border: theme('colors.coral-alert.200');
+  --color-crisis: #ff6252;
+  --color-crisis-bg: #fef2f2;
+  --color-crisis-border: #fecaca;
 }
 
 [data-theme="clinical-trust"] {

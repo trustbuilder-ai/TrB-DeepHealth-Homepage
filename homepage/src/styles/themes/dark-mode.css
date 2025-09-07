@@ -2,25 +2,25 @@
 
 :root[data-theme="dark"] {
   /* Primary colors adapted for dark backgrounds */
-  --color-primary: theme('colors.trust-teal.400');
-  --color-primary-hover: theme('colors.trust-teal.300');
-  --color-secondary: theme('colors.warm-peach.300');
-  --color-secondary-hover: theme('colors.warm-peach.200');
+  --color-primary: #2dd4bf;
+  --color-primary-hover: #5eead4;
+  --color-secondary: #F3B890;
+  --color-secondary-hover: #fde68a;
   
   /* Dark background colors */
-  --color-bg-primary: theme('colors.gray.900');
-  --color-bg-secondary: theme('colors.gray.800');
-  --color-bg-accent: theme('colors.gray.700');
+  --color-bg-primary: #111827;
+  --color-bg-secondary: #1f2937;
+  --color-bg-accent: #374151;
   
   /* High contrast text colors for accessibility */
-  --color-text-primary: theme('colors.gray.100');
-  --color-text-secondary: theme('colors.gray.300');
-  --color-text-muted: theme('colors.gray.400');
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #d1d5db;
+  --color-text-muted: #9ca3af;
   
   /* Crisis support colors (high contrast for visibility) */
-  --color-crisis: theme('colors.coral-alert.400');
-  --color-crisis-bg: theme('colors.coral-alert.900');
-  --color-crisis-border: theme('colors.coral-alert.600');
+  --color-crisis: #f87171;
+  --color-crisis-bg: #7f1d1d;
+  --color-crisis-border: #dc2626;
 }
 
 [data-theme="dark"] {
