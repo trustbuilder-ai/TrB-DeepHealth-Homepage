@@ -18,6 +18,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { motion } from "framer-motion";
+import { AnimatedBackground } from "./shared/AnimatedBackground";
 
 export function MentalHealthTestingPlatform() {
   const [selectedScenario, setSelectedScenario] = useState<TestScenario | null>(
@@ -76,7 +78,13 @@ export function MentalHealthTestingPlatform() {
   }, [selectedScenario]);
 
   return (
-    <div className="testing-interface flex flex-col">
+    <AnimatedBackground variant="platform">
+      <motion.div 
+        className="testing-interface flex flex-col"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
       {/* Mental Health Theme Variables */}
       <style>{`
         :root {
@@ -396,7 +404,8 @@ export function MentalHealthTestingPlatform() {
         severity={crisisModalSeverity}
         triggerWords={crisisModalTriggers}
       />
-    </div>
+    </motion.div>
+    </AnimatedBackground>
   );
 }
 

@@ -240,7 +240,35 @@
 
   /* Mental Health Specific Components */
   .mental-health-card {
-    @apply bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300;
+    @apply bg-card border border-border rounded-xl p-6 shadow-sm transition-all duration-500;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mental-health-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 92, 101, 0.03) 50%,
+      transparent 100%
+    );
+    transition: left 0.8s ease;
+  }
+
+  .mental-health-card:hover {
+    @apply shadow-xl;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 92, 101, 0.1);
+  }
+
+  .mental-health-card:hover::before {
+    left: 100%;
   }
 
   .crisis-banner {
@@ -283,16 +311,49 @@
   }
 
   .hover-lift {
-    @apply transition-all duration-400 hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-xl;
+    transform-origin: center;
+  }
+
+  .hover-lift:hover {
+    box-shadow: 0 12px 40px rgba(0, 92, 101, 0.15);
   }
 
   /* Enhanced hover effects for mental health context */
   .hover-lift-gentle {
-    @apply transition-all duration-500 hover:-translate-y-0.5 hover:shadow-md;
+    @apply transition-all duration-600 hover:-translate-y-1 hover:shadow-lg;
+    transform-origin: center;
+  }
+
+  .hover-lift-gentle:hover {
+    box-shadow: 0 8px 25px rgba(0, 92, 101, 0.12);
   }
 
   .hover-scale {
-    @apply transition-transform duration-300 hover:scale-105 active:scale-95;
+    @apply transition-all duration-400 hover:scale-105 active:scale-98;
+    transform-origin: center;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-500;
+    position: relative;
+  }
+
+  .hover-glow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 92, 101, 0.2), rgba(1, 122, 141, 0.2));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .hover-glow:hover::before {
+    opacity: 1;
   }
 
   .focus-ring {
@@ -322,20 +383,55 @@
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .animate-slide-up {
-    animation: slideUp 0.4s ease-out;
+    animation: slideUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .animate-bounce-in {
-    animation: bounceIn 0.5s ease-out;
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulseGlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
   }
 
   /* Breathing animation for calming effect */
   .animate-breathe {
     animation: breathe 4s ease-in-out infinite;
+  }
+
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .stagger-children > * {
+    animation-delay: calc(var(--stagger) * 150ms);
   }
 
   @keyframes breathe {
@@ -350,10 +446,39 @@
     }
   }
 
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulseGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(0, 92, 101, 0.1);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(0, 92, 101, 0.2);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -364,7 +489,7 @@
   @keyframes slideUp {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
@@ -372,14 +497,51 @@
     }
   }
 
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   @keyframes bounceIn {
     0% {
       opacity: 0;
-      transform: scale(0.8) translateY(24px);
+      transform: scale(0.7) translateY(30px);
     }
-    60% {
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05) translateY(-8px);
+    }
+    70% {
       opacity: 1;
-      transform: scale(1.05) translateY(-4px);
+      transform: scale(0.98) translateY(2px);
     }
     100% {
       opacity: 1;
@@ -390,14 +552,44 @@
   .gradient-text {
     background: linear-gradient(
       135deg,
-      var(--primary) 0%,
-      var(--secondary) 100%
+      var(--mental-health-primary) 0%,
+      var(--mental-health-primary-light) 30%,
+      var(--mental-health-calm) 70%,
+      var(--mental-health-primary-subtle) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300% 300%;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  .gradient-text-warm {
+    background: linear-gradient(
+      135deg,
+      var(--mental-health-primary) 0%,
+      var(--mental-health-warm) 50%,
+      var(--mental-health-coral) 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     background-size: 200% 200%;
     animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--foreground) 25%,
+      var(--mental-health-primary-light) 50%,
+      var(--foreground) 75%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 2s linear infinite;
   }
 
   @keyframes gradient-shift {

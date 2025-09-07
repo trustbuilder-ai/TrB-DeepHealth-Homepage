@@ -168,16 +168,16 @@ export function SafetyDashboard({ className }: SafetyDashboardProps) {
 
   return (
     <div
-      className={`bg-surface rounded-lg border border-border/50 ${className}`}
+      className={`bg-surface rounded-lg border border-border/50 animate-fade-in hover-lift-gentle ${className}`}
     >
       {/* Dashboard Header */}
-      <div className="flex items-center justify-between p-4 border-b border-border/30">
+      <div className="flex items-center justify-between p-4 border-b border-border/30 animate-slide-up">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-            <Brain className="w-5 h-5 text-primary" />
+          <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover-glow animate-pulse-slow">
+            <Brain className="w-5 h-5 text-primary animate-breathe" />
           </div>
           <div>
-            <h2 className="font-semibold text-text-primary">
+            <h2 className="font-semibold text-text-primary gradient-text">
               Safety Dashboard
             </h2>
             <p className="text-sm text-text-secondary">
@@ -204,16 +204,16 @@ export function SafetyDashboard({ className }: SafetyDashboardProps) {
       </div>
 
       {/* Metrics Grid */}
-      <div className="p-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {metrics.map((metric) => (
+      <div className="p-4 animate-slide-up">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-children">
+          {metrics.map((metric, index) => (
             <div
               key={metric.id}
-              className={`p-4 rounded-lg border transition-all duration-300 hover:scale-105 ${getMetricColor(metric.color)}`}
+              className={`p-4 rounded-lg border transition-all duration-500 hover-lift hover-glow animate-fade-in ${getMetricColor(metric.color)}`}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <metric.icon className="w-4 h-4" />
+                  <metric.icon className="w-4 h-4 animate-float" />
                   <span className="text-sm font-medium">{metric.label}</span>
                 </div>
                 {getTrendIcon(metric.trend, metric.change)}
@@ -238,8 +238,8 @@ export function SafetyDashboard({ className }: SafetyDashboardProps) {
                 </div>
 
                 {isLive && (
-                  <div className="flex items-center">
-                    <Zap className="w-3 h-3 text-warning animate-pulse" />
+                  <div className="flex items-center animate-bounce-in">
+                    <Zap className="w-3 h-3 text-warning animate-pulse hover-scale" />
                   </div>
                 )}
               </div>
@@ -249,16 +249,16 @@ export function SafetyDashboard({ className }: SafetyDashboardProps) {
       </div>
 
       {/* Recent Activity Summary */}
-      <div className="p-4 border-t border-border/30">
+      <div className="p-4 border-t border-border/30 animate-slide-up">
         <div className="flex items-center justify-between mb-3">
-          <h3 className="font-medium text-text-primary">Recent Activity</h3>
+          <h3 className="font-medium text-text-primary gradient-text-warm">Recent Activity</h3>
           <span className="text-xs text-text-tertiary">Last 24 hours</span>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="text-center">
-            <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mx-auto mb-2">
-              <MessageSquare className="w-6 h-6 text-primary" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 stagger-children">
+          <div className="text-center animate-fade-in hover-lift-gentle">
+            <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mx-auto mb-2 hover-glow animate-pulse-slow">
+              <MessageSquare className="w-6 h-6 text-primary animate-float" />
             </div>
             <div className="text-lg font-semibold text-text-primary">
               {147 + Math.floor(Math.random() * 50)}
@@ -268,9 +268,9 @@ export function SafetyDashboard({ className }: SafetyDashboardProps) {
             </div>
           </div>
 
-          <div className="text-center">
-            <div className="flex items-center justify-center w-12 h-12 bg-crisis/10 rounded-full mx-auto mb-2">
-              <AlertTriangle className="w-6 h-6 text-crisis" />
+          <div className="text-center animate-fade-in hover-lift-gentle">
+            <div className="flex items-center justify-center w-12 h-12 bg-crisis/10 rounded-full mx-auto mb-2 hover-glow animate-pulse-slow">
+              <AlertTriangle className="w-6 h-6 text-crisis animate-float" />
             </div>
             <div className="text-lg font-semibold text-text-primary">
               {3 + Math.floor(Math.random() * 5)}
@@ -280,9 +280,9 @@ export function SafetyDashboard({ className }: SafetyDashboardProps) {
             </div>
           </div>
 
-          <div className="text-center">
-            <div className="flex items-center justify-center w-12 h-12 bg-success/10 rounded-full mx-auto mb-2">
-              <CheckCircle className="w-6 h-6 text-success" />
+          <div className="text-center animate-fade-in hover-lift-gentle">
+            <div className="flex items-center justify-center w-12 h-12 bg-success/10 rounded-full mx-auto mb-2 hover-glow animate-pulse-slow">
+              <CheckCircle className="w-6 h-6 text-success animate-float" />
             </div>
             <div className="text-lg font-semibold text-text-primary">
               {89 + Math.floor(Math.random() * 10)}%
@@ -290,9 +290,9 @@ export function SafetyDashboard({ className }: SafetyDashboardProps) {
             <div className="text-xs text-text-secondary">Safety Compliance</div>
           </div>
 
-          <div className="text-center">
-            <div className="flex items-center justify-center w-12 h-12 bg-accent/10 rounded-full mx-auto mb-2">
-              <Users className="w-6 h-6 text-accent-dark" />
+          <div className="text-center animate-fade-in hover-lift-gentle">
+            <div className="flex items-center justify-center w-12 h-12 bg-accent/10 rounded-full mx-auto mb-2 hover-glow animate-pulse-slow">
+              <Users className="w-6 h-6 text-accent-dark animate-float" />
             </div>
             <div className="text-lg font-semibold text-text-primary">
               {12 + Math.floor(Math.random() * 8)}
