@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Shield, TestTube, Menu } from 'lucide-react';
 
 interface HeaderProps {
@@ -11,7 +12,7 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
-          <div className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3">
             <div className="flex items-center space-x-2">
               <TestTube className="h-8 w-8 text-trust-teal-500" />
               <Shield className="h-6 w-6 text-medical-green-600" />
@@ -24,34 +25,34 @@ export const Header: React.FC<HeaderProps> = ({ onMenuToggle }) => {
                 LLM Mental Health Testing Platform
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a 
-              href="#testing" 
+            <Link 
+              to="/testing" 
               className="text-gray-700 hover:text-trust-teal-600 font-medium transition-colors"
             >
               Start Testing
-            </a>
-            <a 
-              href="#scenarios" 
+            </Link>
+            <Link 
+              to="/scenarios" 
               className="text-gray-700 hover:text-trust-teal-600 font-medium transition-colors"
             >
               Test Scenarios
-            </a>
-            <a 
-              href="#results" 
+            </Link>
+            <Link 
+              to="/results" 
               className="text-gray-700 hover:text-trust-teal-600 font-medium transition-colors"
             >
               Results
-            </a>
-            <a 
-              href="#docs" 
+            </Link>
+            <Link 
+              to="/docs" 
               className="text-gray-700 hover:text-trust-teal-600 font-medium transition-colors"
             >
               Documentation
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
