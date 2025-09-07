@@ -4,10 +4,10 @@ import { SafetyIndicator } from '../components/shared/SafetyBadge';
 
 export const HomePage: React.FC = () => {
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in">
       {/* Hero Section */}
       <div className="text-center mb-12">
-        <div className="flex justify-center items-center space-x-3 mb-6">
+        <div className="flex justify-center items-center space-x-3 mb-6 animate-in" style={{ animationDelay: '0.1s' }}>
           <TestTube className="h-12 w-12 text-trust-teal-500" />
           <Brain className="h-10 w-10 text-medical-green-600" />
           <Shield className="h-8 w-8 text-trust-teal-600" />
@@ -27,17 +27,17 @@ export const HomePage: React.FC = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="btn-primary">
+          <button className="btn-primary group">
             Start Testing LLMs
           </button>
-          <button className="btn-secondary">
+          <button className="btn-secondary group">
             View Documentation
           </button>
         </div>
       </div>
 
       {/* Key Features Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-in" style={{ animationDelay: '0.2s' }}>
         <div className="card-trust">
           <div className="flex items-center space-x-3 mb-4">
             <Shield className="h-8 w-8 text-coral-alert-500" />
@@ -106,12 +106,12 @@ export const HomePage: React.FC = () => {
       </div>
 
       {/* Safety Indicator */}
-      <div className="flex justify-center mb-12">
+      <div className="flex justify-center mb-12 animate-in" style={{ animationDelay: '0.3s' }}>
         <SafetyIndicator className="max-w-md" />
       </div>
 
       {/* Value Propositions */}
-      <div className="bg-white rounded-therapeutic shadow-gentle p-8 mb-12">
+      <div className="bg-white rounded-therapeutic shadow-gentle p-8 mb-12 hover:shadow-lg transition-all duration-300 animate-in" style={{ animationDelay: '0.4s' }}>
         <h2 className="text-2xl font-bold text-trust-teal-600 text-center mb-8">
           Who We Serve
         </h2>
@@ -148,7 +148,7 @@ export const HomePage: React.FC = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="text-center bg-trust-teal-50 rounded-therapeutic p-8">
+      <div className="text-center bg-trust-teal-50 rounded-therapeutic p-8 hover:bg-trust-teal-100 transition-all duration-300 animate-in" style={{ animationDelay: '0.5s' }}>
         <h2 className="text-2xl font-bold text-trust-teal-700 mb-4">
           Ready to Test Your LLM?
         </h2>

@@ -81,10 +81,10 @@ export const DocumentationPage: React.FC = () => {
   ];
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in">
       {/* Page Header */}
       <div className="text-center mb-12">
-        <div className="flex justify-center items-center space-x-3 mb-6">
+        <div className="flex justify-center items-center space-x-3 mb-6 animate-in" style={{ animationDelay: '0.1s' }}>
           <BookOpen className="h-12 w-12 text-trust-teal-500" />
           <Code className="h-10 w-10 text-medical-green-600" />
         </div>
@@ -100,13 +100,13 @@ export const DocumentationPage: React.FC = () => {
       </div>
 
       {/* Quick Links */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-in" style={{ animationDelay: '0.2s' }}>
         {sections.map((section) => {
           const Icon = section.icon;
           return (
-            <div key={section.id} className="card hover:shadow-lg transition-shadow cursor-pointer">
+            <div key={section.id} className="card hover:shadow-lg transition-all duration-300 cursor-pointer hover:scale-[1.02] group">
               <div className="flex items-center space-x-3 mb-4">
-                <Icon className={`h-8 w-8 ${section.color}`} />
+                <Icon className={`h-8 w-8 ${section.color} group-hover:scale-110 transition-transform duration-200`} />
                 <h3 className="text-lg font-semibold text-gray-800">{section.title}</h3>
               </div>
               
@@ -124,7 +124,7 @@ export const DocumentationPage: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-3 gap-8 animate-in" style={{ animationDelay: '0.3s' }}>
         <div className="lg:col-span-2">
           <div className="card-trust">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6">Platform Overview</h2>
@@ -182,7 +182,7 @@ export const DocumentationPage: React.FC = () => {
             
             <div className="space-y-4">
               {resources.map((resource, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                <div key={index} className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 hover:shadow-md transition-all duration-200 hover:scale-[1.01]">
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <h4 className="font-medium text-gray-800 mb-1">{resource.title}</h4>
@@ -193,7 +193,7 @@ export const DocumentationPage: React.FC = () => {
                         <span>{resource.size}</span>
                       </div>
                     </div>
-                    <button className="ml-3 p-2 text-trust-teal-600 hover:text-trust-teal-700 hover:bg-trust-teal-50 rounded-md transition-colors">
+                    <button className="ml-3 p-2 text-trust-teal-600 hover:text-trust-teal-700 hover:bg-trust-teal-50 rounded-md transition-all duration-200 hover:scale-110">
                       <Download className="h-4 w-4" />
                     </button>
                   </div>
@@ -210,7 +210,7 @@ export const DocumentationPage: React.FC = () => {
                 href="https://988lifeline.org" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-200 hover:scale-[1.01]"
               >
                 <span className="text-sm font-medium text-gray-800">988 Suicide & Crisis Lifeline</span>
                 <ExternalLink className="h-4 w-4 text-gray-500" />
@@ -220,7 +220,7 @@ export const DocumentationPage: React.FC = () => {
                 href="https://www.nimh.nih.gov" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-200 hover:scale-[1.01]"
               >
                 <span className="text-sm font-medium text-gray-800">NIMH Guidelines</span>
                 <ExternalLink className="h-4 w-4 text-gray-500" />
@@ -230,7 +230,7 @@ export const DocumentationPage: React.FC = () => {
                 href="https://www.samhsa.gov" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-200 hover:scale-[1.01]"
               >
                 <span className="text-sm font-medium text-gray-800">SAMHSA Resources</span>
                 <ExternalLink className="h-4 w-4 text-gray-500" />

@@ -3,10 +3,10 @@ import { TestTube, Play, Settings, Upload } from 'lucide-react';
 
 export const TestingPage: React.FC = () => {
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in">
       {/* Page Header */}
       <div className="text-center mb-12">
-        <div className="flex justify-center items-center space-x-3 mb-6">
+        <div className="flex justify-center items-center space-x-3 mb-6 animate-in" style={{ animationDelay: '0.1s' }}>
           <TestTube className="h-12 w-12 text-trust-teal-500" />
           <Play className="h-10 w-10 text-medical-green-600" />
         </div>
@@ -22,7 +22,7 @@ export const TestingPage: React.FC = () => {
       </div>
 
       {/* Testing Configuration */}
-      <div className="grid lg:grid-cols-3 gap-8 mb-12">
+      <div className="grid lg:grid-cols-3 gap-8 mb-12 animate-in" style={{ animationDelay: '0.2s' }}>
         <div className="lg:col-span-2">
           <div className="card-trust">
             <div className="flex items-center space-x-3 mb-6">
@@ -93,10 +93,10 @@ export const TestingPage: React.FC = () => {
             </div>
             
             <div className="space-y-3">
-              <button className="btn-primary w-full">
+              <button className="btn-primary w-full group">
                 Run Standard Test Suite
               </button>
-              <button className="btn-secondary w-full">
+              <button className="btn-secondary w-full group">
                 Upload Custom Scenarios
               </button>
               <button className="w-full px-4 py-2 border border-gray-300 rounded-therapeutic text-gray-700 hover:bg-gray-50 transition-colors">
@@ -114,10 +114,10 @@ export const TestingPage: React.FC = () => {
       </div>
 
       {/* Testing Interface Placeholder */}
-      <div className="card-trust">
+      <div className="card-trust animate-in" style={{ animationDelay: '0.3s' }}>
         <h2 className="text-xl font-semibold text-gray-800 mb-6">Testing Interface</h2>
         
-        <div className="bg-gray-50 rounded-therapeutic p-8 text-center">
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-therapeutic p-8 text-center border border-gray-200">
           <TestTube className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-600 mb-2">
             Testing Interface Coming Soon
@@ -125,7 +125,7 @@ export const TestingPage: React.FC = () => {
           <p className="text-gray-500 mb-6">
             Configure your LLM settings above and select test scenarios to begin comprehensive safety evaluation.
           </p>
-          <button className="btn-primary" disabled>
+          <button className="btn-primary opacity-50 cursor-not-allowed" disabled>
             Start Testing (Coming Soon)
           </button>
         </div>

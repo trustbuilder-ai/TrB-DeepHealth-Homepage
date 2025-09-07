@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Animation keyframes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Mental Health UI Design - Global Styles */
 @layer base {
   html {
@@ -59,6 +82,15 @@
   }
 }
 
+/* Animation utilities */
+.animate-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.slide-in-from-top-2 {
+  animation: slide-in-from-top 0.2s ease-out;
+}
+
 @layer components {
   /* Crisis Banner Component */
   .crisis-banner {
@@ -69,15 +101,17 @@
   /* Trust-building buttons */
   .btn-primary {
     @apply bg-trust-teal-500 hover:bg-trust-teal-600 text-white;
-    @apply px-6 py-3 rounded-therapeutic font-medium;
-    @apply transition-colors duration-200 shadow-gentle;
+    @apply px-6 py-3 rounded-therapeutic font-medium shadow-gentle;
+    @apply transition-all duration-200 ease-in-out;
+    @apply hover:shadow-md hover:scale-[1.02] active:scale-[0.98];
     @apply focus:ring-2 focus:ring-trust-teal-500 focus:ring-offset-2;
   }
   
   .btn-secondary {
     @apply bg-warm-peach-100 hover:bg-warm-peach-200 text-warm-peach-800;
-    @apply px-6 py-3 rounded-therapeutic font-medium;
-    @apply transition-colors duration-200 shadow-gentle;
+    @apply px-6 py-3 rounded-therapeutic font-medium shadow-gentle;
+    @apply transition-all duration-200 ease-in-out;
+    @apply hover:shadow-md hover:scale-[1.02] active:scale-[0.98];
     @apply focus:ring-2 focus:ring-warm-peach-400 focus:ring-offset-2;
   }
   
@@ -85,11 +119,15 @@
   .card {
     @apply bg-white rounded-therapeutic shadow-gentle p-6;
     @apply border border-gray-100;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-lg hover:scale-[1.01];
   }
   
   .card-trust {
     @apply bg-white rounded-therapeutic shadow-trust p-6;
     @apply border border-trust-teal-100;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-xl hover:scale-[1.01];
   }
   
   /* Input styling for forms */

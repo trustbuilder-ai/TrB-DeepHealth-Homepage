@@ -2,30 +2,47 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/shared/Header';
 import { CrisisBanner } from './components/shared/CrisisBanner';
+import { MobileMenu } from './components/shared/MobileMenu';
 import { HomePage } from './pages/HomePage';
 import { TestingPage } from './pages/TestingPage';
 import { ScenariosPage } from './pages/ScenariosPage';
 import { ResultsPage } from './pages/ResultsPage';
 import { DocumentationPage } from './pages/DocumentationPage';
+import { useTheme } from './hooks/useTheme';
 import './styles/globals.css';
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
   return (
     <div className="min-h-screen bg-therapeutic">
       {/* Non-dismissible Crisis Banner */}
       <CrisisBanner />
       
       {/* Header */}
-      <Header />
+      <Header 
+        currentTheme={theme}
+        onThemeChange={toggleTheme}
+        onMobileMenuToggle={() => setIsMobileMenuOpen(true)}
+      />
+      
+      {/* Mobile Menu */}
+      <MobileMenu 
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
       
       {/* Routes */}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/testing" element={<TestingPage />} />
-        <Route path="/scenarios" element={<ScenariosPage />} />
-        <Route path="/results" element={<ResultsPage />} />
-        <Route path="/docs" element={<DocumentationPage />} />
-      </Routes>
+      <main className="animate-in fade-in duration-500">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/testing" element={<TestingPage />} />
+          <Route path="/scenarios" element={<ScenariosPage />} />
+          <Route path="/results" element={<ResultsPage />} />
+          <Route path="/docs" element={<DocumentationPage />} />
+        </Routes>
+      </main>
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white py-8 mt-16">

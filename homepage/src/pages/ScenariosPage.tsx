@@ -117,10 +117,10 @@ export const ScenariosPage: React.FC = () => {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in">
       {/* Page Header */}
       <div className="text-center mb-12">
-        <div className="flex justify-center items-center space-x-3 mb-6">
+        <div className="flex justify-center items-center space-x-3 mb-6 animate-in" style={{ animationDelay: '0.1s' }}>
           <TestTube className="h-12 w-12 text-trust-teal-500" />
           <Shield className="h-10 w-10 text-coral-alert-500" />
         </div>
@@ -136,16 +136,16 @@ export const ScenariosPage: React.FC = () => {
       </div>
 
       {/* Scenarios Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-in" style={{ animationDelay: '0.2s' }}>
         {scenarios.map((scenario) => {
           const Icon = scenario.icon;
           return (
             <div 
               key={scenario.id}
-              className={`card border-2 ${scenario.borderColor} ${scenario.bgColor} hover:shadow-lg transition-shadow`}
+              className={`card border-2 ${scenario.borderColor} ${scenario.bgColor} hover:shadow-xl transition-all duration-300 hover:scale-[1.02] group`}
             >
               <div className="flex items-center space-x-3 mb-4">
-                <Icon className={`h-8 w-8 ${scenario.color}`} />
+                <Icon className={`h-8 w-8 ${scenario.color} group-hover:scale-110 transition-transform duration-200`} />
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">{scenario.title}</h3>
                   <div className="flex items-center space-x-2">
@@ -173,10 +173,10 @@ export const ScenariosPage: React.FC = () => {
               </ul>
               
               <div className="flex space-x-2">
-                <button className="btn-primary flex-1 text-sm">
+                <button className="btn-primary flex-1 text-sm group">
                   Run Scenario
                 </button>
-                <button className="px-3 py-2 border border-gray-300 rounded-therapeutic text-gray-700 hover:bg-gray-50 transition-colors text-sm">
+                <button className="px-3 py-2 border border-gray-300 rounded-therapeutic text-gray-700 hover:bg-gray-50 hover:scale-105 transition-all duration-200 text-sm">
                   Preview
                 </button>
               </div>
@@ -186,13 +186,13 @@ export const ScenariosPage: React.FC = () => {
       </div>
 
       {/* Scenario Builder */}
-      <div className="card-trust">
+      <div className="card-trust animate-in" style={{ animationDelay: '0.3s' }}>
         <div className="flex items-center space-x-3 mb-6">
           <Users className="h-6 w-6 text-trust-teal-500" />
           <h2 className="text-xl font-semibold text-gray-800">Custom Scenario Builder</h2>
         </div>
         
-        <div className="bg-gray-50 rounded-therapeutic p-8 text-center">
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-therapeutic p-8 text-center border border-gray-200">
           <Users className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-600 mb-2">
             Build Your Own Test Scenarios
@@ -200,7 +200,7 @@ export const ScenariosPage: React.FC = () => {
           <p className="text-gray-500 mb-6">
             Create custom test scenarios tailored to your specific mental health application requirements.
           </p>
-          <button className="btn-primary">
+          <button className="btn-primary group">
             Open Scenario Builder
           </button>
         </div>

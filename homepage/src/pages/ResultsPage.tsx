@@ -57,10 +57,10 @@ export const ResultsPage: React.FC = () => {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in">
       {/* Page Header */}
       <div className="text-center mb-12">
-        <div className="flex justify-center items-center space-x-3 mb-6">
+        <div className="flex justify-center items-center space-x-3 mb-6 animate-in" style={{ animationDelay: '0.1s' }}>
           <BarChart3 className="h-12 w-12 text-trust-teal-500" />
           <TrendingUp className="h-10 w-10 text-medical-green-600" />
         </div>
@@ -76,7 +76,7 @@ export const ResultsPage: React.FC = () => {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid md:grid-cols-4 gap-6 mb-8">
+      <div className="grid md:grid-cols-4 gap-6 mb-8 animate-in" style={{ animationDelay: '0.2s' }}>
         <div className="card text-center">
           <div className="text-2xl font-bold text-trust-teal-600 mb-1">24</div>
           <div className="text-sm text-gray-600">Total Tests</div>
@@ -96,7 +96,7 @@ export const ResultsPage: React.FC = () => {
       </div>
 
       {/* Filters and Actions */}
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4 animate-in" style={{ animationDelay: '0.3s' }}>
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
             <Filter className="h-5 w-5 text-gray-500" />
@@ -118,18 +118,18 @@ export const ResultsPage: React.FC = () => {
         </div>
         
         <div className="flex items-center space-x-2">
-          <button className="btn-secondary text-sm">
+          <button className="btn-secondary text-sm group">
             <Download className="h-4 w-4 mr-2" />
             Export Results
           </button>
-          <button className="btn-primary text-sm">
+          <button className="btn-primary text-sm group">
             Generate Report
           </button>
         </div>
       </div>
 
       {/* Results Table */}
-      <div className="card-trust overflow-hidden">
+      <div className="card-trust overflow-hidden animate-in" style={{ animationDelay: '0.4s' }}>
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg font-semibold text-gray-800">Recent Test Results</h2>
         </div>
@@ -193,10 +193,10 @@ export const ResultsPage: React.FC = () => {
                     {result.duration}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <button className="text-trust-teal-600 hover:text-trust-teal-700 mr-3">
+                    <button className="text-trust-teal-600 hover:text-trust-teal-700 hover:scale-110 transition-all duration-200 mr-3">
                       <Eye className="h-4 w-4" />
                     </button>
-                    <button className="text-gray-600 hover:text-gray-700">
+                    <button className="text-gray-600 hover:text-gray-700 hover:scale-110 transition-all duration-200">
                       <Download className="h-4 w-4" />
                     </button>
                   </td>
@@ -208,10 +208,10 @@ export const ResultsPage: React.FC = () => {
       </div>
 
       {/* Analytics Placeholder */}
-      <div className="card-trust mt-8">
+      <div className="card-trust mt-8 animate-in" style={{ animationDelay: '0.5s' }}>
         <h2 className="text-xl font-semibold text-gray-800 mb-6">Performance Analytics</h2>
         
-        <div className="bg-gray-50 rounded-therapeutic p-8 text-center">
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-therapeutic p-8 text-center border border-gray-200">
           <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-lg font-medium text-gray-600 mb-2">
             Advanced Analytics Coming Soon
@@ -219,7 +219,7 @@ export const ResultsPage: React.FC = () => {
           <p className="text-gray-500 mb-6">
             Detailed charts, trends, and model comparisons will be available here.
           </p>
-          <button className="btn-primary" disabled>
+          <button className="btn-primary opacity-50 cursor-not-allowed" disabled>
             View Analytics (Coming Soon)
           </button>
         </div>
