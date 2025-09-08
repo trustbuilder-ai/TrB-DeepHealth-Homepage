@@ -1,44 +1,78 @@
 /* Dark Mode Theme - Dark mode with accessibility focus */
 
 [data-theme="dark-mode"] {
-  /* Primary colors adapted for dark backgrounds */
-  background-color: #111827;
-  color: #f3f4f6;
+  /* True dark mode with high contrast */
+  background-color: #0F172A;
+  color: #E2E8F0;
   
   body {
-    @apply bg-gray-900 text-gray-100;
+    @apply bg-slate-900 text-slate-200;
   }
   
   .crisis-banner {
-    @apply bg-coral-alert-900 border-coral-alert-400 text-coral-alert-200;
+    @apply bg-coral-alert-900 border-coral-alert-300 text-coral-alert-100;
   }
   
   .btn-primary {
-    @apply bg-trust-teal-500 text-gray-900 hover:bg-trust-teal-400;
+    @apply bg-trust-teal-400 text-slate-900 hover:bg-trust-teal-300 shadow-lg;
   }
   
   .btn-secondary {
-    @apply bg-gray-800 text-trust-teal-300 border-gray-600 hover:bg-gray-700;
+    @apply bg-slate-700 text-trust-teal-200 border-slate-600 hover:bg-slate-600 shadow-md;
   }
   
   .card {
-    @apply bg-gray-800 border-gray-700 text-gray-100;
+    @apply bg-slate-800 border-slate-700 text-slate-100 shadow-xl;
   }
   
   .card-trust {
-    @apply bg-gray-800 border-trust-teal-500 text-gray-100;
+    @apply bg-slate-800 border-trust-teal-400 text-slate-100 shadow-xl shadow-trust-teal-900/20;
+  }
+  
+  .card-elevated {
+    @apply bg-slate-800 border-slate-700 text-slate-100 shadow-2xl;
   }
   
   h1, h2, h3 {
-    @apply text-trust-teal-300;
+    @apply text-trust-teal-200;
+  }
+  
+  h4, h5, h6 {
+    @apply text-slate-200;
+  }
+  
+  p {
+    @apply text-slate-300;
   }
   
   .input-therapeutic {
-    @apply bg-gray-800 border-gray-600 text-gray-100 focus:border-trust-teal-500 focus:ring-trust-teal-500;
+    @apply bg-slate-800 border-slate-600 text-slate-200 focus:border-trust-teal-400 focus:ring-trust-teal-400 placeholder-slate-400;
+  }
+  
+  /* Navigation and links */
+  nav a {
+    @apply text-slate-300 hover:text-trust-teal-300;
+  }
+  
+  /* Badge styles for dark mode */
+  .badge-success {
+    @apply bg-medical-green-900 text-medical-green-200;
+  }
+  
+  .badge-warning {
+    @apply bg-warm-peach-900 text-warm-peach-200;
+  }
+  
+  .badge-alert {
+    @apply bg-coral-alert-900 text-coral-alert-200;
+  }
+  
+  .badge-trust {
+    @apply bg-trust-teal-900 text-trust-teal-200;
   }
   
   /* Enhanced focus states for dark mode accessibility */
   *:focus {
-    @apply ring-2 ring-trust-teal-400 ring-offset-2 ring-offset-gray-900;
+    @apply ring-2 ring-trust-teal-400 ring-offset-2 ring-offset-slate-900;
   }
 }

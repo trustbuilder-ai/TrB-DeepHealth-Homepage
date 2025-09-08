@@ -25,7 +25,7 @@ export const InternalLink: React.FC<InternalLinkProps> = ({
   title,
   rel
 }) => {
-  const baseClasses = 'transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2';
+  const baseClasses = 'transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-trust-teal-500 focus:ring-offset-2';
   
   const variantClasses = {
     default: 'text-trust-teal-600 hover:text-trust-teal-700 hover:underline',

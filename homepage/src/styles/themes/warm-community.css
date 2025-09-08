@@ -1,39 +1,78 @@
 /* Warm Community Theme - Approachable theme with emotional design */
 
 [data-theme="warm-community"] {
-  /* Primary colors emphasizing warmth and approachability */
+  /* Warm, approachable design with emotional connection */
   background-color: #fef7ed;
   color: #1f2937;
   
   body {
-    @apply bg-warm-peach-50;
+    @apply bg-gradient-to-br from-warm-peach-50 to-orange-50 text-gray-800;
   }
   
   .crisis-banner {
-    @apply bg-coral-alert-50 border-coral-alert-500 text-coral-alert-800;
+    @apply bg-coral-alert-100 border-coral-alert-400 text-coral-alert-900 shadow-sm;
   }
   
   .btn-primary {
-    @apply bg-warm-peach-600 hover:bg-warm-peach-700;
+    @apply bg-gradient-to-r from-warm-peach-500 to-orange-500 hover:from-warm-peach-600 hover:to-orange-600 text-white shadow-lg hover:shadow-xl;
   }
   
   .btn-secondary {
-    @apply bg-white text-warm-peach-700 border-warm-peach-200 hover:bg-warm-peach-50;
+    @apply bg-white text-warm-peach-800 border-warm-peach-300 hover:bg-warm-peach-100 hover:border-warm-peach-400 shadow-md;
   }
   
   .card {
-    @apply bg-white border-warm-peach-200;
+    @apply bg-white/90 backdrop-blur-sm border-warm-peach-200 shadow-lg shadow-warm-peach-200/30 hover:shadow-xl hover:shadow-warm-peach-300/40;
   }
   
   .card-trust {
-    @apply border-warm-peach-300 shadow-warm-peach-100;
+    @apply bg-white/95 backdrop-blur-sm border-warm-peach-400 shadow-xl shadow-warm-peach-300/50 hover:shadow-2xl hover:shadow-warm-peach-400/60;
   }
   
-  h1, h2 {
-    @apply text-warm-peach-800;
+  .card-elevated {
+    @apply bg-white/95 backdrop-blur-sm border-warm-peach-200 shadow-2xl shadow-warm-peach-300/40;
+  }
+  
+  h1, h2, h3 {
+    @apply text-warm-peach-900;
+  }
+  
+  h4, h5, h6 {
+    @apply text-orange-800;
+  }
+  
+  p {
+    @apply text-gray-700;
   }
   
   .input-therapeutic {
-    @apply focus:border-warm-peach-500 focus:ring-warm-peach-500;
+    @apply bg-white/80 backdrop-blur-sm border-warm-peach-300 text-gray-800 focus:border-warm-peach-500 focus:ring-warm-peach-500 placeholder-warm-peach-400;
+  }
+  
+  /* Warm navigation styling */
+  nav a {
+    @apply text-warm-peach-700 hover:text-warm-peach-900;
+  }
+  
+  /* Warm badge styling */
+  .badge-success {
+    @apply bg-gradient-to-r from-medical-green-100 to-green-100 text-medical-green-900 border border-medical-green-300;
+  }
+  
+  .badge-warning {
+    @apply bg-gradient-to-r from-warm-peach-200 to-orange-200 text-warm-peach-900 border border-warm-peach-400;
+  }
+  
+  .badge-alert {
+    @apply bg-gradient-to-r from-coral-alert-200 to-red-200 text-coral-alert-900 border border-coral-alert-400;
+  }
+  
+  .badge-trust {
+    @apply bg-gradient-to-r from-trust-teal-100 to-teal-100 text-trust-teal-900 border border-trust-teal-300;
+  }
+  
+  /* Warm focus states */
+  *:focus {
+    @apply ring-2 ring-warm-peach-500 ring-offset-2 ring-offset-warm-peach-50;
   }
 }

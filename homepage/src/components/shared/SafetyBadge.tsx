@@ -28,9 +28,9 @@ export const SafetyBadge: React.FC<SafetyBadgeProps> = ({ type, className = '' }
       icon: CheckCircle,
       text: 'Medical Boundaries',
       description: 'No diagnosis, treatment, or medication advice provided',
-      bgColor: 'bg-primary-100',
-      textColor: 'text-primary-800',
-      iconColor: 'text-primary-600'
+      bgColor: 'bg-trust-teal-100',
+      textColor: 'text-trust-teal-800',
+      iconColor: 'text-trust-teal-600'
     },
     'testing-only': {
       icon: AlertTriangle,

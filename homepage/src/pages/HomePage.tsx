@@ -9,16 +9,16 @@ export const HomePage: React.FC = () => {
       {/* Hero Section */}
       <div className="text-center mb-16">
         <div className="flex justify-center items-center space-x-4 mb-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <TestTube className="h-14 w-14 text-primary-600" />
-          <Brain className="h-12 w-12 text-accent-500" />
-          <Shield className="h-10 w-10 text-success-600" />
+          <TestTube className="h-14 w-14 text-trust-teal-600" />
+          <Brain className="h-12 w-12 text-calm-blue-500" />
+          <Shield className="h-10 w-10 text-medical-green-600" />
         </div>
         
-        <h1 className="text-5xl lg:text-6xl font-bold text-primary-900 mb-6 font-display">
+        <h1 className="text-5xl lg:text-6xl font-bold text-trust-teal-900 mb-6 font-display">
           TrB-DeepHealth
         </h1>
         
-        <p className="text-2xl text-primary-700 mb-4 font-display font-medium">
+        <p className="text-2xl text-trust-teal-700 mb-4 font-display font-medium">
           LLM Mental Health Testing Platform
         </p>
         
@@ -41,8 +41,8 @@ export const HomePage: React.FC = () => {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 animate-slide-up" style={{ animationDelay: '0.2s' }}>
         <div className="card-interactive group">
           <div className="flex items-center space-x-4 mb-6">
-            <div className="p-3 bg-alert-100 rounded-xl group-hover:bg-alert-200 transition-colors duration-200">
-              <Shield className="h-8 w-8 text-alert-600" />
+            <div className="p-3 bg-coral-alert-100 rounded-xl group-hover:bg-coral-alert-200 transition-colors duration-200">
+              <Shield className="h-8 w-8 text-coral-alert-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 font-display">Crisis Detection</h3>
           </div>
@@ -54,8 +54,8 @@ export const HomePage: React.FC = () => {
 
         <div className="card-interactive group">
           <div className="flex items-center space-x-4 mb-6">
-            <div className="p-3 bg-success-100 rounded-xl group-hover:bg-success-200 transition-colors duration-200">
-              <FileText className="h-8 w-8 text-success-600" />
+            <div className="p-3 bg-medical-green-100 rounded-xl group-hover:bg-medical-green-200 transition-colors duration-200">
+              <FileText className="h-8 w-8 text-medical-green-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 font-display">Medical Boundaries</h3>
           </div>
@@ -67,8 +67,8 @@ export const HomePage: React.FC = () => {
 
         <div className="card-interactive group">
           <div className="flex items-center space-x-4 mb-6">
-            <div className="p-3 bg-warning-100 rounded-xl group-hover:bg-warning-200 transition-colors duration-200">
-              <Users className="h-8 w-8 text-warning-600" />
+            <div className="p-3 bg-warm-peach-100 rounded-xl group-hover:bg-warm-peach-200 transition-colors duration-200">
+              <Users className="h-8 w-8 text-warm-peach-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 font-display">Empathy Validation</h3>
           </div>
@@ -80,8 +80,8 @@ export const HomePage: React.FC = () => {
 
         <div className="card-interactive group">
           <div className="flex items-center space-x-4 mb-6">
-            <div className="p-3 bg-primary-100 rounded-xl group-hover:bg-primary-200 transition-colors duration-200">
-              <TestTube className="h-8 w-8 text-primary-600" />
+            <div className="p-3 bg-trust-teal-100 rounded-xl group-hover:bg-trust-teal-200 transition-colors duration-200">
+              <TestTube className="h-8 w-8 text-trust-teal-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 font-display">Scenario Library</h3>
           </div>
@@ -93,8 +93,8 @@ export const HomePage: React.FC = () => {
 
         <div className="card-interactive group">
           <div className="flex items-center space-x-4 mb-6">
-            <div className="p-3 bg-accent-100 rounded-xl group-hover:bg-accent-200 transition-colors duration-200">
-              <BarChart3 className="h-8 w-8 text-accent-600" />
+            <div className="p-3 bg-calm-blue-100 rounded-xl group-hover:bg-calm-blue-200 transition-colors duration-200">
+              <BarChart3 className="h-8 w-8 text-calm-blue-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 font-display">Analytics & Reporting</h3>
           </div>
@@ -106,8 +106,8 @@ export const HomePage: React.FC = () => {
 
         <div className="card-interactive group">
           <div className="flex items-center space-x-4 mb-6">
-            <div className="p-3 bg-secondary-100 rounded-xl group-hover:bg-secondary-200 transition-colors duration-200">
-              <Brain className="h-8 w-8 text-secondary-600" />
+            <div className="p-3 bg-gray-100 rounded-xl group-hover:bg-gray-200 transition-colors duration-200">
+              <Brain className="h-8 w-8 text-gray-600" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 font-display">Human Oversight</h3>
           </div>
@@ -125,7 +125,7 @@ export const HomePage: React.FC = () => {
 
       {/* Value Propositions */}
       <div className="card-elevated mb-16 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-        <h2 className="text-3xl font-bold text-primary-800 text-center mb-10 font-display">
+        <h2 className="text-3xl font-bold text-trust-teal-800 text-center mb-10 font-display">
           Who We Serve
         </h2>
         
@@ -161,8 +161,8 @@ export const HomePage: React.FC = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="text-center bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl p-12 animate-scale-in" style={{ animationDelay: '0.5s' }}>
-        <h2 className="text-3xl font-bold text-primary-800 mb-6 font-display">
+      <div className="text-center bg-gradient-to-br from-trust-teal-50 to-calm-blue-50 rounded-3xl p-12 animate-scale-in" style={{ animationDelay: '0.5s' }}>
+        <h2 className="text-3xl font-bold text-trust-teal-800 mb-6 font-display">
           Ready to Test Your LLM?
         </h2>
         <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">

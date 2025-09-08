@@ -57,7 +57,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ currentTheme, onTh
     <div className="relative" data-theme-switcher>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200"
+        className="flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-medium text-gray-700 hover:text-trust-teal-600 hover:bg-trust-teal-50 transition-all duration-200"
         aria-label="Switch theme"
       >
         <Palette className="h-4 w-4" />

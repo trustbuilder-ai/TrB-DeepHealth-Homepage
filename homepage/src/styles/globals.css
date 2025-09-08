@@ -25,19 +25,19 @@
   }
   
   h1 {
-    @apply text-4xl lg:text-5xl text-primary-900;
+    @apply text-4xl lg:text-5xl text-trust-teal-900;
   }
   
   h2 {
-    @apply text-3xl lg:text-4xl text-primary-800;
+    @apply text-3xl lg:text-4xl text-trust-teal-800;
   }
   
   h3 {
-    @apply text-2xl lg:text-3xl text-primary-700;
+    @apply text-2xl lg:text-3xl text-trust-teal-700;
   }
   
   h4 {
-    @apply text-xl lg:text-2xl text-primary-700;
+    @apply text-xl lg:text-2xl text-trust-teal-700;
   }
   
   /* Optimized body text */
@@ -48,7 +48,7 @@
   
   /* Modern focus states */
   *:focus {
-    @apply outline-none ring-2 ring-accent-500 ring-offset-2 ring-offset-white;
+    @apply outline-none ring-2 ring-calm-blue-500 ring-offset-2 ring-offset-white;
   }
   
   /* Reduced motion for accessibility */

@@ -1,31 +1,78 @@
 /* Clinical Trust Theme - Professional theme with crisis support */
 
 [data-theme="clinical-trust"] {
-  /* Primary colors emphasizing medical authority */
+  /* Professional medical authority with clean aesthetics */
   background-color: #ffffff;
   color: #111827;
   
+  body {
+    @apply bg-white text-gray-900;
+  }
+  
   .crisis-banner {
-    @apply bg-coral-alert-50 border-coral-alert-500 text-coral-alert-800;
+    @apply bg-coral-alert-50 border-coral-alert-500 text-coral-alert-900 shadow-sm;
   }
   
   .btn-primary {
-    @apply bg-trust-teal-700 hover:bg-trust-teal-800;
+    @apply bg-trust-teal-700 hover:bg-trust-teal-800 text-white shadow-md hover:shadow-lg;
   }
   
   .btn-secondary {
-    @apply bg-white text-trust-teal-700 border-trust-teal-200 hover:bg-trust-teal-50;
+    @apply bg-white text-trust-teal-700 border-trust-teal-300 hover:bg-trust-teal-50 hover:border-trust-teal-400 shadow-sm;
+  }
+  
+  .card {
+    @apply bg-white border-gray-200 shadow-sm hover:shadow-md;
   }
   
   .card-trust {
-    @apply border-trust-teal-300 shadow-trust-teal-100;
+    @apply bg-white border-trust-teal-300 shadow-md shadow-trust-teal-100/50 hover:shadow-lg hover:shadow-trust-teal-200/50;
+  }
+  
+  .card-elevated {
+    @apply bg-white border-gray-200 shadow-lg hover:shadow-xl;
   }
   
   h1, h2, h3 {
-    @apply text-trust-teal-800;
+    @apply text-trust-teal-900;
+  }
+  
+  h4, h5, h6 {
+    @apply text-gray-800;
+  }
+  
+  p {
+    @apply text-gray-700;
   }
   
   .input-therapeutic {
-    @apply focus:border-trust-teal-500 focus:ring-trust-teal-500;
+    @apply bg-white border-gray-300 text-gray-900 focus:border-trust-teal-600 focus:ring-trust-teal-600 placeholder-gray-500;
+  }
+  
+  /* Navigation styling */
+  nav a {
+    @apply text-gray-700 hover:text-trust-teal-700;
+  }
+  
+  /* Professional badge styling */
+  .badge-success {
+    @apply bg-medical-green-100 text-medical-green-900 border border-medical-green-200;
+  }
+  
+  .badge-warning {
+    @apply bg-warm-peach-100 text-warm-peach-900 border border-warm-peach-200;
+  }
+  
+  .badge-alert {
+    @apply bg-coral-alert-100 text-coral-alert-900 border border-coral-alert-200;
+  }
+  
+  .badge-trust {
+    @apply bg-trust-teal-100 text-trust-teal-900 border border-trust-teal-200;
+  }
+  
+  /* Enhanced professional focus states */
+  *:focus {
+    @apply ring-2 ring-trust-teal-600 ring-offset-2 ring-offset-white;
   }
 }

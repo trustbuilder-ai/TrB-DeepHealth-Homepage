@@ -77,7 +77,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
             <h2 className="text-xl font-semibold text-gray-900 font-display">Navigation</h2>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-gray-500 hover:text-gray-700 hover:bg-primary-50 transition-all duration-200 hover:scale-105"
+              className="p-2 rounded-xl text-gray-500 hover:text-gray-700 hover:bg-trust-teal-50 transition-all duration-200 hover:scale-105"
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
@@ -94,10 +94,10 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                     key={item.to}
                     to={item.to}
                     onClick={onClose}
-                    className="flex items-center space-x-4 p-4 rounded-xl text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200 group hover:scale-105"
+                    className="flex items-center space-x-4 p-4 rounded-xl text-gray-700 hover:text-trust-teal-600 hover:bg-trust-teal-50 transition-all duration-200 group hover:scale-105"
                   >
-                    <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-primary-100 transition-colors duration-200">
-                      <Icon className="h-5 w-5 text-gray-600 group-hover:text-primary-600 transition-colors duration-200" />
+                    <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-trust-teal-100 transition-colors duration-200">
+                      <Icon className="h-5 w-5 text-gray-600 group-hover:text-trust-teal-600 transition-colors duration-200" />
                     </div>
                     <div>
                       <div className="font-medium font-display">{item.label}</div>
@@ -112,7 +112,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           {/* Footer */}
           <div className="p-6 border-t border-gray-100">
             <div className="text-center">
-              <p className="text-sm text-primary-600 mb-2 font-medium font-display">
+              <p className="text-sm text-trust-teal-600 mb-2 font-medium font-display">
                 TrB-DeepHealth Testing Platform
               </p>
               <p className="text-xs text-gray-500">
