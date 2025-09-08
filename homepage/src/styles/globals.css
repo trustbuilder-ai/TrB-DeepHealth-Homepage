@@ -160,11 +160,11 @@
   
   /* Modern gradient utilities */
   .gradient-primary {
-    background: linear-gradient(135deg, theme('colors.primary.600'), theme('colors.primary.700'));
+    background: linear-gradient(135deg, rgb(71 85 105), rgb(51 65 85));
   }
   
   .gradient-accent {
-    background: linear-gradient(135deg, theme('colors.accent.500'), theme('colors.accent.600'));
+    background: linear-gradient(135deg, rgb(100 116 139), rgb(71 85 105));
   }
   
   /* Modern glass effect */

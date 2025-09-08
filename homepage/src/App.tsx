@@ -14,6 +14,24 @@ function App() {
   const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
+  // Add cleanup for any potential event listeners or timers
+  React.useEffect(() => {
+    // Handle escape key to close mobile menu
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('keydown', handleEscapeKey);
+
+    // Cleanup function
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Non-dismissible Crisis Banner */}

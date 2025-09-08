@@ -8,6 +8,30 @@ interface MobileMenuProps {
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
+  // Add cleanup for escape key and body scroll lock
+  React.useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    // Prevent body scroll when menu is open
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = 'hidden';
+    
+    // Add event listener
+    document.addEventListener('keydown', handleEscapeKey);
+
+    // Cleanup function
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+      document.body.style.overflow = originalStyle;
+    };
+  }, [isOpen, onClose]);
+
   const menuItems = [
     {
       to: '/testing',
