@@ -69,7 +69,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ customItems, className
               
               {item.isActive ? (
                 <span 
-                  className="text-primary-600 font-medium"
+                  className="text-trust-teal-600 font-medium"
                   aria-current="page"
                 >
                   {index === 0 && <Home className="h-4 w-4 mr-1 inline" aria-hidden="true" />}
@@ -78,7 +78,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ customItems, className
               ) : (
                 <Link
                   to={item.path}
-                  className="text-gray-500 hover:text-primary-600 transition-colors duration-200 flex items-center"
+                  className="text-gray-500 hover:text-trust-teal-600 transition-colors duration-200 flex items-center"
                   title={`Navigate to ${item.label}`}
                 >
                   {index === 0 && <Home className="h-4 w-4 mr-1" aria-hidden="true" />}

@@ -1,45 +1,31 @@
 /* Clinical Trust Theme - Professional theme with crisis support */
 
-:root[data-theme="clinical-trust"] {
-  /* Primary colors emphasizing medical authority */
-  --color-primary: #01382E;
-  --color-primary-hover: #15803d;
-  --color-secondary: #017A8D;
-  --color-secondary-hover: #005C65;
-  
-  /* Background colors for clinical feel */
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f9fafb;
-  --color-bg-accent: #f0fdf4;
-  
-  /* Text colors for professional readability */
-  --color-text-primary: #111827;
-  --color-text-secondary: #374151;
-  --color-text-muted: #6b7280;
-  
-  /* Crisis support colors */
-  --color-crisis: #ff6252;
-  --color-crisis-bg: #fef2f2;
-  --color-crisis-border: #fecaca;
-}
-
 [data-theme="clinical-trust"] {
+  /* Primary colors emphasizing medical authority */
+  background-color: #ffffff;
+  color: #111827;
+  
   .crisis-banner {
-    background-color: var(--color-crisis-bg);
-    border-left-color: var(--color-crisis);
-    color: var(--color-crisis);
+    @apply bg-coral-alert-50 border-coral-alert-500 text-coral-alert-800;
   }
   
   .btn-primary {
-    background-color: var(--color-primary);
+    @apply bg-trust-teal-700 hover:bg-trust-teal-800;
   }
   
-  .btn-primary:hover {
-    background-color: var(--color-primary-hover);
+  .btn-secondary {
+    @apply bg-white text-trust-teal-700 border-trust-teal-200 hover:bg-trust-teal-50;
   }
   
   .card-trust {
-    border-color: var(--color-primary);
-    box-shadow: 0 4px 6px -1px rgba(1, 56, 46, 0.1);
+    @apply border-trust-teal-300 shadow-trust-teal-100;
+  }
+  
+  h1, h2, h3 {
+    @apply text-trust-teal-800;
+  }
+  
+  .input-therapeutic {
+    @apply focus:border-trust-teal-500 focus:ring-trust-teal-500;
   }
 }

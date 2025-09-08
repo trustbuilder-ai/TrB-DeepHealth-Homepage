@@ -1,67 +1,44 @@
 /* Dark Mode Theme - Dark mode with accessibility focus */
 
-:root[data-theme="dark"] {
+[data-theme="dark-mode"] {
   /* Primary colors adapted for dark backgrounds */
-  --color-primary: #2dd4bf;
-  --color-primary-hover: #5eead4;
-  --color-secondary: #F3B890;
-  --color-secondary-hover: #fde68a;
+  background-color: #111827;
+  color: #f3f4f6;
   
-  /* Dark background colors */
-  --color-bg-primary: #111827;
-  --color-bg-secondary: #1f2937;
-  --color-bg-accent: #374151;
-  
-  /* High contrast text colors for accessibility */
-  --color-text-primary: #f3f4f6;
-  --color-text-secondary: #d1d5db;
-  --color-text-muted: #9ca3af;
-  
-  /* Crisis support colors (high contrast for visibility) */
-  --color-crisis: #f87171;
-  --color-crisis-bg: #7f1d1d;
-  --color-crisis-border: #dc2626;
-}
-
-[data-theme="dark"] {
   body {
-    background-color: var(--color-bg-primary);
-    color: var(--color-text-primary);
+    @apply bg-gray-900 text-gray-100;
   }
   
   .crisis-banner {
-    background-color: var(--color-crisis-bg);
-    border-left-color: var(--color-crisis);
-    color: var(--color-crisis);
+    @apply bg-coral-alert-900 border-coral-alert-400 text-coral-alert-200;
   }
   
   .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-bg-primary);
+    @apply bg-trust-teal-500 text-gray-900 hover:bg-trust-teal-400;
   }
   
-  .btn-primary:hover {
-    background-color: var(--color-primary-hover);
+  .btn-secondary {
+    @apply bg-gray-800 text-trust-teal-300 border-gray-600 hover:bg-gray-700;
   }
   
   .card {
-    background-color: var(--color-bg-secondary);
-    border-color: var(--color-bg-accent);
-    color: var(--color-text-primary);
+    @apply bg-gray-800 border-gray-700 text-gray-100;
   }
   
   .card-trust {
-    background-color: var(--color-bg-secondary);
-    border-color: var(--color-primary);
+    @apply bg-gray-800 border-trust-teal-500 text-gray-100;
   }
   
   h1, h2, h3 {
-    color: var(--color-text-primary);
+    @apply text-trust-teal-300;
+  }
+  
+  .input-therapeutic {
+    @apply bg-gray-800 border-gray-600 text-gray-100 focus:border-trust-teal-500 focus:ring-trust-teal-500;
   }
   
   /* Enhanced focus states for dark mode accessibility */
   *:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 4px rgba(1, 122, 141, 0.2);
+    @apply ring-2 ring-trust-teal-400 ring-offset-2 ring-offset-gray-900;
   }
 }

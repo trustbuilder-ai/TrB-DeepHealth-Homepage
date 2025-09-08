@@ -34,7 +34,7 @@ function App() {
   }, [isMobileMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50" data-theme={theme}>
       {/* Non-dismissible Crisis Banner */}
       <CrisisBanner />
       
@@ -66,16 +66,16 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-primary-900 text-white py-12 mt-20">
+      <footer className="bg-trust-teal-900 text-white py-12 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-primary-200 mb-3 text-lg font-medium">
+            <p className="text-trust-teal-200 mb-3 text-lg font-medium">
               TrB-DeepHealth - LLM Mental Health Testing Platform
             </p>
-            <p className="text-primary-300 mb-6">
+            <p className="text-trust-teal-300 mb-6">
               This is a testing platform for LLM validation, not a mental health service.
             </p>
-            <div className="flex justify-center space-x-8 text-primary-300">
+            <div className="flex justify-center space-x-8 text-trust-teal-300">
               <a href="#privacy" className="hover:text-white transition-colors duration-200 hover:underline">Privacy Policy</a>
               <a href="#terms" className="hover:text-white transition-colors duration-200 hover:underline">Terms of Service</a>
               <a href="#contact" className="hover:text-white transition-colors duration-200 hover:underline">Contact</a>

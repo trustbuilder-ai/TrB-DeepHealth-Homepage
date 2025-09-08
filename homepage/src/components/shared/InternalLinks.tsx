@@ -28,10 +28,10 @@ export const InternalLink: React.FC<InternalLinkProps> = ({
   const baseClasses = 'transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2';
   
   const variantClasses = {
-    default: 'text-primary-600 hover:text-primary-700 hover:underline',
+    default: 'text-trust-teal-600 hover:text-trust-teal-700 hover:underline',
     button: 'btn btn-primary',
-    inline: 'text-primary-600 hover:text-primary-700 border-b border-primary-200 hover:border-primary-400',
-    card: 'block p-4 bg-white rounded-lg border border-gray-200 hover:border-primary-300 hover:shadow-md hover:-translate-y-0.5'
+    inline: 'text-trust-teal-600 hover:text-trust-teal-700 border-b border-trust-teal-200 hover:border-trust-teal-400',
+    card: 'block p-4 bg-white rounded-lg border border-gray-200 hover:border-trust-teal-300 hover:shadow-md hover:-translate-y-0.5'
   };
 
   const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${className}`;
@@ -90,14 +90,14 @@ export const RelatedLinks: React.FC<RelatedLinksProps> = ({ title, links, classN
               title={link.description}
             >
               <div>
-                <span className="font-medium text-gray-900 group-hover:text-primary-600">
+                <span className="font-medium text-gray-900 group-hover:text-trust-teal-600">
                   {link.label}
                 </span>
                 {link.description && (
                   <p className="text-sm text-gray-500 mt-1">{link.description}</p>
                 )}
               </div>
-              <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-primary-600 group-hover:translate-x-1 transition-all duration-200" />
+              <ArrowRight className="h-4 w-4 text-gray-400 group-hover:text-trust-teal-600 group-hover:translate-x-1 transition-all duration-200" />
             </InternalLink>
           </li>
         ))}

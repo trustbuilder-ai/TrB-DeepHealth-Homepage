@@ -75,7 +75,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ currentTheme, onTh
                   onThemeChange(theme.id);
                   setIsOpen(false);
                 }}
-                className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left hover:bg-primary-50 transition-all duration-200 hover:scale-105"
+                className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left hover:bg-trust-teal-50 transition-all duration-200 hover:scale-105"
               >
                 <div className={`w-4 h-4 rounded-full ${theme.color}`} />
                 <div className="flex-1">
@@ -83,7 +83,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ currentTheme, onTh
                   <div className="text-xs text-gray-500">{theme.description}</div>
                 </div>
                 {currentTheme === theme.id && (
-                  <Check className="h-4 w-4 text-primary-600" />
+                  <Check className="h-4 w-4 text-trust-teal-600" />
                 )}
               </button>
             ))}

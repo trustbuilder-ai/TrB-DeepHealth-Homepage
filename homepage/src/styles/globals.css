@@ -64,29 +64,29 @@
 @layer components {
   /* Modern button styles */
   .btn {
-    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-xl transition-all duration-200 ease-in-out;
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-xl transition-all duration-200 ease-in-out font-display;
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   
   .btn-primary {
-    @apply bg-primary-600 text-white shadow-sm;
-    @apply hover:bg-primary-700 hover:shadow-md hover:-translate-y-0.5;
-    @apply active:bg-primary-800 active:translate-y-0;
-    @apply focus:ring-primary-500;
+    @apply bg-trust-teal-600 text-white shadow-sm;
+    @apply hover:bg-trust-teal-700 hover:shadow-md hover:-translate-y-0.5;
+    @apply active:bg-trust-teal-800 active:translate-y-0;
+    @apply focus:ring-trust-teal-500;
   }
   
   .btn-secondary {
-    @apply bg-white text-primary-700 border border-primary-200 shadow-sm;
-    @apply hover:bg-primary-50 hover:border-primary-300 hover:shadow-md hover:-translate-y-0.5;
-    @apply active:bg-primary-100 active:translate-y-0;
-    @apply focus:ring-primary-500;
+    @apply bg-white text-trust-teal-700 border border-trust-teal-200 shadow-sm;
+    @apply hover:bg-trust-teal-50 hover:border-trust-teal-300 hover:shadow-md hover:-translate-y-0.5;
+    @apply active:bg-trust-teal-100 active:translate-y-0;
+    @apply focus:ring-trust-teal-500;
   }
   
-  .btn-accent {
-    @apply bg-accent-500 text-white shadow-sm;
-    @apply hover:bg-accent-600 hover:shadow-md hover:-translate-y-0.5;
-    @apply active:bg-accent-700 active:translate-y-0;
-    @apply focus:ring-accent-500;
+  .btn-therapeutic {
+    @apply bg-warm-peach-500 text-white shadow-sm;
+    @apply hover:bg-warm-peach-600 hover:shadow-md hover:-translate-y-0.5;
+    @apply active:bg-warm-peach-700 active:translate-y-0;
+    @apply focus:ring-warm-peach-500;
   }
   
   /* Modern card styles */
@@ -105,21 +105,27 @@
   .card-interactive {
     @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6 cursor-pointer;
     @apply transition-all duration-300 ease-in-out;
-    @apply hover:shadow-lg hover:-translate-y-1 hover:border-primary-200;
+    @apply hover:shadow-lg hover:-translate-y-1 hover:border-trust-teal-200;
+  }
+  
+  .card-trust {
+    @apply bg-white rounded-2xl shadow-sm border-2 border-trust-teal-200 p-6;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-lg hover:-translate-y-1 hover:border-trust-teal-300;
   }
   
   /* Modern input styles */
-  .input-modern {
+  .input-therapeutic {
     @apply block w-full rounded-xl border-gray-200 bg-white px-4 py-3;
     @apply text-gray-900 placeholder-gray-500;
-    @apply focus:border-primary-500 focus:ring-primary-500 focus:ring-1;
+    @apply focus:border-trust-teal-500 focus:ring-trust-teal-500 focus:ring-1;
     @apply transition-colors duration-200;
   }
   
   /* Crisis banner - maintaining visibility while modernizing */
   .crisis-banner {
-    @apply bg-alert-50 border-l-4 border-alert-500 p-4;
-    @apply text-alert-800 font-medium;
+    @apply bg-coral-alert-50 border-l-4 border-coral-alert-500 p-4;
+    @apply text-coral-alert-800 font-medium;
   }
   
   /* Modern badge styles */
@@ -128,19 +134,19 @@
   }
   
   .badge-success {
-    @apply bg-success-100 text-success-800;
+    @apply bg-medical-green-100 text-medical-green-800;
   }
   
   .badge-warning {
-    @apply bg-warning-100 text-warning-800;
+    @apply bg-warm-peach-100 text-warm-peach-800;
   }
   
   .badge-alert {
-    @apply bg-alert-100 text-alert-800;
+    @apply bg-coral-alert-100 text-coral-alert-800;
   }
   
-  .badge-primary {
-    @apply bg-primary-100 text-primary-800;
+  .badge-trust {
+    @apply bg-trust-teal-100 text-trust-teal-800;
   }
 }
 

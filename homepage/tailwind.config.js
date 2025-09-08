@@ -12,53 +12,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Modern neutral grays
-        gray: colors.gray,
-        
-        // Modern primary palette - sophisticated blue-gray
-        primary: {
-          50: '#f8fafc',
-          100: '#f1f5f9',
-          200: '#e2e8f0',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#64748b',
-          600: '#475569',
-          700: '#334155',
-          800: '#1e293b',
-          900: '#0f172a',
+        // Theme-aware colors using CSS variables
+        'trust-teal': {
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
         },
-        
-        // Modern secondary palette - warm slate
-        secondary: {
-          50: '#fafaf9',
-          100: '#f5f5f4',
-          200: '#e7e5e4',
-          300: '#d6d3d1',
-          400: '#a8a29e',
-          500: '#78716c',
-          600: '#57534e',
-          700: '#44403c',
-          800: '#292524',
-          900: '#1c1917',
-        },
-        
-        // Modern accent palette - vibrant but refined
-        accent: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-        },
-        
-        // Modern success palette - refined green
-        success: {
+        'medical-green': {
           50: '#f0fdf4',
           100: '#dcfce7',
           200: '#bbf7d0',
@@ -70,10 +37,8 @@ export default {
           800: '#166534',
           900: '#14532d',
         },
-        
-        // Modern warning palette - sophisticated amber
-        warning: {
-          50: '#fffbeb',
+        'warm-peach': {
+          50: '#fef7ed',
           100: '#fef3c7',
           200: '#fde68a',
           300: '#fcd34d',
@@ -84,9 +49,7 @@ export default {
           800: '#92400e',
           900: '#78350f',
         },
-        
-        // Modern alert palette - refined red
-        alert: {
+        'coral-alert': {
           50: '#fef2f2',
           100: '#fee2e2',
           200: '#fecaca',
@@ -97,6 +60,18 @@ export default {
           700: '#b91c1c',
           800: '#991b1b',
           900: '#7f1d1d',
+        },
+        'calm-blue': {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
       },
       fontFamily: {
