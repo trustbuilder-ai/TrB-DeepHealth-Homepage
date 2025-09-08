@@ -4,101 +4,113 @@ import { SafetyIndicator } from '../components/shared/SafetyBadge';
 
 export const HomePage: React.FC = () => {
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-in">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
       {/* Hero Section */}
-      <div className="text-center mb-12">
-        <div className="flex justify-center items-center space-x-3 mb-6 animate-in" style={{ animationDelay: '0.1s' }}>
-          <TestTube className="h-12 w-12 text-trust-teal-500" />
-          <Brain className="h-10 w-10 text-medical-green-600" />
-          <Shield className="h-8 w-8 text-trust-teal-600" />
+      <div className="text-center mb-16">
+        <div className="flex justify-center items-center space-x-4 mb-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <TestTube className="h-14 w-14 text-primary-600" />
+          <Brain className="h-12 w-12 text-accent-500" />
+          <Shield className="h-10 w-10 text-success-600" />
         </div>
         
-        <h1 className="text-4xl font-bold text-trust-teal-600 mb-4">
+        <h1 className="text-5xl lg:text-6xl font-bold text-primary-900 mb-6 font-display">
           TrB-DeepHealth
         </h1>
         
-        <p className="text-xl text-gray-700 mb-2 font-therapeutic">
+        <p className="text-2xl text-primary-700 mb-4 font-display font-medium">
           LLM Mental Health Testing Platform
         </p>
         
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+        <p className="text-lg text-gray-600 max-w-4xl mx-auto mb-10 leading-relaxed">
           Testing LLMs to ensure they're safe for mental health product development. 
           Comprehensive safety validation before deployment in sensitive mental health contexts.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="btn-primary group">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <button className="btn btn-primary group text-base px-8 py-4">
             Start Testing LLMs
           </button>
-          <button className="btn-secondary group">
+          <button className="btn btn-secondary group text-base px-8 py-4">
             View Documentation
           </button>
         </div>
       </div>
 
       {/* Key Features Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-in" style={{ animationDelay: '0.2s' }}>
-        <div className="card-trust">
-          <div className="flex items-center space-x-3 mb-4">
-            <Shield className="h-8 w-8 text-coral-alert-500" />
-            <h3 className="text-lg font-semibold text-gray-800">Crisis Detection</h3>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+        <div className="card-interactive group">
+          <div className="flex items-center space-x-4 mb-6">
+            <div className="p-3 bg-alert-100 rounded-xl group-hover:bg-alert-200 transition-colors duration-200">
+              <Shield className="h-8 w-8 text-alert-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 font-display">Crisis Detection</h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 leading-relaxed">
             Real-time crisis language monitoring with immediate 988 resource routing. 
             Test your LLM's ability to detect and respond to mental health emergencies.
           </p>
         </div>
 
-        <div className="card-trust">
-          <div className="flex items-center space-x-3 mb-4">
-            <FileText className="h-8 w-8 text-medical-green-600" />
-            <h3 className="text-lg font-semibold text-gray-800">Medical Boundaries</h3>
+        <div className="card-interactive group">
+          <div className="flex items-center space-x-4 mb-6">
+            <div className="p-3 bg-success-100 rounded-xl group-hover:bg-success-200 transition-colors duration-200">
+              <FileText className="h-8 w-8 text-success-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 font-display">Medical Boundaries</h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 leading-relaxed">
             Validate that your LLM respects medical boundaries - no diagnosis, treatment, 
             or medication advice. Ensure professional referral triggers work correctly.
           </p>
         </div>
 
-        <div className="card-trust">
-          <div className="flex items-center space-x-3 mb-4">
-            <Users className="h-8 w-8 text-warm-peach-500" />
-            <h3 className="text-lg font-semibold text-gray-800">Empathy Validation</h3>
+        <div className="card-interactive group">
+          <div className="flex items-center space-x-4 mb-6">
+            <div className="p-3 bg-warning-100 rounded-xl group-hover:bg-warning-200 transition-colors duration-200">
+              <Users className="h-8 w-8 text-warning-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 font-display">Empathy Validation</h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 leading-relaxed">
             Test emotional support capabilities and appropriate empathy responses. 
             Ensure your LLM provides validation without toxic positivity.
           </p>
         </div>
 
-        <div className="card-trust">
-          <div className="flex items-center space-x-3 mb-4">
-            <TestTube className="h-8 w-8 text-trust-teal-500" />
-            <h3 className="text-lg font-semibold text-gray-800">Scenario Library</h3>
+        <div className="card-interactive group">
+          <div className="flex items-center space-x-4 mb-6">
+            <div className="p-3 bg-primary-100 rounded-xl group-hover:bg-primary-200 transition-colors duration-200">
+              <TestTube className="h-8 w-8 text-primary-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 font-display">Scenario Library</h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 leading-relaxed">
             Comprehensive test scenarios covering crisis intervention, boundary testing, 
             emotional support, and custom scenarios for your specific use case.
           </p>
         </div>
 
-        <div className="card-trust">
-          <div className="flex items-center space-x-3 mb-4">
-            <BarChart3 className="h-8 w-8 text-calm-blue-600" />
-            <h3 className="text-lg font-semibold text-gray-800">Analytics & Reporting</h3>
+        <div className="card-interactive group">
+          <div className="flex items-center space-x-4 mb-6">
+            <div className="p-3 bg-accent-100 rounded-xl group-hover:bg-accent-200 transition-colors duration-200">
+              <BarChart3 className="h-8 w-8 text-accent-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 font-display">Analytics & Reporting</h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 leading-relaxed">
             Detailed safety scores, compliance reports, and performance analytics. 
             Compare different LLM models and track improvements over time.
           </p>
         </div>
 
-        <div className="card-trust">
-          <div className="flex items-center space-x-3 mb-4">
-            <Brain className="h-8 w-8 text-medical-green-600" />
-            <h3 className="text-lg font-semibold text-gray-800">Human Oversight</h3>
+        <div className="card-interactive group">
+          <div className="flex items-center space-x-4 mb-6">
+            <div className="p-3 bg-secondary-100 rounded-xl group-hover:bg-secondary-200 transition-colors duration-200">
+              <Brain className="h-8 w-8 text-secondary-600" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 font-display">Human Oversight</h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 leading-relaxed">
             All responses validated by mental health professionals. 
             Ensure your LLM meets the highest standards for mental health applications.
           </p>
@@ -106,24 +118,24 @@ export const HomePage: React.FC = () => {
       </div>
 
       {/* Safety Indicator */}
-      <div className="flex justify-center mb-12 animate-in" style={{ animationDelay: '0.3s' }}>
+      <div className="flex justify-center mb-16 animate-scale-in" style={{ animationDelay: '0.3s' }}>
         <SafetyIndicator className="max-w-md" />
       </div>
 
       {/* Value Propositions */}
-      <div className="bg-white rounded-therapeutic shadow-gentle p-8 mb-12 hover:shadow-lg transition-all duration-300 animate-in" style={{ animationDelay: '0.4s' }}>
-        <h2 className="text-2xl font-bold text-trust-teal-600 text-center mb-8">
+      <div className="card-elevated mb-16 animate-slide-up" style={{ animationDelay: '0.4s' }}>
+        <h2 className="text-3xl font-bold text-primary-800 text-center mb-10 font-display">
           Who We Serve
         </h2>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-10">
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">For Developers</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4 font-display">For Developers</h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
               Validate your LLM before deployment in mental health apps. 
               Comprehensive testing suite ensures safety and compliance.
             </p>
-            <ul className="text-sm text-gray-600 space-y-1">
+            <ul className="text-gray-600 space-y-2">
               <li>• Pre-deployment safety validation</li>
               <li>• Automated testing scenarios</li>
               <li>• Performance benchmarking</li>
@@ -132,12 +144,12 @@ export const HomePage: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-3">For Healthcare Organizations</h3>
-            <p className="text-gray-600 mb-4">
+            <h3 className="text-xl font-semibold text-gray-900 mb-4 font-display">For Healthcare Organizations</h3>
+            <p className="text-gray-600 mb-6 leading-relaxed">
               Ensure compliance before implementing AI solutions. 
               Professional-grade testing for sensitive healthcare contexts.
             </p>
-            <ul className="text-sm text-gray-600 space-y-1">
+            <ul className="text-gray-600 space-y-2">
               <li>• HIPAA compliance validation</li>
               <li>• Clinical boundary testing</li>
               <li>• Risk assessment reports</li>
@@ -148,19 +160,19 @@ export const HomePage: React.FC = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="text-center bg-trust-teal-50 rounded-therapeutic p-8 hover:bg-trust-teal-100 transition-all duration-300 animate-in" style={{ animationDelay: '0.5s' }}>
-        <h2 className="text-2xl font-bold text-trust-teal-700 mb-4">
+      <div className="text-center bg-gradient-to-br from-primary-50 to-accent-50 rounded-3xl p-12 animate-scale-in" style={{ animationDelay: '0.5s' }}>
+        <h2 className="text-3xl font-bold text-primary-800 mb-6 font-display">
           Ready to Test Your LLM?
         </h2>
-        <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto leading-relaxed">
           Start with our comprehensive testing suite to ensure your LLM is safe, 
           appropriate, and effective for mental health applications.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="btn-primary">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <button className="btn btn-primary text-base px-8 py-4">
             Begin Testing Now
           </button>
-          <button className="btn-secondary">
+          <button className="btn btn-secondary text-base px-8 py-4">
             Schedule Demo
           </button>
         </div>

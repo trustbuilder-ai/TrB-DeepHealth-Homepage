@@ -2,34 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Animation keyframes */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-from-top {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Mental Health UI Design - Global Styles */
+/* Modern base styles */
 @layer base {
   html {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   body {
@@ -38,38 +17,38 @@
     line-height: 1.6;
   }
   
-  /* Therapeutic Typography */
+  /* Modern typography hierarchy */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-therapeutic;
+    @apply font-display font-semibold;
     line-height: 1.2;
+    letter-spacing: -0.025em;
   }
   
   h1 {
-    @apply text-3xl font-semibold text-trust-teal-600;
+    @apply text-4xl lg:text-5xl text-primary-900;
   }
   
   h2 {
-    @apply text-2xl font-medium text-trust-teal-700;
+    @apply text-3xl lg:text-4xl text-primary-800;
   }
   
   h3 {
-    @apply text-xl font-medium text-gray-800;
+    @apply text-2xl lg:text-3xl text-primary-700;
   }
   
-  /* Body text optimized for readability */
+  h4 {
+    @apply text-xl lg:text-2xl text-primary-700;
+  }
+  
+  /* Optimized body text */
   p {
-    line-height: 1.5;
+    line-height: 1.6;
     @apply text-gray-700;
   }
   
-  /* Crisis text styling */
-  .crisis-text {
-    @apply text-crisis text-coral-alert-500 font-semibold;
-  }
-  
-  /* Accessible focus states */
+  /* Modern focus states */
   *:focus {
-    @apply outline-none ring-2 ring-trust-teal-500 ring-offset-2;
+    @apply outline-none ring-2 ring-accent-500 ring-offset-2 ring-offset-white;
   }
   
   /* Reduced motion for accessibility */
@@ -82,103 +61,114 @@
   }
 }
 
-/* Animation utilities */
-.animate-in {
-  animation: fade-in 0.5s ease-out;
-}
-
-.slide-in-from-top-2 {
-  animation: slide-in-from-top 0.2s ease-out;
-}
-
 @layer components {
-  /* Crisis Banner Component */
-  .crisis-banner {
-    @apply bg-coral-alert-50 border-l-4 border-coral-alert-500 p-4 mb-6;
-    @apply text-coral-alert-800 font-medium;
+  /* Modern button styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-sm font-medium rounded-xl transition-all duration-200 ease-in-out;
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   
-  /* Trust-building buttons */
   .btn-primary {
-    @apply bg-trust-teal-500 hover:bg-trust-teal-600 text-white;
-    @apply px-6 py-3 rounded-therapeutic font-medium shadow-gentle;
-    @apply transition-all duration-200 ease-in-out;
-    @apply hover:shadow-md hover:scale-[1.02] active:scale-[0.98];
-    @apply focus:ring-2 focus:ring-trust-teal-500 focus:ring-offset-2;
+    @apply bg-primary-600 text-white shadow-sm;
+    @apply hover:bg-primary-700 hover:shadow-md hover:-translate-y-0.5;
+    @apply active:bg-primary-800 active:translate-y-0;
+    @apply focus:ring-primary-500;
   }
   
   .btn-secondary {
-    @apply bg-warm-peach-100 hover:bg-warm-peach-200 text-warm-peach-800;
-    @apply px-6 py-3 rounded-therapeutic font-medium shadow-gentle;
-    @apply transition-all duration-200 ease-in-out;
-    @apply hover:shadow-md hover:scale-[1.02] active:scale-[0.98];
-    @apply focus:ring-2 focus:ring-warm-peach-400 focus:ring-offset-2;
+    @apply bg-white text-primary-700 border border-primary-200 shadow-sm;
+    @apply hover:bg-primary-50 hover:border-primary-300 hover:shadow-md hover:-translate-y-0.5;
+    @apply active:bg-primary-100 active:translate-y-0;
+    @apply focus:ring-primary-500;
   }
   
-  /* Card components with gentle shadows */
+  .btn-accent {
+    @apply bg-accent-500 text-white shadow-sm;
+    @apply hover:bg-accent-600 hover:shadow-md hover:-translate-y-0.5;
+    @apply active:bg-accent-700 active:translate-y-0;
+    @apply focus:ring-accent-500;
+  }
+  
+  /* Modern card styles */
   .card {
-    @apply bg-white rounded-therapeutic shadow-gentle p-6;
-    @apply border border-gray-100;
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;
     @apply transition-all duration-300 ease-in-out;
-    @apply hover:shadow-lg hover:scale-[1.01];
+    @apply hover:shadow-lg hover:-translate-y-1;
   }
   
-  .card-trust {
-    @apply bg-white rounded-therapeutic shadow-trust p-6;
-    @apply border border-trust-teal-100;
+  .card-elevated {
+    @apply bg-white rounded-2xl shadow-lg border border-gray-100 p-8;
     @apply transition-all duration-300 ease-in-out;
-    @apply hover:shadow-xl hover:scale-[1.01];
+    @apply hover:shadow-xl hover:-translate-y-1;
   }
   
-  /* Input styling for forms */
-  .input-therapeutic {
-    @apply block w-full rounded-therapeutic border-gray-300;
-    @apply focus:border-trust-teal-500 focus:ring-trust-teal-500;
+  .card-interactive {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6 cursor-pointer;
+    @apply transition-all duration-300 ease-in-out;
+    @apply hover:shadow-lg hover:-translate-y-1 hover:border-primary-200;
+  }
+  
+  /* Modern input styles */
+  .input-modern {
+    @apply block w-full rounded-xl border-gray-200 bg-white px-4 py-3;
     @apply text-gray-900 placeholder-gray-500;
+    @apply focus:border-primary-500 focus:ring-primary-500 focus:ring-1;
+    @apply transition-colors duration-200;
   }
   
-  /* Safety indicators */
-  .safety-badge {
+  /* Crisis banner - maintaining visibility while modernizing */
+  .crisis-banner {
+    @apply bg-alert-50 border-l-4 border-alert-500 p-4;
+    @apply text-alert-800 font-medium;
+  }
+  
+  /* Modern badge styles */
+  .badge {
     @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
-    background-color: #dcfce7;
-    color: #166534;
   }
   
-  /* Emotional regulation helpers */
-  .breathing-prompt {
-    @apply text-center p-6 bg-calm-blue-50 rounded-therapeutic;
-    @apply border border-calm-blue-200;
+  .badge-success {
+    @apply bg-success-100 text-success-800;
+  }
+  
+  .badge-warning {
+    @apply bg-warning-100 text-warning-800;
+  }
+  
+  .badge-alert {
+    @apply bg-alert-100 text-alert-800;
+  }
+  
+  .badge-primary {
+    @apply bg-primary-100 text-primary-800;
   }
 }
 
 @layer utilities {
-  /* Text color utilities for mental health context */
-  .text-therapeutic {
-    @apply text-gray-700;
+  /* Modern animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
   }
   
-  .text-trust {
-    @apply text-trust-teal-600;
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
   }
   
-  .text-warm {
-    @apply text-warm-peach-600;
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
   }
   
-  .text-crisis {
-    @apply text-coral-alert-600;
+  /* Modern gradient utilities */
+  .gradient-primary {
+    background: linear-gradient(135deg, theme('colors.primary.600'), theme('colors.primary.700'));
   }
   
-  /* Background utilities */
-  .bg-therapeutic {
-    @apply bg-gray-50;
+  .gradient-accent {
+    background: linear-gradient(135deg, theme('colors.accent.500'), theme('colors.accent.600'));
   }
   
-  .bg-trust {
-    @apply bg-trust-teal-50;
-  }
-  
-  .bg-warm {
-    @apply bg-warm-peach-50;
+  /* Modern glass effect */
+  .glass {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
   }
 }

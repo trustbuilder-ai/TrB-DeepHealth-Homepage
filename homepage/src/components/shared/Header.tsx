@@ -16,48 +16,48 @@ export const Header: React.FC<HeaderProps> = ({
   onMobileMenuToggle 
 }) => {
   return (
-    <header className="bg-white shadow-gentle border-b border-gray-200 sticky top-0 z-30 backdrop-blur-sm bg-white/95">
+    <header className="glass sticky top-0 z-30 border-b border-gray-200/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo and Brand */}
-          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity duration-200">
+          <Link to="/" className="flex items-center space-x-3 hover:opacity-90 transition-all duration-200 hover:scale-105">
             <div className="flex items-center space-x-2">
-              <TestTube className="h-8 w-8 text-trust-teal-500" />
-              <Shield className="h-6 w-6 text-medical-green-600" />
+              <TestTube className="h-9 w-9 text-primary-600" />
+              <Shield className="h-7 w-7 text-accent-500" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-trust-teal-600">
+              <h1 className="text-xl font-bold text-primary-800 font-display">
                 TrB-DeepHealth
               </h1>
-              <p className="text-xs text-gray-500 -mt-1">
+              <p className="text-xs text-primary-500 -mt-1 font-medium">
                 LLM Mental Health Testing Platform
               </p>
             </div>
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-8">
             <Link 
               to="/testing" 
-              className="text-gray-700 hover:text-trust-teal-600 font-medium transition-all duration-200 hover:scale-105"
+              className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-200 hover:scale-105 px-3 py-2 rounded-lg hover:bg-primary-50"
             >
               Start Testing
             </Link>
             <Link 
               to="/scenarios" 
-              className="text-gray-700 hover:text-trust-teal-600 font-medium transition-all duration-200 hover:scale-105"
+              className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-200 hover:scale-105 px-3 py-2 rounded-lg hover:bg-primary-50"
             >
               Test Scenarios
             </Link>
             <Link 
               to="/results" 
-              className="text-gray-700 hover:text-trust-teal-600 font-medium transition-all duration-200 hover:scale-105"
+              className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-200 hover:scale-105 px-3 py-2 rounded-lg hover:bg-primary-50"
             >
               Results
             </Link>
             <Link 
               to="/docs" 
-              className="text-gray-700 hover:text-trust-teal-600 font-medium transition-all duration-200 hover:scale-105"
+              className="text-gray-700 hover:text-primary-600 font-medium transition-all duration-200 hover:scale-105 px-3 py-2 rounded-lg hover:bg-primary-50"
             >
               Documentation
             </Link>
@@ -72,7 +72,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile menu button */}
           <button
             onClick={onMobileMenuToggle}
-            className="md:hidden p-2 rounded-md text-gray-700 hover:text-trust-teal-600 hover:bg-gray-100 transition-all duration-200 hover:scale-105"
+            className="md:hidden p-3 rounded-xl text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200 hover:scale-105"
             aria-label="Open menu"
           >
             <Menu className="h-6 w-6" />

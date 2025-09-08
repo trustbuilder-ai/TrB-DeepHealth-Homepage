@@ -46,14 +46,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
       />
       
       {/* Menu */}
-      <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-xl z-50 md:hidden transform transition-transform duration-300 ease-in-out">
+      <div className="fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 md:hidden transform transition-transform duration-300 ease-in-out rounded-l-2xl">
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-800">Navigation</h2>
+          <div className="flex items-center justify-between p-6 border-b border-gray-100">
+            <h2 className="text-xl font-semibold text-gray-900 font-display">Navigation</h2>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg text-gray-500 hover:text-gray-700 hover:bg-gray-100 transition-colors duration-150"
+              className="p-2 rounded-xl text-gray-500 hover:text-gray-700 hover:bg-primary-50 transition-all duration-200 hover:scale-105"
               aria-label="Close menu"
             >
               <X className="h-5 w-5" />
@@ -61,8 +61,8 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Menu Items */}
-          <nav className="flex-1 p-4">
-            <div className="space-y-2">
+          <nav className="flex-1 p-6">
+            <div className="space-y-3">
               {menuItems.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -70,11 +70,13 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
                     key={item.to}
                     to={item.to}
                     onClick={onClose}
-                    className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:text-trust-teal-600 hover:bg-trust-teal-50 transition-all duration-200 group"
+                    className="flex items-center space-x-4 p-4 rounded-xl text-gray-700 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200 group hover:scale-105"
                   >
-                    <Icon className="h-5 w-5 text-gray-500 group-hover:text-trust-teal-600 transition-colors duration-200" />
+                    <div className="p-2 bg-gray-100 rounded-lg group-hover:bg-primary-100 transition-colors duration-200">
+                      <Icon className="h-5 w-5 text-gray-600 group-hover:text-primary-600 transition-colors duration-200" />
+                    </div>
                     <div>
-                      <div className="font-medium">{item.label}</div>
+                      <div className="font-medium font-display">{item.label}</div>
                       <div className="text-sm text-gray-500">{item.description}</div>
                     </div>
                   </Link>
@@ -84,12 +86,12 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-gray-200">
+          <div className="p-6 border-t border-gray-100">
             <div className="text-center">
-              <p className="text-sm text-gray-500 mb-2">
+              <p className="text-sm text-primary-600 mb-2 font-medium font-display">
                 TrB-DeepHealth Testing Platform
               </p>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-gray-500">
                 For LLM validation, not mental health services
               </p>
             </div>
