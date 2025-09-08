@@ -1,5 +1,6 @@
 import React from 'react';
 import { TestTube, Play, Settings, Upload } from 'lucide-react';
+import { InternalLink, RelatedLinks } from '../components/shared/InternalLinks';
 
 export const TestingPage: React.FC = () => {
   return (
@@ -93,12 +94,12 @@ export const TestingPage: React.FC = () => {
             </div>
             
             <div className="space-y-3">
-              <button className="btn-primary w-full group">
+              <InternalLink to="/scenarios" variant="button" className="w-full group">
                 Run Standard Test Suite
-              </button>
-              <button className="btn-secondary w-full group">
+              </InternalLink>
+              <InternalLink to="/scenarios" variant="button" className="btn-secondary w-full group">
                 Upload Custom Scenarios
-              </button>
+              </InternalLink>
               <button className="w-full px-4 py-2 border border-gray-300 rounded-therapeutic text-gray-700 hover:bg-gray-50 transition-colors">
                 Load Previous Configuration
               </button>
@@ -130,6 +131,30 @@ export const TestingPage: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Related Testing Resources */}
+      <RelatedLinks
+        title="Testing Resources"
+        links={[
+          {
+            to: '/scenarios',
+            label: 'Test Scenario Library',
+            description: 'Browse pre-built testing scenarios for different use cases'
+          },
+          {
+            to: '/results',
+            label: 'Previous Test Results',
+            description: 'Review your historical test results and analytics'
+          },
+          {
+            to: '/docs',
+            label: 'Testing Best Practices',
+            description: 'Learn how to effectively test LLMs for mental health applications'
+          }
+        ]}
+        className="mt-8 animate-in"
+        style={{ animationDelay: '0.4s' }}
+      />
     </main>
   );
 };

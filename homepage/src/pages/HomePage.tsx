@@ -1,6 +1,7 @@
 import React from 'react';
 import { TestTube, Shield, Brain, BarChart3, FileText, Users } from 'lucide-react';
 import { SafetyIndicator } from '../components/shared/SafetyBadge';
+import { InternalLink, RelatedLinks } from '../components/shared/InternalLinks';
 
 export const HomePage: React.FC = () => {
   return (
@@ -27,12 +28,12 @@ export const HomePage: React.FC = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-          <button className="btn btn-primary group text-base px-8 py-4">
+          <InternalLink to="/testing" variant="button" className="text-base px-8 py-4">
             Start Testing LLMs
-          </button>
-          <button className="btn btn-secondary group text-base px-8 py-4">
+          </InternalLink>
+          <InternalLink to="/docs" variant="button" className="btn-secondary text-base px-8 py-4">
             View Documentation
-          </button>
+          </InternalLink>
         </div>
       </div>
 
@@ -169,14 +170,44 @@ export const HomePage: React.FC = () => {
           appropriate, and effective for mental health applications.
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center">
-          <button className="btn btn-primary text-base px-8 py-4">
+          <InternalLink to="/testing" variant="button" className="text-base px-8 py-4">
             Begin Testing Now
-          </button>
-          <button className="btn btn-secondary text-base px-8 py-4">
-            Schedule Demo
-          </button>
+          </InternalLink>
+          <InternalLink to="/scenarios" variant="button" className="btn-secondary text-base px-8 py-4">
+            Explore Test Scenarios
+          </InternalLink>
         </div>
       </div>
+
+      {/* Related Resources */}
+      <RelatedLinks
+        title="Quick Start Resources"
+        links={[
+          {
+            to: '/scenarios',
+            label: 'Browse Test Scenarios',
+            description: 'Explore our comprehensive library of mental health testing scenarios'
+          },
+          {
+            to: '/results',
+            label: 'View Sample Results',
+            description: 'See example test results and analytics dashboards'
+          },
+          {
+            to: '/docs',
+            label: 'API Documentation',
+            description: 'Complete guide for integrating our testing platform'
+          },
+          {
+            to: 'https://988lifeline.org',
+            label: '988 Crisis Resources',
+            description: 'Mental health crisis support and resources',
+            external: true
+          }
+        ]}
+        className="mt-12 animate-scale-in"
+        style={{ animationDelay: '0.6s' }}
+      />
     </main>
   );
 };

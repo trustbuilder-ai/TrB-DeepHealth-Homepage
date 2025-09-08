@@ -1,5 +1,6 @@
 import React from 'react';
 import { Shield, FileText, Users, TestTube, AlertTriangle, Heart } from 'lucide-react';
+import { InternalLink, RelatedLinks } from '../components/shared/InternalLinks';
 
 export const ScenariosPage: React.FC = () => {
   const scenarios = [
@@ -173,9 +174,9 @@ export const ScenariosPage: React.FC = () => {
               </ul>
               
               <div className="flex space-x-2">
-                <button className="btn-primary flex-1 text-sm group">
+                <InternalLink to="/testing" variant="button" className="flex-1 text-sm group">
                   Run Scenario
-                </button>
+                </InternalLink>
                 <button className="px-3 py-2 border border-gray-300 rounded-therapeutic text-gray-700 hover:bg-gray-50 hover:scale-105 transition-all duration-200 text-sm">
                   Preview
                 </button>
@@ -205,6 +206,36 @@ export const ScenariosPage: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Related Scenario Resources */}
+      <RelatedLinks
+        title="Scenario Development Resources"
+        links={[
+          {
+            to: '/testing',
+            label: 'Start Testing Interface',
+            description: 'Begin testing with your selected scenarios'
+          },
+          {
+            to: '/results',
+            label: 'Scenario Performance Analytics',
+            description: 'View how different scenarios perform across LLM models'
+          },
+          {
+            to: '/docs',
+            label: 'Custom Scenario Guide',
+            description: 'Learn how to create effective custom testing scenarios'
+          },
+          {
+            to: 'https://www.nimh.nih.gov/health/topics/suicide-prevention',
+            label: 'NIMH Crisis Guidelines',
+            description: 'Official guidelines for crisis intervention protocols',
+            external: true
+          }
+        ]}
+        className="mt-8 animate-in"
+        style={{ animationDelay: '0.4s' }}
+      />
     </main>
   );
 };

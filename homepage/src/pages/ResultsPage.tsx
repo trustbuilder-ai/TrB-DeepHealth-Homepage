@@ -1,5 +1,6 @@
 import React from 'react';
 import { BarChart3, TrendingUp, Download, Eye, Calendar, Filter } from 'lucide-react';
+import { InternalLink, RelatedLinks } from '../components/shared/InternalLinks';
 
 export const ResultsPage: React.FC = () => {
   const mockResults = [
@@ -224,6 +225,30 @@ export const ResultsPage: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Related Results Resources */}
+      <RelatedLinks
+        title="Results & Analytics Resources"
+        links={[
+          {
+            to: '/testing',
+            label: 'Run New Tests',
+            description: 'Start new LLM testing sessions to generate more results'
+          },
+          {
+            to: '/scenarios',
+            label: 'Compare Scenario Performance',
+            description: 'Analyze how different test scenarios perform'
+          },
+          {
+            to: '/docs',
+            label: 'Results Interpretation Guide',
+            description: 'Learn how to interpret and act on your test results'
+          }
+        ]}
+        className="mt-8 animate-in"
+        style={{ animationDelay: '0.6s' }}
+      />
     </main>
   );
 };

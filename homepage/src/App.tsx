@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/shared/Header';
 import { CrisisBanner } from './components/shared/CrisisBanner';
 import { MobileMenu } from './components/shared/MobileMenu';
+import { Breadcrumbs } from './components/shared/Breadcrumbs';
 import { HomePage } from './pages/HomePage';
 import { TestingPage } from './pages/TestingPage';
 import { ScenariosPage } from './pages/ScenariosPage';
@@ -43,6 +44,9 @@ function App() {
         onThemeChange={toggleTheme}
         onMobileMenuToggle={() => setIsMobileMenuOpen(true)}
       />
+      
+      {/* Breadcrumbs */}
+      <Breadcrumbs />
       
       {/* Mobile Menu */}
       <MobileMenu 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BookOpen, Code, Shield, Users, ExternalLink, Download } from 'lucide-react';
+import { InternalLink, RelatedLinks } from '../components/shared/InternalLinks';
 
 export const DocumentationPage: React.FC = () => {
   const sections = [
@@ -239,6 +240,36 @@ export const DocumentationPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Documentation Navigation */}
+      <RelatedLinks
+        title="Documentation Sections"
+        links={[
+          {
+            to: '/testing',
+            label: 'Try the Testing Interface',
+            description: 'Experience the platform with hands-on testing'
+          },
+          {
+            to: '/scenarios',
+            label: 'Explore Test Scenarios',
+            description: 'Browse our comprehensive scenario library'
+          },
+          {
+            to: '/results',
+            label: 'View Sample Analytics',
+            description: 'See example results and reporting capabilities'
+          },
+          {
+            to: 'https://github.com/your-org/trb-deephealth',
+            label: 'GitHub Repository',
+            description: 'Access source code and contribute to the project',
+            external: true
+          }
+        ]}
+        className="mt-8 animate-in"
+        style={{ animationDelay: '0.5s' }}
+      />
     </main>
   );
 };
