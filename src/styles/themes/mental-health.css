@@ -1,51 +1,51 @@
 /* Mental Health LLM Testing Platform Theme - Tailwind Compatible */
 /* Emotional, calming design with WCAG AA compliance */
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Lato:wght@300;400;700&family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Geist:wght@300;400;500;600;700&display=swap");
 
 /* CSS Custom Properties for Mental Health Theme */
 :root,
 .theme-mental-health {
-  /* Primary Colors - Calming teal/blue-green */
-  --primary: #005c65;
-  --primary-light: #017a8d;
-  --primary-lighter: #20a4b8;
-  --primary-dark: #004850;
+  /* Primary Colors - Soft sage/teal palette */
+  --primary: #2d5a5a;
+  --primary-light: #4a7c7c;
+  --primary-lighter: #6b9e9e;
+  --primary-dark: #1e4040;
 
-  /* Accent Colors - Warm peach/coral */
-  --accent: #eca97c;
-  --accent-light: #f3b890;
-  --accent-lighter: #f9d4b7;
-  --accent-dark: #d4956a;
+  /* Accent Colors - Muted warm terracotta */
+  --accent: #c4967a;
+  --accent-light: #d4a68a;
+  --accent-lighter: #e4b69a;
+  --accent-dark: #b4866a;
 
-  /* Crisis/Alert Color - Soft coral */
-  --crisis: #ff6252;
-  --crisis-light: #ff8a7a;
-  --crisis-dark: #e5553f;
+  /* Crisis/Alert Color - Muted coral */
+  --crisis: #d4826a;
+  --crisis-light: #e4927a;
+  --crisis-dark: #c4725a;
 
   /* Background Colors */
-  --background: #fafbfc;
-  --background-secondary: #f7fafc;
-  --background-tertiary: #edf2f7;
-  --surface: #ffffff;
-  --surface-hover: #f7fafc;
+  --background: #fcfbf9;
+  --background-secondary: #f9f8f6;
+  --background-tertiary: #f0efed;
+  --surface: #fefefe;
+  --surface-hover: #f9f8f6;
 
-  /* Text Colors - Warm dark gray */
-  --text-primary: #2d3748;
-  --text-secondary: #4a5568;
-  --text-tertiary: #718096;
+  /* Text Colors - Refined warm grays */
+  --text-primary: #2c3e50;
+  --text-secondary: #546e7a;
+  --text-tertiary: #78909c;
   --text-inverse: #ffffff;
 
   /* Border Colors */
-  --border: #e2e8f0;
-  --border-light: #f1f5f9;
+  --border: #e8e6e3;
+  --border-light: #f2f1ef;
   --border-focus: var(--primary);
 
   /* Success/Warning/Error States */
-  --success: #38a169;
-  --success-light: #68d391;
-  --warning: #d69e2e;
-  --warning-light: #f6e05e;
+  --success: #4a7c59;
+  --success-light: #6a9c79;
+  --warning: #b8956b;
+  --warning-light: #c8a57b;
   --error: var(--crisis);
   --error-light: var(--crisis-light);
 
@@ -65,41 +65,41 @@
   --accent-foreground: var(--text-primary);
   --ring: var(--primary);
 
-  /* Shadows - Gentle, calming */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 92, 101, 0.05);
+  /* Shadows - Subtle and refined */
+  --shadow-sm: 0 1px 2px 0 rgba(45, 90, 90, 0.04);
   --shadow:
-    0 1px 3px 0 rgba(0, 92, 101, 0.1), 0 1px 2px 0 rgba(0, 92, 101, 0.06);
+    0 1px 3px 0 rgba(45, 90, 90, 0.08), 0 1px 2px 0 rgba(45, 90, 90, 0.04);
   --shadow-md:
-    0 4px 6px -1px rgba(0, 92, 101, 0.1), 0 2px 4px -1px rgba(0, 92, 101, 0.06);
+    0 4px 6px -1px rgba(45, 90, 90, 0.08), 0 2px 4px -1px rgba(45, 90, 90, 0.04);
   --shadow-lg:
-    0 10px 15px -3px rgba(0, 92, 101, 0.1),
-    0 4px 6px -2px rgba(0, 92, 101, 0.05);
+    0 8px 12px -3px rgba(45, 90, 90, 0.08),
+    0 4px 6px -2px rgba(45, 90, 90, 0.04);
   --shadow-xl:
-    0 20px 25px -5px rgba(0, 92, 101, 0.1),
-    0 10px 10px -5px rgba(0, 92, 101, 0.04);
+    0 16px 20px -5px rgba(45, 90, 90, 0.08),
+    0 8px 10px -5px rgba(45, 90, 90, 0.04);
 
-  /* Border Radius - Soft, rounded edges */
-  --radius: 0.5rem;
+  /* Border Radius - Modern, refined edges */
+  --radius: 0.75rem;
 
   /* Typography */
   --font-sans:
-    "Open Sans", "Lato", "Montserrat", system-ui, -apple-system, sans-serif;
-  --font-mono: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace;
+    "Inter", "Geist", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", "Monaco", monospace;
 }
 
 /* Dark mode support */
 .dark,
 .theme-mental-health.dark {
-  --background: #1a202c;
-  --background-secondary: #2d3748;
-  --background-tertiary: #4a5568;
-  --surface: #2d3748;
-  --surface-hover: #4a5568;
-  --text-primary: #f7fafc;
+  --background: #0f1419;
+  --background-secondary: #1a1f2e;
+  --background-tertiary: #2d3748;
+  --surface: #1e2532;
+  --surface-hover: #2d3748;
+  --text-primary: #f8fafc;
   --text-secondary: #e2e8f0;
-  --text-tertiary: #cbd5e0;
-  --border: #4a5568;
-  --border-light: #718096;
+  --text-tertiary: #94a3b8;
+  --border: #334155;
+  --border-light: #475569;
   --foreground: var(--text-primary);
   --muted: var(--background-secondary);
   --muted-foreground: var(--text-tertiary);
@@ -118,64 +118,64 @@
   }
 
   .mental-health-card {
-    @apply bg-card border-border rounded-lg shadow-sm hover:shadow-md transition-all duration-300;
+    @apply bg-card/80 backdrop-blur-sm border-border/60 rounded-xl shadow-sm hover:shadow-md transition-all duration-400;
   }
 
   .mental-health-button-primary {
-    @apply bg-primary text-text-inverse hover:bg-primary-dark px-4 py-2 rounded-lg font-medium transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply bg-primary text-text-inverse hover:bg-primary-dark px-5 py-2.5 rounded-lg font-medium transition-all duration-250 shadow-sm hover:shadow-md;
   }
 
   .mental-health-button-secondary {
-    @apply bg-surface text-text-primary border border-border hover:bg-surface-hover px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    @apply bg-surface text-text-primary border border-border hover:bg-surface-hover px-5 py-2.5 rounded-lg font-medium transition-all duration-250;
   }
 
   .mental-health-input {
-    @apply bg-background border-border focus:border-primary focus:ring-2 focus:ring-primary/50 px-3 py-2 rounded-lg transition-all duration-200;
+    @apply bg-background/80 backdrop-blur-sm border-border/60 focus:border-primary focus:ring-2 focus:ring-primary/40 px-4 py-3 rounded-lg transition-all duration-250;
   }
 
   .crisis-banner {
-    @apply bg-gradient-to-r from-crisis/10 via-crisis-light/10 to-accent-light/10 border-crisis/20;
+    @apply bg-gradient-to-r from-crisis/8 via-crisis-light/8 to-accent-light/8 border-crisis/30 backdrop-blur-sm;
   }
 
   .safety-indicator {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium;
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border;
   }
 
   .safety-safe {
-    @apply bg-success-light/20 text-success border border-success/20;
+    @apply bg-success-light/15 text-success border-success/30;
   }
 
   .safety-caution {
-    @apply bg-warning-light/20 text-warning border border-warning/20;
+    @apply bg-warning-light/15 text-warning border-warning/30;
   }
 
   .safety-crisis {
-    @apply bg-crisis-light/20 text-crisis border border-crisis/20;
+    @apply bg-crisis-light/15 text-crisis border-crisis/30;
   }
 }
 
 /* Animation classes */
 @layer utilities {
   .animate-fade-in {
-    animation: mentalHealthFadeIn 0.4s ease-out;
+    animation: mentalHealthFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .animate-slide-up {
-    animation: mentalHealthSlideUp 0.5s ease-out;
+    animation: mentalHealthSlideUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .animate-bounce-in {
-    animation: mentalHealthBounceIn 0.6s ease-out;
+    animation: mentalHealthBounceIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+    @apply transition-all duration-400 hover:-translate-y-0.5 hover:shadow-md;
   }
 
   @keyframes mentalHealthFadeIn {
     from {
       opacity: 0;
-      transform: translateY(16px);
+      transform: translateY(12px);
     }
     to {
       opacity: 1;
@@ -186,7 +186,7 @@
   @keyframes mentalHealthSlideUp {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(16px);
     }
     to {
       opacity: 1;
@@ -197,11 +197,11 @@
   @keyframes mentalHealthBounceIn {
     0% {
       opacity: 0;
-      transform: scale(0.8) translateY(24px);
+      transform: scale(0.9) translateY(16px);
     }
     60% {
       opacity: 1;
-      transform: scale(1.05) translateY(-4px);
+      transform: scale(1.02) translateY(-2px);
     }
     100% {
       opacity: 1;
@@ -221,7 +221,7 @@
 
 /* Focus styles for better keyboard navigation */
 .mental-health-focus {
-  @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2;
+  @apply focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-1;
 }
 
 /* High contrast mode support */

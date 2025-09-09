@@ -1,32 +1,37 @@
 /* ========================================
-   Dark Mode UI Framework
-   A beautiful dark mode design system
+   Modern Dark Mode - Inspired by Linear.app and Grok.com
+   Deep, rich backgrounds with sophisticated contrast
    ======================================== */
 
 /* ========================================
    CSS Variables & Theme
    ======================================== */
 .dark {
-  /* Dark Mode Color Palette */
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  /* Modern Dark Mode Color Palette - Deep, rich backgrounds */
+  --background: #0f1419;
+  --foreground: #f8fafc;
+  --card: #1a1f2e;
+  --card-foreground: #f1f5f9;
+  --primary: #4a7c7c;
+  --primary-foreground: #f8fafc;
+  --secondary: #2d3748;
+  --secondary-foreground: #e2e8f0;
+  --muted: #1e2532;
+  --muted-foreground: #94a3b8;
+  --accent: #374151;
+  --accent-foreground: #f1f5f9;
+  --destructive: #dc2626;
+  --destructive-foreground: #fef2f2;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #4a7c7c;
+
+  /* Enhanced glass effects for dark mode */
+  --glass-bg-dark: rgba(26, 31, 46, 0.7);
+  --glass-border-dark: rgba(74, 124, 124, 0.15);
 
   /* Spacing & Layout */
-  --radius: 0.625rem;
+  --radius: 0.75rem;
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 0.75rem;
@@ -36,8 +41,7 @@
   --spacing-3xl: 3rem;
 
   /* Typography */
-  --font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family: "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -46,6 +50,13 @@
   --font-size-2xl: 1.5rem;
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
+
+  /* Refined shadows for dark mode */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 /* ========================================
@@ -61,8 +72,12 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-family);
-  line-height: 1.6;
+  line-height: 1.65;
   min-height: 100vh;
+  letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html.dark {
@@ -146,15 +161,18 @@ html.dark {
 .card {
   background-color: var(--card);
   color: var(--card-foreground);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: calc(var(--radius) + 4px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   padding: var(--spacing-xl);
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(8px);
 }
 
 .card:hover {
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  border-color: rgba(74, 124, 124, 0.3);
 }
 
 /* ========================================
@@ -169,13 +187,14 @@ html.dark {
   border-radius: var(--radius);
   font-size: var(--font-size-sm);
   font-weight: 500;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: none;
   cursor: pointer;
   padding: var(--spacing-sm) var(--spacing-lg);
-  min-height: 2.25rem;
+  min-height: 2.5rem;
   outline: none;
   text-decoration: none;
+  letter-spacing: -0.005em;
 }
 
 .btn:disabled {
@@ -186,10 +205,13 @@ html.dark {
 .btn-primary {
   background-color: var(--primary);
   color: var(--primary-foreground);
+  box-shadow: 0 1px 3px rgba(74, 124, 124, 0.2);
 }
 
 .btn-primary:hover {
-  background-color: rgba(236, 236, 236, 0.9);
+  background-color: #3d6666;
+  transform: translateY(-0.5px);
+  box-shadow: 0 2px 6px rgba(74, 124, 124, 0.25);
 }
 
 .btn-outline {
@@ -200,6 +222,7 @@ html.dark {
 
 .btn-outline:hover {
   background-color: var(--accent);
+  border-color: rgba(74, 124, 124, 0.3);
 }
 
 .btn-ghost {
@@ -213,11 +236,11 @@ html.dark {
 
 .btn-destructive {
   background-color: var(--destructive);
-  color: white;
+  color: var(--destructive-foreground);
 }
 
 .btn-destructive:hover {
-  background-color: rgba(220, 38, 38, 0.9);
+  background-color: #b91c1c;
 }
 
 /* Button Sizes */
@@ -230,13 +253,13 @@ html.dark {
 .btn-lg {
   padding: var(--spacing-md) var(--spacing-xl);
   font-size: var(--font-size-base);
-  min-height: 2.75rem;
+  min-height: 3rem;
 }
 
 .btn-icon {
   padding: var(--spacing-sm);
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 /* ========================================
@@ -244,19 +267,20 @@ html.dark {
    ======================================== */
 .form-input {
   width: 100%;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--input);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: var(--spacing-sm) var(--spacing-md);
   color: var(--foreground);
   font-size: var(--font-size-sm);
   outline: none;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(4px);
 }
 
 .form-input:focus {
   border-color: var(--ring);
-  box-shadow: 0 0 0 3px rgba(136, 136, 136, 0.5);
+  box-shadow: 0 0 0 2px rgba(74, 124, 124, 0.2);
 }
 
 .form-input::placeholder {
@@ -272,7 +296,7 @@ html.dark {
   justify-content: center;
   border-radius: var(--radius);
   border: 1px solid;
-  padding: 0.125rem var(--spacing-sm);
+  padding: 0.25rem var(--spacing-sm);
   font-size: var(--font-size-xs);
   font-weight: 500;
   white-space: nowrap;
@@ -280,21 +304,21 @@ html.dark {
 
 /* Priority Badge Variants */
 .badge-priority-high {
-  background: rgba(127, 29, 29, 0.3);
-  color: rgb(252, 165, 165);
-  border: 1px solid rgba(153, 27, 27, 0.5);
+  background: rgba(220, 38, 38, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(220, 38, 38, 0.3);
 }
 
 .badge-priority-medium {
-  background: rgba(120, 53, 15, 0.3);
-  color: rgb(252, 211, 77);
-  border: 1px solid rgba(146, 64, 14, 0.5);
+  background: rgba(245, 158, 11, 0.2);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .badge-priority-low {
-  background: rgba(20, 83, 45, 0.3);
-  color: rgb(134, 239, 172);
-  border: 1px solid rgba(22, 101, 52, 0.5);
+  background: rgba(74, 124, 124, 0.2);
+  color: #86efac;
+  border: 1px solid rgba(74, 124, 124, 0.3);
 }
 
 /* ========================================
@@ -308,11 +332,11 @@ html.dark {
 
 .tab-button {
   background-color: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border);
   color: var(--foreground);
   text-transform: capitalize;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius);
   cursor: pointer;
@@ -320,20 +344,20 @@ html.dark {
 }
 
 .tab-button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--accent);
+  border-color: rgba(74, 124, 124, 0.3);
 }
 
 .tab-button.active {
-  background-color: #f8f9fa !important;
-  color: #1a1a1a !important;
-  border-color: #f8f9fa !important;
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  border-color: var(--primary) !important;
   font-weight: 600;
 }
 
 .tab-button.active:hover {
-  background-color: #e9ecef !important;
-  border-color: #e9ecef !important;
+  background-color: #3d6666 !important;
+  border-color: #3d6666 !important;
 }
 
 /* ========================================
@@ -391,7 +415,7 @@ html.dark {
   background: linear-gradient(
     to right,
     var(--primary),
-    rgba(236, 236, 236, 0.6)
+    #6b9e9e
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -435,8 +459,8 @@ html.dark {
   border-radius: 4px;
   cursor: pointer;
   position: relative;
-  background: rgba(255, 255, 255, 0.15);
-  transition: all 0.2s;
+  background: var(--input);
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .checkbox:hover {
@@ -444,8 +468,8 @@ html.dark {
 }
 
 .checkbox.checked {
-  background-color: rgb(22, 163, 74);
-  border-color: rgb(22, 163, 74);
+  background-color: var(--primary);
+  border-color: var(--primary);
 }
 
 .checkbox.checked::after {
@@ -454,7 +478,7 @@ html.dark {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: var(--primary-foreground);
   font-size: 0.75rem;
   font-weight: bold;
 }
@@ -467,12 +491,12 @@ html.dark {
   align-items: center;
   gap: var(--spacing-lg);
   padding: var(--spacing-lg);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background-color 0.2s;
+  border-bottom: 1px solid var(--border);
+  transition: background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .list-item:hover {
-  background-color: rgba(255, 255, 255, 0.025);
+  background-color: var(--accent);
 }
 
 .list-item:last-child {
@@ -536,15 +560,15 @@ html.dark {
 }
 
 .transition-all {
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .transition-colors {
   transition:
-    color 0.2s ease,
-    background-color 0.2s ease;
+    color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .transition-opacity {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ========================================
@@ -601,7 +625,7 @@ html.dark {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -610,7 +634,7 @@ html.dark {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* ========================================
@@ -627,4 +651,36 @@ html.dark {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ========================================
+   Mental Health Specific Dark Mode Styles
+   ======================================== */
+.dark .mental-health-card {
+  background: rgba(26, 31, 46, 0.8);
+  border: 1px solid rgba(74, 124, 124, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.dark .mental-health-card:hover {
+  background: rgba(26, 31, 46, 0.9);
+  border-color: rgba(74, 124, 124, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dark .crisis-banner {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  backdrop-filter: blur(8px);
+}
+
+.dark .glass-card {
+  background: var(--glass-bg-dark);
+  border: 1px solid var(--glass-border-dark);
+  backdrop-filter: blur(12px);
+}
+
+.dark .glass-card:hover {
+  background: rgba(26, 31, 46, 0.85);
+  border-color: rgba(74, 124, 124, 0.25);
 }
