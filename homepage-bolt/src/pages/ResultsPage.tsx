@@ -1,6 +1,6 @@
 import React from 'react';
 import { BarChart3, TrendingUp, Download, Eye, Calendar, Filter } from 'lucide-react';
-import { InternalLink, RelatedLinks } from '../components/shared/InternalLinks';
+import { RelatedLinks } from '../components/shared/InternalLinks';
 
 export const ResultsPage: React.FC = () => {
   const mockResults = [

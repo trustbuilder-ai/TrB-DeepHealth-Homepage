@@ -1,12 +1,21 @@
 import { useState, useEffect } from 'react';
 
-export type Theme = 'clinical-trust' | 'warm-community' | 'dark-mode';
+export type Theme = 
+  | 'light-clinical-trust' 
+  | 'light-warm-community'
+  | 'light-coastal-breeze'
+  | 'light-coastal-glow'
+  | 'light-earthy-serenity'
+  | 'dark-classic'
+  | 'dark-neon-tide'
+  | 'dark-cyber-mint'
+  | 'dark-midnight-pulse';
 
 export const useTheme = () => {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Get theme from localStorage or default to clinical-trust
+    // Get theme from localStorage or default to light-clinical-trust
     const savedTheme = localStorage.getItem('trb-theme') as Theme;
-    return savedTheme || 'clinical-trust';
+    return savedTheme || 'light-clinical-trust';
   });
 
   useEffect(() => {

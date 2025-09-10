@@ -1,6 +1,6 @@
 import React from 'react';
 import { BookOpen, Code, Shield, Users, ExternalLink, Download } from 'lucide-react';
-import { InternalLink, RelatedLinks } from '../components/shared/InternalLinks';
+import { RelatedLinks } from '../components/shared/InternalLinks';
 
 export const DocumentationPage: React.FC = () => {
   const sections = [

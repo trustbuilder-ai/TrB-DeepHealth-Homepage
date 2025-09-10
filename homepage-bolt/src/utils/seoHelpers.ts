@@ -126,7 +126,7 @@ export const pageMetadata: Record<string, PageMetadata> = {
  * Generate canonical URLs with proper domain
  */
 export const generateCanonicalUrl = (path: string): string => {
-  const baseUrl = process.env.NODE_ENV === 'production' 
+  const baseUrl = import.meta.env.PROD 
     ? 'https://trb-deephealth.com' 
     : 'http://localhost:5173';
   

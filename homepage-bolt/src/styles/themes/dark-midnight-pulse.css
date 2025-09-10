@@ -1,0 +1,165 @@
+/* Midnight Pulse Theme - Sleek, modern, and dramatic with dark slate tones */
+
+[data-theme="dark-midnight-pulse"] {
+  /* Sleek, modern, and dramatic with dark slate tones, light text, vibrant blue accent, and bold red */
+  background-color: #1a202c;
+  color: #e2e8f0;
+  
+  body {
+    @apply bg-[#1a202c] text-[#e2e8f0];
+  }
+  
+  .crisis-banner {
+    @apply bg-[#e53e3e] border-[#e53e3e] text-[#ffffff] shadow-lg;
+  }
+  
+  .btn-primary {
+    @apply bg-[#63b3ed] hover:bg-[#4299e1] text-white shadow-lg hover:shadow-xl hover:shadow-[#63b3ed]/20;
+  }
+  
+  .btn-secondary {
+    @apply bg-[#2d3748] text-[#63b3ed] border-[#63b3ed] hover:bg-[#4a5568] hover:border-[#4299e1] shadow-lg;
+  }
+  
+  .btn-therapeutic {
+    @apply bg-[#2d3748] hover:bg-[#4a5568] text-[#e2e8f0] border border-[#4a5568] shadow-lg;
+  }
+  
+  .card {
+    @apply bg-[#2d3748] border-[#4a5568] shadow-lg hover:shadow-xl hover:shadow-[#63b3ed]/5;
+  }
+  
+  .card-trust {
+    @apply bg-[#2d3748] border-[#63b3ed] shadow-xl shadow-[#63b3ed]/10 hover:shadow-2xl hover:shadow-[#63b3ed]/20;
+  }
+  
+  .card-elevated {
+    @apply bg-[#2d3748] border-[#4a5568] shadow-2xl hover:shadow-2xl hover:shadow-[#63b3ed]/10;
+  }
+  
+  h1, h2, h3 {
+    @apply text-[#e2e8f0];
+  }
+  
+  h4, h5, h6 {
+    @apply text-[#e2e8f0];
+  }
+  
+  p {
+    @apply text-[#a0aec0];
+  }
+  
+  .input-therapeutic {
+    @apply bg-[#2d3748] border-[#4a5568] text-[#e2e8f0] focus:border-[#63b3ed] focus:ring-[#63b3ed] placeholder-[#a0aec0];
+  }
+  
+  /* Navigation styling */
+  nav a {
+    @apply text-[#a0aec0] hover:text-[#63b3ed];
+  }
+  
+  /* Midnight badge styling */
+  .badge-success {
+    @apply bg-[#63b3ed]/20 text-[#63b3ed] border border-[#63b3ed]/30;
+  }
+  
+  .badge-warning {
+    @apply bg-[#a0aec0]/20 text-[#a0aec0] border border-[#a0aec0]/30;
+  }
+  
+  .badge-alert {
+    @apply bg-[#e53e3e]/20 text-[#e53e3e] border border-[#e53e3e]/30;
+  }
+  
+  .badge-trust {
+    @apply bg-[#63b3ed]/20 text-[#63b3ed] border border-[#63b3ed]/30;
+  }
+  
+  /* Dramatic focus states */
+  *:focus {
+    @apply ring-2 ring-[#63b3ed] ring-offset-2 ring-offset-[#1a202c];
+  }
+  
+  /* Midnight specific components */
+  .header {
+    @apply bg-[#1a202c]/95 backdrop-blur-sm border-b border-[#4a5568];
+  }
+  
+  .sidebar {
+    @apply bg-[#2d3748] border-r border-[#4a5568];
+  }
+  
+  /* Dramatic pulse effects */
+  .midnight-pulse {
+    box-shadow: 
+      0 0 20px rgba(99, 179, 237, 0.3),
+      0 0 40px rgba(99, 179, 237, 0.1);
+    animation: midnight-pulse 3s ease-in-out infinite;
+  }
+  
+  @keyframes midnight-pulse {
+    0%, 100% {
+      box-shadow: 
+        0 0 20px rgba(99, 179, 237, 0.3),
+        0 0 40px rgba(99, 179, 237, 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 30px rgba(99, 179, 237, 0.5),
+        0 0 60px rgba(99, 179, 237, 0.2);
+    }
+  }
+  
+  .crisis-pulse {
+    box-shadow: 
+      0 0 20px rgba(229, 62, 62, 0.4),
+      0 0 40px rgba(229, 62, 62, 0.2);
+    animation: crisis-pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes crisis-pulse {
+    0%, 100% {
+      box-shadow: 
+        0 0 20px rgba(229, 62, 62, 0.4),
+        0 0 40px rgba(229, 62, 62, 0.2);
+    }
+    50% {
+      box-shadow: 
+        0 0 30px rgba(229, 62, 62, 0.6),
+        0 0 60px rgba(229, 62, 62, 0.3);
+    }
+  }
+  
+  /* Sleek gradients */
+  .gradient-midnight {
+    background: linear-gradient(135deg, #1a202c, #2d3748);
+  }
+  
+  .gradient-midnight-accent {
+    background: linear-gradient(135deg, #2d3748, #63b3ed);
+  }
+  
+  /* Modern dark scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-[#1a202c];
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#4a5568] rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#63b3ed];
+  }
+  
+  /* Dramatic shadows */
+  .shadow-dramatic {
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(99, 179, 237, 0.05);
+  }
+}

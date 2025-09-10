@@ -8,11 +8,6 @@ export const HomePage: React.FC = () => {
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in">
       {/* Hero Section */}
       <div className="text-center mb-16">
-        <div className="flex justify-center items-center space-x-4 mb-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
-          <TestTube className="h-14 w-14 text-trust-teal-600" />
-          <Brain className="h-12 w-12 text-calm-blue-500" />
-          <Shield className="h-10 w-10 text-medical-green-600" />
-        </div>
         
         <h1 className="text-5xl lg:text-6xl font-bold text-trust-teal-900 mb-6 font-display">
           TrB-DeepHealth

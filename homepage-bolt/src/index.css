@@ -1,8 +1,14 @@
 
 @import './styles/globals.css';
-@import './styles/themes/clinical-trust.css';
-@import './styles/themes/warm-community.css';
-@import './styles/themes/dark-mode.css';
+@import './styles/themes/light-clinical-trust.css';
+@import './styles/themes/light-warm-community.css';
+@import './styles/themes/dark-classic.css';
+@import './styles/themes/light-coastal-breeze.css';
+@import './styles/themes/light-coastal-glow.css';
+@import './styles/themes/light-earthy-serenity.css';
+@import './styles/themes/dark-neon-tide.css';
+@import './styles/themes/dark-cyber-mint.css';
+@import './styles/themes/dark-midnight-pulse.css';
 
 @tailwind base;
 @tailwind components;

@@ -1,6 +1,6 @@
 /* Dark Mode Theme - Dark mode with accessibility focus */
 
-[data-theme="dark-mode"] {
+[data-theme="dark-classic"] {
   /* True dark mode with high contrast */
   background-color: #0F172A;
   color: #E2E8F0;

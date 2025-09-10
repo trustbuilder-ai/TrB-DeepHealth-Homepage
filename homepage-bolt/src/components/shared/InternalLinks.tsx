@@ -71,14 +71,15 @@ interface RelatedLinksProps {
     external?: boolean;
   }>;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 /**
  * Related links component for contextual navigation
  */
-export const RelatedLinks: React.FC<RelatedLinksProps> = ({ title, links, className = '' }) => {
+export const RelatedLinks: React.FC<RelatedLinksProps> = ({ title, links, className = '', style }) => {
   return (
-    <div className={`bg-gray-50 rounded-lg p-6 ${className}`}>
+    <div className={`bg-gray-50 rounded-lg p-6 ${className}`} style={style}>
       <h3 className="text-lg font-semibold text-gray-900 mb-4 font-display">{title}</h3>
       <ul className="space-y-3">
         {links.map((link, index) => (
