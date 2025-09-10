@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Test</title>
+  </head>
+  <body>
+    <h1>Testing App Load</h1>
+    <iframe
+      src="http://localhost:5174"
+      width="100%"
+      height="600"
+      style="border: 1px solid #ccc"
+    ></iframe>
+
+    <script>
+      // Open the page and check console
+      const iframe = document.querySelector("iframe");
+      iframe.onload = () => {
+        console.log("Page loaded");
+      };
+
+      // Also open in new window to check console
+      window.open("http://localhost:5174", "_blank");
+    </script>
+  </body>
+</html>

@@ -1,86 +1,107 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Header } from './components/shared/Header';
-import { CrisisBanner } from './components/shared/CrisisBanner';
-import { MobileMenu } from './components/shared/MobileMenu';
-import { Breadcrumbs } from './components/shared/Breadcrumbs';
-import { HomePage } from './pages/HomePage';
-import { TestingPage } from './pages/TestingPage';
-import { ScenariosPage } from './pages/ScenariosPage';
-import { ResultsPage } from './pages/ResultsPage';
-import { DocumentationPage } from './pages/DocumentationPage';
-import { useTheme } from './hooks/useTheme';
+import { useState } from "react";
+import { Brain, Shield, Heart, TrendingUp, AlertTriangle } from "lucide-react";
+import "./App.css";
+import { ThemeToggle } from "./components/shared/ThemeToggle";
+import { CrisisBanner } from "./components/shared/CrisisBanner";
+import { TestInterface } from "./components/testing/TestInterface";
+import { ScenarioPanel } from "./components/testing/ScenarioPanel";
+import { MetricsDisplay } from "./components/testing/MetricsDisplay";
+import { useTheme } from "./hooks/useTheme";
+import type { TestScenario } from "./types/theme.types";
 
 function App() {
-  const { theme, toggleTheme } = useTheme();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const { theme } = useTheme();
+  const [selectedScenario, setSelectedScenario] = useState<TestScenario>();
 
-  // Add cleanup for any potential event listeners or timers
-  React.useEffect(() => {
-    // Handle escape key to close mobile menu
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    // Add event listener
-    document.addEventListener('keydown', handleEscapeKey);
-
-    // Cleanup function
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-    };
-  }, [isMobileMenuOpen]);
+  // Mock metrics for demonstration
+  const mockMetrics = {
+    safetyScore: 87,
+    responseTime: 245,
+    empathyRating: 92,
+    boundaryCompliance: 95,
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50" data-theme={theme}>
-      {/* Non-dismissible Crisis Banner */}
+    <div className="app-container">
       <CrisisBanner />
-      
-      {/* Header */}
-      <Header 
-        currentTheme={theme}
-        onThemeChange={toggleTheme}
-        onMobileMenuToggle={() => setIsMobileMenuOpen(true)}
-      />
-      
-      {/* Breadcrumbs */}
-      <Breadcrumbs />
-      
-      {/* Mobile Menu */}
-      <MobileMenu 
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      />
-      
-      {/* Routes */}
-      <main className="animate-fade-in">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/testing" element={<TestingPage />} />
-          <Route path="/scenarios" element={<ScenariosPage />} />
-          <Route path="/results" element={<ResultsPage />} />
-          <Route path="/docs" element={<DocumentationPage />} />
-        </Routes>
+
+      <header className="app-header">
+        <div className="header-content">
+          <div className="header-brand">
+            <div className="brand-icon">
+              <Brain className="w-6 h-6" />
+            </div>
+            <div className="brand-text">
+              <h1>TrB-DeepHealth</h1>
+              <p>LLM Mental Health Testing Platform</p>
+            </div>
+          </div>
+          <div className="header-actions">
+            <div className="theme-indicator">Current: {theme.displayName}</div>
+          </div>
+        </div>
+      </header>
+
+      <main className="main-content">
+        <div className="platform-intro">
+          <h2>Testing LLMs for Safe Mental Health Product Development</h2>
+          <p>
+            Comprehensive testing suite for evaluating Large Language Models
+            before deployment in mental health applications. Ensure safety,
+            compliance, and effectiveness.
+          </p>
+          <div className="intro-features">
+            <div className="feature-item">
+              <Shield className="w-5 h-5 feature-icon" />
+              <span>Crisis Detection</span>
+            </div>
+            <div className="feature-item">
+              <Heart className="w-5 h-5 feature-icon" />
+              <span>Empathy Validation</span>
+            </div>
+            <div className="feature-item">
+              <AlertTriangle className="w-5 h-5 feature-icon" />
+              <span>Boundary Testing</span>
+            </div>
+            <div className="feature-item">
+              <TrendingUp className="w-5 h-5 feature-icon" />
+              <span>Performance Metrics</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="dashboard-grid">
+          <div className="sidebar-content">
+            <ThemeToggle />
+            <ScenarioPanel
+              onScenarioSelect={setSelectedScenario}
+              selectedScenario={selectedScenario}
+            />
+            <MetricsDisplay metrics={mockMetrics} />
+          </div>
+
+          <div className="main-testing-area">
+            <TestInterface />
+          </div>
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-trust-teal-900 text-white py-12 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-trust-teal-200 mb-3 text-lg font-medium">
-              TrB-DeepHealth - LLM Mental Health Testing Platform
-            </p>
-            <p className="text-trust-teal-300 mb-6">
-              This is a testing platform for LLM validation, not a mental health service.
-            </p>
-            <div className="flex justify-center space-x-8 text-trust-teal-300">
-              <a href="#privacy" className="hover:text-white transition-colors duration-200 hover:underline">Privacy Policy</a>
-              <a href="#terms" className="hover:text-white transition-colors duration-200 hover:underline">Terms of Service</a>
-              <a href="#contact" className="hover:text-white transition-colors duration-200 hover:underline">Contact</a>
-              <a href="#docs" className="hover:text-white transition-colors duration-200 hover:underline">Documentation</a>
-            </div>
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-disclaimer">
+            <AlertTriangle className="w-5 h-5 inline mr-2" />
+            This is a testing platform for LLM evaluation, not a mental health
+            service.
+          </div>
+          <div className="footer-links">
+            <a href="#documentation">Documentation</a>
+            <a href="#api">API Reference</a>
+            <a href="#compliance">Compliance</a>
+            <a href="#support">Support</a>
+          </div>
+          <div className="footer-copyright">
+            © 2025 TrB-DeepHealth. Testing platform for mental health AI
+            safety.
           </div>
         </div>
       </footer>
