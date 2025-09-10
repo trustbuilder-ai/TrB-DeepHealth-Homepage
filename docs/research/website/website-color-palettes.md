@@ -78,7 +78,7 @@
 
 - **Primary Colors**: Use for 60–70% of design (backgrounds, headers) to set a calming tone. Pure Ivory, Warm Cream, or Deep Slate suit light, warm, or dark themes.
 - **Accent Colors**: Apply to 20–30% (buttons, links, icons) for gentle interaction. Soft Coral, Gentle Seafoam, and Moonlit Mint add empathy and hope.
-- **Accessibility**: Ensure text contrast meets WCAG 2.1 (4.5:1) using WebAIM’s Contrast Checker ([webaim.org/resources/contrastchecker/](https://webaim.org/resources/contrastchecker/)). Test light accents (e.g., Moonlit Mint) on dark backgrounds (e.g., Deep Slate) and darker accents (e.g., Slate Blue) on light backgrounds.
+- **Accessibility**: Ensure text contrast meets WCAG 2.1 (4.5:1) using [WebAIM’s Contrast Checker](https://webaim.org/resources/contrastchecker/). Test light accents (e.g., Moonlit Mint) on dark backgrounds (e.g., Deep Slate) and darker accents (e.g., Slate Blue) on light backgrounds.
 - **Theme Flexibility**: For theme switching, adjust accent lightness (e.g., Moonlit Mint to #8FC8C2 for dark themes, Gentle Seafoam to #C5F4E5 for light themes) for visibility. Test transitions for smooth shifts.
 - **Contextual Use**:
   - **Therapy/Crisis**: Calm Unity, Healing Horizon, Tranquil Trust for professional, trust-focused pages (e.g., therapist directories, crisis resources).
@@ -89,14 +89,14 @@
 
 ## Researched Resources
 
-1. **Talkspace** ([https://www.talkspace.com](https://www.talkspace.com))  
+1. [Talkspace](https://www.talkspace.com)
    - **Colors**: Blues (#4A90E2, #E6F0FA), whites (#F7F9FC), green accents (#2ECC71).  
    - **Findings**: Clean, professional design with trust-building blues and hopeful greens. Simple navigation, high contrast for accessibility.  
    - **Influence**: Blues in Healing Horizon, Calm Unity, Serene Haven.
 
-2. **BetterHelp** ([https://www.betterhelp.com](https://www.betterhelp.com))  
+2. [BetterHelp](https://www.betterhelp.com)
    - **Colors**: Blues (#3B5998, #D3E4F3), creams (#FFF8E7), orange (#F28C38).  
-   - **Findings**: Warm, inviting aesthetic with approachable navigation. Orange adds energy.  
+   - **Findings**: Warm, inviting aesthetic with approachable navigation. Orange adds energy.
    - **Influence**: Creams in Empathy Wave, Soothing Balance, Gentle Embrace.
 
 3. **Headspace** ([https://www.headspace.com](https://www.headspace.com))  
