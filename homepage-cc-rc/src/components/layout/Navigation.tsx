@@ -7,8 +7,11 @@ import {
   Menu,
   X,
   WifiOff,
+  Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { EnhancedDialog } from "@/components/ui/modal";
 import {
   ThemeSwitcher,
   FontSwitcher,
@@ -39,12 +42,36 @@ export const Navigation = () => {
     useIcon();
   const isOnline = useOnlineStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [newsletterModalOpen, setNewsletterModalOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useModalClose(
     mobileMenuOpen,
     () => setMobileMenuOpen(false),
     mobileMenuTriggerRef,
+  );
+
+  const handleNewsletterSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!email.trim()) return;
+
+      setIsSubmitting(true);
+
+      // Simulate newsletter signup
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Reset form
+      setEmail("");
+      setNewsletterModalOpen(false);
+      setIsSubmitting(false);
+
+      // Could add a success notification here
+      console.log("Newsletter signup successful for:", email);
+    },
+    [email],
   );
 
   const scrollToSection = useCallback((id: string) => {
@@ -159,8 +186,10 @@ export const Navigation = () => {
                   size="sm"
                   theme={theme}
                   className="bg-gradient-to-r text-white border-0"
+                  onClick={() => setNewsletterModalOpen(true)}
                 >
-                  Get Started
+                  <Mail className="w-4 h-4 mr-2 icon-dynamic" />
+                  Get Newsletter
                 </Button>
               </div>
 
@@ -233,14 +262,89 @@ export const Navigation = () => {
                 <Button
                   theme={theme}
                   className="w-full bg-gradient-to-r text-white border-0"
+                  onClick={() => {
+                    setNewsletterModalOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
                 >
-                  Get Started
+                  <Mail className="w-4 h-4 mr-2 icon-dynamic" />
+                  Get Newsletter
                 </Button>
               </div>
             </div>
           </div>
         )}
       </nav>
+
+      {/* Newsletter Signup Modal */}
+      <EnhancedDialog
+        isOpen={newsletterModalOpen}
+        onClose={() => setNewsletterModalOpen(false)}
+        title="Get Newsletter"
+        size="md"
+        theme={theme}
+      >
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <Mail className="w-6 h-6 text-teal-600 icon-dynamic" />
+            <div>
+              <h3 className={`font-semibold ${theme.text}`}>Stay Updated</h3>
+              <p className={`text-sm ${theme.textSecondary}`}>
+                Get the latest AI safety research and platform updates.
+              </p>
+            </div>
+          </div>
+
+          <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="newsletter-email"
+                className={`block text-sm font-medium ${theme.text} mb-2`}
+              >
+                Email address
+              </label>
+              <Input
+                id="newsletter-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
+                theme={theme}
+                className="w-full"
+              />
+            </div>
+
+            <div className={`text-xs ${theme.textMuted}`}>
+              By subscribing, you agree to receive updates about AI safety
+              research, platform features, and mental health technology. You can
+              unsubscribe at any time.
+            </div>
+
+            <div className="flex gap-3 pt-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setNewsletterModalOpen(false)}
+                theme={theme}
+                disabled={isSubmitting}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                theme={theme}
+                disabled={isSubmitting || !email.trim()}
+                loading={isSubmitting}
+                className="flex-1 bg-gradient-to-r text-white border-0"
+              >
+                Subscribe
+              </Button>
+            </div>
+          </form>
+        </div>
+      </EnhancedDialog>
     </>
   );
 };

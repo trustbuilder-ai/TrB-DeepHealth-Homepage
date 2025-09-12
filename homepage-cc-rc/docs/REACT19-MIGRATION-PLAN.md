@@ -13,16 +13,19 @@
 ### Alternative Execution Methods
 
 **Option A: Sequential with Agents** (Safer)
+
 - Run each Task command one at a time
 - Review output before next command
 - Total time: ~60 minutes
 
-**Option B: Manual Parallel** (Fastest)  
+**Option B: Manual Parallel** (Fastest)
+
 - You run commands in multiple terminals
 - Manually coordinate phases
 - Total time: ~20 minutes
 
 **Option C: Automated Script** (Most Efficient)
+
 - Create bash script with phase synchronization
 - Use `wait` command for parallel tasks
 - Total time: ~20 minutes unattended
@@ -57,20 +60,20 @@ Task({
     - List files with propTypes/defaultProps
     - Identify string refs or Legacy Context
     - Output: File paths grouped by pattern type
-    CRITICAL: Must check ALL .tsx/.ts files`
-})
+    CRITICAL: Must check ALL .tsx/.ts files`,
+});
 
-// Agent 2: Optimization Analysis  
+// Agent 2: Optimization Analysis
 Task({
-  subagent_type: "general-purpose", 
+  subagent_type: "general-purpose",
   description: "Analyze optimization hooks",
   prompt: `
     Analyze memoization in src/:
     - Find useMemo/useCallback/memo usage
     - Categorize: Required vs Removable
     - Count instances per file
-    Output format: filepath:line - hook - can_remove(yes/no)`
-})
+    Output format: filepath:line - hook - can_remove(yes/no)`,
+});
 
 // Agent 3: Radix Compatibility
 Task({
@@ -81,8 +84,8 @@ Task({
     - List all @radix-ui imports in package.json
     - Find Radix component usage in src/
     - Check each package version for React 19 support
-    Flag any incompatible versions`
-})
+    Flag any incompatible versions`,
+});
 ```
 
 **Wait for all 3 agents to complete before proceeding**
@@ -110,13 +113,13 @@ Task({
     
     Pattern: Convert forwardRef to regular function with ref prop
     Maintain: TypeScript types, displayName
-    Run after each file: npm run tscheck`
-})
+    Run after each file: npm run tscheck`,
+});
 
 // Agent 2: Card & Compound Components
 Task({
   subagent_type: "general-purpose",
-  description: "Remove forwardRef batch 2", 
+  description: "Remove forwardRef batch 2",
   prompt: `
     Remove React.forwardRef from card components ONLY:
     - src/components/ui/card.tsx (all 6 components inside)
@@ -124,8 +127,8 @@ Task({
     - src/components/ui/avatar.tsx (all 3 components inside)
     
     Same conversion pattern as batch 1
-    Preserve theme prop handling`
-})
+    Preserve theme prop handling`,
+});
 
 // Agent 3: Complex Components
 Task({
@@ -139,8 +142,8 @@ Task({
     - src/components/ui/notification.tsx
     
     Maintain Radix primitive integration
-    Test interactivity after changes`
-})
+    Test interactivity after changes`,
+});
 ```
 
 **Wait for all 3 agents to complete before proceeding**
@@ -162,8 +165,8 @@ Task({
     - Reset functionality
     - Follow existing UI component patterns
     - Use TypeScript strict mode
-    Wrap App component with ErrorBoundary`
-})
+    Wrap App component with ErrorBoundary`,
+});
 
 // Agent 2: Component Testing
 Task({
@@ -175,8 +178,8 @@ Task({
     - Modal open/close with ESC
     - Select dropdowns
     - Form inputs
-    Run: npm run dev, test manually, report issues`
-})
+    Run: npm run dev, test manually, report issues`,
+});
 
 // Agent 3: Migration Documentation
 Task({
@@ -187,8 +190,8 @@ Task({
     - List all changes made
     - Document any errors encountered
     - Note Radix UI compatibility findings
-    Include before/after code examples ONLY for complex changes`
-})
+    Include before/after code examples ONLY for complex changes`,
+});
 
 // Agent 4: Update Project Docs
 Task({
@@ -199,8 +202,8 @@ Task({
     - Change "React 18" to "React 19" in Stack
     - Add note: "ref as prop pattern (no forwardRef)"
     
-    Check for README.md, update if exists`
-})
+    Check for README.md, update if exists`,
+});
 ```
 
 **Wait for all 4 agents to complete before proceeding**
@@ -230,7 +233,7 @@ echo "Update react19-best-practices.md with findings"
 
 - [ ] Phase 1: Setup complete
 - [ ] Phase 2: Analysis agents finished
-- [ ] Phase 3: Refactoring agents finished  
+- [ ] Phase 3: Refactoring agents finished
 - [ ] Phase 4: Enhancement agents finished
 - [ ] Phase 5: Validation passed
 
@@ -245,6 +248,7 @@ echo "Update react19-best-practices.md with findings"
 ## Rollback Plan
 
 If migration fails:
+
 ```bash
 git reset --hard HEAD
 npm install  # Restore original dependencies
@@ -252,14 +256,14 @@ npm install  # Restore original dependencies
 
 ## Timeline
 
-| Phase | Duration | Type |
-|-------|----------|------|
-| Phase 1 | 5 min | Sequential |
-| Phase 2 | 2 min | Parallel (3 agents) |
-| Phase 3 | 5 min | Parallel (3 agents) |
-| Phase 4 | 3 min | Parallel (4 agents) |
-| Phase 5 | 5 min | Sequential |
-| **Total** | **~20 min** | Mixed |
+| Phase     | Duration    | Type                |
+| --------- | ----------- | ------------------- |
+| Phase 1   | 5 min       | Sequential          |
+| Phase 2   | 2 min       | Parallel (3 agents) |
+| Phase 3   | 5 min       | Parallel (3 agents) |
+| Phase 4   | 3 min       | Parallel (4 agents) |
+| Phase 5   | 5 min       | Sequential          |
+| **Total** | **~20 min** | Mixed               |
 
 ## Notes
 

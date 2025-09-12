@@ -10,27 +10,46 @@ export const useTheme = () => {
     [currentTheme],
   );
 
-  const updateCSSVariables = useCallback((theme: Theme) => {
-    const root = document.documentElement;
+  const updateCSSVariables = useCallback(
+    (theme: Theme) => {
+      const root = document.documentElement;
 
-    // Force a re-render by toggling a data attribute
-    root.setAttribute("data-theme", theme.name);
-  }, []);
+      // Clear all previous theme classes
+      root.className = root.className.replace(/theme-\S+/g, "").trim();
+
+      // Add new theme class
+      root.classList.add(`theme-${currentTheme}`);
+
+      // Set data attributes for CSS selectors
+      root.setAttribute("data-theme", theme.name);
+      root.setAttribute("data-theme-dark", theme.isDark ? "true" : "false");
+    },
+    [currentTheme],
+  );
 
   const changeTheme = useCallback(
     async (newTheme: string) => {
       if (newTheme === currentTheme || !themes[newTheme]) return;
       setIsLoading(true);
-      await new Promise((resolve) => setTimeout(resolve, 150));
+
+      // Update immediately without waiting
       setCurrentTheme(newTheme);
       localStorage.setItem("theme", newTheme);
 
-      // Update CSS variables immediately
-      updateCSSVariables(themes[newTheme]);
+      // Update CSS attributes
+      const root = document.documentElement;
+      root.className = root.className.replace(/theme-\S+/g, "").trim();
+      root.classList.add(`theme-${newTheme}`);
+      root.setAttribute("data-theme", themes[newTheme].name);
+      root.setAttribute(
+        "data-theme-dark",
+        themes[newTheme].isDark ? "true" : "false",
+      );
 
+      await new Promise((resolve) => setTimeout(resolve, 150));
       setIsLoading(false);
     },
-    [currentTheme, updateCSSVariables],
+    [currentTheme],
   );
 
   useEffect(() => {
