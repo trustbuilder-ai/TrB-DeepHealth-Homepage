@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React from "react";
 import { X } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { useModalClose } from "@/hooks/useModalClose";
 
 export interface EnhancedDialogProps {
   isOpen: boolean;
@@ -22,21 +23,9 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
     className,
     overlayClassName,
   }) => {
-    const dialogRef = useRef<HTMLDivElement>(null);
+    const dialogRef = useModalClose(isOpen, onClose);
 
     if (!isOpen) return null;
-
-    const handleOverlayClick = (e: React.MouseEvent) => {
-      if (e.target === e.currentTarget) {
-        onClose();
-      }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
 
     return (
       <div
@@ -45,15 +34,13 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
           "bg-black/50 backdrop-blur-sm",
           overlayClassName,
         )}
-        onClick={handleOverlayClick}
-        onKeyDown={handleKeyDown}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? "dialog-title" : undefined}
         aria-describedby={description ? "dialog-description" : undefined}
       >
         <div
-          ref={dialogRef}
+          ref={dialogRef as React.RefObject<HTMLDivElement>}
           className={cn(
             "relative w-full max-w-md max-h-[90vh] overflow-auto",
             "bg-background rounded-lg shadow-xl border",

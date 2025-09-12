@@ -85,7 +85,7 @@ export const Features = ({ theme: propTheme }: FeaturesProps) => {
                   <Avatar className="w-12 h-12 transition-transform flex-shrink-0 enhanced-glow">
                     <AvatarFallback className={`bg-${feature.color}-100`}>
                       <feature.icon
-                        className={`w-6 h-6 text-${feature.color}-600`}
+                        className={`w-6 h-6 text-${feature.color}-600 icon-dynamic`}
                       />
                     </AvatarFallback>
                   </Avatar>

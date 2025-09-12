@@ -2,6 +2,7 @@ import * as React from "react";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { Theme } from "@/utils/themes";
+import { getButtonStyles } from "@/utils/themeUtils";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -28,21 +29,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseClasses =
       "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
 
-    const variants = theme ? {
-      default: `${theme.primarySolid} text-white ${theme.primaryHover}`,
-      outline: `border ${theme.border} ${theme.text} hover:${theme.surface}`,
-      ghost: `${theme.text} hover:${theme.surface}`,
-      destructive: "bg-red-600 text-white hover:bg-red-700",
-      secondary: `${theme.surface} ${theme.text} hover:${theme.accent}`,
-    } : {
+    const themeStyles = theme ? getButtonStyles(theme, variant) : "";
+    
+    const fallbackVariants = {
       default: "bg-primary text-primary-foreground hover:bg-primary/90",
-      outline:
-        "border border-input hover:bg-accent hover:text-accent-foreground",
+      outline: "border border-input hover:bg-accent hover:text-accent-foreground", 
       ghost: "hover:bg-accent hover:text-accent-foreground",
-      destructive:
-        "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+      destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
       secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
     };
+    
+    const variantStyle = theme ? themeStyles : fallbackVariants[variant];
 
     const sizes = {
       default: "h-10 px-4 py-2",
@@ -53,7 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        className={cn(baseClasses, variants[variant], sizes[size], className)}
+        className={cn(baseClasses, variantStyle, sizes[size], className)}
         ref={ref}
         disabled={disabled || loading}
         {...props}

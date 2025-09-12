@@ -60,7 +60,7 @@ export const Navigation = () => {
       {/* Offline Banner */}
       {!isOnline && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 text-sm">
-          <WifiOff className="w-4 h-4 inline mr-2" />
+          <WifiOff className="w-4 h-4 inline mr-2 icon-dynamic" />
           You're currently offline. Some features may not be available.
         </div>
       )}
@@ -90,7 +90,7 @@ export const Navigation = () => {
                     theme.glow,
                   )}
                 >
-                  <Brain className="w-5 h-5 text-white" />
+                  <Brain className="w-5 h-5 text-white icon-dynamic" />
                 </div>
                 <span className={cn("text-xl font-semibold", theme.text)}>
                   Astra Labs
@@ -115,7 +115,7 @@ export const Navigation = () => {
                     )}
                     aria-label={`Navigate to ${item.label} section`}
                   >
-                    <item.icon className="w-4 h-4" />
+                    <item.icon className="w-4 h-4 icon-dynamic" />
                     {item.label}
                   </button>
                 ))}
@@ -178,9 +178,9 @@ export const Navigation = () => {
                 )}
               >
                 {mobileMenuOpen ? (
-                  <X className="w-5 h-5" />
+                  <X className="w-5 h-5 icon-dynamic" />
                 ) : (
-                  <Menu className="w-5 h-5" />
+                  <Menu className="w-5 h-5 icon-dynamic" />
                 )}
               </button>
             </div>
@@ -216,7 +216,7 @@ export const Navigation = () => {
                       : "text-slate-600 focus-visible:ring-slate-600",
                   )}
                 >
-                  <item.icon className="w-5 h-5" />
+                  <item.icon className="w-5 h-5 icon-dynamic" />
                   <span className="font-medium">{item.label}</span>
                 </button>
               ))}

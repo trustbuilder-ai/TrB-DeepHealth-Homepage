@@ -23,8 +23,8 @@ export { Alert, AlertDescription, AlertTitle } from "./alert";
 export { Textarea, type TextareaProps } from "./textarea";
 export { StatusBadge, type StatusBadgeProps } from "./status-badge";
 export { Notification, type NotificationProps } from "./notification";
-export { EnhancedDialog, type EnhancedDialogProps } from "./enhanced-dialog";
+export { EnhancedDialog, type EnhancedDialogProps } from "./modal";
 export {
   EnhancedProgress,
   type EnhancedProgressProps,
-} from "./enhanced-progress";
+} from "./progress-bar";

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/utils/cn";
 import { Theme } from "@/utils/themes";
+import { getCardStyles } from "@/utils/themeUtils";
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   theme?: Theme;
@@ -12,9 +13,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       ref={ref}
       className={cn(
         "rounded-lg border shadow-sm",
-        theme
-          ? `${theme.surface} ${theme.border} ${theme.text}`
-          : "bg-card text-card-foreground border-border",
+        theme ? getCardStyles(theme) : "",
         className,
       )}
       {...props}
