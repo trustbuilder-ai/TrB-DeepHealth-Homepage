@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { themes } from "@/utils/themes";
+import { themes, type Theme } from "@/utils/themes";
 
 export const useTheme = () => {
   const [currentTheme, setCurrentTheme] = useState("coastalBreeze");
@@ -10,6 +10,13 @@ export const useTheme = () => {
     [currentTheme],
   );
 
+  const updateCSSVariables = useCallback((theme: Theme) => {
+    const root = document.documentElement;
+
+    // Force a re-render by toggling a data attribute
+    root.setAttribute("data-theme", theme.name);
+  }, []);
+
   const changeTheme = useCallback(
     async (newTheme: string) => {
       if (newTheme === currentTheme || !themes[newTheme]) return;
@@ -17,17 +24,24 @@ export const useTheme = () => {
       await new Promise((resolve) => setTimeout(resolve, 150));
       setCurrentTheme(newTheme);
       localStorage.setItem("theme", newTheme);
+
+      // Update CSS variables immediately
+      updateCSSVariables(themes[newTheme]);
+
       setIsLoading(false);
     },
-    [currentTheme],
+    [currentTheme, updateCSSVariables],
   );
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme && themes[savedTheme]) {
       setCurrentTheme(savedTheme);
+      updateCSSVariables(themes[savedTheme]);
+    } else {
+      updateCSSVariables(themes.coastalBreeze);
     }
-  }, []);
+  }, [updateCSSVariables]);
 
   return { theme, currentTheme, changeTheme, isLoading };
 };

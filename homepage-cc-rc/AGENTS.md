@@ -18,8 +18,8 @@
 ## Context7: Docs via MCP
 
 ```typescript
-mcp__context7__resolve-library-id("react") // → /facebook/react
-mcp__context7__get-library-docs("/facebook/react", { topic: "hooks" })
+mcp__context7__resolve - library - id("react"); // → /facebook/react
+mcp__context7__get - library - docs("/facebook/react", { topic: "hooks" });
 ```
 
 **Libraries**: `/websites/react_dev`, `/websites/tailwindcss`, `/radix-ui/primitives`, `/vitejs/vite`

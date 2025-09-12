@@ -3,7 +3,8 @@ import { cn } from "@/utils/cn";
 import { Theme } from "@/utils/themes";
 import { getInputStyles } from "@/utils/themeUtils";
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   theme?: Theme;
 }
 

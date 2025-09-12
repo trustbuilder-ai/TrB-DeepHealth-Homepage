@@ -3,7 +3,8 @@ import { cn } from "@/utils/cn";
 import { Theme } from "@/utils/themes";
 import { getInputStyles } from "@/utils/themeUtils";
 
-export interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   theme?: Theme;
 }
 

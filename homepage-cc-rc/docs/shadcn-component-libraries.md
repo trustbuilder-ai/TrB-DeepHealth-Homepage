@@ -4,14 +4,14 @@
 
 ## Library Comparison
 
-| Library | Focus | Components | Install | Cost | React 19 |
-|---------|-------|------------|---------|------|----------|
-| Origin UI | General | 300+ variants | Copy-paste | Free | Ready |
-| Kibo UI | Business | Gantt/Kanban | CLI | Free | Ready |
-| MVP Blocks | Landing | Heroes/CTA | Copy-paste | Free | Ready |
-| Skiper/UI | Premium | 72+ animated | CLI | $129+ | Unknown |
-| Shsf UI | Motion | Micro-interactions | Beta | Free | Unknown |
-| TweakCN | Themes | Visual editor | Web tool | Free | Ready |
+| Library    | Focus    | Components         | Install    | Cost  | React 19 |
+| ---------- | -------- | ------------------ | ---------- | ----- | -------- |
+| Origin UI  | General  | 300+ variants      | Copy-paste | Free  | Ready    |
+| Kibo UI    | Business | Gantt/Kanban       | CLI        | Free  | Ready    |
+| MVP Blocks | Landing  | Heroes/CTA         | Copy-paste | Free  | Ready    |
+| Skiper/UI  | Premium  | 72+ animated       | CLI        | $129+ | Unknown  |
+| Shsf UI    | Motion   | Micro-interactions | Beta       | Free  | Unknown  |
+| TweakCN    | Themes   | Visual editor      | Web tool   | Free  | Ready    |
 
 ## Recommendations
 

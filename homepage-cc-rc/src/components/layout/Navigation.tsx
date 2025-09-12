@@ -9,7 +9,11 @@ import {
   WifiOff,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeSwitcher, FontSwitcher, IconSwitcher } from "@/components/features";
+import {
+  ThemeSwitcher,
+  FontSwitcher,
+  IconSwitcher,
+} from "@/components/features";
 import { useModalClose } from "@/hooks/useModalClose";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useTheme } from "@/hooks/useTheme";
@@ -31,7 +35,8 @@ export const Navigation = () => {
     isLoading: themeLoading,
   } = useTheme();
   const { currentFont, changeFont, fontLoading, loadedFonts } = useFont();
-  const { currentIconSet, changeIconSet, iconLoading, loadedIconSets } = useIcon();
+  const { currentIconSet, changeIconSet, iconLoading, loadedIconSets } =
+    useIcon();
   const isOnline = useOnlineStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -147,11 +152,7 @@ export const Navigation = () => {
               />
 
               <div className="hidden md:flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  theme={theme}
-                >
+                <Button variant="ghost" size="sm" theme={theme}>
                   Sign In
                 </Button>
                 <Button

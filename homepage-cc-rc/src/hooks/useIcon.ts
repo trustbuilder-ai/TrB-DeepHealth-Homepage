@@ -52,11 +52,18 @@ export const useIcon = () => {
 
       const iconConfig = iconSets[newIconSet as keyof typeof iconSets];
       if (typeof document !== "undefined") {
+        // Update CSS custom properties
         document.documentElement.style.setProperty(
           "--icon-stroke-width",
           iconConfig.strokeWidth.toString(),
         );
+
+        // Force re-render by updating a data attribute
+        document.documentElement.setAttribute("data-icon-set", newIconSet);
       }
+
+      // Simulate loading time for better UX
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
       setCurrentIconSet(newIconSet);
       localStorage.setItem("iconSet", newIconSet);
@@ -69,6 +76,19 @@ export const useIcon = () => {
     const savedIconSet = localStorage.getItem("iconSet");
     if (savedIconSet && iconSets[savedIconSet as keyof typeof iconSets]) {
       setCurrentIconSet(savedIconSet);
+      const iconConfig = iconSets[savedIconSet as keyof typeof iconSets];
+      if (typeof document !== "undefined") {
+        document.documentElement.style.setProperty(
+          "--icon-stroke-width",
+          iconConfig.strokeWidth.toString(),
+        );
+        document.documentElement.setAttribute("data-icon-set", savedIconSet);
+      }
+    } else {
+      // Set default lucide icon set
+      if (typeof document !== "undefined") {
+        document.documentElement.setAttribute("data-icon-set", "lucide");
+      }
     }
   }, []);
 

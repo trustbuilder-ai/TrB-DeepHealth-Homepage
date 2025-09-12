@@ -53,23 +53,25 @@ const CardTitle = React.forwardRef<HTMLParagraphElement, CardTitleProps>(
 );
 CardTitle.displayName = "CardTitle";
 
-interface CardDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {
+interface CardDescriptionProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   theme?: Theme;
 }
 
-const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionProps>(
-  ({ className, theme, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={cn(
-        "text-sm",
-        theme ? theme.textSecondary : "text-muted-foreground",
-        className
-      )}
-      {...props}
-    />
-  ),
-);
+const CardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  CardDescriptionProps
+>(({ className, theme, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn(
+      "text-sm",
+      theme ? theme.textSecondary : "text-muted-foreground",
+      className,
+    )}
+    {...props}
+  />
+));
 CardDescription.displayName = "CardDescription";
 
 const CardContent = React.forwardRef<

@@ -30,15 +30,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
 
     const themeStyles = theme ? getButtonStyles(theme, variant) : "";
-    
+
     const fallbackVariants = {
       default: "bg-primary text-primary-foreground hover:bg-primary/90",
-      outline: "border border-input hover:bg-accent hover:text-accent-foreground", 
+      outline:
+        "border border-input hover:bg-accent hover:text-accent-foreground",
       ghost: "hover:bg-accent hover:text-accent-foreground",
-      destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+      destructive:
+        "bg-destructive text-destructive-foreground hover:bg-destructive/90",
       secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
     };
-    
+
     const variantStyle = theme ? themeStyles : fallbackVariants[variant];
 
     const sizes = {

@@ -11,13 +11,13 @@ npm install --save-exact react@^19.0.0 react-dom@^19.0.0
 
 ## New Hooks
 
-| Hook | Purpose | Usage |
-|------|---------|-------|
-| `useActionState` | Form submissions + async | `const [state, action, isPending] = useActionState(fn)` |
-| `useOptimistic` | Optimistic UI updates | `const [optimistic, addOptimistic] = useOptimistic(state)` |
-| `use` | Read resources in render | `const data = use(promise)` |
-| `useFormStatus` | Parent form state | `const { pending } = useFormStatus()` |
-| `useTransition` | Now accepts async | `startTransition(async () => {...})` |
+| Hook             | Purpose                  | Usage                                                      |
+| ---------------- | ------------------------ | ---------------------------------------------------------- |
+| `useActionState` | Form submissions + async | `const [state, action, isPending] = useActionState(fn)`    |
+| `useOptimistic`  | Optimistic UI updates    | `const [optimistic, addOptimistic] = useOptimistic(state)` |
+| `use`            | Read resources in render | `const data = use(promise)`                                |
+| `useFormStatus`  | Parent form state        | `const { pending } = useFormStatus()`                      |
+| `useTransition`  | Now accepts async        | `startTransition(async () => {...})`                       |
 
 ## React Compiler = No Manual Optimization
 
@@ -57,7 +57,7 @@ async function createUser(formData) {
 <form action={createUser}>
   <input name="name" />
   <button>Submit</button>
-</form>
+</form>;
 ```
 
 ## Native Metadata
@@ -88,7 +88,7 @@ function Page({ title }) {
 ## Key Practices
 
 - **Error boundaries** required (errors not re-thrown)
-- **ref as prop** (no `forwardRef` needed)  
+- **ref as prop** (no `forwardRef` needed)
 - **StrictMode** for dev checks
 - **Resource preloading** APIs for performance
 - **Optimistic UI** with `useOptimistic`

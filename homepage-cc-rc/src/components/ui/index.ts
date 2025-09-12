@@ -24,7 +24,4 @@ export { Textarea, type TextareaProps } from "./textarea";
 export { StatusBadge, type StatusBadgeProps } from "./status-badge";
 export { Notification, type NotificationProps } from "./notification";
 export { EnhancedDialog, type EnhancedDialogProps } from "./modal";
-export {
-  EnhancedProgress,
-  type EnhancedProgressProps,
-} from "./progress-bar";
+export { EnhancedProgress, type EnhancedProgressProps } from "./progress-bar";

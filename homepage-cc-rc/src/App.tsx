@@ -1,10 +1,4 @@
-import {
-  useState,
-  useCallback,
-  useMemo,
-  useEffect,
-  useRef,
-} from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import {
   Heart,
   Search,
@@ -28,7 +22,14 @@ import { useTheme } from "@/hooks/useTheme";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-import { scenarios, mockAnalytics, mockConversations, mockTourSteps, mockRecommendations, mockBatchQueue } from "@/utils/mockData";
+import {
+  scenarios,
+  mockAnalytics,
+  mockConversations,
+  mockTourSteps,
+  mockRecommendations,
+  mockBatchQueue,
+} from "@/utils/mockData";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -61,26 +62,32 @@ export default function LLMTestingPlatform() {
     null,
   );
   const [notifications, setNotifications] = useState<
-    Array<{ id: string; type: "success" | "error" | "warning" | "info"; title: string; message: string }>
+    Array<{
+      id: string;
+      type: "success" | "error" | "warning" | "info";
+      title: string;
+      message: string;
+    }>
   >([]);
   const [activeDialog, setActiveDialog] = useState<{
     title: string;
     description: string;
     content: string;
   } | null>(null);
-  
+
   // Missing panel states
   const [showTour, setShowTour] = useState(false);
   const [tourStep, setTourStep] = useState(0);
   const [showAnalytics, setShowAnalytics] = useState(false);
   const [showRecommendations, setShowRecommendations] = useState(false);
+  const [showBatchTesting, setShowBatchTesting] = useState(false);
   const [batchQueue] = useState(mockBatchQueue);
-  
-  // Modal refs for click outside detection
-  const tourModalRef = useRef<HTMLDivElement>(null);
-  const analyticsModalRef = useRef<HTMLDivElement>(null);
-  const recommendationsModalRef = useRef<HTMLDivElement>(null);
-  
+
+  // Modal refs for click outside detection (kept for potential future use)
+  // const tourModalRef = useRef<HTMLDivElement>(null);
+  // const analyticsModalRef = useRef<HTMLDivElement>(null);
+  // const recommendationsModalRef = useRef<HTMLDivElement>(null);
+
   // Modal close hooks
   useModalClose(showTour, () => setShowTour(false));
   useModalClose(showAnalytics, () => setShowAnalytics(false));
@@ -113,7 +120,9 @@ export default function LLMTestingPlatform() {
   }, []);
 
   const dismissNotification = useCallback((id: string) => {
-    setNotifications((prev) => prev.filter((notification) => notification.id !== id));
+    setNotifications((prev) =>
+      prev.filter((notification) => notification.id !== id),
+    );
   }, []);
 
   const [expandedFooterSections, setExpandedFooterSections] = useLocalStorage(
@@ -122,7 +131,6 @@ export default function LLMTestingPlatform() {
   );
 
   const isOnline = useOnlineStatus();
-  
 
   // Filter scenarios based on search query
   const filteredScenarios = useMemo(() => {
@@ -137,8 +145,6 @@ export default function LLMTestingPlatform() {
     );
   }, [searchQuery]);
 
-
-
   const closeDialog = useCallback(() => {
     setActiveDialog(null);
   }, []);
@@ -150,9 +156,10 @@ export default function LLMTestingPlatform() {
         if (showTour) setShowTour(false);
         if (showAnalytics) setShowAnalytics(false);
         if (showRecommendations) setShowRecommendations(false);
+        if (showBatchTesting) setShowBatchTesting(false);
         return;
       }
-      
+
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         document.getElementById("search-input")?.focus();
@@ -161,7 +168,7 @@ export default function LLMTestingPlatform() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [showTour, showAnalytics, showRecommendations]);
+  }, [showTour, showAnalytics, showRecommendations, showBatchTesting]);
 
   return (
     <div
@@ -215,7 +222,6 @@ export default function LLMTestingPlatform() {
             </div>
           </div>
         </div>
-
       </section>
 
       {/* Features Section */}
@@ -266,7 +272,9 @@ export default function LLMTestingPlatform() {
 
           {filteredScenarios.length === 0 ? (
             <div className="text-center py-12">
-              <Search className={`w-12 h-12 mx-auto mb-4 icon-dynamic ${theme.textMuted}`} />
+              <Search
+                className={`w-12 h-12 mx-auto mb-4 icon-dynamic ${theme.textMuted}`}
+              />
               <h3 className={`text-lg font-medium ${theme.text} mb-2`}>
                 No scenarios found
               </h3>
@@ -664,11 +672,7 @@ export default function LLMTestingPlatform() {
                 Building safer AI for mental health with research-backed design.
               </p>
               <div className="flex items-center gap-4">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  theme={theme}
-                >
+                <Button variant="ghost" size="icon" theme={theme}>
                   <Globe className="w-4 h-4 icon-dynamic" />
                 </Button>
                 {isOnline ? (
@@ -781,7 +785,10 @@ export default function LLMTestingPlatform() {
                   ],
                 },
               ].map((section) => {
-                const isExpanded = expandedFooterSections[section.id as keyof typeof expandedFooterSections];
+                const isExpanded =
+                  expandedFooterSections[
+                    section.id as keyof typeof expandedFooterSections
+                  ];
 
                 return (
                   <div
@@ -790,10 +797,13 @@ export default function LLMTestingPlatform() {
                   >
                     <button
                       onClick={() =>
-                        setExpandedFooterSections((prev: typeof expandedFooterSections) => ({
-                          ...prev,
-                          [section.id]: !prev[section.id as keyof typeof prev],
-                        }))
+                        setExpandedFooterSections(
+                          (prev: typeof expandedFooterSections) => ({
+                            ...prev,
+                            [section.id]:
+                              !prev[section.id as keyof typeof prev],
+                          }),
+                        )
                       }
                       aria-expanded={isExpanded}
                       aria-controls={`footer-section-${section.id}`}
@@ -911,6 +921,15 @@ export default function LLMTestingPlatform() {
         </Button>
         <Button
           size="icon"
+          onClick={() => setShowBatchTesting(true)}
+          className="rounded-full floating-glow bg-teal-600 text-white hover:bg-teal-700 transition-all duration-200"
+          title="Batch Testing"
+          aria-label="Open batch testing panel"
+        >
+          <Loader2 className="w-4 h-4 icon-dynamic" />
+        </Button>
+        <Button
+          size="icon"
           onClick={() => setShowTour(true)}
           className="rounded-full floating-glow bg-teal-600 text-white hover:bg-teal-700 transition-all duration-200"
           title="Help Tour"
@@ -921,66 +940,68 @@ export default function LLMTestingPlatform() {
       </div>
 
       {/* Tour Overlay */}
-      {showTour && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setShowTour(false);
+      {showTour && mockTourSteps[tourStep] && (
+        <EnhancedDialog
+          isOpen={showTour}
+          onClose={() => {
+            setShowTour(false);
+            setTourStep(0);
           }}
+          title={mockTourSteps[tourStep].title || "Tour"}
+          size="md"
+          theme={theme}
         >
-          <div
-            ref={tourModalRef}
-            className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg p-6 max-w-md w-full mx-4 modal-glow border theme-transition ${theme.isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center">
-                <Lightbulb className="w-4 h-4 text-white icon-dynamic" />
-              </div>
-              <h3 className={`text-lg font-semibold ${theme.text}`}>
-                {mockTourSteps[tourStep]?.title}
-              </h3>
-            </div>
-            <p className={`${theme.textSecondary} mb-6`}>
-              {mockTourSteps[tourStep]?.content}
-            </p>
-            <div className="flex justify-between items-center">
-              <span className={`text-sm ${theme.textMuted}`}>
-                Step {tourStep + 1} of {mockTourSteps.length}
-              </span>
-              <div className="flex gap-2">
-                <Button variant="ghost" theme={theme} onClick={() => setShowTour(false)}>
-                  Skip Tour
-                </Button>
-                <Button
-                  theme={theme}
-                  onClick={() => {
-                    if (tourStep === mockTourSteps.length - 1) {
-                      setShowTour(false);
-                      setTourStep(0);
-                    } else {
-                      setTourStep(tourStep + 1);
-                    }
-                  }}
-                >
-                  {tourStep === mockTourSteps.length - 1 ? "Finish" : "Next"}
-                </Button>
-              </div>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center">
+              <Lightbulb className="w-4 h-4 text-white icon-dynamic" />
             </div>
           </div>
-        </div>
+          <p className={`${theme.textSecondary} mb-6`}>
+            {mockTourSteps[tourStep].content || "Tour content"}
+          </p>
+          <div className="flex justify-between items-center">
+            <span className={`text-sm ${theme.textMuted}`}>
+              Step {tourStep + 1} of {mockTourSteps.length}
+            </span>
+            <div className="flex gap-2">
+              <Button
+                variant="ghost"
+                theme={theme}
+                onClick={() => {
+                  setShowTour(false);
+                  setTourStep(0);
+                }}
+              >
+                Skip Tour
+              </Button>
+              <Button
+                theme={theme}
+                onClick={() => {
+                  if (tourStep === mockTourSteps.length - 1) {
+                    setShowTour(false);
+                    setTourStep(0);
+                  } else {
+                    setTourStep(tourStep + 1);
+                  }
+                }}
+              >
+                {tourStep === mockTourSteps.length - 1 ? "Finish" : "Next"}
+              </Button>
+            </div>
+          </div>
+        </EnhancedDialog>
       )}
 
       {/* Analytics Panel */}
       {showAnalytics && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
           onClick={(e) => {
             if (e.target === e.currentTarget) setShowAnalytics(false);
           }}
         >
           <div
-            ref={analyticsModalRef}
-            className={`fixed top-4 right-4 bottom-4 w-96 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}
+            className={`fixed top-4 right-4 bottom-4 w-96 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"}`}
           >
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className={`text-lg font-semibold ${theme.text}`}>
@@ -1002,17 +1023,25 @@ export default function LLMTestingPlatform() {
                   Key Metrics
                 </h4>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className={`p-3 rounded ${theme.isDark ? 'bg-slate-700' : 'bg-slate-100'}`}>
+                  <div
+                    className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
+                  >
                     <div className="text-2xl font-bold text-green-600">
                       {mockAnalytics.passRate}%
                     </div>
-                    <div className={`text-sm ${theme.textSecondary}`}>Pass Rate</div>
+                    <div className={`text-sm ${theme.textSecondary}`}>
+                      Pass Rate
+                    </div>
                   </div>
-                  <div className={`p-3 rounded ${theme.isDark ? 'bg-slate-700' : 'bg-slate-100'}`}>
+                  <div
+                    className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
+                  >
                     <div className="text-2xl font-bold text-blue-600">
                       {mockAnalytics.totalTests}
                     </div>
-                    <div className={`text-sm ${theme.textSecondary}`}>Total Tests</div>
+                    <div className={`text-sm ${theme.textSecondary}`}>
+                      Total Tests
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1022,22 +1051,33 @@ export default function LLMTestingPlatform() {
                 </h4>
                 <div className="space-y-3">
                   {mockAnalytics.modelComparison.map((model, i) => (
-                    <div key={i} className={`p-3 rounded border ${theme.isDark ? 'bg-slate-700 border-slate-600' : 'bg-slate-50 border-slate-200'}`}>
+                    <div
+                      key={i}
+                      className={`p-3 rounded border ${theme.isDark ? "bg-slate-700 border-slate-600" : "bg-slate-50 border-slate-200"}`}
+                    >
                       <div className={`font-medium ${theme.text} mb-2`}>
                         {model.model}
                       </div>
                       <div className="grid grid-cols-3 gap-2 text-xs">
                         <div>
                           <div className={`${theme.textSecondary}`}>Safety</div>
-                          <div className="text-green-600 font-medium">{model.safety}%</div>
+                          <div className="text-green-600 font-medium">
+                            {model.safety}%
+                          </div>
                         </div>
                         <div>
-                          <div className={`${theme.textSecondary}`}>Empathy</div>
-                          <div className="text-blue-600 font-medium">{model.empathy}%</div>
+                          <div className={`${theme.textSecondary}`}>
+                            Empathy
+                          </div>
+                          <div className="text-blue-600 font-medium">
+                            {model.empathy}%
+                          </div>
                         </div>
                         <div>
                           <div className={`${theme.textSecondary}`}>Bias</div>
-                          <div className="text-purple-600 font-medium">{model.bias}%</div>
+                          <div className="text-purple-600 font-medium">
+                            {model.bias}%
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1051,15 +1091,14 @@ export default function LLMTestingPlatform() {
 
       {/* Recommendations Panel */}
       {showRecommendations && (
-        <div 
+        <div
           className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
           onClick={(e) => {
             if (e.target === e.currentTarget) setShowRecommendations(false);
           }}
         >
           <div
-            ref={recommendationsModalRef}
-            className={`fixed top-4 left-4 bottom-4 w-80 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}
+            className={`fixed top-4 left-4 bottom-4 w-80 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"}`}
           >
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className={`text-lg font-semibold ${theme.text}`}>
@@ -1079,7 +1118,7 @@ export default function LLMTestingPlatform() {
               {mockRecommendations.map((rec) => (
                 <div
                   key={rec.id}
-                  className={`p-3 rounded border ${theme.isDark ? 'border-slate-600 bg-slate-700' : 'border-slate-200 bg-slate-50'}`}
+                  className={`p-3 rounded border ${theme.isDark ? "border-slate-600 bg-slate-700" : "border-slate-200 bg-slate-50"}`}
                 >
                   <div className="flex items-start justify-between mb-2">
                     <h4 className={`font-medium ${theme.text}`}>{rec.title}</h4>
@@ -1088,13 +1127,15 @@ export default function LLMTestingPlatform() {
                     {rec.description}
                   </p>
                   <div className="flex items-center justify-between text-xs">
-                    <span className={`px-2 py-1 rounded ${
-                      rec.priority === 'high' 
-                        ? 'bg-red-100 text-red-800' 
-                        : rec.priority === 'medium'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-green-100 text-green-800'
-                    }`}>
+                    <span
+                      className={`px-2 py-1 rounded ${
+                        rec.priority === "high"
+                          ? "bg-red-100 text-red-800"
+                          : rec.priority === "medium"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : "bg-green-100 text-green-800"
+                      }`}
+                    >
                       {rec.priority}
                     </span>
                     <span className={`font-medium ${theme.textMuted}`}>
@@ -1108,38 +1149,80 @@ export default function LLMTestingPlatform() {
         </div>
       )}
 
-      {/* Batch Testing Panel */}
-      {batchQueue.some((item) => item.status === "running") && (
-        <div className="fixed bottom-4 left-24 z-40">
-          <div
-            className={`rounded-lg p-4 shadow-lg border max-w-sm ${theme.isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}
-          >
-            <div className="flex items-center gap-2 mb-2">
-              <Loader2 className="w-4 h-4 animate-spin icon-dynamic" />
-              <span className={`font-medium ${theme.text}`}>Batch Testing</span>
+      {/* Batch Testing Modal */}
+      {showBatchTesting && (
+        <EnhancedDialog
+          isOpen={showBatchTesting}
+          onClose={() => setShowBatchTesting(false)}
+          title="Batch Testing Dashboard"
+          size="lg"
+          theme={theme}
+        >
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <Loader2 className="w-5 h-5 animate-spin icon-dynamic" />
+              <span className={`font-medium ${theme.text}`}>
+                Running{" "}
+                {batchQueue?.filter((item) => item.status === "running")
+                  .length || 0}{" "}
+                of {batchQueue?.length || 0} tests
+              </span>
             </div>
-            <div className="space-y-1">
-              {batchQueue.map((item) => (
-                <div key={item.id} className="flex justify-between text-sm">
-                  <span className={theme.textSecondary}>{item.scenario}</span>
-                  <span
-                    className={`${
-                      item.status === "completed"
-                        ? "text-green-600"
-                        : item.status === "running"
-                          ? "text-blue-600"
-                          : "text-gray-500"
-                    }`}
+
+            <div className="space-y-3">
+              <h4 className={`font-medium ${theme.text}`}>Test Queue Status</h4>
+              {batchQueue && batchQueue.length > 0 ? (
+                batchQueue.map((item) => (
+                  <div
+                    key={item.id}
+                    className={`p-3 rounded border ${theme.isDark ? "bg-slate-700 border-slate-600" : "bg-slate-50 border-slate-200"}`}
                   >
-                    {item.status}
-                  </span>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <div className={`font-medium ${theme.text}`}>
+                          {item.scenario}
+                        </div>
+                        <div className={`text-sm ${theme.textSecondary}`}>
+                          Model: {item.model}
+                        </div>
+                      </div>
+                      <span
+                        className={`px-2 py-1 rounded text-xs font-medium ${
+                          item.status === "completed"
+                            ? "bg-green-100 text-green-800"
+                            : item.status === "running"
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-gray-100 text-gray-600"
+                        }`}
+                      >
+                        {item.status}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className={`p-3 text-center ${theme.textSecondary}`}>
+                  No batch tests available
                 </div>
-              ))}
+              )}
+            </div>
+
+            <div className="flex gap-2">
+              <Button theme={theme} disabled>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin icon-dynamic" />
+                Running Tests...
+              </Button>
+              <Button
+                variant="outline"
+                theme={theme}
+                onClick={() => setShowBatchTesting(false)}
+              >
+                Close
+              </Button>
             </div>
           </div>
-        </div>
+        </EnhancedDialog>
       )}
-
     </div>
   );
 }

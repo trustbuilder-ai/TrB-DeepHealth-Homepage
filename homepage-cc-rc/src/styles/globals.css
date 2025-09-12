@@ -80,6 +80,64 @@
   --icon-stroke-width: 2;
 }
 
+/* Icon set styles - dramatically different visual representations */
+[data-icon-set="heroicons"] .icon-dynamic {
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.6)) hue-rotate(15deg);
+  stroke-width: 1.5;
+  transform: scale(1.2);
+  background: linear-gradient(
+    45deg,
+    rgba(59, 130, 246, 0.1),
+    rgba(59, 130, 246, 0.2)
+  );
+  border-radius: 50%;
+  padding: 2px;
+}
+
+[data-icon-set="feather"] .icon-dynamic {
+  filter: drop-shadow(0 0 3px rgba(16, 185, 129, 0.7)) saturate(150%);
+  stroke-width: 1.2;
+  transform: rotate(5deg) scale(1.15);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent);
+  border-radius: 3px;
+}
+
+[data-icon-set="tabler"] .icon-dynamic {
+  filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.8)) contrast(120%);
+  stroke-width: 2.5;
+  transform: skew(2deg, 1deg) scale(1.1);
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.1),
+    rgba(168, 85, 247, 0.3)
+  );
+  border-radius: 4px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+[data-icon-set="phosphor"] .icon-dynamic {
+  filter: drop-shadow(0 0 3px rgba(245, 101, 101, 0.6)) brightness(110%);
+  stroke-width: 3;
+  transform: scale(0.9) rotate(-3deg);
+  background: conic-gradient(
+    from 45deg,
+    rgba(245, 101, 101, 0.1),
+    rgba(245, 101, 101, 0.2),
+    rgba(245, 101, 101, 0.1)
+  );
+  border-radius: 6px;
+  outline: 2px solid rgba(245, 101, 101, 0.2);
+  outline-offset: 1px;
+}
+
+/* Icon transition effects */
+.icon-dynamic {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  stroke-width: var(--icon-stroke-width, 2);
+  display: inline-block;
+  position: relative;
+}
+
 /* Notification animations */
 .notification-enter-active {
   animation: slideInRight 0.3s ease-out;
