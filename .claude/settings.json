@@ -6,6 +6,9 @@
     "CLAUDE_CODE_SUBAGENT_MODEL": "opusplan",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1"
   },
+  "enabledMcpjsonServers": [
+    "context7"
+  ],
   "permissions": {
     "allow": [
       "WebSearch"

@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced animations and transitions from enhanced-3.jsx */
+:root {
+  --icon-stroke-width: 2;
+}
+
+/* Notification animations */
+.notification-enter-active {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Dialog animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-in {
+  animation:
+    fade-in 200ms ease-out,
+    zoom-in 200ms ease-out;
+}
+
+/* Card animations */
+.card-glow {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-glow:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 25px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Enhanced glow effects */
+.enhanced-glow {
+  box-shadow:
+    0 2px 8px -2px rgba(0, 0, 0, 0.04),
+    0 1px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+}
+
+.button-glow {
+  box-shadow:
+    0 1px 4px -1px rgba(0, 0, 0, 0.06),
+    0 1px 2px -1px rgba(0, 0, 0, 0.04);
+}
+
+.nav-glow {
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 2px 16px -4px rgba(0, 0, 0, 0.08),
+    0 1px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+.floating-glow {
+  box-shadow:
+    0 8px 32px -8px rgba(0, 0, 0, 0.15),
+    0 4px 16px -4px rgba(0, 0, 0, 0.1);
+}
+
+.modal-glow {
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.25),
+    0 8px 30px -8px rgba(0, 0, 0, 0.15);
+}
+
+/* Theme transition */
+.theme-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Badge styles */
+.badge-success {
+  @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300;
+}
+
+.badge-warning {
+  @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300;
+}
+
+.badge-critical {
+  @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300;
+}
+
+.badge-info {
+  @apply bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300;
+}
+
+/* Enhanced Form Styling */
+.form-input {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--foreground);
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  ring: 2px solid var(--ring);
+  border-color: var(--ring);
+}
+
+/* Professional Dialog Styling */
+.dialog-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.dialog-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 2);
+  color: var(--card-foreground);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Progress bar enhancements */
+.progress-bar {
+  transition: width 0.3s ease-in-out;
+}
+
+/* Icon stroke width CSS variable support */
+.icon-dynamic {
+  stroke-width: var(--icon-stroke-width);
+}
+
+/* Responsive text truncation */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .card-glow,
+  .enhanced-glow,
+  .notification-enter-active,
+  .animate-in,
+  .progress-bar {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Focus indicators for keyboard navigation */
+.focus\:ring-offset-2:focus-visible {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .card-glow {
+    border: 2px solid;
+  }
+
+  .badge-success,
+  .badge-warning,
+  .badge-critical,
+  .badge-info {
+    border: 1px solid;
+  }
+}
