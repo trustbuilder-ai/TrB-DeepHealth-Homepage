@@ -11,7 +11,11 @@
   ],
   "permissions": {
     "allow": [
-      "WebSearch"
+      "Bash(make:*)",
+      "Bash(npm run:*)",
+      "WebSearch",
+      "mcp__context7__get-library-docs",
+      "mcp__context7__resolve-library-id"
     ],
     "deny": [],
     "ask": []
