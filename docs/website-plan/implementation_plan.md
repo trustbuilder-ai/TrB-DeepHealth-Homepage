@@ -310,7 +310,7 @@ GET /api/metrics/aggregate
 
 ### Mental Health UI Design Integration
 
-1. **Crisis Support Integration** 
+1. **Crisis Support Integration**
    - Non-dismissible 988 crisis banner on all components
    - Calming teal/blue-green color palette (#005C65, #017A8D)
    - Warm accent colors for emotional connection (#ECA97C, #F3B890)
@@ -397,7 +397,7 @@ GET /api/metrics/aggregate
 
 This implementation plan transforms TrB-DeepHealth from a health advice
 validation tool into a comprehensive **LLM testing platform for mental health
-product development** with **mental health UI design principles** integrated 
+product development** with **mental health UI design principles** integrated
 throughout. The focus is clearly on:
 
 1. **Testing and evaluation**, not providing mental health services
