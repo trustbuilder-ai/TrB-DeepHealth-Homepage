@@ -189,7 +189,7 @@ export const Navigation = () => {
                   onClick={() => setNewsletterModalOpen(true)}
                 >
                   <Mail className="w-4 h-4 mr-2 icon-dynamic" />
-                  Get Newsletter
+                  Newsletter
                 </Button>
               </div>
 
@@ -268,7 +268,7 @@ export const Navigation = () => {
                   }}
                 >
                   <Mail className="w-4 h-4 mr-2 icon-dynamic" />
-                  Get Newsletter
+                  Newsletter
                 </Button>
               </div>
             </div>

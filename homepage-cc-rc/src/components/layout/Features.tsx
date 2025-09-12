@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useTheme } from "@/hooks/useTheme";
-import { Theme } from "@/utils/themes";
+import { Theme } from "@/styles/themes";
 import { cn } from "@/utils/cn";
 
 const features = [
@@ -21,7 +21,7 @@ const features = [
     icon: BarChart3,
     title: "Transparent Analytics",
     desc: "Clear, intuitive metrics help you understand model performance, safety scores, and empathy ratings at a glance.",
-    color: "blue",
+    color: "emerald",
   },
   {
     icon: Heart,

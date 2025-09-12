@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { themes, type Theme } from "@/utils/themes";
+import { themes, type Theme } from "@/styles/themes";
 
 export const useTheme = () => {
   const [currentTheme, setCurrentTheme] = useState("coastalBreeze");

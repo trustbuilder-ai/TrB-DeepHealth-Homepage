@@ -2,7 +2,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useModalClose } from "@/hooks/useModalClose";
-import { themes, type Theme } from "@/utils/themes";
+import { themes, type Theme } from "@/styles/themes";
 import { cn } from "@/utils/cn";
 
 export interface ThemeSwitcherProps {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/utils/cn";
-import { Theme } from "@/utils/themes";
+import { Theme } from "@/styles/themes";
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?:

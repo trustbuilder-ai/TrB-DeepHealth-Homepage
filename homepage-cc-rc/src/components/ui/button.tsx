@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/utils/cn";
-import { Theme } from "@/utils/themes";
+import { Theme } from "@/styles/themes";
 import { getButtonStyles } from "@/utils/themeUtils";
 
 export interface ButtonProps

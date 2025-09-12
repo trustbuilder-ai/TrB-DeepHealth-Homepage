@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Code, ChevronDown, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useModalClose } from "@/hooks/useModalClose";
-import { type Theme } from "@/utils/themes";
+import { type Theme } from "@/styles/themes";
 import { cn } from "@/utils/cn";
 
 // Icon sets configuration

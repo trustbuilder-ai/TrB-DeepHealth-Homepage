@@ -1089,65 +1089,46 @@ export default function LLMTestingPlatform() {
         </div>
       )}
 
-      {/* Recommendations Panel */}
-      {showRecommendations && (
-        <div
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setShowRecommendations(false);
-          }}
-        >
-          <div
-            className={`fixed top-4 left-4 bottom-4 w-80 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"}`}
-          >
-            <div className="flex items-center justify-between p-4 border-b">
-              <h3 className={`text-lg font-semibold ${theme.text}`}>
-                AI Insights
-              </h3>
-              <Button
-                variant="ghost"
-                size="icon"
-                theme={theme}
-                onClick={() => setShowRecommendations(false)}
-                aria-label="Close recommendations"
-              >
-                <X className="w-4 h-4 icon-dynamic" />
-              </Button>
-            </div>
-            <div className="flex-1 p-4 overflow-y-auto space-y-4">
-              {mockRecommendations.map((rec) => (
-                <div
-                  key={rec.id}
-                  className={`p-3 rounded border ${theme.isDark ? "border-slate-600 bg-slate-700" : "border-slate-200 bg-slate-50"}`}
+      {/* AI Insights Panel */}
+      <EnhancedDialog
+        isOpen={showRecommendations}
+        onClose={() => setShowRecommendations(false)}
+        title="AI Insights"
+        size="sidebar-right"
+        theme={theme}
+      >
+        <div className="space-y-4">
+          {mockRecommendations.map((rec) => (
+            <div
+              key={rec.id}
+              className={`p-3 rounded border ${theme.isDark ? "border-slate-600 bg-slate-700" : "border-slate-200 bg-slate-50"}`}
+            >
+              <div className="flex items-start justify-between mb-2">
+                <h4 className={`font-medium ${theme.text}`}>{rec.title}</h4>
+              </div>
+              <p className={`text-sm ${theme.textSecondary} mb-2`}>
+                {rec.description}
+              </p>
+              <div className="flex items-center justify-between text-xs">
+                <span
+                  className={`px-2 py-1 rounded ${
+                    rec.priority === "high"
+                      ? "bg-red-100 text-red-800"
+                      : rec.priority === "medium"
+                        ? "bg-yellow-100 text-yellow-800"
+                        : "bg-green-100 text-green-800"
+                  }`}
                 >
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className={`font-medium ${theme.text}`}>{rec.title}</h4>
-                  </div>
-                  <p className={`text-sm ${theme.textSecondary} mb-2`}>
-                    {rec.description}
-                  </p>
-                  <div className="flex items-center justify-between text-xs">
-                    <span
-                      className={`px-2 py-1 rounded ${
-                        rec.priority === "high"
-                          ? "bg-red-100 text-red-800"
-                          : rec.priority === "medium"
-                            ? "bg-yellow-100 text-yellow-800"
-                            : "bg-green-100 text-green-800"
-                      }`}
-                    >
-                      {rec.priority}
-                    </span>
-                    <span className={`font-medium ${theme.textMuted}`}>
-                      {rec.impact}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                  {rec.priority}
+                </span>
+                <span className={`font-medium ${theme.textMuted}`}>
+                  {rec.impact}
+                </span>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      )}
+      </EnhancedDialog>
 
       {/* Batch Testing Modal */}
       {showBatchTesting && (

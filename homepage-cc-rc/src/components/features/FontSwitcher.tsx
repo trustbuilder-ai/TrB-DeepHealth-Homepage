@@ -3,7 +3,7 @@ import { FileText, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useModalClose } from "@/hooks/useModalClose";
 import { fontSets } from "@/utils/fonts";
-import { type Theme } from "@/utils/themes";
+import { type Theme } from "@/styles/themes";
 import { cn } from "@/utils/cn";
 
 export interface FontSwitcherProps {

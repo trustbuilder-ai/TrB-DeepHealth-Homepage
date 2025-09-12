@@ -2,7 +2,7 @@ import React from "react";
 import { X } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { useModalClose } from "@/hooks/useModalClose";
-import { Theme } from "@/utils/themes";
+import { Theme } from "@/styles/themes";
 
 export interface EnhancedDialogProps {
   isOpen: boolean;
