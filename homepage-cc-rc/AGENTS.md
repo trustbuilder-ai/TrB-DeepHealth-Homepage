@@ -2,7 +2,7 @@
 
 ## Quick Start
 
-**Commands**: `npm run dev` | `npm run build` | `npm run lint` | `npm run tscheck`
+**Commands**: `npm run dev` | `npm run build` | `npm run lint` | `npm run typecheck` | `npm run format`
 **Stack**: React 18 + Vite + TypeScript + Tailwind + Radix UI
 **Structure**: `src/{components/{ui,features,layout}, hooks, utils}`
 
