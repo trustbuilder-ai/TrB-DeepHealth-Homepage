@@ -3,6 +3,7 @@ import {
   useCallback,
   useMemo,
   useEffect,
+  useRef,
 } from "react";
 import {
   Heart,
@@ -75,6 +76,11 @@ export default function LLMTestingPlatform() {
   const [showRecommendations, setShowRecommendations] = useState(false);
   const [batchQueue] = useState(mockBatchQueue);
   
+  // Modal refs for click outside detection
+  const tourModalRef = useRef<HTMLDivElement>(null);
+  const analyticsModalRef = useRef<HTMLDivElement>(null);
+  const recommendationsModalRef = useRef<HTMLDivElement>(null);
+  
   // Modal close hooks
   useModalClose(showTour, () => setShowTour(false));
   useModalClose(showAnalytics, () => setShowAnalytics(false));
@@ -137,9 +143,16 @@ export default function LLMTestingPlatform() {
     setActiveDialog(null);
   }, []);
 
-  // Keyboard shortcuts
+  // ESC key handler for modals
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (showTour) setShowTour(false);
+        if (showAnalytics) setShowAnalytics(false);
+        if (showRecommendations) setShowRecommendations(false);
+        return;
+      }
+      
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         document.getElementById("search-input")?.focus();
@@ -148,7 +161,7 @@ export default function LLMTestingPlatform() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [showTour, showAnalytics, showRecommendations]);
 
   return (
     <div
@@ -909,8 +922,14 @@ export default function LLMTestingPlatform() {
 
       {/* Tour Overlay */}
       {showTour && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+        <div 
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowTour(false);
+          }}
+        >
           <div
+            ref={tourModalRef}
             className={`fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-lg p-6 max-w-md w-full mx-4 modal-glow border theme-transition ${theme.isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}
           >
             <div className="flex items-center gap-3 mb-4">
@@ -953,8 +972,14 @@ export default function LLMTestingPlatform() {
 
       {/* Analytics Panel */}
       {showAnalytics && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+        <div 
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowAnalytics(false);
+          }}
+        >
           <div
+            ref={analyticsModalRef}
             className={`fixed top-4 right-4 bottom-4 w-96 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}
           >
             <div className="flex items-center justify-between p-4 border-b">
@@ -1026,8 +1051,14 @@ export default function LLMTestingPlatform() {
 
       {/* Recommendations Panel */}
       {showRecommendations && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm">
+        <div 
+          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowRecommendations(false);
+          }}
+        >
           <div
+            ref={recommendationsModalRef}
             className={`fixed top-4 left-4 bottom-4 w-80 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? 'bg-slate-800 border-slate-700' : 'bg-white border-slate-200'}`}
           >
             <div className="flex items-center justify-between p-4 border-b">

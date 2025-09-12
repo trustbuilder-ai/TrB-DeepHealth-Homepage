@@ -37,10 +37,10 @@ const iconSets = {
     strokeWidth: 2,
     type: "external",
   },
-  bootstrap: {
-    name: "Bootstrap Icons",
-    description: "Official Bootstrap SVG icons",
-    strokeWidth: 0,
+  octicons: {
+    name: "Octicons",
+    description: "GitHub's icon set - clean and expressive",
+    strokeWidth: 1.5,
     type: "external",
   },
 };
