@@ -6,9 +6,16 @@
     "CLAUDE_CODE_SUBAGENT_MODEL": "opusplan",
     "DISABLE_NON_ESSENTIAL_MODEL_CALLS": "1"
   },
+  "enabledMcpjsonServers": [
+    "context7"
+  ],
   "permissions": {
     "allow": [
-      "WebSearch"
+      "Bash(make:*)",
+      "Bash(npm run:*)",
+      "WebSearch",
+      "mcp__context7__get-library-docs",
+      "mcp__context7__resolve-library-id"
     ],
     "deny": [],
     "ask": []
