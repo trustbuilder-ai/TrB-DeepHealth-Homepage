@@ -43,25 +43,11 @@ export const HumanOversightBanner = () => {
       role="complementary"
       aria-label="Human oversight and AI limitations notice"
     >
-      <div className="flex items-start gap-3">
-        <div
-          className={cn(
-            "flex-shrink-0 p-2 rounded-full",
-            theme.isDark ? "bg-amber-900/40" : "bg-amber-100",
-          )}
-        >
-          <Shield
-            className={cn(
-              "w-5 h-5",
-              theme.isDark ? "text-amber-400" : "text-amber-600",
-            )}
-          />
-        </div>
-
-        <div className="flex-1">
+      <div className="flex items-center justify-center">
+        <div>
           <h3
             className={cn(
-              "text-lg font-semibold mb-3",
+              "text-lg font-semibold mb-3 mt-0",
               theme.isDark ? "text-amber-300" : "text-amber-800",
             )}
           >

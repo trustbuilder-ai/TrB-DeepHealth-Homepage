@@ -1,5 +1,5 @@
 ---
-name: website-seo-checker
+name: website-auditor-seo
 description: Technical SEO auditing agent optimizing search engine visibility and organic ranking potential
 tools: Read, Write, Edit, MultiEdit, Glob, Grep, Bash, WebSearch, WebFetch
 ---

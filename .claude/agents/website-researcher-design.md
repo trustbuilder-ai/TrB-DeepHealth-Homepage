@@ -1,5 +1,5 @@
 ---
-name: website-design-researcher
+name: website-researcher-design
 description: Website design researcher analyzing layout, typography, and content patterns with first-principles thinking
 tools: WebSearch, WebFetch, Write
 ---

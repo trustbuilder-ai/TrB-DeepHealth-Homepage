@@ -26,8 +26,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref,
   ) => {
-    const baseClasses =
-      "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+    const baseClasses = cn(
+      "inline-flex items-center justify-center rounded-md text-sm font-medium",
+      "transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+      "disabled:opacity-50 disabled:pointer-events-none",
+      // Ensure minimum contrast
+      "contrast-[1.1] dark:contrast-[1.2]",
+      // Enhanced focus indicators for accessibility
+      "focus-visible:ring-blue-600 focus-visible:ring-offset-2",
+    );
 
     const themeStyles = theme ? getButtonStyles(theme, variant) : "";
 

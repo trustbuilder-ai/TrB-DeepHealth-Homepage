@@ -80,7 +80,7 @@ export const Features = () => {
               className="group card-glow transition-all duration-300"
             >
               <CardContent className="p-6">
-                <div className="flex items-start gap-4">
+                <div className="flex items-center gap-4">
                   <Avatar className="w-12 h-12 transition-transform flex-shrink-0 enhanced-glow">
                     <AvatarFallback
                       className={cn(

@@ -1,5 +1,5 @@
 ---
-name: website-creator
+name: website-creator-superdesign
 description: Frontend design agent creating LLM testing platform components with mental health UI design
 tools: Read, Write, Edit, MultiEdit, Glob, Grep, Bash, generateTheme
 ---
