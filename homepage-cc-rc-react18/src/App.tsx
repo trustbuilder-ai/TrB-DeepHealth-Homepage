@@ -236,14 +236,23 @@ export default function LLMTestingPlatform() {
       {/* Skip Links for Accessibility */}
       <SkipLinksWithShortcuts />
 
-      {/* Navigation */}
-      <Navigation />
+      {/* Navigation Banner */}
+      <header role="banner">
+        <Navigation />
+      </header>
 
       {/* Hero Section */}
-      <section className={`pt-24 pb-20 ${theme.hero} relative overflow-hidden`}>
+      <section
+        className={`pt-24 pb-20 ${theme.hero} relative overflow-hidden`}
+        role="region"
+        aria-labelledby="hero-heading"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
-            <h1 className={`h1-style font-bold ${theme.text} mb-6`}>
+            <h1
+              id="hero-heading"
+              className={`h1-style font-bold ${theme.text} mb-6`}
+            >
               Research-Backed AI Testing for
               <span
                 className={`block bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}
@@ -285,15 +294,25 @@ export default function LLMTestingPlatform() {
       </section>
 
       {/* Main Content */}
-      <main id="main-content" tabIndex={-1} aria-label="Main content">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        aria-label="Main content"
+        role="main"
+      >
         {/* Features Section */}
         <Features />
 
         {/* Testing Scenarios Section */}
-        <section id="scenarios" className="py-20">
+        <section
+          id="scenarios"
+          className="py-20"
+          aria-labelledby="scenarios-heading"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2
+                id="scenarios-heading"
                 className={`h2-style font-bold ${theme.text} mb-4`}
                 tabIndex={-1}
               >
@@ -571,17 +590,27 @@ export default function LLMTestingPlatform() {
         </section>
 
         {/* Human Oversight Notice */}
-        <section className={`py-8 ${theme.surface}`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <HumanOversightBanner />
-          </div>
-        </section>
+        <aside
+          role="complementary"
+          aria-label="AI limitations and professional oversight information"
+        >
+          <section className={`py-8 ${theme.surface}`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <HumanOversightBanner />
+            </div>
+          </section>
+        </aside>
 
         {/* Conversation Display Section */}
-        <section id="conversations" className="py-20">
+        <section
+          id="conversations"
+          className="py-20"
+          aria-labelledby="conversations-heading"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2
+                id="conversations-heading"
                 className={`h2-style font-bold ${theme.text} mb-4`}
                 tabIndex={-1}
               >
@@ -733,7 +762,10 @@ export default function LLMTestingPlatform() {
         </section>
 
         {/* Footer Section */}
-        <footer className={`py-16 ${theme.surface} border-t ${theme.border}`}>
+        <footer
+          className={`py-16 ${theme.surface} border-t ${theme.border}`}
+          role="contentinfo"
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-5 gap-8 mb-8 lg:items-start">
               <div className="lg:col-span-1 flex flex-col h-full">
@@ -924,9 +956,14 @@ export default function LLMTestingPlatform() {
             </div>
 
             {/* Crisis Support Banner - below all footer sections */}
-            <div className="mt-8">
-              <CrisisBanner />
-            </div>
+            <aside
+              role="complementary"
+              aria-label="Crisis support and mental health resources"
+            >
+              <div className="mt-8">
+                <CrisisBanner />
+              </div>
+            </aside>
 
             <div
               className={`border-t ${theme.border} mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between`}

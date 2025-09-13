@@ -113,6 +113,8 @@ export const Navigation = () => {
 
       {/* Navigation */}
       <nav
+        role="navigation"
+        aria-label="Main navigation"
         className={cn(
           "fixed w-full top-0 z-50 nav-glow border-b transition-colors",
           theme.isDark

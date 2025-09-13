@@ -1,8 +1,8 @@
 # TODOs
 
-- Modals 'signin' and 'newsletter' do not close on ESC. Check whether they use the common modal hooks and components
+- ~~Modals 'signin' and 'newsletter' do not close on ESC. Check whether they use the common modal hooks and components~~ - FIXED 2025-09-13 - Removed duplicate ESC handlers and unified modal closing behavior
 - Modals 'ai insights' and 'analytics' use more distance to the bottom than to the top of the page
-- Themes are not rerendered, the page has to be reloaded to switch themes
+- ~~Themes are not rerendered, the page has to be reloaded to switch themes~~ - FIXED 2025-09-13 - Fixed theme switching dependency cycles and CSS variable application
 - Hamburger menu in mobile mode not scrollable
 
 ## 2025-09-12
@@ -29,3 +29,32 @@
 - [x] Added comprehensive keyboard navigation - 2025-09-13 - Implemented skip links, focus management, WCAG 2.1 compliant navigation with keyboard shortcuts (Ctrl+M, Alt+1/2/3, Alt+S)
 - [x] Fixed modal conditional accessibility - 2025-09-13 - Made accessibility improvements optional via settings checkboxes instead of default behavior
 - [x] Updated feature section layout - 2025-09-13 - Positioned icons to the left of title and description for better visual hierarchy
+
+## 2025-09-13 - Session 2
+
+### Critical Feature Implementation
+- [x] **Crisis Support Integration** - Added comprehensive 988 crisis resources banner with suicide prevention hotline, crisis text line, and SAMHSA helpline
+- [x] **Human Oversight Messaging** - Implemented AI limitations banner with professional validation requirements and ethics messaging
+- [x] **Footer Layout Optimization** - Ensured all footer sections (Astra Labs, Platform, Research, Resources, Support) align at same height with crisis banner positioned below
+
+### Accessibility & UX Enhancements
+- [x] **Modal Accessibility Overhaul** - Made enhanced readability, dyslexia-friendly fonts, and high contrast OPTIONAL (user must opt-in via settings)
+- [x] **Compact Modal Design** - Reduced default modal spacing (p-4→p-3, mb-4→mb-2, mb-6→mb-3) while maintaining readability
+- [x] **Enhanced vs Standard Distinction** - Created clear visual difference between default compact modals and enhanced accessibility modes
+- [x] **Modal ESC Key Fix** - Removed duplicate ESC handlers preventing proper modal closure
+- [x] **Theme Switching Fix** - Resolved dependency cycles causing page reload requirement for theme changes
+
+### ARIA Landmark Implementation
+- [x] **Complete ARIA Audit** - Implemented proper semantic landmark structure for screen readers
+- [x] **Banner Role** - Navigation wrapped in `<header role="banner">`
+- [x] **Navigation Role** - Added `role="navigation" aria-label="Main navigation"` to nav elements
+- [x] **Main Content** - Enhanced main content area with `role="main"`
+- [x] **Complementary Content** - Crisis banner and human oversight sections wrapped in `<aside role="complementary">`
+- [x] **Content Info** - Footer enhanced with `role="contentinfo"`
+- [x] **Section Labeling** - All major sections have proper `aria-labelledby` with corresponding heading IDs
+
+### Component Architecture
+- [x] **Dropdown Spacing** - Reduced SettingsDropdown and ThemeSwitcher padding for more compact interface
+- [x] **CSS Accessibility Rules** - Fixed global styles applying enhanced accessibility by default (now only with .spacing-comfortable)
+- [x] **Modal Components** - Updated both EnhancedDialog and Dialog components with conditional accessibility
+- [x] **Heart Icon Removal** - Removed heart icon from crisis banner per user request
