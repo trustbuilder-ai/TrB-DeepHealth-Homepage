@@ -2,7 +2,11 @@
 
 ## Quick Start
 
+<<<<<<< HEAD:homepage-cc-rc-react18/AGENTS.md
 **Commands**: `npm run dev` | `npm run build` | `npm run lint` | `npm run tscheck`
+=======
+**Commands**: `npm run dev` | `npm run build` | `npm run lint` | `npm run typecheck` | `npm run format`
+>>>>>>> main:homepage-cc-rc/AGENTS.md
 **Stack**: React 18 + Vite + TypeScript + Tailwind + Radix UI
 **Structure**: `src/{components/{ui,features,layout}, hooks, utils}`
 
