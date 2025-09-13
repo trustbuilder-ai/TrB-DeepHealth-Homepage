@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { Loader2, Brain, Users, TrendingUp, Lightbulb } from "lucide-react";
+import { Loader2, Brain, TrendingUp, Lightbulb } from "lucide-react";
 
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
@@ -18,14 +18,10 @@ import {
   mockTourSteps,
   mockRecommendations,
   mockBatchQueue,
-} from "@/utils/mockData";
+} from "@/data/mockData";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { StatusBadge } from "@/components/ui/status-badge";
 import { EnhancedDialog } from "@/components/ui/modal";
-import { useModalClose } from "@/hooks/useModalClose";
 import { Notification } from "@/components/ui/notification";
 
 import { Navigation } from "@/components/layout/Navigation";
@@ -34,6 +30,7 @@ import { HeroSection } from "@/components/layout/HeroSection";
 import { FooterSection } from "@/components/layout/FooterSection";
 import { ScenariosSection } from "@/components/layout/ScenariosSection";
 import { AnalyticsSection } from "@/components/layout/AnalyticsSection";
+import { ConversationsSection } from "@/components/layout/ConversationsSection";
 import { SkipLinksWithShortcuts } from "@/components/ui/skip-links";
 import { HumanOversightBanner } from "@/components/ui/human-oversight-banner";
 import { useFocusManagement } from "@/hooks/useFocusManagement";
@@ -53,14 +50,13 @@ import { useFocusManagement } from "@/hooks/useFocusManagement";
 export default function App() {
   const { theme } = useTheme();
   const isOnline = useOnlineStatus();
-  const { navigateToSection, announceToScreenReader } = useFocusManagement();
+  const { announceToScreenReader } = useFocusManagement();
 
   // Use custom hooks for state management
   const {
     selectedScenario,
     testingStates,
     searchQuery,
-    toast,
     filteredScenarios,
     setSelectedScenario,
     setSearchQuery,
@@ -80,35 +76,24 @@ export default function App() {
   const [tourStep, setTourStep] = useState(0);
   const [batchQueue] = useState(mockBatchQueue);
 
-  // SEO: Track active section for dynamic meta tags
-  const [activeSection, setActiveSection] =
-    useState<keyof typeof seoContent>("home");
-
-  // Modal close hooks
-  useModalClose(modals.showTour.isOpen, modals.showTour.close);
-  useModalClose(modals.showAnalytics.isOpen, modals.showAnalytics.close);
-  useModalClose(
-    modals.showRecommendations.isOpen,
-    modals.showRecommendations.close,
-  );
-
   /**
-   * Scrolls to a specific section of the page with smooth animation.
-   * Focuses on the section heading for accessibility compliance.
-   *
-   * @param sectionId - The DOM ID of the target section
+   * Navigates to a section with smooth scrolling and accessibility focus.
+   * Combines scrollToSection and navigateToSection functionality.
    */
-  const scrollToSection = useCallback((sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-      // Focus the section for accessibility
-      const heading = element.querySelector("h2, h3");
-      if (heading) {
-        (heading as HTMLElement).focus();
+  const navigateToSection = useCallback(
+    (sectionId: string) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        const heading = element.querySelector("h2, h3");
+        if (heading) {
+          (heading as HTMLElement).focus();
+          announceToScreenReader(`Navigated to ${heading.textContent}`);
+        }
       }
-    }
-  }, []);
+    },
+    [announceToScreenReader],
+  );
 
   const [expandedFooterSections, setExpandedFooterSections] = useLocalStorage(
     "expandedFooterSections",
@@ -116,82 +101,59 @@ export default function App() {
   );
 
   /**
-   * Sets up global keyboard event handlers for modal management and shortcuts.
-   * - ESC key: Close all open modals
-   * - Ctrl/Cmd+K: Focus search input
-   * - Alt+1/2/3: Navigate to sections
-   * - Alt+S: Open settings dropdown
-   * - Ctrl/Cmd+M: Skip to main content
+   * Consolidated keyboard shortcuts for navigation and modal management.
    */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // ESC: Close modals
       if (e.key === "Escape") {
         closeAllModals();
         return;
       }
 
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        document.getElementById("search-input")?.focus();
-        return;
-      }
-
-      // Skip to main content
-      if ((e.metaKey || e.ctrlKey) && e.key === "m") {
-        e.preventDefault();
-        const mainContent = document.getElementById("main-content");
-        if (mainContent) {
-          mainContent.focus();
-          mainContent.scrollIntoView({ behavior: "smooth" });
-          announceToScreenReader("Skipped to main content");
-        }
-        return;
-      }
-
-      // Alt key shortcuts for navigation
-      if (e.altKey) {
+      // Ctrl/Cmd shortcuts
+      if (e.metaKey || e.ctrlKey) {
         switch (e.key) {
-          case "1":
+          case "k":
             e.preventDefault();
-            navigateToSection("features");
-            break;
-          case "2":
+            document.getElementById("search-input")?.focus();
+            return;
+          case "m":
             e.preventDefault();
-            navigateToSection("scenarios");
-            break;
-          case "3":
+            navigateToSection("main-content");
+            return;
+          case "/":
             e.preventDefault();
-            navigateToSection("conversations");
-            break;
-          case "s": {
-            e.preventDefault();
-            // Open settings dropdown
+            modals.showTour.open();
+            return;
+        }
+      }
+
+      // Alt shortcuts
+      if (e.altKey) {
+        e.preventDefault();
+        const shortcuts: Record<string, () => void> = {
+          "1": () => navigateToSection("features"),
+          "2": () => navigateToSection("scenarios"),
+          "3": () => navigateToSection("conversations"),
+          s: () => {
             const settingsButton = document.querySelector(
               '[aria-label="Settings menu"]',
             ) as HTMLButtonElement;
-            if (settingsButton) {
-              settingsButton.click();
-              announceToScreenReader("Settings menu opened");
-            }
-            break;
-          }
-          case "t":
-            e.preventDefault();
-            modals.showTour.open();
-            break;
-          case "a":
-            e.preventDefault();
-            modals.showAnalytics.open();
-            break;
-        }
+            settingsButton?.click();
+            announceToScreenReader("Settings menu opened");
+          },
+          t: () => modals.showTour.open(),
+          a: () => modals.showAnalytics.open(),
+        };
+        shortcuts[e.key]?.();
         return;
       }
 
-      // Help shortcut
-      if (e.key === "F1" || ((e.ctrlKey || e.metaKey) && e.key === "/")) {
+      // F1: Help
+      if (e.key === "F1") {
         e.preventDefault();
         modals.showTour.open();
-        return;
       }
     };
 
@@ -199,68 +161,17 @@ export default function App() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [closeAllModals, navigateToSection, announceToScreenReader, modals]);
 
-  // SEO: Track active section for dynamic meta tags
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = [
-        { id: "hero-heading", key: "home" as const },
-        { id: "features", key: "features" as const },
-        { id: "scenarios", key: "scenarios" as const },
-        { id: "conversations", key: "conversations" as const },
-        { id: "analytics", key: "analytics" as const },
-      ];
-
-      // Find the section that's currently in view
-      const current = sections.find((section) => {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // Consider a section active if its top is within the upper half of the viewport
-          return (
-            rect.top <= window.innerHeight / 2 &&
-            rect.bottom >= window.innerHeight / 2
-          );
-        }
-        return false;
-      });
-
-      // Default to home if no section is clearly in view
-      const newActiveSection = current?.key || "home";
-      if (newActiveSection !== activeSection) {
-        setActiveSection(newActiveSection);
-      }
-    };
-
-    // Initial check
-    handleScroll();
-
-    // Add scroll listener with throttling
-    let ticking = false;
-    const throttledHandleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", throttledHandleScroll);
-  }, [activeSection]);
-
   return (
     <div
       className={`min-h-screen transition-all duration-300 ${theme.bg} ${theme.text}`}
     >
-      {/* SEO Meta Tags - Dynamic based on active section */}
+      {/* SEO Meta Tags */}
       <SEOHead
-        title={seoContent[activeSection].title}
-        description={seoContent[activeSection].description}
-        keywords={seoContent[activeSection].keywords}
-        canonicalUrl={seoContent[activeSection].canonicalUrl}
-        ogImage={seoContent[activeSection].ogImage}
+        title={seoContent.home.title}
+        description={seoContent.home.description}
+        keywords={seoContent.home.keywords}
+        canonicalUrl={seoContent.home.canonicalUrl}
+        ogImage={seoContent.home.ogImage}
         additionalMeta={{
           "theme-color": theme.isDark ? "#1e293b" : "#ffffff",
           "application-name": "TrB DeepHealth Platform",
@@ -286,7 +197,7 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <HeroSection scrollToSection={scrollToSection} />
+      <HeroSection scrollToSection={navigateToSection} />
 
       {/* Main Content */}
       <main
@@ -325,165 +236,8 @@ export default function App() {
           </section>
         </aside>
 
-        {/* Conversation Display Section */}
-        <section
-          id="conversations"
-          className="py-20"
-          aria-labelledby="conversations-heading"
-        >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2
-                id="conversations-heading"
-                className={`h2-style font-bold ${theme.text} mb-4`}
-                tabIndex={-1}
-              >
-                Research Conversations
-              </h2>
-              <p
-                className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto leading-relaxed`}
-              >
-                Review actual test conversations and their safety, empathy, and
-                bias metrics.
-              </p>
-            </div>
-
-            <div className="grid gap-8">
-              {mockConversations.map((conversation) => (
-                <Card
-                  key={conversation.id}
-                  className={`group card-glow transition-all duration-300 ${theme.surface} ${theme.border}`}
-                >
-                  <CardHeader className="pb-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <CardTitle className={`text-xl ${theme.text} mb-2`}>
-                          {conversation.scenario}
-                        </CardTitle>
-                        <div className="flex items-center gap-4 text-sm">
-                          <span
-                            className={`font-medium ${theme.textSecondary}`}
-                          >
-                            Model: {conversation.model}
-                          </span>
-                          <StatusBadge
-                            variant={
-                              conversation.status.includes("Excellent")
-                                ? "success"
-                                : conversation.status.includes("Flagged")
-                                  ? "warning"
-                                  : "info"
-                            }
-                            size="sm"
-                          >
-                            {conversation.status}
-                          </StatusBadge>
-                          <span className={`text-xs ${theme.textMuted}`}>
-                            {conversation.metrics.timestamp}
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* Metrics Display */}
-                      <div className="flex gap-4">
-                        <div className="text-center">
-                          <div
-                            className={`text-lg font-bold ${
-                              conversation.metrics.safety >= 95
-                                ? "text-green-600"
-                                : conversation.metrics.safety >= 90
-                                  ? "text-yellow-600"
-                                  : "text-red-600"
-                            }`}
-                          >
-                            {conversation.metrics.safety}
-                          </div>
-                          <div className={`text-xs ${theme.textMuted}`}>
-                            Safety
-                          </div>
-                        </div>
-                        <div className="text-center">
-                          <div
-                            className={`text-lg font-bold ${
-                              conversation.metrics.empathy >= 90
-                                ? "text-green-600"
-                                : conversation.metrics.empathy >= 80
-                                  ? "text-yellow-600"
-                                  : "text-red-600"
-                            }`}
-                          >
-                            {conversation.metrics.empathy}
-                          </div>
-                          <div className={`text-xs ${theme.textMuted}`}>
-                            Empathy
-                          </div>
-                        </div>
-                        <div className="text-center">
-                          <div
-                            className={`text-lg font-bold ${
-                              conversation.metrics.bias >= 95
-                                ? "text-green-600"
-                                : conversation.metrics.bias >= 90
-                                  ? "text-yellow-600"
-                                  : "text-red-600"
-                            }`}
-                          >
-                            {conversation.metrics.bias}
-                          </div>
-                          <div className={`text-xs ${theme.textMuted}`}>
-                            Bias Score
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="space-y-4">
-                    {conversation.messages.map((message, index) => (
-                      <div
-                        key={index}
-                        className={`flex gap-3 ${
-                          message.role === "assistant" ? "ml-6" : ""
-                        }`}
-                      >
-                        <div className="flex-shrink-0">
-                          <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                              message.role === "user"
-                                ? `${theme.primarySolid} text-white`
-                                : `${theme.accent} ${theme.textSecondary}`
-                            }`}
-                          >
-                            {message.role === "user" ? (
-                              <Users className="w-4 h-4 icon-dynamic" />
-                            ) : (
-                              <Brain className="w-4 h-4 icon-dynamic" />
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <div
-                            className={`px-4 py-3 rounded-lg ${
-                              message.role === "user"
-                                ? `${theme.primary} bg-opacity-10 border-l-4 border-opacity-50`
-                                : `${theme.surface} border`
-                            } ${theme.border}`}
-                          >
-                            <p
-                              className={`text-sm leading-relaxed ${theme.textSecondary}`}
-                            >
-                              {message.content}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* Conversations Section */}
+        <ConversationsSection conversations={mockConversations} />
 
         {/* Footer Section */}
         <FooterSection
@@ -501,23 +255,6 @@ export default function App() {
           onDismiss={() => dismissNotification(notification.id)}
         />
       ))}
-
-      {/* Toast */}
-      {toast && (
-        <div className="fixed bottom-4 right-4 z-50 max-w-sm">
-          <Alert
-            className={`${
-              toast.type === "success"
-                ? "bg-green-50 border-green-200"
-                : toast.type === "error"
-                  ? "bg-red-50 border-red-200"
-                  : "bg-blue-50 border-blue-200"
-            }`}
-          >
-            <AlertDescription>{toast.message}</AlertDescription>
-          </Alert>
-        </div>
-      )}
 
       {/* Floating Action Buttons */}
       <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-2">
