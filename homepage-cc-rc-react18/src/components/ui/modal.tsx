@@ -2,6 +2,8 @@ import React from "react";
 import { X } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { useModalClose } from "@/hooks/useModalClose";
+import { useAccessibility } from "@/hooks/useAccessibility";
+import { useFocusManagement } from "@/hooks/useFocusManagement";
 import { Theme } from "@/styles/themes";
 import { getModalStyles } from "@/utils/themeUtils";
 
@@ -30,6 +32,11 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
     size = "md",
   }) => {
     const dialogRef = useModalClose(isOpen, onClose);
+    const { settings } = useAccessibility();
+    const { useFocusTrap } = useFocusManagement();
+
+    // Implement focus trapping for the modal (uses dialogRef directly)
+    useFocusTrap(isOpen, dialogRef as React.RefObject<HTMLElement>);
 
     // Additional ESC key handler as backup
     React.useEffect(() => {
@@ -102,6 +109,10 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
             size === "sidebar-left" || size === "sidebar-right"
               ? "flex flex-col"
               : "",
+            // Conditional accessibility improvements
+            settings.enhancedReadability && "spacing-comfortable",
+            settings.dyslexiaFriendly && "dyslexia-friendly",
+            settings.highContrast && "high-contrast",
             className,
           )}
           role="document"

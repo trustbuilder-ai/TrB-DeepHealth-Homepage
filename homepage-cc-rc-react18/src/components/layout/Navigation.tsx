@@ -15,15 +15,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EnhancedDialog } from "@/components/ui/modal";
 import {
-  ThemeSwitcher,
-  FontSwitcher,
-  IconSwitcher,
+  SettingsDropdown,
 } from "@/components/features";
 import { useModalClose } from "@/hooks/useModalClose";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useTheme } from "@/hooks/useTheme";
-import { useFont } from "@/hooks/useFont";
-import { useIcon } from "@/hooks/useIcon";
 import { cn } from "@/utils/cn";
 
 const navigationItems = [
@@ -33,15 +29,7 @@ const navigationItems = [
 ];
 
 export const Navigation = () => {
-  const {
-    theme,
-    currentTheme,
-    changeTheme,
-    isLoading: themeLoading,
-  } = useTheme();
-  const { currentFont, changeFont, fontLoading, loadedFonts } = useFont();
-  const { currentIconSet, changeIconSet, iconLoading, loadedIconSets } =
-    useIcon();
+  const { theme } = useTheme();
   const isOnline = useOnlineStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [newsletterModalOpen, setNewsletterModalOpen] = useState(false);
@@ -183,28 +171,7 @@ export const Navigation = () => {
             </div>
 
             <div className="flex items-center gap-2 md:gap-4">
-              <FontSwitcher
-                currentFont={currentFont}
-                onFontChange={changeFont}
-                isLoading={fontLoading}
-                loadedFonts={loadedFonts}
-                theme={theme}
-              />
-
-              <ThemeSwitcher
-                currentTheme={currentTheme}
-                onThemeChange={changeTheme}
-                isLoading={themeLoading}
-                theme={theme}
-              />
-
-              <IconSwitcher
-                currentIconSet={currentIconSet}
-                onIconSetChange={changeIconSet}
-                isLoading={iconLoading}
-                loadedIconSets={loadedIconSets}
-                theme={theme}
-              />
+              <SettingsDropdown />
 
               <div className="hidden md:flex items-center gap-2">
                 <Button

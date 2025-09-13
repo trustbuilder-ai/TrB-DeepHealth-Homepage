@@ -50,6 +50,8 @@ import { Notification } from "@/components/ui/notification";
 
 import { Navigation } from "@/components/layout/Navigation";
 import { Features } from "@/components/layout/Features";
+import { SkipLinksWithShortcuts } from "@/components/ui/skip-links";
+import { useFocusManagement } from "@/hooks/useFocusManagement";
 
 /**
  * Main component for testing LLMs for mental health capabilities.
@@ -66,6 +68,7 @@ import { Features } from "@/components/layout/Features";
 export default function LLMTestingPlatform() {
   const { theme } = useTheme();
   const isOnline = useOnlineStatus();
+  const { navigateToSection, announceToScreenReader } = useFocusManagement();
 
   // Use custom hooks for state management
   const {
@@ -144,6 +147,9 @@ export default function LLMTestingPlatform() {
    * Sets up global keyboard event handlers for modal management and shortcuts.
    * - ESC key: Close all open modals
    * - Ctrl/Cmd+K: Focus search input
+   * - Alt+1/2/3: Navigate to sections
+   * - Alt+S: Open settings dropdown
+   * - Ctrl/Cmd+M: Skip to main content
    */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -155,17 +161,76 @@ export default function LLMTestingPlatform() {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         document.getElementById("search-input")?.focus();
+        return;
+      }
+
+      // Skip to main content
+      if ((e.metaKey || e.ctrlKey) && e.key === "m") {
+        e.preventDefault();
+        const mainContent = document.getElementById("main-content");
+        if (mainContent) {
+          mainContent.focus();
+          mainContent.scrollIntoView({ behavior: 'smooth' });
+          announceToScreenReader("Skipped to main content");
+        }
+        return;
+      }
+
+      // Alt key shortcuts for navigation
+      if (e.altKey) {
+        switch (e.key) {
+          case '1':
+            e.preventDefault();
+            navigateToSection('features');
+            break;
+          case '2':
+            e.preventDefault();
+            navigateToSection('scenarios');
+            break;
+          case '3':
+            e.preventDefault();
+            navigateToSection('conversations');
+            break;
+          case 's':
+            e.preventDefault();
+            // Open settings dropdown
+            const settingsButton = document.querySelector('[aria-label="Settings menu"]') as HTMLButtonElement;
+            if (settingsButton) {
+              settingsButton.click();
+              announceToScreenReader("Settings menu opened");
+            }
+            break;
+          case 't':
+            e.preventDefault();
+            modals.showTour.open();
+            break;
+          case 'a':
+            e.preventDefault();
+            modals.showAnalytics.open();
+            break;
+        }
+        return;
+      }
+
+      // Help shortcut
+      if (e.key === 'F1' || ((e.ctrlKey || e.metaKey) && e.key === '/')) {
+        e.preventDefault();
+        modals.showTour.open();
+        return;
       }
     };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [closeAllModals]);
+  }, [closeAllModals, navigateToSection, announceToScreenReader, modals]);
 
   return (
     <div
       className={`min-h-screen transition-all duration-300 ${theme.bg} ${theme.text}`}
     >
+      {/* Skip Links for Accessibility */}
+      <SkipLinksWithShortcuts />
+
       {/* Navigation */}
       <Navigation />
 
@@ -173,9 +238,7 @@ export default function LLMTestingPlatform() {
       <section className={`pt-24 pb-20 ${theme.hero} relative overflow-hidden`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
-            <h1
-              className={`text-5xl sm:text-6xl lg:text-7xl font-bold ${theme.text} mb-6 leading-tight`}
-            >
+            <h1 className={`h1-style font-bold ${theme.text} mb-6`}>
               Research-Backed AI Testing for
               <span
                 className={`block bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}
@@ -216,21 +279,23 @@ export default function LLMTestingPlatform() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <Features />
+      {/* Main Content */}
+      <main id="main-content" tabIndex={-1} aria-label="Main content">
+        {/* Features Section */}
+        <Features />
 
       {/* Testing Scenarios Section */}
       <section id="scenarios" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2
-              className={`text-4xl font-bold ${theme.text} mb-4`}
+              className={`h2-style font-bold ${theme.text} mb-4`}
               tabIndex={-1}
             >
               Testing Scenarios
             </h2>
             <p
-              className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto mb-8`}
+              className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto mb-8 leading-relaxed`}
             >
               Comprehensive evaluation scenarios designed by mental health
               experts.
@@ -424,7 +489,7 @@ export default function LLMTestingPlatform() {
       {/* Analytics Overview */}
       <section className={`py-12 px-4 ${theme.surface}`}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center">
+          <h2 className="h2-style font-bold mb-8 text-center">
             Platform Analytics
           </h2>
 
@@ -503,12 +568,14 @@ export default function LLMTestingPlatform() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2
-              className={`text-4xl font-bold ${theme.text} mb-4`}
+              className={`h2-style font-bold ${theme.text} mb-4`}
               tabIndex={-1}
             >
               Research Conversations
             </h2>
-            <p className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto`}>
+            <p
+              className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto leading-relaxed`}
+            >
               Review actual test conversations and their safety, empathy, and
               bias metrics.
             </p>
@@ -862,6 +929,7 @@ export default function LLMTestingPlatform() {
           </div>
         </div>
       </footer>
+      </main>
 
       {/* Notifications */}
       {notifications.map((notification) => (
