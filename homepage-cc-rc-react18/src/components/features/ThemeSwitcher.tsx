@@ -26,36 +26,14 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
 
     const themeCategories = useMemo(
       () => ({
-        "Light Themes": {
-          "Research Palettes": lightThemes.filter(
-            ([, t]) => t.category === "Research Palettes",
-          ),
-          "Research Palettes V2": lightThemes.filter(
-            ([, t]) => t.category === "Research Palettes V2",
-          ),
-          Original: lightThemes.filter(([, t]) => t.category === "Original"),
-          "Therapy/Crisis": lightThemes.filter(
-            ([, t]) => t.category === "Therapy/Crisis",
-          ),
-          Accessibility: lightThemes.filter(
-            ([, t]) => t.category === "Accessibility",
-          ),
-        },
-        "Dark Themes": {
-          "Research Palettes": darkThemes.filter(
-            ([, t]) => t.category === "Research Palettes",
-          ),
-          "Research Palettes V2": darkThemes.filter(
-            ([, t]) => t.category === "Research Palettes V2",
-          ),
-          Original: darkThemes.filter(([, t]) => t.category === "Original"),
-          "Therapy/Crisis": darkThemes.filter(
-            ([, t]) => t.category === "Therapy/Crisis",
-          ),
-          Accessibility: darkThemes.filter(
-            ([, t]) => t.category === "Accessibility",
-          ),
-        },
+        "Light Themes": lightThemes.filter(([, t]) => t.category === "Light"),
+        "Dark Themes": darkThemes.filter(([, t]) => t.category === "Dark"),
+        "Therapeutic Themes": Object.entries(themes).filter(
+          ([, t]) => t.category === "Therapeutic",
+        ),
+        "Accessibility Themes": Object.entries(themes).filter(
+          ([, t]) => t.category === "Accessibility",
+        ),
       }),
       [lightThemes, darkThemes],
     );
@@ -95,68 +73,55 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
             aria-label="Theme selection"
           >
             <div className="space-y-2">
-              {Object.entries(themeCategories).map(
-                ([categoryName, subcategories]) => (
+              {Object.entries(themeCategories)
+                .filter(([, themeList]) => themeList.length > 0)
+                .map(([categoryName, themeList]) => (
                   <div key={categoryName}>
                     <h3 className="font-semibold text-sm text-muted-foreground mb-1">
                       {categoryName}
                     </h3>
-                    <div className="space-y-2">
-                      {Object.entries(subcategories)
-                        .filter(([, themeList]) => themeList.length > 0)
-                        .map(([subName, themeList]) => (
-                          <div key={subName}>
-                            <h4
-                              className={`text-xs mb-1 font-medium ${theme.textMuted}`}
-                            >
-                              {subName}
-                            </h4>
-                            <div className="space-y-1">
-                              {themeList.map(([key, themeData]) => (
-                                <button
-                                  key={key}
-                                  onClick={() => {
-                                    onThemeChange(key);
-                                    setIsOpen(false);
-                                  }}
-                                  className={cn(
-                                    "w-full text-left p-3 rounded-md transition-colors focus:ring-2 focus:ring-offset-1 focus:outline-none",
-                                    currentTheme === key
-                                      ? `${theme.primarySolid} text-white focus:ring-blue-400`
-                                      : `${theme.text} hover:${theme.accent} focus:${theme.accent} focus:ring-blue-500`,
-                                  )}
-                                  role="option"
-                                  aria-selected={currentTheme === key}
-                                >
-                                  <div className="flex items-center justify-between">
-                                    <div>
-                                      <div className="font-medium text-sm">
-                                        {themeData.name}
-                                      </div>
-                                      <div
-                                        className={`text-xs ${currentTheme === key ? "text-white/80" : theme.textSecondary}`}
-                                      >
-                                        {themeData.category}
-                                      </div>
-                                    </div>
-                                    <div className="flex items-center gap-1">
-                                      <div
-                                        className={cn(
-                                          "w-3 h-3 rounded-full border",
-                                          themeData.primarySolid,
-                                        )}
-                                      />
-                                    </div>
-                                  </div>
-                                </button>
-                              ))}
+                    <div className="space-y-1">
+                      {themeList.map(([key, themeData]) => (
+                        <button
+                          key={key}
+                          onClick={() => {
+                            onThemeChange(key);
+                            setIsOpen(false);
+                          }}
+                          className={cn(
+                            "w-full text-left p-3 rounded-md transition-colors focus:ring-2 focus:ring-offset-1 focus:outline-none",
+                            currentTheme === key
+                              ? `${theme.primarySolid} text-white focus:ring-blue-400`
+                              : `${theme.text} hover:${theme.accent} focus:${theme.accent} focus:ring-blue-500`,
+                          )}
+                          role="option"
+                          aria-selected={currentTheme === key}
+                        >
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <div className="font-medium text-sm">
+                                {themeData.name}
+                              </div>
+                              <div
+                                className={`text-xs ${currentTheme === key ? "text-white/80" : theme.textSecondary}`}
+                              >
+                                {themeData.category}
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <div
+                                className={cn(
+                                  "w-3 h-3 rounded-full border",
+                                  themeData.primarySolid,
+                                )}
+                              />
                             </div>
                           </div>
-                        ))}
+                        </button>
+                      ))}
                     </div>
                   </div>
-                ),
-              )}
+                ))}
             </div>
           </div>
         )}

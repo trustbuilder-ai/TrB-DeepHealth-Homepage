@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import { scenarios } from "@/utils/mockData";
+import { scenarios } from "@/data/mockData";
 
 /**
  * Test execution states for scenario tracking.
