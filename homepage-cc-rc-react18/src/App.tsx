@@ -224,7 +224,7 @@ export default function LLMTestingPlatform() {
       </section>
 
       {/* Features Section */}
-      <Features theme={theme} />
+      <Features />
 
       {/* Testing Scenarios Section */}
       <section id="scenarios" className="py-20">

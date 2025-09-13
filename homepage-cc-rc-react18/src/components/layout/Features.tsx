@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useTheme } from "@/hooks/useTheme";
-import { Theme } from "@/styles/themes";
 import { cn } from "@/utils/cn";
 
 const features = [
@@ -49,13 +48,8 @@ const features = [
   },
 ];
 
-interface FeaturesProps {
-  theme?: Theme;
-}
-
-export const Features = ({ theme: propTheme }: FeaturesProps) => {
-  const { theme: hookTheme } = useTheme();
-  const theme = propTheme || hookTheme;
+export const Features = () => {
+  const { theme } = useTheme();
 
   return (
     <section id="features" className={cn("py-20", theme.surface)}>

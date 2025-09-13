@@ -6,3 +6,5 @@
 - separate functionality from app.tx
 - provide therapeutic fonts from fonts.ts in the font switcher
 - use types/ and context/?
+- use strict mode
+- @ notation concistently for imports instead of relative paths, possible issues with config/tsconfig.json
