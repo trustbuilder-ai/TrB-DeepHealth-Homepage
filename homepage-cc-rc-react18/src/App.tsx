@@ -24,6 +24,10 @@ import { useModalManager } from "@/hooks/useModalManager";
 import { useScenarioManager } from "@/hooks/useScenarioManager";
 import { useNotificationManager } from "@/hooks/useNotificationManager";
 
+// SEO Components
+import { SEOHead, StructuredData } from "@/components/seo";
+import { seoContent } from "@/data/seoContent";
+
 import {
   mockAnalytics,
   mockConversations,
@@ -101,6 +105,10 @@ export default function LLMTestingPlatform() {
   } | null>(null);
   const [tourStep, setTourStep] = useState(0);
   const [batchQueue] = useState(mockBatchQueue);
+
+  // SEO: Track active section for dynamic meta tags
+  const [activeSection, setActiveSection] =
+    useState<keyof typeof seoContent>("home");
 
   // Modal refs for click outside detection (kept for potential future use)
   // const tourModalRef = useRef<HTMLDivElement>(null);
@@ -229,10 +237,84 @@ export default function LLMTestingPlatform() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [closeAllModals, navigateToSection, announceToScreenReader, modals]);
 
+  // SEO: Track active section for dynamic meta tags
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = [
+        { id: "hero-heading", key: "home" as const },
+        { id: "features", key: "features" as const },
+        { id: "scenarios", key: "scenarios" as const },
+        { id: "conversations", key: "conversations" as const },
+        { id: "analytics", key: "analytics" as const },
+      ];
+
+      // Find the section that's currently in view
+      const current = sections.find((section) => {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Consider a section active if its top is within the upper half of the viewport
+          return (
+            rect.top <= window.innerHeight / 2 &&
+            rect.bottom >= window.innerHeight / 2
+          );
+        }
+        return false;
+      });
+
+      // Default to home if no section is clearly in view
+      const newActiveSection = current?.key || "home";
+      if (newActiveSection !== activeSection) {
+        setActiveSection(newActiveSection);
+      }
+    };
+
+    // Initial check
+    handleScroll();
+
+    // Add scroll listener with throttling
+    let ticking = false;
+    const throttledHandleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", throttledHandleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", throttledHandleScroll);
+  }, [activeSection]);
+
   return (
     <div
       className={`min-h-screen transition-all duration-300 ${theme.bg} ${theme.text}`}
     >
+      {/* SEO Meta Tags - Dynamic based on active section */}
+      <SEOHead
+        title={seoContent[activeSection].title}
+        description={seoContent[activeSection].description}
+        keywords={seoContent[activeSection].keywords}
+        canonicalUrl={seoContent[activeSection].canonicalUrl}
+        ogImage={seoContent[activeSection].ogImage}
+        additionalMeta={{
+          "theme-color": theme.isDark ? "#1e293b" : "#ffffff",
+          "application-name": "TrB DeepHealth Platform",
+          "apple-mobile-web-app-title": "TrB DeepHealth",
+          "apple-mobile-web-app-capable": "yes",
+          "apple-mobile-web-app-status-bar-style": theme.isDark
+            ? "black-translucent"
+            : "default",
+          "msapplication-TileColor": "#2563eb",
+          "msapplication-config": "/browserconfig.xml",
+        }}
+      />
+
+      {/* Structured Data - Healthcare & Organization */}
+      <StructuredData />
+
       {/* Skip Links for Accessibility */}
       <SkipLinksWithShortcuts />
 
@@ -530,9 +612,17 @@ export default function LLMTestingPlatform() {
         </section>
 
         {/* Analytics Overview */}
-        <section className={`py-12 px-4 ${theme.surface}`}>
+        <section
+          id="analytics"
+          className={`py-12 px-4 ${theme.surface}`}
+          aria-labelledby="analytics-heading"
+        >
           <div className="max-w-6xl mx-auto">
-            <h2 className="h2-style font-bold mb-8 text-center">
+            <h2
+              id="analytics-heading"
+              className="h2-style font-bold mb-8 text-center"
+              tabIndex={-1}
+            >
               Platform Analytics
             </h2>
 
