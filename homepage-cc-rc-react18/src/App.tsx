@@ -326,23 +326,40 @@ export default function LLMTestingPlatform() {
               </p>
 
               {/* Search Input */}
-              <div className="max-w-md mx-auto">
+              <div
+                className="max-w-md mx-auto"
+                role="search"
+                aria-label="Search testing scenarios"
+              >
+                <label htmlFor="search-input" className="sr-only">
+                  Search testing scenarios
+                </label>
                 <div className="relative">
                   <Search
                     className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 icon-dynamic ${theme.textMuted}`}
                   />
                   <Input
                     id="search-input"
-                    type="text"
+                    type="search"
                     placeholder="Search scenarios... (Ctrl+K)"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     theme={theme}
                     className="pl-10"
+                    aria-label="Search testing scenarios"
+                    role="searchbox"
+                    aria-describedby={
+                      searchQuery ? "search-results" : undefined
+                    }
                   />
                 </div>
                 {searchQuery && (
-                  <p className={`text-sm ${theme.textMuted} mt-2`}>
+                  <p
+                    id="search-results"
+                    className={`text-sm ${theme.textMuted} mt-2`}
+                    aria-live="polite"
+                    role="status"
+                  >
                     {filteredScenarios.length} scenario
                     {filteredScenarios.length !== 1 ? "s" : ""} found for "
                     {searchQuery}"

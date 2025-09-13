@@ -37,6 +37,9 @@ export const Navigation = () => {
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [loginEmailError, setLoginEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useModalClose(
@@ -45,23 +48,44 @@ export const Navigation = () => {
     mobileMenuTriggerRef,
   );
 
+  const validateEmail = (email: string) => {
+    if (!email.trim()) return "Email is required";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      return "Please enter a valid email address";
+    return "";
+  };
+
+  const validatePassword = (password: string) => {
+    if (!password.trim()) return "Password is required";
+    if (password.length < 6) return "Password must be at least 6 characters";
+    return "";
+  };
+
   const handleNewsletterSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      if (!email.trim()) return;
-
+      const error = validateEmail(email);
+      if (error) {
+        setEmailError(error);
+        document.getElementById("newsletter-email")?.focus();
+        return;
+      }
+      setEmailError("");
       setIsSubmitting(true);
 
-      // Simulate newsletter signup
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      try {
+        // Simulate newsletter signup
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Reset form
-      setEmail("");
-      setNewsletterModalOpen(false);
-      setIsSubmitting(false);
-
-      // Could add a success notification here
-      console.log("Newsletter signup successful for:", email);
+        // Reset form
+        setEmail("");
+        setNewsletterModalOpen(false);
+        console.log("Newsletter signup successful for:", email);
+      } catch {
+        setEmailError("Failed to subscribe. Please try again.");
+      } finally {
+        setIsSubmitting(false);
+      }
     },
     [email],
   );
@@ -69,21 +93,38 @@ export const Navigation = () => {
   const handleLoginSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
-      if (!loginEmail.trim() || !password.trim()) return;
+      const emailError = validateEmail(loginEmail);
+      const passError = validatePassword(password);
 
+      if (emailError || passError) {
+        setLoginEmailError(emailError);
+        setPasswordError(passError);
+        if (emailError) {
+          document.getElementById("login-email")?.focus();
+        } else if (passError) {
+          document.getElementById("login-password")?.focus();
+        }
+        return;
+      }
+
+      setLoginEmailError("");
+      setPasswordError("");
       setIsLoggingIn(true);
 
-      // Simulate login
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      try {
+        // Simulate login
+        await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // Reset form
-      setLoginEmail("");
-      setPassword("");
-      setLoginModalOpen(false);
-      setIsLoggingIn(false);
-
-      // Could add a success notification here
-      console.log("Login successful for:", loginEmail);
+        // Reset form
+        setLoginEmail("");
+        setPassword("");
+        setLoginModalOpen(false);
+        console.log("Login successful for:", loginEmail);
+      } catch {
+        setLoginEmailError("Login failed. Please check your credentials.");
+      } finally {
+        setIsLoggingIn(false);
+      }
     },
     [loginEmail, password],
   );
@@ -311,12 +352,28 @@ export const Navigation = () => {
                 id="newsletter-email"
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (emailError) setEmailError("");
+                }}
                 placeholder="Enter your email address"
                 required
                 theme={theme}
                 className="w-full"
+                aria-describedby={
+                  emailError ? "newsletter-email-error" : undefined
+                }
+                aria-invalid={emailError ? "true" : "false"}
               />
+              {emailError && (
+                <div
+                  id="newsletter-email-error"
+                  role="alert"
+                  className="text-red-600 text-sm mt-1"
+                >
+                  {emailError}
+                </div>
+              )}
             </div>
 
             <div className={`text-xs ${theme.textMuted}`}>
@@ -381,12 +438,28 @@ export const Navigation = () => {
                 id="login-email"
                 type="email"
                 value={loginEmail}
-                onChange={(e) => setLoginEmail(e.target.value)}
+                onChange={(e) => {
+                  setLoginEmail(e.target.value);
+                  if (loginEmailError) setLoginEmailError("");
+                }}
                 placeholder="Enter your email address"
                 required
                 theme={theme}
                 className="w-full"
+                aria-describedby={
+                  loginEmailError ? "login-email-error" : undefined
+                }
+                aria-invalid={loginEmailError ? "true" : "false"}
               />
+              {loginEmailError && (
+                <div
+                  id="login-email-error"
+                  role="alert"
+                  className="text-red-600 text-sm mt-1"
+                >
+                  {loginEmailError}
+                </div>
+              )}
             </div>
 
             <div>
@@ -404,13 +477,29 @@ export const Navigation = () => {
                   id="login-password"
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (passwordError) setPasswordError("");
+                  }}
                   placeholder="Enter your password"
                   required
                   theme={theme}
                   className="w-full pl-10"
+                  aria-describedby={
+                    passwordError ? "login-password-error" : undefined
+                  }
+                  aria-invalid={passwordError ? "true" : "false"}
                 />
               </div>
+              {passwordError && (
+                <div
+                  id="login-password-error"
+                  role="alert"
+                  className="text-red-600 text-sm mt-1"
+                >
+                  {passwordError}
+                </div>
+              )}
             </div>
 
             <div className={`text-xs ${theme.textMuted}`}>

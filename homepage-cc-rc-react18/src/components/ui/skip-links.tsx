@@ -16,6 +16,7 @@ export const SkipLinks = () => {
     { id: "features", label: "Skip to features" },
     { id: "scenarios", label: "Skip to testing scenarios" },
     { id: "conversations", label: "Skip to research" },
+    { id: "footer", label: "Skip to footer" },
     { id: "navigation", label: "Skip to navigation" },
   ];
 
@@ -62,6 +63,7 @@ export const SkipLinksWithShortcuts = () => {
     { id: "features", label: "Skip to features", shortcut: "Alt+1" },
     { id: "scenarios", label: "Skip to testing scenarios", shortcut: "Alt+2" },
     { id: "conversations", label: "Skip to research", shortcut: "Alt+3" },
+    { id: "footer", label: "Skip to footer", shortcut: "Alt+F" },
     { id: "navigation", label: "Skip to navigation", shortcut: "Alt+N" },
   ];
 
