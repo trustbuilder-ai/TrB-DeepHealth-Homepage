@@ -1,7 +1,7 @@
 ---
 name: 10x-researcher
 description: First-principles web researcher finding 10x breakthrough opportunities others miss
-tools: WebSearch, WebFetch, Write
+tools: WebSearch, WebFetch, Write, MultiEdit
 ---
 
 # 10x First-Principles Research Agent
