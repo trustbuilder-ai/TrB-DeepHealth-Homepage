@@ -15,7 +15,6 @@ import {
   Globe,
   TrendingUp,
   Lightbulb,
-  X,
 } from "lucide-react";
 
 import { useTheme } from "@/hooks/useTheme";
@@ -993,101 +992,78 @@ export default function LLMTestingPlatform() {
       )}
 
       {/* Analytics Panel */}
-      {showAnalytics && (
-        <div
-          className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setShowAnalytics(false);
-          }}
-        >
-          <div
-            className={`fixed top-4 right-4 bottom-4 w-96 rounded-lg modal-glow border flex flex-col theme-transition ${theme.isDark ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"}`}
-          >
-            <div className="flex items-center justify-between p-4 border-b">
-              <h3 className={`text-lg font-semibold ${theme.text}`}>
-                Analytics Dashboard
-              </h3>
-              <Button
-                variant="ghost"
-                size="icon"
-                theme={theme}
-                onClick={() => setShowAnalytics(false)}
-                aria-label="Close analytics"
+      <EnhancedDialog
+        isOpen={showAnalytics}
+        onClose={() => setShowAnalytics(false)}
+        title="Analytics Dashboard"
+        size="sidebar-right"
+        theme={theme}
+      >
+        <div className="space-y-6">
+          <div>
+            <h4 className={`font-medium ${theme.text} mb-3`}>Key Metrics</h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div
+                className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
               >
-                <X className="w-4 h-4 icon-dynamic" />
-              </Button>
-            </div>
-            <div className="flex-1 p-4 overflow-y-auto space-y-6">
-              <div>
-                <h4 className={`font-medium ${theme.text} mb-3`}>
-                  Key Metrics
-                </h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <div
-                    className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
-                  >
-                    <div className="text-2xl font-bold text-green-600">
-                      {mockAnalytics.passRate}%
-                    </div>
-                    <div className={`text-sm ${theme.textSecondary}`}>
-                      Pass Rate
-                    </div>
-                  </div>
-                  <div
-                    className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
-                  >
-                    <div className="text-2xl font-bold text-blue-600">
-                      {mockAnalytics.totalTests}
-                    </div>
-                    <div className={`text-sm ${theme.textSecondary}`}>
-                      Total Tests
-                    </div>
-                  </div>
+                <div className="text-2xl font-bold text-green-600">
+                  {mockAnalytics.passRate}%
+                </div>
+                <div className={`text-sm ${theme.textSecondary}`}>
+                  Pass Rate
                 </div>
               </div>
-              <div>
-                <h4 className={`font-medium ${theme.text} mb-3`}>
-                  Model Comparison
-                </h4>
-                <div className="space-y-3">
-                  {mockAnalytics.modelComparison.map((model, i) => (
-                    <div
-                      key={i}
-                      className={`p-3 rounded border ${theme.isDark ? "bg-slate-700 border-slate-600" : "bg-slate-50 border-slate-200"}`}
-                    >
-                      <div className={`font-medium ${theme.text} mb-2`}>
-                        {model.model}
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 text-xs">
-                        <div>
-                          <div className={`${theme.textSecondary}`}>Safety</div>
-                          <div className="text-green-600 font-medium">
-                            {model.safety}%
-                          </div>
-                        </div>
-                        <div>
-                          <div className={`${theme.textSecondary}`}>
-                            Empathy
-                          </div>
-                          <div className="text-blue-600 font-medium">
-                            {model.empathy}%
-                          </div>
-                        </div>
-                        <div>
-                          <div className={`${theme.textSecondary}`}>Bias</div>
-                          <div className="text-purple-600 font-medium">
-                            {model.bias}%
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+              <div
+                className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
+              >
+                <div className="text-2xl font-bold text-blue-600">
+                  {mockAnalytics.totalTests}
+                </div>
+                <div className={`text-sm ${theme.textSecondary}`}>
+                  Total Tests
                 </div>
               </div>
             </div>
           </div>
+          <div>
+            <h4 className={`font-medium ${theme.text} mb-3`}>
+              Model Comparison
+            </h4>
+            <div className="space-y-3">
+              {mockAnalytics.modelComparison.map((model, i) => (
+                <div
+                  key={i}
+                  className={`p-3 rounded border ${theme.isDark ? "bg-slate-700 border-slate-600" : "bg-slate-50 border-slate-200"}`}
+                >
+                  <div className={`font-medium ${theme.text} mb-2`}>
+                    {model.model}
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 text-xs">
+                    <div>
+                      <div className={`${theme.textSecondary}`}>Safety</div>
+                      <div className="text-green-600 font-medium">
+                        {model.safety}%
+                      </div>
+                    </div>
+                    <div>
+                      <div className={`${theme.textSecondary}`}>Empathy</div>
+                      <div className="text-blue-600 font-medium">
+                        {model.empathy}%
+                      </div>
+                    </div>
+                    <div>
+                      <div className={`${theme.textSecondary}`}>Bias</div>
+                      <div className="text-purple-600 font-medium">
+                        {model.bias}%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      )}
+      </EnhancedDialog>
 
       {/* AI Insights Panel */}
       <EnhancedDialog

@@ -1,4 +1,4 @@
-import { Theme } from "./themes";
+import { Theme } from "../styles/themes";
 
 export const getButtonStyles = (theme: Theme, variant: string) => {
   if (!theme) return "";
