@@ -63,6 +63,9 @@ export const Notification = React.memo<NotificationProps>(
           "fixed top-4 right-4 z-50 max-w-sm w-full notification-enter-active",
           className,
         )}
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
       >
         <div
           className={cn(
