@@ -1,3 +1,7 @@
+/**
+ * Theme interface defining the structure for all color palettes used in the platform.
+ * Supports both light and dark modes with specialized therapeutic and accessibility options.
+ */
 export interface Theme {
   name: string;
   category: string;
@@ -19,6 +23,11 @@ export interface Theme {
   accessibility?: boolean;
 }
 
+/**
+ * Collection of all available themes for the platform.
+ * Organized by categories: Research Palettes, Original, Therapy/Crisis, and Accessibility.
+ * Each theme is research-backed and designed for mental health applications.
+ */
 export const themes: Record<string, Theme> = {
   // === RESEARCH PALETTES ===
   coastalBreeze: {
@@ -127,6 +136,116 @@ export const themes: Record<string, Theme> = {
     border: "border-slate-600",
     hero: "bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900/20",
     glow: "shadow-blue-400/25",
+    isDark: true,
+  },
+
+  // === RESEARCH PALETTES V2 ===
+  coastalBreeze2: {
+    name: "Coastal Breeze Vivid",
+    category: "Research Palettes V2",
+    primary: "from-teal-600 to-cyan-500",
+    primarySolid: "bg-teal-600",
+    primaryHover: "hover:bg-cyan-500",
+    secondary: "bg-orange-500",
+    accent: "bg-teal-100/80",
+    text: "text-slate-900",
+    textSecondary: "text-teal-800",
+    textMuted: "text-teal-700",
+    bg: "bg-gradient-to-br from-teal-50/80 via-cyan-25/60 to-white",
+    surface: "bg-white/90 backdrop-blur-sm",
+    border: "border-teal-200/60",
+    hero: "bg-gradient-to-br from-teal-100/70 via-cyan-50/50 to-white",
+    glow: "shadow-xl shadow-teal-500/40",
+    isDark: false,
+  },
+  coastalGlow2: {
+    name: "Coastal Glow Radiant",
+    category: "Research Palettes V2",
+    primary: "from-cyan-500 to-teal-500",
+    primarySolid: "bg-cyan-500",
+    primaryHover: "hover:bg-teal-500",
+    secondary: "bg-amber-400",
+    accent: "bg-cyan-100/90",
+    text: "text-slate-800",
+    textSecondary: "text-cyan-800",
+    textMuted: "text-cyan-700",
+    bg: "bg-gradient-to-br from-cyan-50/90 via-teal-50/70 to-white",
+    surface: "bg-white/85 backdrop-blur-sm",
+    border: "border-cyan-300/50",
+    hero: "bg-gradient-to-br from-cyan-100/80 via-teal-75/60 to-white",
+    glow: "shadow-xl shadow-cyan-400/50",
+    isDark: false,
+  },
+  earthySerenity2: {
+    name: "Earthy Serenity Lush",
+    category: "Research Palettes V2",
+    primary: "from-emerald-500 to-green-500",
+    primarySolid: "bg-emerald-500",
+    primaryHover: "hover:bg-green-500",
+    secondary: "bg-orange-500",
+    accent: "bg-emerald-100/90",
+    text: "text-slate-900",
+    textSecondary: "text-emerald-800",
+    textMuted: "text-emerald-700",
+    bg: "bg-gradient-to-br from-emerald-50/80 via-green-50/60 to-orange-50/40",
+    surface: "bg-white/80 backdrop-blur-sm",
+    border: "border-emerald-300/50",
+    hero: "bg-gradient-to-br from-emerald-100/80 via-green-75/60 to-orange-100/50",
+    glow: "shadow-xl shadow-emerald-400/45",
+    isDark: false,
+  },
+  neonTide2: {
+    name: "Neon Tide Electric",
+    category: "Research Palettes V2",
+    primary: "from-cyan-400 to-teal-300",
+    primarySolid: "bg-cyan-400",
+    primaryHover: "hover:bg-teal-300",
+    secondary: "bg-orange-400",
+    accent: "bg-slate-800/90",
+    text: "text-cyan-50",
+    textSecondary: "text-cyan-100",
+    textMuted: "text-cyan-200",
+    bg: "bg-slate-900",
+    surface: "bg-slate-800/90 backdrop-blur-sm",
+    border: "border-cyan-500/30",
+    hero: "bg-gradient-to-br from-slate-900 via-cyan-900/20 to-slate-800",
+    glow: "shadow-2xl shadow-cyan-400/60",
+    isDark: true,
+  },
+  cyberMint2: {
+    name: "Cyber Mint Matrix",
+    category: "Research Palettes V2",
+    primary: "from-emerald-300 to-green-300",
+    primarySolid: "bg-emerald-300",
+    primaryHover: "hover:bg-green-300",
+    secondary: "bg-lime-400",
+    accent: "bg-gray-800/90",
+    text: "text-emerald-50",
+    textSecondary: "text-emerald-100",
+    textMuted: "text-emerald-200",
+    bg: "bg-gray-900",
+    surface: "bg-gray-800/85 backdrop-blur-sm",
+    border: "border-emerald-400/40",
+    hero: "bg-gradient-to-br from-gray-900 via-emerald-900/25 to-gray-800",
+    glow: "shadow-2xl shadow-emerald-300/55",
+    isDark: true,
+  },
+  midnightPulse2: {
+    name: "Midnight Pulse Neon",
+    category: "Research Palettes V2",
+    primary: "from-blue-400 to-violet-400",
+    primarySolid: "bg-blue-400",
+    primaryHover: "hover:bg-violet-400",
+    secondary: "bg-pink-500",
+    accent: "bg-slate-800/90",
+    text: "text-blue-50",
+    textSecondary: "text-blue-100",
+    textMuted: "text-violet-200",
+    bg: "bg-slate-900",
+    surface: "bg-slate-800/90 backdrop-blur-sm",
+    border: "border-blue-400/40",
+    hero: "bg-gradient-to-br from-slate-900 via-blue-900/30 to-violet-900/20",
+    glow: "shadow-2xl shadow-blue-400/65",
     isDark: true,
   },
 

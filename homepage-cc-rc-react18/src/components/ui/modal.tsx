@@ -30,6 +30,21 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
   }) => {
     const dialogRef = useModalClose(isOpen, onClose);
 
+    // Additional ESC key handler as backup
+    React.useEffect(() => {
+      if (!isOpen) return;
+
+      const handleEsc = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          e.stopPropagation();
+          onClose();
+        }
+      };
+
+      document.addEventListener("keydown", handleEsc);
+      return () => document.removeEventListener("keydown", handleEsc);
+    }, [isOpen, onClose]);
+
     if (!isOpen) return null;
 
     const getSizeClasses = () => {
@@ -43,9 +58,9 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
         case "xl":
           return "max-w-4xl";
         case "sidebar-left":
-          return "fixed top-4 left-4 bottom-4 w-80 max-w-none";
+          return "fixed top-4 left-4 h-[calc(100vh-2rem)] w-80 max-w-none";
         case "sidebar-right":
-          return "fixed top-4 right-4 bottom-4 w-96 max-w-none";
+          return "fixed top-4 right-4 h-[calc(100vh-2rem)] w-96 max-w-none";
         default:
           return "max-w-md";
       }

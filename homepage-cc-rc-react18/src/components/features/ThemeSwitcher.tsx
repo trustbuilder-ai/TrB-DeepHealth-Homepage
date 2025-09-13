@@ -28,10 +28,30 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
           "Research Palettes": lightThemes.filter(
             ([, t]) => t.category === "Research Palettes",
           ),
+          "Research Palettes V2": lightThemes.filter(
+            ([, t]) => t.category === "Research Palettes V2",
+          ),
+          Original: lightThemes.filter(([, t]) => t.category === "Original"),
+          "Therapy/Crisis": lightThemes.filter(
+            ([, t]) => t.category === "Therapy/Crisis",
+          ),
+          Accessibility: lightThemes.filter(
+            ([, t]) => t.category === "Accessibility",
+          ),
         },
         "Dark Themes": {
           "Research Palettes": darkThemes.filter(
             ([, t]) => t.category === "Research Palettes",
+          ),
+          "Research Palettes V2": darkThemes.filter(
+            ([, t]) => t.category === "Research Palettes V2",
+          ),
+          Original: darkThemes.filter(([, t]) => t.category === "Original"),
+          "Therapy/Crisis": darkThemes.filter(
+            ([, t]) => t.category === "Therapy/Crisis",
+          ),
+          Accessibility: darkThemes.filter(
+            ([, t]) => t.category === "Accessibility",
           ),
         },
       }),
@@ -73,8 +93,9 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
                       {categoryName}
                     </h3>
                     <div className="space-y-3">
-                      {Object.entries(subcategories).map(
-                        ([subName, themeList]) => (
+                      {Object.entries(subcategories)
+                        .filter(([, themeList]) => themeList.length > 0)
+                        .map(([subName, themeList]) => (
                           <div key={subName}>
                             <h4 className="text-xs text-muted-foreground mb-1">
                               {subName}
@@ -118,8 +139,7 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
                               ))}
                             </div>
                           </div>
-                        ),
-                      )}
+                        ))}
                     </div>
                   </div>
                 ),

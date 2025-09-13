@@ -1,5 +1,13 @@
 import { Theme } from "../styles/themes";
 
+/**
+ * Generates theme-aware CSS classes for button components.
+ * Supports multiple variants with dark/light mode compatibility.
+ *
+ * @param theme - The current theme object containing style definitions
+ * @param variant - The button variant (default, outline, ghost, destructive, secondary)
+ * @returns CSS class string for the button styling
+ */
 export const getButtonStyles = (theme: Theme, variant: string) => {
   if (!theme) return "";
 
@@ -27,6 +35,13 @@ export const getButtonStyles = (theme: Theme, variant: string) => {
   }
 };
 
+/**
+ * Generates theme-aware CSS classes for card components.
+ * Provides consistent styling across light and dark themes.
+ *
+ * @param theme - The current theme object containing style definitions
+ * @returns CSS class string for card styling
+ */
 export const getCardStyles = (theme: Theme) => {
   if (!theme) return "bg-card text-card-foreground border-border";
 
@@ -35,6 +50,13 @@ export const getCardStyles = (theme: Theme) => {
     : "bg-white text-slate-900 border-slate-200";
 };
 
+/**
+ * Generates theme-aware CSS classes for input components.
+ * Includes proper placeholder styling for accessibility.
+ *
+ * @param theme - The current theme object containing style definitions
+ * @returns CSS class string for input styling
+ */
 export const getInputStyles = (theme: Theme) => {
   if (!theme) return "bg-background border-input text-foreground";
 

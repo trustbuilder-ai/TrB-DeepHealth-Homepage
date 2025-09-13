@@ -125,6 +125,16 @@ export const FontSwitcher = React.memo<FontSwitcherProps>(
                                   A11y
                                 </div>
                               )}
+                              {fontData.therapeutic && (
+                                <div className="text-xs bg-green-100 text-green-800 px-1 py-0.5 rounded">
+                                  Therapeutic
+                                </div>
+                              )}
+                              {fontData.scientific && (
+                                <div className="text-xs bg-purple-100 text-purple-800 px-1 py-0.5 rounded">
+                                  Scientific
+                                </div>
+                              )}
                             </div>
                           </div>
                         </button>

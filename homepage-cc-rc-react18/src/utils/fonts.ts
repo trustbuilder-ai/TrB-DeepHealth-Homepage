@@ -5,6 +5,7 @@ export interface FontSet {
   cdnUrl: string;
   type: string;
   accessibility?: boolean;
+  therapeutic?: boolean;
   scientific?: boolean;
 }
 
@@ -41,7 +42,8 @@ export const fontSets: Record<string, FontSet> = {
     fontFamily: '"Source Serif Pro", Georgia, serif',
     cdnUrl:
       "https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@300;400;600&display=swap",
-    type: "serif",
+    type: "therapeutic",
+    therapeutic: true,
   },
   nunito: {
     name: "Nunito",
@@ -49,7 +51,8 @@ export const fontSets: Record<string, FontSet> = {
     fontFamily: '"Nunito", sans-serif',
     cdnUrl:
       "https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap",
-    type: "sans-serif",
+    type: "therapeutic",
+    therapeutic: true,
   },
   lexend: {
     name: "Lexend",

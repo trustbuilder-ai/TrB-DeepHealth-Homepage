@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   Heart,
   Search,
@@ -20,9 +20,11 @@ import {
 import { useTheme } from "@/hooks/useTheme";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { useModalManager } from "@/hooks/useModalManager";
+import { useScenarioManager } from "@/hooks/useScenarioManager";
+import { useNotificationManager } from "@/hooks/useNotificationManager";
 
 import {
-  scenarios,
   mockAnalytics,
   mockConversations,
   mockTourSteps,
@@ -49,37 +51,50 @@ import { Notification } from "@/components/ui/notification";
 import { Navigation } from "@/components/layout/Navigation";
 import { Features } from "@/components/layout/Features";
 
+/**
+ * Main component for testing LLMs for mental health capabilities.
+ *
+ * Provides a comprehensive testing environment with:
+ * - Theme switching with research-backed color palettes
+ * - Test scenario management and execution
+ * - Analytics dashboard and insights
+ * - Accessibility features and therapeutic design
+ * - Real-time conversation monitoring
+ *
+ * @returns The main application component
+ */
 export default function LLMTestingPlatform() {
   const { theme } = useTheme();
+  const isOnline = useOnlineStatus();
 
-  const [selectedScenario, setSelectedScenario] = useState<number | null>(null);
-  const [testingStates, setTestingStates] = useState<Record<number, string>>(
-    {},
-  );
-  const [searchQuery, setSearchQuery] = useState("");
-  const [toast, setToast] = useState<{ message: string; type: string } | null>(
-    null,
-  );
-  const [notifications, setNotifications] = useState<
-    Array<{
-      id: string;
-      type: "success" | "error" | "warning" | "info";
-      title: string;
-      message: string;
-    }>
-  >([]);
+  // Use custom hooks for state management
+  const {
+    selectedScenario,
+    testingStates,
+    searchQuery,
+    toast,
+    filteredScenarios,
+    setSelectedScenario,
+    setSearchQuery,
+    handleRunTest,
+  } = useScenarioManager();
+
+  const { notifications, dismissNotification } = useNotificationManager();
+
+  const { modals, closeAllModals } = useModalManager({
+    showTour: false,
+    showAnalytics: false,
+    showRecommendations: false,
+    showBatchTesting: false,
+  });
+
+  // Legacy state that needs refactoring
   const [activeDialog, setActiveDialog] = useState<{
     title: string;
     description: string;
     content: string;
   } | null>(null);
-
-  // Missing panel states
-  const [showTour, setShowTour] = useState(false);
   const [tourStep, setTourStep] = useState(0);
-  const [showAnalytics, setShowAnalytics] = useState(false);
-  const [showRecommendations, setShowRecommendations] = useState(false);
-  const [showBatchTesting, setShowBatchTesting] = useState(false);
   const [batchQueue] = useState(mockBatchQueue);
 
   // Modal refs for click outside detection (kept for potential future use)
@@ -88,10 +103,19 @@ export default function LLMTestingPlatform() {
   // const recommendationsModalRef = useRef<HTMLDivElement>(null);
 
   // Modal close hooks
-  useModalClose(showTour, () => setShowTour(false));
-  useModalClose(showAnalytics, () => setShowAnalytics(false));
-  useModalClose(showRecommendations, () => setShowRecommendations(false));
+  useModalClose(modals.showTour.isOpen, modals.showTour.close);
+  useModalClose(modals.showAnalytics.isOpen, modals.showAnalytics.close);
+  useModalClose(
+    modals.showRecommendations.isOpen,
+    modals.showRecommendations.close,
+  );
 
+  /**
+   * Scrolls to a specific section of the page with smooth animation.
+   * Focuses on the section heading for accessibility compliance.
+   *
+   * @param sectionId - The DOM ID of the target section
+   */
   const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -104,58 +128,27 @@ export default function LLMTestingPlatform() {
     }
   }, []);
 
-  const handleRunTest = useCallback(async (scenarioId: number) => {
-    setTestingStates((prev) => ({ ...prev, [scenarioId]: "running" }));
-
-    // Simulate test execution
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      setTestingStates((prev) => ({ ...prev, [scenarioId]: "completed" }));
-      setToast({ message: "Test completed successfully!", type: "success" });
-    } catch {
-      setTestingStates((prev) => ({ ...prev, [scenarioId]: "error" }));
-      setToast({ message: "Test failed to complete", type: "error" as const });
-    }
-  }, []);
-
-  const dismissNotification = useCallback((id: string) => {
-    setNotifications((prev) =>
-      prev.filter((notification) => notification.id !== id),
-    );
-  }, []);
-
   const [expandedFooterSections, setExpandedFooterSections] = useLocalStorage(
     "expandedFooterSections",
     {},
   );
 
-  const isOnline = useOnlineStatus();
-
-  // Filter scenarios based on search query
-  const filteredScenarios = useMemo(() => {
-    if (!searchQuery.trim()) return scenarios;
-    const query = searchQuery.toLowerCase();
-    return scenarios.filter(
-      (scenario) =>
-        scenario.title.toLowerCase().includes(query) ||
-        scenario.description.toLowerCase().includes(query) ||
-        scenario.category.toLowerCase().includes(query) ||
-        scenario.difficulty.toLowerCase().includes(query),
-    );
-  }, [searchQuery]);
-
+  /**
+   * Closes the currently active dialog modal.
+   */
   const closeDialog = useCallback(() => {
     setActiveDialog(null);
   }, []);
 
-  // ESC key handler for modals
+  /**
+   * Sets up global keyboard event handlers for modal management and shortcuts.
+   * - ESC key: Close all open modals
+   * - Ctrl/Cmd+K: Focus search input
+   */
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (showTour) setShowTour(false);
-        if (showAnalytics) setShowAnalytics(false);
-        if (showRecommendations) setShowRecommendations(false);
-        if (showBatchTesting) setShowBatchTesting(false);
+        closeAllModals();
         return;
       }
 
@@ -167,7 +160,7 @@ export default function LLMTestingPlatform() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [showTour, showAnalytics, showRecommendations, showBatchTesting]);
+  }, [closeAllModals]);
 
   return (
     <div
@@ -902,8 +895,9 @@ export default function LLMTestingPlatform() {
       <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-2">
         <Button
           size="icon"
-          onClick={() => setShowRecommendations(true)}
-          className="rounded-full floating-glow bg-teal-600 text-white hover:bg-teal-700 transition-all duration-200"
+          onClick={() => modals.showRecommendations.open()}
+          theme={theme}
+          className={`rounded-full floating-glow ${theme.primarySolid} text-white ${theme.primaryHover} transition-all duration-200 ${theme.glow}`}
           title="AI Insights"
           aria-label="Open AI insights panel"
         >
@@ -911,8 +905,9 @@ export default function LLMTestingPlatform() {
         </Button>
         <Button
           size="icon"
-          onClick={() => setShowAnalytics(true)}
-          className="rounded-full floating-glow bg-teal-600 text-white hover:bg-teal-700 transition-all duration-200"
+          onClick={() => modals.showAnalytics.open()}
+          theme={theme}
+          className={`rounded-full floating-glow ${theme.primarySolid} text-white ${theme.primaryHover} transition-all duration-200 ${theme.glow}`}
           title="Analytics Dashboard"
           aria-label="Open analytics dashboard"
         >
@@ -920,8 +915,9 @@ export default function LLMTestingPlatform() {
         </Button>
         <Button
           size="icon"
-          onClick={() => setShowBatchTesting(true)}
-          className="rounded-full floating-glow bg-teal-600 text-white hover:bg-teal-700 transition-all duration-200"
+          onClick={() => modals.showBatchTesting.open()}
+          theme={theme}
+          className={`rounded-full floating-glow ${theme.primarySolid} text-white ${theme.primaryHover} transition-all duration-200 ${theme.glow}`}
           title="Batch Testing"
           aria-label="Open batch testing panel"
         >
@@ -929,8 +925,9 @@ export default function LLMTestingPlatform() {
         </Button>
         <Button
           size="icon"
-          onClick={() => setShowTour(true)}
-          className="rounded-full floating-glow bg-teal-600 text-white hover:bg-teal-700 transition-all duration-200"
+          onClick={() => modals.showTour.open()}
+          theme={theme}
+          className={`rounded-full floating-glow ${theme.primarySolid} text-white ${theme.primaryHover} transition-all duration-200 ${theme.glow}`}
           title="Help Tour"
           aria-label="Start help tour"
         >
@@ -939,11 +936,11 @@ export default function LLMTestingPlatform() {
       </div>
 
       {/* Tour Overlay */}
-      {showTour && mockTourSteps[tourStep] && (
+      {modals.showTour.isOpen && mockTourSteps[tourStep] && (
         <EnhancedDialog
-          isOpen={showTour}
+          isOpen={modals.showTour.isOpen}
           onClose={() => {
-            setShowTour(false);
+            modals.showTour.close();
             setTourStep(0);
           }}
           title={mockTourSteps[tourStep].title || "Tour"}
@@ -967,7 +964,7 @@ export default function LLMTestingPlatform() {
                 variant="ghost"
                 theme={theme}
                 onClick={() => {
-                  setShowTour(false);
+                  modals.showTour.close();
                   setTourStep(0);
                 }}
               >
@@ -977,7 +974,7 @@ export default function LLMTestingPlatform() {
                 theme={theme}
                 onClick={() => {
                   if (tourStep === mockTourSteps.length - 1) {
-                    setShowTour(false);
+                    modals.showTour.close();
                     setTourStep(0);
                   } else {
                     setTourStep(tourStep + 1);
@@ -993,8 +990,8 @@ export default function LLMTestingPlatform() {
 
       {/* Analytics Panel */}
       <EnhancedDialog
-        isOpen={showAnalytics}
-        onClose={() => setShowAnalytics(false)}
+        isOpen={modals.showAnalytics.isOpen}
+        onClose={() => modals.showAnalytics.close()}
         title="Analytics Dashboard"
         size="sidebar-right"
         theme={theme}
@@ -1067,8 +1064,8 @@ export default function LLMTestingPlatform() {
 
       {/* AI Insights Panel */}
       <EnhancedDialog
-        isOpen={showRecommendations}
-        onClose={() => setShowRecommendations(false)}
+        isOpen={modals.showRecommendations.isOpen}
+        onClose={() => modals.showRecommendations.close()}
         title="AI Insights"
         size="sidebar-right"
         theme={theme}
@@ -1107,10 +1104,10 @@ export default function LLMTestingPlatform() {
       </EnhancedDialog>
 
       {/* Batch Testing Modal */}
-      {showBatchTesting && (
+      {modals.showBatchTesting.isOpen && (
         <EnhancedDialog
-          isOpen={showBatchTesting}
-          onClose={() => setShowBatchTesting(false)}
+          isOpen={modals.showBatchTesting.isOpen}
+          onClose={() => modals.showBatchTesting.close()}
           title="Batch Testing Dashboard"
           size="lg"
           theme={theme}
@@ -1172,7 +1169,7 @@ export default function LLMTestingPlatform() {
               <Button
                 variant="outline"
                 theme={theme}
-                onClick={() => setShowBatchTesting(false)}
+                onClick={() => modals.showBatchTesting.close()}
               >
                 Close
               </Button>

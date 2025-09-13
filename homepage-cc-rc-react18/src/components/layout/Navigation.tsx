@@ -8,6 +8,8 @@ import {
   X,
   WifiOff,
   Mail,
+  User,
+  Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,8 +45,12 @@ export const Navigation = () => {
   const isOnline = useOnlineStatus();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [newsletterModalOpen, setNewsletterModalOpen] = useState(false);
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useModalClose(
@@ -72,6 +78,28 @@ export const Navigation = () => {
       console.log("Newsletter signup successful for:", email);
     },
     [email],
+  );
+
+  const handleLoginSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!loginEmail.trim() || !password.trim()) return;
+
+      setIsLoggingIn(true);
+
+      // Simulate login
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      // Reset form
+      setLoginEmail("");
+      setPassword("");
+      setLoginModalOpen(false);
+      setIsLoggingIn(false);
+
+      // Could add a success notification here
+      console.log("Login successful for:", loginEmail);
+    },
+    [loginEmail, password],
   );
 
   const scrollToSection = useCallback((id: string) => {
@@ -179,13 +207,18 @@ export const Navigation = () => {
               />
 
               <div className="hidden md:flex items-center gap-2">
-                <Button variant="ghost" size="sm" theme={theme}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  theme={theme}
+                  onClick={() => setLoginModalOpen(true)}
+                >
                   Sign In
                 </Button>
                 <Button
                   size="sm"
                   theme={theme}
-                  className="bg-gradient-to-r text-white border-0"
+                  className={`bg-gradient-to-r ${theme.primary} text-white border-0`}
                   onClick={() => setNewsletterModalOpen(true)}
                 >
                   <Mail className="w-4 h-4 mr-2 icon-dynamic" />
@@ -256,12 +289,16 @@ export const Navigation = () => {
                   variant="ghost"
                   theme={theme}
                   className="w-full justify-start"
+                  onClick={() => {
+                    setLoginModalOpen(true);
+                    setMobileMenuOpen(false);
+                  }}
                 >
                   Sign In
                 </Button>
                 <Button
                   theme={theme}
-                  className="w-full bg-gradient-to-r text-white border-0"
+                  className={`w-full bg-gradient-to-r ${theme.primary} text-white border-0`}
                   onClick={() => {
                     setNewsletterModalOpen(true);
                     setMobileMenuOpen(false);
@@ -286,7 +323,7 @@ export const Navigation = () => {
       >
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <Mail className="w-6 h-6 text-teal-600 icon-dynamic" />
+            <Mail className={`w-6 h-6 icon-dynamic ${theme.text}`} />
             <div>
               <h3 className={`font-semibold ${theme.text}`}>Stay Updated</h3>
               <p className={`text-sm ${theme.textSecondary}`}>
@@ -337,9 +374,102 @@ export const Navigation = () => {
                 theme={theme}
                 disabled={isSubmitting || !email.trim()}
                 loading={isSubmitting}
-                className="flex-1 bg-gradient-to-r text-white border-0"
+                className={`flex-1 bg-gradient-to-r ${theme.primary} text-white border-0`}
               >
                 Subscribe
+              </Button>
+            </div>
+          </form>
+        </div>
+      </EnhancedDialog>
+
+      {/* Login Modal */}
+      <EnhancedDialog
+        isOpen={loginModalOpen}
+        onClose={() => setLoginModalOpen(false)}
+        title="Sign In"
+        size="md"
+        theme={theme}
+      >
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <User className={`w-6 h-6 icon-dynamic ${theme.text}`} />
+            <div>
+              <h3 className={`font-semibold ${theme.text}`}>Welcome Back</h3>
+              <p className={`text-sm ${theme.textSecondary}`}>
+                Sign in to access your account and personalized settings.
+              </p>
+            </div>
+          </div>
+
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
+            <div>
+              <label
+                htmlFor="login-email"
+                className={`block text-sm font-medium ${theme.text} mb-2`}
+              >
+                Email address
+              </label>
+              <Input
+                id="login-email"
+                type="email"
+                value={loginEmail}
+                onChange={(e) => setLoginEmail(e.target.value)}
+                placeholder="Enter your email address"
+                required
+                theme={theme}
+                className="w-full"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="login-password"
+                className={`block text-sm font-medium ${theme.text} mb-2`}
+              >
+                Password
+              </label>
+              <div className="relative">
+                <Lock
+                  className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 ${theme.textMuted}`}
+                />
+                <Input
+                  id="login-password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
+                  required
+                  theme={theme}
+                  className="w-full pl-10"
+                />
+              </div>
+            </div>
+
+            <div className={`text-xs ${theme.textMuted}`}>
+              By signing in, you agree to our Terms of Service and Privacy
+              Policy. Your data is protected with industry-standard encryption.
+            </div>
+
+            <div className="flex gap-3 pt-2">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setLoginModalOpen(false)}
+                theme={theme}
+                disabled={isLoggingIn}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+              <Button
+                type="submit"
+                theme={theme}
+                disabled={isLoggingIn || !loginEmail.trim() || !password.trim()}
+                loading={isLoggingIn}
+                className={`flex-1 bg-gradient-to-r ${theme.primary} text-white border-0`}
+              >
+                Sign In
               </Button>
             </div>
           </form>
