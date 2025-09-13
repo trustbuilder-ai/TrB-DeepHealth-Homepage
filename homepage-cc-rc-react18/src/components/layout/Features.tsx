@@ -77,9 +77,19 @@ export const Features = () => {
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <Avatar className="w-12 h-12 transition-transform flex-shrink-0 enhanced-glow">
-                    <AvatarFallback className={`bg-${feature.color}-100`}>
+                    <AvatarFallback
+                      className={cn(
+                        "transition-colors",
+                        theme.isDark
+                          ? `${theme.accent} bg-opacity-20`
+                          : `${theme.accent} bg-opacity-60`,
+                      )}
+                    >
                       <feature.icon
-                        className={`w-6 h-6 text-${feature.color}-600 icon-dynamic`}
+                        className={cn(
+                          "w-6 h-6 icon-dynamic transition-colors",
+                          theme.text,
+                        )}
                       />
                     </AvatarFallback>
                   </Avatar>

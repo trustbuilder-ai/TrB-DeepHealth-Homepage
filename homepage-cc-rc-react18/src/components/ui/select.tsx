@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { Theme } from "@/styles/themes";
+import { getSelectStyles } from "@/utils/themeUtils";
 
 export interface SelectProps {
   children: React.ReactNode;
@@ -8,6 +10,7 @@ export interface SelectProps {
   onValueChange?: (value: string) => void;
   placeholder?: string;
   className?: string;
+  theme?: Theme;
 }
 
 export interface SelectTriggerProps
@@ -15,12 +18,14 @@ export interface SelectTriggerProps
   children: React.ReactNode;
   isOpen?: boolean;
   setIsOpen?: (open: boolean) => void;
+  theme?: Theme;
 }
 
 export interface SelectContentProps {
   children: React.ReactNode;
   isOpen?: boolean;
   className?: string;
+  theme?: Theme;
 }
 
 export interface SelectItemProps
@@ -29,12 +34,14 @@ export interface SelectItemProps
   value: string;
   onValueChange?: (value: string) => void;
   setIsOpen?: (open: boolean) => void;
+  theme?: Theme;
 }
 
 export const Select: React.FC<SelectProps> = ({
   children,
   value,
   onValueChange,
+  theme,
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,6 +82,7 @@ export const Select: React.FC<SelectProps> = ({
             onValueChange,
             isOpen,
             setIsOpen,
+            theme,
           });
         }
         return child;
@@ -86,18 +94,29 @@ export const Select: React.FC<SelectProps> = ({
 export const SelectTrigger = React.forwardRef<
   HTMLButtonElement,
   SelectTriggerProps
->(({ className, children, isOpen, setIsOpen, ...props }, ref) => (
+>(({ className, children, isOpen, setIsOpen, theme, ...props }, ref) => (
   <button
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+      "flex h-10 w-full items-center justify-between rounded-md px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50",
+      theme
+        ? getSelectStyles(theme)
+        : "border border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
       className,
     )}
     onClick={() => setIsOpen?.(!isOpen)}
+    aria-expanded={isOpen}
+    aria-haspopup="listbox"
     {...props}
   >
     {children}
-    <ChevronDown className="h-4 w-4 opacity-50" />
+    <ChevronDown
+      className={cn(
+        "h-4 w-4 transition-transform",
+        isOpen && "rotate-180",
+        theme ? theme.textMuted : "opacity-50",
+      )}
+    />
   </button>
 ));
 
@@ -113,14 +132,18 @@ export const SelectValue: React.FC<{
 export const SelectContent = React.forwardRef<
   HTMLDivElement,
   SelectContentProps
->(({ className, children, isOpen, ...props }, ref) =>
+>(({ className, children, isOpen, theme, ...props }, ref) =>
   isOpen ? (
     <div
       ref={ref}
       className={cn(
-        "absolute top-full z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md",
+        "absolute top-full z-50 min-w-[8rem] overflow-hidden rounded-md p-1 shadow-lg border",
+        theme
+          ? `${theme.surface} ${theme.border} ${theme.text}`
+          : "bg-popover text-popover-foreground border-border",
         className,
       )}
+      role="listbox"
       {...props}
     >
       {children}
@@ -129,17 +152,24 @@ export const SelectContent = React.forwardRef<
 );
 
 export const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
-  ({ className, children, value, onValueChange, setIsOpen, ...props }, ref) => (
+  (
+    { className, children, value, onValueChange, setIsOpen, theme, ...props },
+    ref,
+  ) => (
     <button
       ref={ref}
       className={cn(
-        "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-2 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+        theme
+          ? `${theme.text} hover:${theme.accent} focus:${theme.accent}`
+          : "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
         className,
       )}
       onClick={() => {
         onValueChange?.(value);
         setIsOpen?.(false);
       }}
+      role="option"
       {...props}
     >
       {children}

@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { useModalClose } from "@/hooks/useModalClose";
 import { Theme } from "@/styles/themes";
+import { getModalStyles } from "@/utils/themeUtils";
 
 export interface EnhancedDialogProps {
   isOpen: boolean;
@@ -97,9 +98,7 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
             "transform transition-all duration-200 ease-out",
             "animate-in fade-in-0 zoom-in-95",
             getSizeClasses(),
-            theme
-              ? `${theme.isDark ? "bg-slate-800 border-slate-700" : "bg-white border-slate-200"}`
-              : "bg-background border-border",
+            theme ? getModalStyles(theme) : "bg-background border-border",
             size === "sidebar-left" || size === "sidebar-right"
               ? "flex flex-col"
               : "",

@@ -440,7 +440,9 @@ export default function LLMTestingPlatform() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-2xl font-bold text-green-600">
+                <CardTitle
+                  className={`text-2xl font-bold ${theme.isDark ? "text-green-400" : "text-green-600"}`}
+                >
                   {mockAnalytics.passRate}%
                 </CardTitle>
                 <CardDescription>Pass Rate</CardDescription>
@@ -458,7 +460,9 @@ export default function LLMTestingPlatform() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-2xl font-bold text-red-600">
+                <CardTitle
+                  className={`text-2xl font-bold ${theme.isDark ? "text-red-400" : "text-red-600"}`}
+                >
                   {mockAnalytics.riskFlags}
                 </CardTitle>
                 <CardDescription>Risk Flags</CardDescription>
@@ -669,12 +673,12 @@ export default function LLMTestingPlatform() {
                 </Button>
                 {isOnline ? (
                   <Wifi
-                    className="w-4 h-4 text-green-500 ml-2"
+                    className={`w-4 h-4 ml-2 ${theme.isDark ? "text-green-400" : "text-green-500"}`}
                     aria-label="Online"
                   />
                 ) : (
                   <WifiOff
-                    className="w-4 h-4 text-red-500 ml-2"
+                    className={`w-4 h-4 ml-2 ${theme.isDark ? "text-red-400" : "text-red-500"}`}
                     aria-label="Offline"
                   />
                 )}
@@ -844,7 +848,13 @@ export default function LLMTestingPlatform() {
             </p>
             <div className="flex items-center gap-4 mt-4 sm:mt-0">
               <span className={`text-xs ${theme.textMuted}`}>Made with</span>
-              <Heart className="w-4 h-4 text-red-500" />
+              <div
+                className={`flex h-6 w-6 items-center justify-center rounded-full ${theme.isDark ? "bg-rose-900/30" : "bg-rose-100"} transition-colors`}
+              >
+                <Heart
+                  className={`w-3 h-3 ${theme.isDark ? "text-rose-400" : "text-rose-600"}`}
+                />
+              </div>
               <span className={`text-xs ${theme.textMuted}`}>
                 for mental wellness
               </span>
@@ -948,7 +958,9 @@ export default function LLMTestingPlatform() {
           theme={theme}
         >
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 rounded-full bg-teal-600 flex items-center justify-center">
+            <div
+              className={`w-8 h-8 rounded-full ${theme.primarySolid} flex items-center justify-center transition-colors`}
+            >
               <Lightbulb className="w-4 h-4 text-white icon-dynamic" />
             </div>
           </div>
@@ -1000,20 +1012,20 @@ export default function LLMTestingPlatform() {
           <div>
             <h4 className={`font-medium ${theme.text} mb-3`}>Key Metrics</h4>
             <div className="grid grid-cols-2 gap-4">
-              <div
-                className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
-              >
-                <div className="text-2xl font-bold text-green-600">
+              <div className={`p-3 rounded ${theme.accent} transition-colors`}>
+                <div
+                  className={`text-2xl font-bold ${theme.isDark ? "text-green-400" : "text-green-600"}`}
+                >
                   {mockAnalytics.passRate}%
                 </div>
                 <div className={`text-sm ${theme.textSecondary}`}>
                   Pass Rate
                 </div>
               </div>
-              <div
-                className={`p-3 rounded ${theme.isDark ? "bg-slate-700" : "bg-slate-100"}`}
-              >
-                <div className="text-2xl font-bold text-blue-600">
+              <div className={`p-3 rounded ${theme.accent} transition-colors`}>
+                <div
+                  className={`text-2xl font-bold ${theme.isDark ? "text-blue-400" : "text-blue-600"}`}
+                >
                   {mockAnalytics.totalTests}
                 </div>
                 <div className={`text-sm ${theme.textSecondary}`}>
@@ -1030,7 +1042,7 @@ export default function LLMTestingPlatform() {
               {mockAnalytics.modelComparison.map((model, i) => (
                 <div
                   key={i}
-                  className={`p-3 rounded border ${theme.isDark ? "bg-slate-700 border-slate-600" : "bg-slate-50 border-slate-200"}`}
+                  className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
                 >
                   <div className={`font-medium ${theme.text} mb-2`}>
                     {model.model}
@@ -1074,7 +1086,7 @@ export default function LLMTestingPlatform() {
           {mockRecommendations.map((rec) => (
             <div
               key={rec.id}
-              className={`p-3 rounded border ${theme.isDark ? "border-slate-600 bg-slate-700" : "border-slate-200 bg-slate-50"}`}
+              className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
             >
               <div className="flex items-start justify-between mb-2">
                 <h4 className={`font-medium ${theme.text}`}>{rec.title}</h4>
@@ -1129,7 +1141,7 @@ export default function LLMTestingPlatform() {
                 batchQueue.map((item) => (
                   <div
                     key={item.id}
-                    className={`p-3 rounded border ${theme.isDark ? "bg-slate-700 border-slate-600" : "bg-slate-50 border-slate-200"}`}
+                    className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
                   >
                     <div className="flex justify-between items-center">
                       <div>

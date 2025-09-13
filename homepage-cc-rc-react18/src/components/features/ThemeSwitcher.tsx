@@ -80,7 +80,10 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
             ref={modalRef as React.RefObject<HTMLDivElement>}
             className={cn(
               "absolute top-full right-0 mt-2 w-80 max-h-96 overflow-y-auto",
-              "bg-background border rounded-lg shadow-lg z-50 p-4",
+              "rounded-lg shadow-lg z-50 p-4 border transition-colors",
+              theme.isDark
+                ? `${theme.surface} ${theme.border}`
+                : `bg-white ${theme.border}`,
             )}
             role="listbox"
             aria-label="Theme selection"
@@ -97,7 +100,9 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
                         .filter(([, themeList]) => themeList.length > 0)
                         .map(([subName, themeList]) => (
                           <div key={subName}>
-                            <h4 className="text-xs text-muted-foreground mb-1">
+                            <h4
+                              className={`text-xs mb-1 font-medium ${theme.textMuted}`}
+                            >
                               {subName}
                             </h4>
                             <div className="space-y-1">
@@ -109,10 +114,10 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
                                     setIsOpen(false);
                                   }}
                                   className={cn(
-                                    "w-full text-left p-2 rounded-md transition-colors",
-                                    "hover:bg-accent hover:text-accent-foreground",
-                                    currentTheme === key &&
-                                      "bg-primary text-primary-foreground",
+                                    "w-full text-left p-3 rounded-md transition-colors focus:ring-2 focus:ring-offset-1 focus:outline-none",
+                                    currentTheme === key
+                                      ? `${theme.primarySolid} text-white focus:ring-blue-400`
+                                      : `${theme.text} hover:${theme.accent} focus:${theme.accent} focus:ring-blue-500`,
                                   )}
                                   role="option"
                                   aria-selected={currentTheme === key}
@@ -122,7 +127,9 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
                                       <div className="font-medium text-sm">
                                         {themeData.name}
                                       </div>
-                                      <div className="text-xs opacity-70">
+                                      <div
+                                        className={`text-xs ${currentTheme === key ? "text-white/80" : theme.textSecondary}`}
+                                      >
                                         {themeData.category}
                                       </div>
                                     </div>

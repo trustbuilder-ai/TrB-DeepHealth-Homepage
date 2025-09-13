@@ -2,6 +2,7 @@
 
 - Modals 'signin' and 'newsletter' do not close on ESC. Check whether they use the common modal hooks and components
 - Modals 'ai insights' and 'analytics' use more distance to the bottom than to the top of the page
+- Themes are not rerendered, the page has to be reloaded to switch themes
 
 ## 2025-09-13
 
@@ -16,3 +17,9 @@
 - [x] @ notation concistently for imports instead of relative paths, possible issues with config/tsconfig.json - 2025-09-13 - @ imports working correctly with baseUrl and paths configured
 - [x] Added login modal to navbar - 2025-09-13 - Created login modal with form validation matching newsletter modal pattern
 - [x] Enhanced font system with proper therapeutic categorization - 2025-09-13 - Updated FontSet interface and component to show therapeutic/accessibility/scientific badges
+- [x] Implemented vibrant "-2" theme variants - 2025-09-13 - Added 6 new enhanced themes: Coastal Breeze Vivid, Coastal Glow Radiant, Earthy Serenity Lush, Neon Tide Electric, Cyber Mint Matrix, Midnight Pulse Neon
+- [x] Fixed button theme adaptation issues - 2025-09-13 - Updated floating action buttons, modal buttons, and icons to properly use theme colors instead of hardcoded teal-600
+- [x] Enhanced WCAG accessibility and contrast compliance - 2025-09-13 - Improved form inputs, modals, dropdowns, and theme switcher with better contrast ratios and focus indicators
+- [x] Added theme-aware styling utilities - 2025-09-13 - Enhanced themeUtils.ts with new functions for inputs, selects, modals, and improved button styling
+- [x] Updated Select component with theme support - 2025-09-13 - Added theme props and styling to SelectTrigger, SelectContent, and SelectItem components
+- [x] Improved ThemeSwitcher accessibility - 2025-09-13 - Enhanced dropdown contrast, focus management, and ARIA attributes for better screen reader support
