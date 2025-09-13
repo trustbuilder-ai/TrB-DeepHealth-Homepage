@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from "react";
 
 /**
  * Hook for comprehensive focus management in single-page applications.
@@ -34,7 +34,7 @@ export const useFocusManagement = () => {
    */
   const focusFirst = useCallback((container: HTMLElement) => {
     const focusableElements = container.querySelectorAll(
-      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
     );
 
     const firstElement = focusableElements[0] as HTMLElement;
@@ -55,7 +55,10 @@ export const useFocusManagement = () => {
   /**
    * Focus management for modal dialogs
    */
-  const useFocusTrap = (isOpen: boolean, containerRef: React.RefObject<HTMLElement>) => {
+  const useFocusTrap = (
+    isOpen: boolean,
+    containerRef: React.RefObject<HTMLElement>,
+  ) => {
     useEffect(() => {
       if (!isOpen || !containerRef.current) return;
 
@@ -71,16 +74,18 @@ export const useFocusManagement = () => {
 
       // Handle Tab key for focus trapping
       const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key !== 'Tab') return;
+        if (e.key !== "Tab") return;
 
         const focusableElements = container.querySelectorAll(
-          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
         );
 
         if (focusableElements.length === 0) return;
 
         const firstElement = focusableElements[0] as HTMLElement;
-        const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+        const lastElement = focusableElements[
+          focusableElements.length - 1
+        ] as HTMLElement;
 
         if (e.shiftKey) {
           // Shift+Tab: moving backwards
@@ -97,24 +102,24 @@ export const useFocusManagement = () => {
         }
       };
 
-      container.addEventListener('keydown', handleKeyDown);
+      container.addEventListener("keydown", handleKeyDown);
 
       return () => {
-        container.removeEventListener('keydown', handleKeyDown);
+        container.removeEventListener("keydown", handleKeyDown);
         // Restore focus when modal closes
         restoreFocus();
       };
-    }, [isOpen, containerRef, storeFocus, focusFirst, restoreFocus]);
+    }, [isOpen, containerRef]);
   };
 
   /**
    * Announce content changes to screen readers
    */
   const announceToScreenReader = useCallback((message: string) => {
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('aria-atomic', 'true');
-    announcement.classList.add('sr-only');
+    const announcement = document.createElement("div");
+    announcement.setAttribute("aria-live", "polite");
+    announcement.setAttribute("aria-atomic", "true");
+    announcement.classList.add("sr-only");
     announcement.textContent = message;
 
     document.body.appendChild(announcement);
@@ -128,64 +133,77 @@ export const useFocusManagement = () => {
   /**
    * Focus management for dynamic content updates
    */
-  const handleContentUpdate = useCallback((
-    container: HTMLElement,
-    message?: string,
-    focusTarget?: HTMLElement | string
-  ) => {
-    if (message) {
-      announceToScreenReader(message);
-    }
-
-    // Focus specific target or first focusable element
-    setTimeout(() => {
-      if (typeof focusTarget === 'string') {
-        const element = container.querySelector(focusTarget) as HTMLElement;
-        if (element) {
-          element.focus();
-          return;
-        }
-      } else if (focusTarget) {
-        focusTarget.focus();
-        return;
+  const handleContentUpdate = useCallback(
+    (
+      container: HTMLElement,
+      message?: string,
+      focusTarget?: HTMLElement | string,
+    ) => {
+      if (message) {
+        announceToScreenReader(message);
       }
 
-      // Default: focus first focusable element
-      focusFirst(container);
-    }, 100);
-  }, [announceToScreenReader, focusFirst]);
+      // Focus specific target or first focusable element
+      setTimeout(() => {
+        if (typeof focusTarget === "string") {
+          const element = container.querySelector(focusTarget) as HTMLElement;
+          if (element) {
+            element.focus();
+            return;
+          }
+        } else if (focusTarget) {
+          focusTarget.focus();
+          return;
+        }
+
+        // Default: focus first focusable element
+        focusFirst(container);
+      }, 100);
+    },
+    [announceToScreenReader, focusFirst],
+  );
 
   /**
    * Skip to main content functionality
    */
-  const skipToContent = useCallback((targetId: string = 'main-content') => {
-    const target = document.getElementById(targetId);
-    if (target) {
-      target.focus();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      announceToScreenReader(`Skipped to ${target.getAttribute('aria-label') || 'main content'}`);
-    }
-  }, [announceToScreenReader]);
+  const skipToContent = useCallback(
+    (targetId: string = "main-content") => {
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.focus();
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        announceToScreenReader(
+          `Skipped to ${target.getAttribute("aria-label") || "main content"}`,
+        );
+      }
+    },
+    [announceToScreenReader],
+  );
 
   /**
    * Navigate to section with proper focus management
    */
-  const navigateToSection = useCallback((sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+  const navigateToSection = useCallback(
+    (sectionId: string) => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
 
-      // Focus the section heading or first focusable element
-      const heading = section.querySelector('h1, h2, h3, h4, h5, h6') as HTMLElement;
-      if (heading) {
-        heading.setAttribute('tabindex', '-1');
-        heading.focus();
-        announceToScreenReader(`Navigated to ${heading.textContent}`);
-      } else {
-        focusFirst(section);
+        // Focus the section heading or first focusable element
+        const heading = section.querySelector(
+          "h1, h2, h3, h4, h5, h6",
+        ) as HTMLElement;
+        if (heading) {
+          heading.setAttribute("tabindex", "-1");
+          heading.focus();
+          announceToScreenReader(`Navigated to ${heading.textContent}`);
+        } else {
+          focusFirst(section);
+        }
       }
-    }
-  }, [focusFirst, announceToScreenReader]);
+    },
+    [focusFirst, announceToScreenReader],
+  );
 
   return {
     storeFocus,

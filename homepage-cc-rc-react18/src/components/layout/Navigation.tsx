@@ -14,9 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EnhancedDialog } from "@/components/ui/modal";
-import {
-  SettingsDropdown,
-} from "@/components/features";
+import { SettingsDropdown } from "@/components/features";
 import { useModalClose } from "@/hooks/useModalClose";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useTheme } from "@/hooks/useTheme";

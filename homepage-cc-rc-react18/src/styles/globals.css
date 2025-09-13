@@ -545,16 +545,33 @@ li {
   line-height: 2;
 }
 
-/* Enhanced readability for small text */
-.text-sm,
-.text-xs {
+/* Enhanced readability for small text - only when accessibility is enabled */
+.spacing-comfortable .text-sm,
+.spacing-comfortable .text-xs {
   line-height: 1.6;
   letter-spacing: 0.025em;
 }
 
-/* Improved button text readability */
-button,
-.btn {
+/* Enhanced modal spacing when accessibility is enabled */
+.spacing-comfortable {
+  padding: 1.5rem !important; /* Override p-3 with more generous padding */
+}
+
+.spacing-comfortable h2 {
+  margin-bottom: 1rem !important; /* More space after titles */
+}
+
+.spacing-comfortable p {
+  margin-bottom: 1rem !important; /* More space after descriptions */
+}
+
+.spacing-comfortable > div {
+  margin-bottom: 0.75rem !important; /* More space between sections */
+}
+
+/* Improved button text readability - only when accessibility is enabled */
+.spacing-comfortable button,
+.spacing-comfortable .btn {
   font-weight: 500;
   letter-spacing: 0.025em;
   line-height: 1.5;

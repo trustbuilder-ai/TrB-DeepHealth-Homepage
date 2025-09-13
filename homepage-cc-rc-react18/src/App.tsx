@@ -51,6 +51,8 @@ import { Notification } from "@/components/ui/notification";
 import { Navigation } from "@/components/layout/Navigation";
 import { Features } from "@/components/layout/Features";
 import { SkipLinksWithShortcuts } from "@/components/ui/skip-links";
+import { CrisisBanner } from "@/components/ui/crisis-banner";
+import { HumanOversightBanner } from "@/components/ui/human-oversight-banner";
 import { useFocusManagement } from "@/hooks/useFocusManagement";
 
 /**
@@ -170,7 +172,7 @@ export default function LLMTestingPlatform() {
         const mainContent = document.getElementById("main-content");
         if (mainContent) {
           mainContent.focus();
-          mainContent.scrollIntoView({ behavior: 'smooth' });
+          mainContent.scrollIntoView({ behavior: "smooth" });
           announceToScreenReader("Skipped to main content");
         }
         return;
@@ -179,32 +181,35 @@ export default function LLMTestingPlatform() {
       // Alt key shortcuts for navigation
       if (e.altKey) {
         switch (e.key) {
-          case '1':
+          case "1":
             e.preventDefault();
-            navigateToSection('features');
+            navigateToSection("features");
             break;
-          case '2':
+          case "2":
             e.preventDefault();
-            navigateToSection('scenarios');
+            navigateToSection("scenarios");
             break;
-          case '3':
+          case "3":
             e.preventDefault();
-            navigateToSection('conversations');
+            navigateToSection("conversations");
             break;
-          case 's':
+          case "s": {
             e.preventDefault();
             // Open settings dropdown
-            const settingsButton = document.querySelector('[aria-label="Settings menu"]') as HTMLButtonElement;
+            const settingsButton = document.querySelector(
+              '[aria-label="Settings menu"]',
+            ) as HTMLButtonElement;
             if (settingsButton) {
               settingsButton.click();
               announceToScreenReader("Settings menu opened");
             }
             break;
-          case 't':
+          }
+          case "t":
             e.preventDefault();
             modals.showTour.open();
             break;
-          case 'a':
+          case "a":
             e.preventDefault();
             modals.showAnalytics.open();
             break;
@@ -213,7 +218,7 @@ export default function LLMTestingPlatform() {
       }
 
       // Help shortcut
-      if (e.key === 'F1' || ((e.ctrlKey || e.metaKey) && e.key === '/')) {
+      if (e.key === "F1" || ((e.ctrlKey || e.metaKey) && e.key === "/")) {
         e.preventDefault();
         modals.showTour.open();
         return;
@@ -284,651 +289,668 @@ export default function LLMTestingPlatform() {
         {/* Features Section */}
         <Features />
 
-      {/* Testing Scenarios Section */}
-      <section id="scenarios" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2
-              className={`h2-style font-bold ${theme.text} mb-4`}
-              tabIndex={-1}
-            >
-              Testing Scenarios
-            </h2>
-            <p
-              className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto mb-8 leading-relaxed`}
-            >
-              Comprehensive evaluation scenarios designed by mental health
-              experts.
-            </p>
-
-            {/* Search Input */}
-            <div className="max-w-md mx-auto">
-              <div className="relative">
-                <Search
-                  className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 icon-dynamic ${theme.textMuted}`}
-                />
-                <Input
-                  id="search-input"
-                  type="text"
-                  placeholder="Search scenarios... (Ctrl+K)"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  theme={theme}
-                  className="pl-10"
-                />
-              </div>
-              {searchQuery && (
-                <p className={`text-sm ${theme.textMuted} mt-2`}>
-                  {filteredScenarios.length} scenario
-                  {filteredScenarios.length !== 1 ? "s" : ""} found for "
-                  {searchQuery}"
-                </p>
-              )}
-            </div>
-          </div>
-
-          {filteredScenarios.length === 0 ? (
-            <div className="text-center py-12">
-              <Search
-                className={`w-12 h-12 mx-auto mb-4 icon-dynamic ${theme.textMuted}`}
-              />
-              <h3 className={`text-lg font-medium ${theme.text} mb-2`}>
-                No scenarios found
-              </h3>
-              <p className={`${theme.textSecondary}`}>
-                Try a different search term or clear your search.
-              </p>
-              <Button
-                variant="outline"
-                onClick={() => setSearchQuery("")}
-                theme={theme}
-                className="mt-4"
+        {/* Testing Scenarios Section */}
+        <section id="scenarios" className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2
+                className={`h2-style font-bold ${theme.text} mb-4`}
+                tabIndex={-1}
               >
-                Clear Search
-              </Button>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 gap-6">
-              {filteredScenarios.map((scenario) => {
-                const IconComponent = scenario.icon;
-                const testState = testingStates[scenario.id];
+                Testing Scenarios
+              </h2>
+              <p
+                className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto mb-8 leading-relaxed`}
+              >
+                Comprehensive evaluation scenarios designed by mental health
+                experts.
+              </p>
 
-                return (
-                  <Card
-                    key={scenario.id}
+              {/* Search Input */}
+              <div className="max-w-md mx-auto">
+                <div className="relative">
+                  <Search
+                    className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 icon-dynamic ${theme.textMuted}`}
+                  />
+                  <Input
+                    id="search-input"
+                    type="text"
+                    placeholder="Search scenarios... (Ctrl+K)"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                     theme={theme}
-                    className={`group card-glow transition-all duration-300 cursor-pointer ${
-                      selectedScenario === scenario.id
-                        ? `ring-2 ring-blue-500 ${theme.glow}`
-                        : ""
-                    }`}
-                    onClick={() =>
-                      setSelectedScenario(
-                        selectedScenario === scenario.id ? null : scenario.id,
-                      )
-                    }
-                  >
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={`p-3 rounded-lg ${theme.accent} group-hover:scale-105 transition-transform`}
-                          >
-                            <IconComponent className="w-6 h-6 icon-dynamic" />
-                          </div>
-                          <div>
-                            <CardTitle theme={theme} className="text-lg mb-1">
-                              {scenario.title}
-                            </CardTitle>
-                            <div className={`text-sm ${theme.textMuted} mb-2`}>
-                              {scenario.category}
+                    className="pl-10"
+                  />
+                </div>
+                {searchQuery && (
+                  <p className={`text-sm ${theme.textMuted} mt-2`}>
+                    {filteredScenarios.length} scenario
+                    {filteredScenarios.length !== 1 ? "s" : ""} found for "
+                    {searchQuery}"
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {filteredScenarios.length === 0 ? (
+              <div className="text-center py-12">
+                <Search
+                  className={`w-12 h-12 mx-auto mb-4 icon-dynamic ${theme.textMuted}`}
+                />
+                <h3 className={`text-lg font-medium ${theme.text} mb-2`}>
+                  No scenarios found
+                </h3>
+                <p className={`${theme.textSecondary}`}>
+                  Try a different search term or clear your search.
+                </p>
+                <Button
+                  variant="outline"
+                  onClick={() => setSearchQuery("")}
+                  theme={theme}
+                  className="mt-4"
+                >
+                  Clear Search
+                </Button>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 gap-6">
+                {filteredScenarios.map((scenario) => {
+                  const IconComponent = scenario.icon;
+                  const testState = testingStates[scenario.id];
+
+                  return (
+                    <Card
+                      key={scenario.id}
+                      theme={theme}
+                      className={`group card-glow transition-all duration-300 cursor-pointer ${
+                        selectedScenario === scenario.id
+                          ? `ring-2 ring-blue-500 ${theme.glow}`
+                          : ""
+                      }`}
+                      onClick={() =>
+                        setSelectedScenario(
+                          selectedScenario === scenario.id ? null : scenario.id,
+                        )
+                      }
+                    >
+                      <CardHeader className="pb-3">
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-center gap-3">
+                            <div
+                              className={`p-3 rounded-lg ${theme.accent} group-hover:scale-105 transition-transform`}
+                            >
+                              <IconComponent className="w-6 h-6 icon-dynamic" />
+                            </div>
+                            <div>
+                              <CardTitle theme={theme} className="text-lg mb-1">
+                                {scenario.title}
+                              </CardTitle>
+                              <div
+                                className={`text-sm ${theme.textMuted} mb-2`}
+                              >
+                                {scenario.category}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <StatusBadge
-                          variant={
-                            scenario.difficulty === "Critical"
-                              ? "critical"
-                              : scenario.difficulty === "High"
-                                ? "warning"
-                                : scenario.difficulty === "Medium"
-                                  ? "info"
-                                  : "default"
-                          }
-                          size="sm"
-                        >
-                          {scenario.difficulty}
-                        </StatusBadge>
-                      </div>
-                      <CardDescription
-                        theme={theme}
-                        className="text-sm leading-relaxed"
-                      >
-                        {scenario.description}
-                      </CardDescription>
-                    </CardHeader>
-
-                    <CardContent className="pt-0">
-                      <div
-                        className={`px-4 py-3 ${theme.surface} rounded-lg mb-4`}
-                      >
-                        <p
-                          className={`text-sm ${theme.textSecondary} italic leading-relaxed`}
-                        >
-                          "{scenario.prompt}"
-                        </p>
-                      </div>
-
-                      {testState === "running" && (
-                        <Alert className="mb-4">
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                          <AlertDescription>
-                            Running test scenario... This may take a few
-                            moments.
-                          </AlertDescription>
-                        </Alert>
-                      )}
-
-                      {testState === "completed" && (
-                        <Alert className="mb-4">
-                          <CheckCircle2 className="h-4 w-4" />
-                          <AlertDescription>
-                            Test completed successfully! Results are available
-                            in the Research section.
-                          </AlertDescription>
-                        </Alert>
-                      )}
-
-                      {testState === "error" && (
-                        <Alert variant="destructive" className="mb-4">
-                          <AlertTriangle className="h-4 w-4" />
-                          <AlertDescription>
-                            Test failed to complete. Please try again or contact
-                            support.
-                          </AlertDescription>
-                        </Alert>
-                      )}
-
-                      {selectedScenario === scenario.id && (
-                        <div className="flex gap-3">
-                          <Button
-                            variant="outline"
+                          <StatusBadge
+                            variant={
+                              scenario.difficulty === "Critical"
+                                ? "critical"
+                                : scenario.difficulty === "High"
+                                  ? "warning"
+                                  : scenario.difficulty === "Medium"
+                                    ? "info"
+                                    : "default"
+                            }
                             size="sm"
-                            theme={theme}
-                            className="flex-1"
                           >
-                            <Settings className="w-4 h-4 mr-2 icon-dynamic" />
-                            Configure
-                          </Button>
-                          <Button
-                            size="sm"
-                            theme={theme}
-                            className="flex-1"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleRunTest(scenario.id);
-                            }}
-                            disabled={testState === "running" || !isOnline}
-                          >
-                            <Play className="w-4 h-4 mr-2" />
-                            {testState === "running"
-                              ? "Running..."
-                              : "Run Test"}
-                          </Button>
+                            {scenario.difficulty}
+                          </StatusBadge>
                         </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Analytics Overview */}
-      <section className={`py-12 px-4 ${theme.surface}`}>
-        <div className="max-w-6xl mx-auto">
-          <h2 className="h2-style font-bold mb-8 text-center">
-            Platform Analytics
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-2xl font-bold">
-                  {mockAnalytics.totalTests}
-                </CardTitle>
-                <CardDescription>Total Tests</CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle
-                  className={`text-2xl font-bold ${theme.isDark ? "text-green-400" : "text-green-600"}`}
-                >
-                  {mockAnalytics.passRate}%
-                </CardTitle>
-                <CardDescription>Pass Rate</CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-2xl font-bold">
-                  {mockAnalytics.averageResponseTime}s
-                </CardTitle>
-                <CardDescription>Avg Response Time</CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle
-                  className={`text-2xl font-bold ${theme.isDark ? "text-red-400" : "text-red-600"}`}
-                >
-                  {mockAnalytics.riskFlags}
-                </CardTitle>
-                <CardDescription>Risk Flags</CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
-
-          <div className="mt-8">
-            <Card>
-              <CardHeader>
-                <CardTitle>Category Performance</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {mockAnalytics.categories.map((category, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between"
-                  >
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="font-medium">{category.name}</span>
-                        <span className="text-sm text-gray-600">
-                          {category.passRate}%
-                        </span>
-                      </div>
-                      <Progress value={category.passRate} />
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Conversation Display Section */}
-      <section id="conversations" className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2
-              className={`h2-style font-bold ${theme.text} mb-4`}
-              tabIndex={-1}
-            >
-              Research Conversations
-            </h2>
-            <p
-              className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto leading-relaxed`}
-            >
-              Review actual test conversations and their safety, empathy, and
-              bias metrics.
-            </p>
-          </div>
-
-          <div className="grid gap-8">
-            {mockConversations.map((conversation) => (
-              <Card
-                key={conversation.id}
-                className={`group card-glow transition-all duration-300 ${theme.surface} ${theme.border}`}
-              >
-                <CardHeader className="pb-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <CardTitle className={`text-xl ${theme.text} mb-2`}>
-                        {conversation.scenario}
-                      </CardTitle>
-                      <div className="flex items-center gap-4 text-sm">
-                        <span className={`font-medium ${theme.textSecondary}`}>
-                          Model: {conversation.model}
-                        </span>
-                        <StatusBadge
-                          variant={
-                            conversation.status.includes("Excellent")
-                              ? "success"
-                              : conversation.status.includes("Flagged")
-                                ? "warning"
-                                : "info"
-                          }
-                          size="sm"
+                        <CardDescription
+                          theme={theme}
+                          className="text-sm leading-relaxed"
                         >
-                          {conversation.status}
-                        </StatusBadge>
-                        <span className={`text-xs ${theme.textMuted}`}>
-                          {conversation.metrics.timestamp}
-                        </span>
-                      </div>
-                    </div>
+                          {scenario.description}
+                        </CardDescription>
+                      </CardHeader>
 
-                    {/* Metrics Display */}
-                    <div className="flex gap-4">
-                      <div className="text-center">
+                      <CardContent className="pt-0">
                         <div
-                          className={`text-lg font-bold ${
-                            conversation.metrics.safety >= 95
-                              ? "text-green-600"
-                              : conversation.metrics.safety >= 90
-                                ? "text-yellow-600"
-                                : "text-red-600"
-                          }`}
-                        >
-                          {conversation.metrics.safety}
-                        </div>
-                        <div className={`text-xs ${theme.textMuted}`}>
-                          Safety
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div
-                          className={`text-lg font-bold ${
-                            conversation.metrics.empathy >= 90
-                              ? "text-green-600"
-                              : conversation.metrics.empathy >= 80
-                                ? "text-yellow-600"
-                                : "text-red-600"
-                          }`}
-                        >
-                          {conversation.metrics.empathy}
-                        </div>
-                        <div className={`text-xs ${theme.textMuted}`}>
-                          Empathy
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div
-                          className={`text-lg font-bold ${
-                            conversation.metrics.bias >= 95
-                              ? "text-green-600"
-                              : conversation.metrics.bias >= 90
-                                ? "text-yellow-600"
-                                : "text-red-600"
-                          }`}
-                        >
-                          {conversation.metrics.bias}
-                        </div>
-                        <div className={`text-xs ${theme.textMuted}`}>
-                          Bias Score
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="space-y-4">
-                  {conversation.messages.map((message, index) => (
-                    <div
-                      key={index}
-                      className={`flex gap-3 ${
-                        message.role === "assistant" ? "ml-6" : ""
-                      }`}
-                    >
-                      <div className="flex-shrink-0">
-                        <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            message.role === "user"
-                              ? `${theme.primarySolid} text-white`
-                              : `${theme.accent} ${theme.textSecondary}`
-                          }`}
-                        >
-                          {message.role === "user" ? (
-                            <Users className="w-4 h-4 icon-dynamic" />
-                          ) : (
-                            <Brain className="w-4 h-4 icon-dynamic" />
-                          )}
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <div
-                          className={`px-4 py-3 rounded-lg ${
-                            message.role === "user"
-                              ? `${theme.primary} bg-opacity-10 border-l-4 border-opacity-50`
-                              : `${theme.surface} border`
-                          } ${theme.border}`}
+                          className={`px-4 py-3 ${theme.surface} rounded-lg mb-4`}
                         >
                           <p
-                            className={`text-sm leading-relaxed ${theme.textSecondary}`}
+                            className={`text-sm ${theme.textSecondary} italic leading-relaxed`}
                           >
-                            {message.content}
+                            "{scenario.prompt}"
                           </p>
                         </div>
+
+                        {testState === "running" && (
+                          <Alert className="mb-4">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            <AlertDescription>
+                              Running test scenario... This may take a few
+                              moments.
+                            </AlertDescription>
+                          </Alert>
+                        )}
+
+                        {testState === "completed" && (
+                          <Alert className="mb-4">
+                            <CheckCircle2 className="h-4 w-4" />
+                            <AlertDescription>
+                              Test completed successfully! Results are available
+                              in the Research section.
+                            </AlertDescription>
+                          </Alert>
+                        )}
+
+                        {testState === "error" && (
+                          <Alert variant="destructive" className="mb-4">
+                            <AlertTriangle className="h-4 w-4" />
+                            <AlertDescription>
+                              Test failed to complete. Please try again or
+                              contact support.
+                            </AlertDescription>
+                          </Alert>
+                        )}
+
+                        {selectedScenario === scenario.id && (
+                          <div className="flex gap-3">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              theme={theme}
+                              className="flex-1"
+                            >
+                              <Settings className="w-4 h-4 mr-2 icon-dynamic" />
+                              Configure
+                            </Button>
+                            <Button
+                              size="sm"
+                              theme={theme}
+                              className="flex-1"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleRunTest(scenario.id);
+                              }}
+                              disabled={testState === "running" || !isOnline}
+                            >
+                              <Play className="w-4 h-4 mr-2" />
+                              {testState === "running"
+                                ? "Running..."
+                                : "Run Test"}
+                            </Button>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Analytics Overview */}
+        <section className={`py-12 px-4 ${theme.surface}`}>
+          <div className="max-w-6xl mx-auto">
+            <h2 className="h2-style font-bold mb-8 text-center">
+              Platform Analytics
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-2xl font-bold">
+                    {mockAnalytics.totalTests}
+                  </CardTitle>
+                  <CardDescription>Total Tests</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle
+                    className={`text-2xl font-bold ${theme.isDark ? "text-green-400" : "text-green-600"}`}
+                  >
+                    {mockAnalytics.passRate}%
+                  </CardTitle>
+                  <CardDescription>Pass Rate</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-2xl font-bold">
+                    {mockAnalytics.averageResponseTime}s
+                  </CardTitle>
+                  <CardDescription>Avg Response Time</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle
+                    className={`text-2xl font-bold ${theme.isDark ? "text-red-400" : "text-red-600"}`}
+                  >
+                    {mockAnalytics.riskFlags}
+                  </CardTitle>
+                  <CardDescription>Risk Flags</CardDescription>
+                </CardHeader>
+              </Card>
+            </div>
+
+            <div className="mt-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Category Performance</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {mockAnalytics.categories.map((category, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between"
+                    >
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="font-medium">{category.name}</span>
+                          <span className="text-sm text-gray-600">
+                            {category.passRate}%
+                          </span>
+                        </div>
+                        <Progress value={category.passRate} />
                       </div>
                     </div>
                   ))}
                 </CardContent>
               </Card>
-            ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Footer Section */}
-      <footer className={`py-16 ${theme.surface} border-t ${theme.border}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-5 gap-8 mb-8">
-            <div className="lg:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div
-                  className={`w-8 h-8 rounded-lg bg-gradient-to-r ${theme.primary} flex items-center justify-center shadow-lg ${theme.glow}`}
-                >
-                  <Brain className="w-5 h-5 text-white" />
-                </div>
-                <span className={`text-xl font-semibold ${theme.text}`}>
-                  Astra Labs
-                </span>
-              </div>
-              <p className={`text-sm ${theme.textSecondary} mb-6`}>
-                Building safer AI for mental health with research-backed design.
+        {/* Human Oversight Notice */}
+        <section className={`py-8 ${theme.surface}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <HumanOversightBanner />
+          </div>
+        </section>
+
+        {/* Conversation Display Section */}
+        <section id="conversations" className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2
+                className={`h2-style font-bold ${theme.text} mb-4`}
+                tabIndex={-1}
+              >
+                Research Conversations
+              </h2>
+              <p
+                className={`text-xl ${theme.textSecondary} max-w-3xl mx-auto leading-relaxed`}
+              >
+                Review actual test conversations and their safety, empathy, and
+                bias metrics.
               </p>
-              <div className="flex items-center gap-4">
-                <Button variant="ghost" size="icon" theme={theme}>
-                  <Globe className="w-4 h-4 icon-dynamic" />
-                </Button>
-                {isOnline ? (
-                  <Wifi
-                    className={`w-4 h-4 ml-2 ${theme.isDark ? "text-green-400" : "text-green-500"}`}
-                    aria-label="Online"
-                  />
-                ) : (
-                  <WifiOff
-                    className={`w-4 h-4 ml-2 ${theme.isDark ? "text-red-400" : "text-red-500"}`}
-                    aria-label="Offline"
-                  />
-                )}
-              </div>
             </div>
 
-            {/* Desktop: Side by side sections */}
-            <div className="hidden lg:grid lg:grid-cols-4 lg:col-span-4 gap-8">
-              {[
-                {
-                  title: "Platform",
-                  items: [
-                    "LLM Testing",
-                    "Safety Protocols",
-                    "Analytics Dashboard",
-                    "API Access",
-                  ],
-                },
-                {
-                  title: "Research",
-                  items: [
-                    "Case Studies",
-                    "White Papers",
-                    "Best Practices",
-                    "Publications",
-                  ],
-                },
-                {
-                  title: "Resources",
-                  items: ["Documentation", "Tutorials", "Community", "Blog"],
-                },
-                {
-                  title: "Support",
-                  items: [
-                    "Help Center",
-                    "Contact Us",
-                    "Privacy Policy",
-                    "Terms of Service",
-                  ],
-                },
-              ].map((section) => (
-                <div key={section.title}>
-                  <h3 className={`font-semibold ${theme.text} mb-3`}>
-                    {section.title}
-                  </h3>
-                  <nav aria-label={`${section.title} links`}>
-                    <ul className="space-y-2">
-                      {section.items.map((item) => (
-                        <li key={item}>
-                          <a
-                            href="#"
-                            className={`text-sm ${theme.textSecondary} transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded`}
+            <div className="grid gap-8">
+              {mockConversations.map((conversation) => (
+                <Card
+                  key={conversation.id}
+                  className={`group card-glow transition-all duration-300 ${theme.surface} ${theme.border}`}
+                >
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle className={`text-xl ${theme.text} mb-2`}>
+                          {conversation.scenario}
+                        </CardTitle>
+                        <div className="flex items-center gap-4 text-sm">
+                          <span
+                            className={`font-medium ${theme.textSecondary}`}
                           >
-                            {item}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </nav>
-                </div>
+                            Model: {conversation.model}
+                          </span>
+                          <StatusBadge
+                            variant={
+                              conversation.status.includes("Excellent")
+                                ? "success"
+                                : conversation.status.includes("Flagged")
+                                  ? "warning"
+                                  : "info"
+                            }
+                            size="sm"
+                          >
+                            {conversation.status}
+                          </StatusBadge>
+                          <span className={`text-xs ${theme.textMuted}`}>
+                            {conversation.metrics.timestamp}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Metrics Display */}
+                      <div className="flex gap-4">
+                        <div className="text-center">
+                          <div
+                            className={`text-lg font-bold ${
+                              conversation.metrics.safety >= 95
+                                ? "text-green-600"
+                                : conversation.metrics.safety >= 90
+                                  ? "text-yellow-600"
+                                  : "text-red-600"
+                            }`}
+                          >
+                            {conversation.metrics.safety}
+                          </div>
+                          <div className={`text-xs ${theme.textMuted}`}>
+                            Safety
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div
+                            className={`text-lg font-bold ${
+                              conversation.metrics.empathy >= 90
+                                ? "text-green-600"
+                                : conversation.metrics.empathy >= 80
+                                  ? "text-yellow-600"
+                                  : "text-red-600"
+                            }`}
+                          >
+                            {conversation.metrics.empathy}
+                          </div>
+                          <div className={`text-xs ${theme.textMuted}`}>
+                            Empathy
+                          </div>
+                        </div>
+                        <div className="text-center">
+                          <div
+                            className={`text-lg font-bold ${
+                              conversation.metrics.bias >= 95
+                                ? "text-green-600"
+                                : conversation.metrics.bias >= 90
+                                  ? "text-yellow-600"
+                                  : "text-red-600"
+                            }`}
+                          >
+                            {conversation.metrics.bias}
+                          </div>
+                          <div className={`text-xs ${theme.textMuted}`}>
+                            Bias Score
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="space-y-4">
+                    {conversation.messages.map((message, index) => (
+                      <div
+                        key={index}
+                        className={`flex gap-3 ${
+                          message.role === "assistant" ? "ml-6" : ""
+                        }`}
+                      >
+                        <div className="flex-shrink-0">
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                              message.role === "user"
+                                ? `${theme.primarySolid} text-white`
+                                : `${theme.accent} ${theme.textSecondary}`
+                            }`}
+                          >
+                            {message.role === "user" ? (
+                              <Users className="w-4 h-4 icon-dynamic" />
+                            ) : (
+                              <Brain className="w-4 h-4 icon-dynamic" />
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <div
+                            className={`px-4 py-3 rounded-lg ${
+                              message.role === "user"
+                                ? `${theme.primary} bg-opacity-10 border-l-4 border-opacity-50`
+                                : `${theme.surface} border`
+                            } ${theme.border}`}
+                          >
+                            <p
+                              className={`text-sm leading-relaxed ${theme.textSecondary}`}
+                            >
+                              {message.content}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </CardContent>
+                </Card>
               ))}
             </div>
+          </div>
+        </section>
 
-            {/* Mobile: Expandable sections */}
-            <div className="lg:hidden space-y-4">
-              {[
-                {
-                  id: "platform",
-                  title: "Platform",
-                  items: [
-                    "LLM Testing",
-                    "Safety Protocols",
-                    "Analytics Dashboard",
-                    "API Access",
-                  ],
-                },
-                {
-                  id: "research",
-                  title: "Research",
-                  items: [
-                    "Case Studies",
-                    "White Papers",
-                    "Best Practices",
-                    "Publications",
-                  ],
-                },
-                {
-                  id: "resources",
-                  title: "Resources",
-                  items: ["Documentation", "Tutorials", "Community", "Blog"],
-                },
-                {
-                  id: "support",
-                  title: "Support",
-                  items: [
-                    "Help Center",
-                    "Contact Us",
-                    "Privacy Policy",
-                    "Terms of Service",
-                  ],
-                },
-              ].map((section) => {
-                const isExpanded =
-                  expandedFooterSections[
-                    section.id as keyof typeof expandedFooterSections
-                  ];
-
-                return (
+        {/* Footer Section */}
+        <footer className={`py-16 ${theme.surface} border-t ${theme.border}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-5 gap-8 mb-8 lg:items-start">
+              <div className="lg:col-span-1 flex flex-col h-full">
+                <div className="flex items-center gap-3 mb-4">
                   <div
-                    key={section.id}
-                    className={`border rounded-lg ${theme.border}`}
+                    className={`w-8 h-8 rounded-lg bg-gradient-to-r ${theme.primary} flex items-center justify-center shadow-lg ${theme.glow}`}
                   >
-                    <button
-                      onClick={() =>
-                        setExpandedFooterSections(
-                          (prev: typeof expandedFooterSections) => ({
-                            ...prev,
-                            [section.id]:
-                              !prev[section.id as keyof typeof prev],
-                          }),
-                        )
-                      }
-                      aria-expanded={isExpanded}
-                      aria-controls={`footer-section-${section.id}`}
-                      className={`w-full flex items-center justify-between p-4 text-left ${theme.surface} rounded-lg transition-colors hover:bg-opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
-                    >
-                      <h3 className={`font-semibold ${theme.text}`}>
-                        {section.title}
-                      </h3>
-                      <ChevronDown
-                        className={`w-4 h-4 ${theme.textSecondary} transition-transform ${isExpanded ? "rotate-180" : ""}`}
-                      />
-                    </button>
-                    {isExpanded && (
-                      <div
-                        id={`footer-section-${section.id}`}
-                        className="px-4 pb-4"
-                      >
-                        <nav aria-label={`${section.title} links`}>
-                          <ul className="space-y-2">
-                            {section.items.map((item) => (
-                              <li key={item}>
-                                <a
-                                  href="#"
-                                  className={`text-sm ${theme.textSecondary} transition-colors block py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded`}
-                                >
-                                  {item}
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
-                        </nav>
-                      </div>
-                    )}
+                    <Brain className="w-5 h-5 text-white" />
                   </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div
-            className={`border-t ${theme.border} mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between`}
-          >
-            <p className={`text-sm ${theme.textSecondary}`}>
-              © 2025 Astra Labs. Building safer AI for mental health with
-              research-backed design.
-            </p>
-            <div className="flex items-center gap-4 mt-4 sm:mt-0">
-              <span className={`text-xs ${theme.textMuted}`}>Made with</span>
-              <div
-                className={`flex h-6 w-6 items-center justify-center rounded-full ${theme.isDark ? "bg-rose-900/30" : "bg-rose-100"} transition-colors`}
-              >
-                <Heart
-                  className={`w-3 h-3 ${theme.isDark ? "text-rose-400" : "text-rose-600"}`}
-                />
+                  <span className={`text-xl font-semibold ${theme.text}`}>
+                    Astra Labs
+                  </span>
+                </div>
+                <p className={`text-sm ${theme.textSecondary} mb-6`}>
+                  Building safer AI for mental health with research-backed
+                  design.
+                </p>
+                <div className="flex items-center gap-4">
+                  <Button variant="ghost" size="icon" theme={theme}>
+                    <Globe className="w-4 h-4 icon-dynamic" />
+                  </Button>
+                  {isOnline ? (
+                    <Wifi
+                      className={`w-4 h-4 ml-2 ${theme.isDark ? "text-green-400" : "text-green-500"}`}
+                      aria-label="Online"
+                    />
+                  ) : (
+                    <WifiOff
+                      className={`w-4 h-4 ml-2 ${theme.isDark ? "text-red-400" : "text-red-500"}`}
+                      aria-label="Offline"
+                    />
+                  )}
+                </div>
               </div>
-              <span className={`text-xs ${theme.textMuted}`}>
-                for mental wellness
-              </span>
+
+              {/* Desktop: Side by side sections */}
+              <div className="hidden lg:grid lg:grid-cols-4 lg:col-span-4 gap-8">
+                {[
+                  {
+                    title: "Platform",
+                    items: [
+                      "LLM Testing",
+                      "Safety Protocols",
+                      "Analytics Dashboard",
+                      "API Access",
+                    ],
+                  },
+                  {
+                    title: "Research",
+                    items: [
+                      "Case Studies",
+                      "White Papers",
+                      "Best Practices",
+                      "Publications",
+                    ],
+                  },
+                  {
+                    title: "Resources",
+                    items: ["Documentation", "Tutorials", "Community", "Blog"],
+                  },
+                  {
+                    title: "Support",
+                    items: [
+                      "Help Center",
+                      "Contact Us",
+                      "Privacy Policy",
+                      "Terms of Service",
+                    ],
+                  },
+                ].map((section) => (
+                  <div key={section.title} className="h-full flex flex-col">
+                    <h3 className={`font-semibold ${theme.text} mb-3`}>
+                      {section.title}
+                    </h3>
+                    <nav aria-label={`${section.title} links`}>
+                      <ul className="space-y-2">
+                        {section.items.map((item) => (
+                          <li key={item}>
+                            <a
+                              href="#"
+                              className={`text-sm ${theme.textSecondary} transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded`}
+                            >
+                              {item}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </nav>
+                  </div>
+                ))}
+              </div>
+
+              {/* Mobile: Expandable sections */}
+              <div className="lg:hidden space-y-4">
+                {[
+                  {
+                    id: "platform",
+                    title: "Platform",
+                    items: [
+                      "LLM Testing",
+                      "Safety Protocols",
+                      "Analytics Dashboard",
+                      "API Access",
+                    ],
+                  },
+                  {
+                    id: "research",
+                    title: "Research",
+                    items: [
+                      "Case Studies",
+                      "White Papers",
+                      "Best Practices",
+                      "Publications",
+                    ],
+                  },
+                  {
+                    id: "resources",
+                    title: "Resources",
+                    items: ["Documentation", "Tutorials", "Community", "Blog"],
+                  },
+                  {
+                    id: "support",
+                    title: "Support",
+                    items: [
+                      "Help Center",
+                      "Contact Us",
+                      "Privacy Policy",
+                      "Terms of Service",
+                    ],
+                  },
+                ].map((section) => {
+                  const isExpanded =
+                    expandedFooterSections[
+                      section.id as keyof typeof expandedFooterSections
+                    ];
+
+                  return (
+                    <div
+                      key={section.id}
+                      className={`border rounded-lg ${theme.border}`}
+                    >
+                      <button
+                        onClick={() =>
+                          setExpandedFooterSections(
+                            (prev: typeof expandedFooterSections) => ({
+                              ...prev,
+                              [section.id]:
+                                !prev[section.id as keyof typeof prev],
+                            }),
+                          )
+                        }
+                        aria-expanded={isExpanded}
+                        aria-controls={`footer-section-${section.id}`}
+                        className={`w-full flex items-center justify-between p-4 text-left ${theme.surface} rounded-lg transition-colors hover:bg-opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+                      >
+                        <h3 className={`font-semibold ${theme.text}`}>
+                          {section.title}
+                        </h3>
+                        <ChevronDown
+                          className={`w-4 h-4 ${theme.textSecondary} transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                      {isExpanded && (
+                        <div
+                          id={`footer-section-${section.id}`}
+                          className="px-4 pb-4"
+                        >
+                          <nav aria-label={`${section.title} links`}>
+                            <ul className="space-y-2">
+                              {section.items.map((item) => (
+                                <li key={item}>
+                                  <a
+                                    href="#"
+                                    className={`text-sm ${theme.textSecondary} transition-colors block py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded`}
+                                  >
+                                    {item}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          </nav>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Crisis Support Banner - below all footer sections */}
+            <div className="mt-8">
+              <CrisisBanner />
+            </div>
+
+            <div
+              className={`border-t ${theme.border} mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between`}
+            >
+              <p className={`text-sm ${theme.textSecondary}`}>
+                © 2025 Astra Labs. Building safer AI for mental health with
+                research-backed design.
+              </p>
+              <div className="flex items-center gap-4 mt-4 sm:mt-0">
+                <span className={`text-xs ${theme.textMuted}`}>Made with</span>
+                <div
+                  className={`flex h-6 w-6 items-center justify-center rounded-full ${theme.isDark ? "bg-rose-900/30" : "bg-rose-100"} transition-colors`}
+                >
+                  <Heart
+                    className={`w-3 h-3 ${theme.isDark ? "text-rose-400" : "text-rose-600"}`}
+                  />
+                </div>
+                <span className={`text-xs ${theme.textMuted}`}>
+                  for mental wellness
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      </footer>
+        </footer>
       </main>
 
       {/* Notifications */}

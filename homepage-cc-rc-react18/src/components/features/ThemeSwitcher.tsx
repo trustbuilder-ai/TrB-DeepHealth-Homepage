@@ -2,6 +2,7 @@ import React, { useState, useRef, useMemo } from "react";
 import { Palette } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useModalClose } from "@/hooks/useModalClose";
+import { useAccessibility } from "@/hooks/useAccessibility";
 import { themes, type Theme } from "@/styles/themes";
 import { cn } from "@/utils/cn";
 
@@ -17,6 +18,7 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
     const [isOpen, setIsOpen] = useState(false);
     const triggerRef = useRef<HTMLButtonElement>(null);
     const modalRef = useModalClose(isOpen, () => setIsOpen(false), triggerRef);
+    const { settings } = useAccessibility();
 
     // Group themes by light/dark with subcategories
     const lightThemes = Object.entries(themes).filter(([, t]) => !t.isDark);
@@ -80,22 +82,26 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
             ref={modalRef as React.RefObject<HTMLDivElement>}
             className={cn(
               "absolute top-full right-0 mt-2 w-80 max-h-96 overflow-y-auto",
-              "rounded-lg shadow-lg z-50 p-4 border transition-colors",
+              "rounded-lg shadow-lg z-50 p-2 border transition-colors",
               theme.isDark
                 ? `${theme.surface} ${theme.border}`
                 : `bg-white ${theme.border}`,
+              // Conditional accessibility improvements
+              settings.enhancedReadability && "spacing-comfortable",
+              settings.dyslexiaFriendly && "dyslexia-friendly",
+              settings.highContrast && "high-contrast",
             )}
             role="listbox"
             aria-label="Theme selection"
           >
-            <div className="space-y-4">
+            <div className="space-y-2">
               {Object.entries(themeCategories).map(
                 ([categoryName, subcategories]) => (
                   <div key={categoryName}>
-                    <h3 className="font-semibold text-sm text-muted-foreground mb-2">
+                    <h3 className="font-semibold text-sm text-muted-foreground mb-1">
                       {categoryName}
                     </h3>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {Object.entries(subcategories)
                         .filter(([, themeList]) => themeList.length > 0)
                         .map(([subName, themeList]) => (

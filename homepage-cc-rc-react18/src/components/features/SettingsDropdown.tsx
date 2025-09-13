@@ -1,14 +1,14 @@
-import { useState, useRef } from 'react';
-import { Settings, ChevronDown } from 'lucide-react';
-import { useTheme } from '@/hooks/useTheme';
-import { useFont } from '@/hooks/useFont';
-import { useIcon } from '@/hooks/useIcon';
-import { useAccessibility } from '@/hooks/useAccessibility';
-import { useModalClose } from '@/hooks/useModalClose';
-import { cn } from '@/utils/cn';
-import { ThemeSwitcher } from './ThemeSwitcher';
-import { FontSwitcher } from './FontSwitcher';
-import { IconSwitcher } from './IconSwitcher';
+import { useState, useRef } from "react";
+import { Settings, ChevronDown } from "lucide-react";
+import { useTheme } from "@/hooks/useTheme";
+import { useFont } from "@/hooks/useFont";
+import { useIcon } from "@/hooks/useIcon";
+import { useAccessibility } from "@/hooks/useAccessibility";
+import { useModalClose } from "@/hooks/useModalClose";
+import { cn } from "@/utils/cn";
+import { ThemeSwitcher } from "./ThemeSwitcher";
+import { FontSwitcher } from "./FontSwitcher";
+import { IconSwitcher } from "./IconSwitcher";
 
 /**
  * Settings dropdown component that organizes all customization options
@@ -16,17 +16,25 @@ import { IconSwitcher } from './IconSwitcher';
  */
 export const SettingsDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, currentTheme, changeTheme, isLoading: themeLoading } = useTheme();
+  const {
+    theme,
+    currentTheme,
+    changeTheme,
+    isLoading: themeLoading,
+  } = useTheme();
   const { currentFont, changeFont, fontLoading, loadedFonts } = useFont();
-  const { currentIconSet, changeIconSet, iconLoading, loadedIconSets } = useIcon();
-  const { settings, toggleEnhancedReadability, toggleDyslexiaFriendly, toggleHighContrast, toggleReducedMotion } = useAccessibility();
+  const { currentIconSet, changeIconSet, iconLoading, loadedIconSets } =
+    useIcon();
+  const {
+    settings,
+    toggleEnhancedReadability,
+    toggleDyslexiaFriendly,
+    toggleHighContrast,
+    toggleReducedMotion,
+  } = useAccessibility();
 
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const dropdownRef = useModalClose(
-    isOpen,
-    () => setIsOpen(false),
-    triggerRef
-  );
+  const dropdownRef = useModalClose(isOpen, () => setIsOpen(false), triggerRef);
 
   return (
     <div className="relative">
@@ -38,7 +46,7 @@ export const SettingsDropdown = () => {
           "focus:outline-none focus:ring-2 focus:ring-offset-2",
           theme.isDark
             ? `${theme.surface} ${theme.text} hover:${theme.accent} hover:bg-opacity-10 focus:ring-blue-400`
-            : `bg-white ${theme.text} hover:${theme.accent} hover:bg-opacity-10 focus:ring-blue-500 border ${theme.border}`
+            : `bg-white ${theme.text} hover:${theme.accent} hover:bg-opacity-10 focus:ring-blue-500 border ${theme.border}`,
         )}
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -46,7 +54,9 @@ export const SettingsDropdown = () => {
       >
         <Settings className="w-4 h-4" />
         <span className="text-sm font-medium hidden sm:inline">Settings</span>
-        <ChevronDown className={cn("w-4 h-4 transition-transform", isOpen && "rotate-180")} />
+        <ChevronDown
+          className={cn("w-4 h-4 transition-transform", isOpen && "rotate-180")}
+        />
       </button>
 
       {isOpen && (
@@ -63,13 +73,17 @@ export const SettingsDropdown = () => {
               "border backdrop-blur-sm transition-all duration-200",
               theme.isDark
                 ? `${theme.surface} ${theme.border} shadow-black/20`
-                : `bg-white ${theme.border} shadow-gray-200/50`
+                : `bg-white ${theme.border} shadow-gray-200/50`,
+              // Conditional accessibility improvements
+              settings.enhancedReadability && "spacing-comfortable",
+              settings.dyslexiaFriendly && "dyslexia-friendly",
+              settings.highContrast && "high-contrast",
             )}
           >
-            <div className="p-4 space-y-6">
+            <div className="p-2 space-y-3">
               {/* Accessibility Section */}
               <div>
-                <h3 className={cn("text-sm font-semibold mb-3", theme.text)}>
+                <h3 className={cn("text-sm font-semibold mb-1", theme.text)}>
                   Accessibility
                 </h3>
                 <div className="space-y-3">
@@ -85,7 +99,7 @@ export const SettingsDropdown = () => {
                         "rounded focus:ring-2 focus:ring-offset-2",
                         theme.isDark
                           ? "bg-gray-700 border-gray-600 text-blue-400 focus:ring-blue-400"
-                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500"
+                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500",
                       )}
                     />
                   </label>
@@ -102,7 +116,7 @@ export const SettingsDropdown = () => {
                         "rounded focus:ring-2 focus:ring-offset-2",
                         theme.isDark
                           ? "bg-gray-700 border-gray-600 text-blue-400 focus:ring-blue-400"
-                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500"
+                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500",
                       )}
                     />
                   </label>
@@ -119,7 +133,7 @@ export const SettingsDropdown = () => {
                         "rounded focus:ring-2 focus:ring-offset-2",
                         theme.isDark
                           ? "bg-gray-700 border-gray-600 text-blue-400 focus:ring-blue-400"
-                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500"
+                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500",
                       )}
                     />
                   </label>
@@ -136,7 +150,7 @@ export const SettingsDropdown = () => {
                         "rounded focus:ring-2 focus:ring-offset-2",
                         theme.isDark
                           ? "bg-gray-700 border-gray-600 text-blue-400 focus:ring-blue-400"
-                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500"
+                          : "bg-white border-gray-300 text-blue-600 focus:ring-blue-500",
                       )}
                     />
                   </label>
@@ -145,7 +159,7 @@ export const SettingsDropdown = () => {
 
               {/* Theme Section */}
               <div>
-                <h3 className={cn("text-sm font-semibold mb-3", theme.text)}>
+                <h3 className={cn("text-sm font-semibold mb-1", theme.text)}>
                   Theme
                 </h3>
                 <ThemeSwitcher
@@ -158,7 +172,7 @@ export const SettingsDropdown = () => {
 
               {/* Font Section */}
               <div>
-                <h3 className={cn("text-sm font-semibold mb-3", theme.text)}>
+                <h3 className={cn("text-sm font-semibold mb-1", theme.text)}>
                   Font
                 </h3>
                 <FontSwitcher
@@ -172,7 +186,7 @@ export const SettingsDropdown = () => {
 
               {/* Icon Section */}
               <div>
-                <h3 className={cn("text-sm font-semibold mb-3", theme.text)}>
+                <h3 className={cn("text-sm font-semibold mb-1", theme.text)}>
                   Icons
                 </h3>
                 <IconSwitcher

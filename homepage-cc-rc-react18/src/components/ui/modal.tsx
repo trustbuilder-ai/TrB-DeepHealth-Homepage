@@ -38,20 +38,7 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
     // Implement focus trapping for the modal (uses dialogRef directly)
     useFocusTrap(isOpen, dialogRef as React.RefObject<HTMLElement>);
 
-    // Additional ESC key handler as backup
-    React.useEffect(() => {
-      if (!isOpen) return;
-
-      const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === "Escape") {
-          e.stopPropagation();
-          onClose();
-        }
-      };
-
-      document.addEventListener("keydown", handleEsc);
-      return () => document.removeEventListener("keydown", handleEsc);
-    }, [isOpen, onClose]);
+    // ESC key handling is managed by useModalClose hook
 
     if (!isOpen) return null;
 
@@ -122,12 +109,12 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
         >
           <div
             className={
-              size === "sidebar-left" || size === "sidebar-right" ? "" : "p-6"
+              size === "sidebar-left" || size === "sidebar-right" ? "" : "p-3"
             }
           >
             {(title || size === "sidebar-left" || size === "sidebar-right") && (
               <div
-                className={`flex items-center justify-between ${size === "sidebar-left" || size === "sidebar-right" ? "p-4 border-b" : "mb-4"}`}
+                className={`flex items-center justify-between ${size === "sidebar-left" || size === "sidebar-right" ? "p-4 border-b" : "mb-2"}`}
               >
                 {title && (
                   <h2
@@ -157,7 +144,7 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
               {description && (
                 <p
                   id="dialog-description"
-                  className={`text-sm mb-6 ${theme ? theme.textSecondary : "text-muted-foreground"}`}
+                  className={`text-sm mb-3 ${theme ? theme.textSecondary : "text-muted-foreground"}`}
                 >
                   {description}
                 </p>

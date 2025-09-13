@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useLocalStorage } from './useLocalStorage';
+import { useEffect } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 export interface AccessibilitySettings {
   enhancedReadability: boolean;
@@ -24,8 +24,8 @@ const defaultSettings: AccessibilitySettings = {
  */
 export const useAccessibility = () => {
   const [settings, setSettings] = useLocalStorage<AccessibilitySettings>(
-    'accessibility-settings',
-    defaultSettings
+    "accessibility-settings",
+    defaultSettings,
   );
 
   /**
@@ -34,7 +34,7 @@ export const useAccessibility = () => {
   const toggleEnhancedReadability = () => {
     setSettings({
       ...settings,
-      enhancedReadability: !settings.enhancedReadability
+      enhancedReadability: !settings.enhancedReadability,
     });
   };
 
@@ -44,7 +44,7 @@ export const useAccessibility = () => {
   const toggleDyslexiaFriendly = () => {
     setSettings({
       ...settings,
-      dyslexiaFriendly: !settings.dyslexiaFriendly
+      dyslexiaFriendly: !settings.dyslexiaFriendly,
     });
   };
 
@@ -54,7 +54,7 @@ export const useAccessibility = () => {
   const toggleHighContrast = () => {
     setSettings({
       ...settings,
-      highContrast: !settings.highContrast
+      highContrast: !settings.highContrast,
     });
   };
 
@@ -64,7 +64,7 @@ export const useAccessibility = () => {
   const toggleReducedMotion = () => {
     setSettings({
       ...settings,
-      reducedMotion: !settings.reducedMotion
+      reducedMotion: !settings.reducedMotion,
     });
   };
 
@@ -76,32 +76,32 @@ export const useAccessibility = () => {
 
     // Enhanced readability
     if (settings.enhancedReadability) {
-      body.classList.add('spacing-comfortable');
+      body.classList.add("spacing-comfortable");
     } else {
-      body.classList.remove('spacing-comfortable');
+      body.classList.remove("spacing-comfortable");
     }
 
     // Dyslexia-friendly features
     if (settings.dyslexiaFriendly) {
-      body.classList.add('dyslexia-friendly');
+      body.classList.add("dyslexia-friendly");
     } else {
-      body.classList.remove('dyslexia-friendly');
+      body.classList.remove("dyslexia-friendly");
     }
 
     // High contrast
     if (settings.highContrast) {
-      body.classList.add('high-contrast');
+      body.classList.add("high-contrast");
     } else {
-      body.classList.remove('high-contrast');
+      body.classList.remove("high-contrast");
     }
 
     // Reduced motion
     if (settings.reducedMotion) {
-      body.style.setProperty('--animation-duration', '0.01ms');
-      body.style.setProperty('--transition-duration', '0.01ms');
+      body.style.setProperty("--animation-duration", "0.01ms");
+      body.style.setProperty("--transition-duration", "0.01ms");
     } else {
-      body.style.removeProperty('--animation-duration');
-      body.style.removeProperty('--transition-duration');
+      body.style.removeProperty("--animation-duration");
+      body.style.removeProperty("--transition-duration");
     }
   }, [settings]);
 

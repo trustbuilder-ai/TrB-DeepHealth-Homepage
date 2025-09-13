@@ -10,22 +10,19 @@ export const useTheme = () => {
     [currentTheme],
   );
 
-  const updateCSSVariables = useCallback(
-    (theme: Theme) => {
-      const root = document.documentElement;
+  const updateCSSVariables = useCallback((theme: Theme, themeName: string) => {
+    const root = document.documentElement;
 
-      // Clear all previous theme classes
-      root.className = root.className.replace(/theme-\S+/g, "").trim();
+    // Clear all previous theme classes
+    root.className = root.className.replace(/theme-\S+/g, "").trim();
 
-      // Add new theme class
-      root.classList.add(`theme-${currentTheme}`);
+    // Add new theme class
+    root.classList.add(`theme-${themeName}`);
 
-      // Set data attributes for CSS selectors
-      root.setAttribute("data-theme", theme.name);
-      root.setAttribute("data-theme-dark", theme.isDark ? "true" : "false");
-    },
-    [currentTheme],
-  );
+    // Set data attributes for CSS selectors
+    root.setAttribute("data-theme", theme.name);
+    root.setAttribute("data-theme-dark", theme.isDark ? "true" : "false");
+  }, []);
 
   const changeTheme = useCallback(
     async (newTheme: string) => {
@@ -56,9 +53,9 @@ export const useTheme = () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme && themes[savedTheme]) {
       setCurrentTheme(savedTheme);
-      updateCSSVariables(themes[savedTheme]);
+      updateCSSVariables(themes[savedTheme], savedTheme);
     } else {
-      updateCSSVariables(themes.coastalBreeze);
+      updateCSSVariables(themes.coastalBreeze, "coastalBreeze");
     }
   }, [updateCSSVariables]);
 
