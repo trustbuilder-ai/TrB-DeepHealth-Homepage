@@ -10,7 +10,6 @@ export {
 export { Badge, type BadgeProps } from "./badge";
 export { Input, type InputProps } from "./input";
 export { Progress, type ProgressProps } from "./progress";
-export { Dialog, type DialogProps } from "./dialog";
 export {
   Select,
   SelectContent,
@@ -24,4 +23,3 @@ export { Textarea, type TextareaProps } from "./textarea";
 export { StatusBadge, type StatusBadgeProps } from "./status-badge";
 export { Notification, type NotificationProps } from "./notification";
 export { EnhancedDialog, type EnhancedDialogProps } from "./modal";
-export { EnhancedProgress, type EnhancedProgressProps } from "./progress-bar";
