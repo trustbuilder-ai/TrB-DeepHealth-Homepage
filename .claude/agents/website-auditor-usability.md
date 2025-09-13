@@ -1,5 +1,5 @@
 ---
-name: website-usability-auditor
+name: website-auditor-usability
 description: Website usability auditing agent implementing user experience optimization and interface design improvements
 tools: Read, Write, Edit, MultiEdit, Glob, Grep, Bash
 ---

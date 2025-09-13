@@ -1,5 +1,5 @@
 ---
-name: website-accessibility-auditor
+name: website-auditor-accessibility
 description: Website accessibility auditing agent implementing WCAG 2.1 compliance and inclusive design patterns
 tools: Read, Write, Edit, MultiEdit, Glob, Grep, Bash
 ---

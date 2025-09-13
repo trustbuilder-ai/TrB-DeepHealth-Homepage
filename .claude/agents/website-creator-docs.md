@@ -1,5 +1,5 @@
 ---
-name: website-documentation-creator
+name: website-creator-docs
 description: Website documentation creation agent generating streamlined JSDoc, component templates, and API documentation
 tools: Read, Write, Edit, MultiEdit, Glob, Grep, Bash
 ---
