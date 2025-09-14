@@ -1,8 +1,8 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef } from "react";
 import { FileText, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useModalClose } from "@/hooks/useModalClose";
-import { fontSets } from "@/utils/fonts";
+import { fontSets, type FontSet } from "@/utils/fonts";
 import { type Theme } from "@/styles/themes";
 import { cn } from "@/utils/cn";
 
@@ -23,20 +23,17 @@ export const FontSwitcher = React.memo<FontSwitcherProps>(
     const font = fontSets[currentFont];
 
     // Group fonts by type
-    const fontCategories = useMemo(
-      () => ({
-        "Sans-Serif": Object.entries(fontSets).filter(
-          ([, f]) => f.type === "sans-serif",
-        ),
-        Accessibility: Object.entries(fontSets).filter(
-          ([, f]) => f.type === "accessibility",
-        ),
-        Therapeutic: Object.entries(fontSets).filter(
-          ([, f]) => f.type === "therapeutic",
-        ),
-      }),
-      [],
-    );
+    const fontCategories: Record<string, [string, FontSet][]> = {
+      "Sans-Serif": Object.entries(fontSets).filter(
+        ([, f]) => f.type === "sans-serif",
+      ),
+      Accessibility: Object.entries(fontSets).filter(
+        ([, f]) => f.type === "accessibility",
+      ),
+      Therapeutic: Object.entries(fontSets).filter(
+        ([, f]) => f.type === "therapeutic",
+      ),
+    };
 
     return (
       <div className="relative">

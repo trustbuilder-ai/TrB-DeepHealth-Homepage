@@ -55,9 +55,9 @@ export const useNotificationManager = () => {
   /**
    * Clears all notifications from the queue.
    */
-  const clearAllNotifications = useCallback(() => {
+  const clearAllNotifications = () => {
     setNotifications([]);
-  }, []);
+  };
 
   /**
    * Adds a success notification with predefined styling.
@@ -65,12 +65,9 @@ export const useNotificationManager = () => {
    * @param title - Notification title
    * @param message - Notification message
    */
-  const addSuccessNotification = useCallback(
-    (title: string, message: string) => {
-      addNotification({ type: "success", title, message });
-    },
-    [addNotification],
-  );
+  const addSuccessNotification = (title: string, message: string) => {
+    addNotification({ type: "success", title, message });
+  };
 
   /**
    * Adds an error notification with predefined styling.
@@ -79,12 +76,9 @@ export const useNotificationManager = () => {
    * @param title - Notification title
    * @param message - Notification message
    */
-  const addErrorNotification = useCallback(
-    (title: string, message: string) => {
-      addNotification({ type: "error", title, message });
-    },
-    [addNotification],
-  );
+  const addErrorNotification = (title: string, message: string) => {
+    addNotification({ type: "error", title, message });
+  };
 
   /**
    * Adds a warning notification with predefined styling.
@@ -92,12 +86,9 @@ export const useNotificationManager = () => {
    * @param title - Notification title
    * @param message - Notification message
    */
-  const addWarningNotification = useCallback(
-    (title: string, message: string) => {
-      addNotification({ type: "warning", title, message });
-    },
-    [addNotification],
-  );
+  const addWarningNotification = (title: string, message: string) => {
+    addNotification({ type: "warning", title, message });
+  };
 
   /**
    * Adds an info notification with predefined styling.
@@ -105,12 +96,9 @@ export const useNotificationManager = () => {
    * @param title - Notification title
    * @param message - Notification message
    */
-  const addInfoNotification = useCallback(
-    (title: string, message: string) => {
-      addNotification({ type: "info", title, message });
-    },
-    [addNotification],
-  );
+  const addInfoNotification = (title: string, message: string) => {
+    addNotification({ type: "info", title, message });
+  };
 
   return {
     notifications,

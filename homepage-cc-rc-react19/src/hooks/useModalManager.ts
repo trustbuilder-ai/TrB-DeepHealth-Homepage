@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 /**
  * Interface defining the state and handlers for a modal.
@@ -27,35 +27,35 @@ export const useModalManager = (
    *
    * @param modalName - The name/key of the modal to open
    */
-  const openModal = useCallback((modalName: string) => {
+  const openModal = (modalName: string) => {
     setModalStates((prev) => ({ ...prev, [modalName]: true }));
-  }, []);
+  };
 
   /**
    * Closes a specific modal by name.
    *
    * @param modalName - The name/key of the modal to close
    */
-  const closeModal = useCallback((modalName: string) => {
+  const closeModal = (modalName: string) => {
     setModalStates((prev) => ({ ...prev, [modalName]: false }));
-  }, []);
+  };
 
   /**
    * Toggles a specific modal's state.
    *
    * @param modalName - The name/key of the modal to toggle
    */
-  const toggleModal = useCallback((modalName: string) => {
+  const toggleModal = (modalName: string) => {
     setModalStates((prev) => ({
       ...prev,
       [modalName]: !prev[modalName],
     }));
-  }, []);
+  };
 
   /**
    * Closes all managed modals.
    */
-  const closeAllModals = useCallback(() => {
+  const closeAllModals = () => {
     setModalStates((prev) =>
       Object.keys(prev).reduce(
         (acc, key) => ({
@@ -65,7 +65,7 @@ export const useModalManager = (
         {},
       ),
     );
-  }, []);
+  };
 
   // Create modal objects with consistent interface
   const modals = Object.keys(modalStates).reduce(

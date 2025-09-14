@@ -3,8 +3,11 @@
 ## Quick Start
 
 **Commands**: `npm run dev` | `npm run build` | `npm run lint` | `npm run typecheck` | `npm run format`
-**Stack**: React 18 + Vite + TypeScript + Tailwind + Radix UI
-**Structure**: `src/{components/{ui,features,layout}, hooks, utils}`
+**Stack**:
+
+- `homepage-cc-rc-react18/`: React 18 + Vite + TypeScript + Tailwind + Radix UI
+- `homepage-cc-rc-react19/`: React 19 + Vite + TypeScript + Tailwind + Radix UI (ref as prop, no forwardRef)
+  **Structure**: `src/{components/{ui,features,layout}, hooks, utils}`
 
 ## Core Rules
 

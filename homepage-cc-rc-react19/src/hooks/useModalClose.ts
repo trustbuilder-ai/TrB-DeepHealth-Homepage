@@ -3,7 +3,9 @@ import { useRef, useEffect } from "react";
 export const useModalClose = (
   isOpen: boolean,
   onClose: () => void,
-  triggerRef: React.RefObject<HTMLElement> | null = null,
+  triggerRef: React.RefObject<
+    HTMLElement | HTMLButtonElement | null
+  > | null = null,
 ) => {
   const modalRef = useRef<HTMLElement>(null);
 

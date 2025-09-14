@@ -19,6 +19,7 @@ export interface SelectTriggerProps
   isOpen?: boolean;
   setIsOpen?: (open: boolean) => void;
   theme?: Theme;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
 export interface SelectContentProps {
@@ -26,6 +27,7 @@ export interface SelectContentProps {
   isOpen?: boolean;
   className?: string;
   theme?: Theme;
+  ref?: React.Ref<HTMLDivElement>;
 }
 
 export interface SelectItemProps
@@ -35,6 +37,7 @@ export interface SelectItemProps
   onValueChange?: (value: string) => void;
   setIsOpen?: (open: boolean) => void;
   theme?: Theme;
+  ref?: React.Ref<HTMLButtonElement>;
 }
 
 export const Select: React.FC<SelectProps> = ({
@@ -76,8 +79,15 @@ export const Select: React.FC<SelectProps> = ({
     <div className="relative" ref={dropdownRef} {...props}>
       {React.Children.map(children, (child) => {
         if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            ...child.props,
+          // Type assertion for cloning with additional props
+          const childElement = child as React.ReactElement<{
+            value?: string;
+            onValueChange?: (value: string) => void;
+            isOpen?: boolean;
+            setIsOpen?: (open: boolean) => void;
+            theme?: Theme;
+          }>;
+          return React.cloneElement(childElement, {
             value,
             onValueChange,
             isOpen,
@@ -91,10 +101,15 @@ export const Select: React.FC<SelectProps> = ({
   );
 };
 
-export const SelectTrigger = React.forwardRef<
-  HTMLButtonElement,
-  SelectTriggerProps
->(({ className, children, isOpen, setIsOpen, theme, ...props }, ref) => (
+export const SelectTrigger = ({
+  className,
+  children,
+  isOpen,
+  setIsOpen,
+  theme,
+  ref,
+  ...props
+}: SelectTriggerProps) => (
   <button
     ref={ref}
     className={cn(
@@ -118,7 +133,7 @@ export const SelectTrigger = React.forwardRef<
       )}
     />
   </button>
-));
+);
 
 export const SelectValue: React.FC<{
   placeholder?: string;
@@ -129,10 +144,14 @@ export const SelectValue: React.FC<{
   </span>
 );
 
-export const SelectContent = React.forwardRef<
-  HTMLDivElement,
-  SelectContentProps
->(({ className, children, isOpen, theme, ...props }, ref) =>
+export const SelectContent = ({
+  className,
+  children,
+  isOpen,
+  theme,
+  ref,
+  ...props
+}: SelectContentProps) =>
   isOpen ? (
     <div
       ref={ref}
@@ -148,33 +167,36 @@ export const SelectContent = React.forwardRef<
     >
       {children}
     </div>
-  ) : null,
-);
+  ) : null;
 
-export const SelectItem = React.forwardRef<HTMLButtonElement, SelectItemProps>(
-  (
-    { className, children, value, onValueChange, setIsOpen, theme, ...props },
-    ref,
-  ) => (
-    <button
-      ref={ref}
-      className={cn(
-        "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-2 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-        theme
-          ? `${theme.text} hover:${theme.accent} focus:${theme.accent}`
-          : "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-        className,
-      )}
-      onClick={() => {
-        onValueChange?.(value);
-        setIsOpen?.(false);
-      }}
-      role="option"
-      {...props}
-    >
-      {children}
-    </button>
-  ),
+export const SelectItem = ({
+  className,
+  children,
+  value,
+  onValueChange,
+  setIsOpen,
+  theme,
+  ref,
+  ...props
+}: SelectItemProps) => (
+  <button
+    ref={ref}
+    className={cn(
+      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-2 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      theme
+        ? `${theme.text} hover:${theme.accent} focus:${theme.accent}`
+        : "hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+      className,
+    )}
+    onClick={() => {
+      onValueChange?.(value);
+      setIsOpen?.(false);
+    }}
+    role="option"
+    {...props}
+  >
+    {children}
+  </button>
 );
 
 SelectTrigger.displayName = "SelectTrigger";
