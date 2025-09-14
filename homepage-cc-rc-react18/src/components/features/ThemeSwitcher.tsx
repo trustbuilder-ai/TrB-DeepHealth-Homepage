@@ -60,7 +60,7 @@ export const ThemeSwitcher = React.memo<ThemeSwitcherProps>(
             ref={modalRef as React.RefObject<HTMLDivElement>}
             className={cn(
               "absolute top-full right-0 mt-2 w-80 max-h-96 overflow-y-auto",
-              "rounded-lg shadow-lg z-50 p-2 border transition-colors",
+              "rounded-lg shadow-lg z-[9999] p-2 border transition-colors",
               theme.isDark
                 ? `${theme.surface} ${theme.border}`
                 : `bg-white ${theme.border}`,

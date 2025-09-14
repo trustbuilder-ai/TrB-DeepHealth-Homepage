@@ -12,7 +12,22 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        "rounded-lg border shadow-sm",
+        "rounded-lg shadow-sm transition-[all,transform] duration-[var(--cs-animation-duration)]",
+        // Component Style System - Apply CSS variables for border
+        "border-[var(--cs-card-border)]",
+        // Default style
+        "border-border",
+        // Enhanced style - Origin UI glass morphism
+        "[body[data-component-style='enhanced']_&]:bg-white/80",
+        "[body[data-component-style='enhanced']_&]:backdrop-blur-xl",
+        "[body[data-component-style='enhanced']_&]:border-white/20",
+        "[body[data-component-style='enhanced']_&]:shadow-2xl",
+        "[body[data-component-style='enhanced']_&]:hover:shadow-3xl",
+        "[body[data-component-style='enhanced']_&]:hover:scale-[1.02]",
+        "[body[data-component-style='enhanced']_&]:hover:-translate-y-1",
+        // Dark mode enhanced
+        "dark:[body[data-component-style='enhanced']_&]:bg-gray-900/80",
+        "dark:[body[data-component-style='enhanced']_&]:border-gray-700/30",
         theme ? getCardStyles(theme) : "",
         className,
       )}

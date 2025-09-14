@@ -1,10 +1,8 @@
-import { Brain, Globe, Heart, Wifi, WifiOff, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Brain, Heart, ChevronDown } from "lucide-react";
 import { CrisisBanner } from "@/components/ui/crisis-banner";
 import { useTheme } from "@/hooks/useTheme";
 
 interface FooterSectionProps {
-  isOnline: boolean;
   expandedFooterSections: Record<string, boolean>;
   setExpandedFooterSections: (
     value:
@@ -14,7 +12,6 @@ interface FooterSectionProps {
 }
 
 export const FooterSection = ({
-  isOnline,
   expandedFooterSections,
   setExpandedFooterSections,
 }: FooterSectionProps) => {
@@ -28,7 +25,9 @@ export const FooterSection = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-5 gap-8 mb-8 lg:items-start">
           <div className="lg:col-span-1 flex flex-col h-full">
-            <div className="flex items-center gap-3 mb-4">
+            <div
+              className={`flex items-center gap-3 mt-8 mb-3 font-semibold ${theme.text}`}
+            >
               <div
                 className={`w-8 h-8 rounded-lg bg-gradient-to-r ${theme.primary} flex items-center justify-center shadow-lg ${theme.glow}`}
               >
@@ -41,22 +40,6 @@ export const FooterSection = ({
             <p className={`text-sm ${theme.textSecondary} mb-6`}>
               Building safer AI for mental health with research-backed design.
             </p>
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" theme={theme}>
-                <Globe className="w-4 h-4 icon-dynamic" />
-              </Button>
-              {isOnline ? (
-                <Wifi
-                  className={`w-4 h-4 ml-2 ${theme.isDark ? "text-green-400" : "text-green-500"}`}
-                  aria-label="Online"
-                />
-              ) : (
-                <WifiOff
-                  className={`w-4 h-4 ml-2 ${theme.isDark ? "text-red-400" : "text-red-500"}`}
-                  aria-label="Offline"
-                />
-              )}
-            </div>
           </div>
 
           {/* Desktop: Side by side sections */}
