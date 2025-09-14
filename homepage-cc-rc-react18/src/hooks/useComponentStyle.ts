@@ -23,24 +23,24 @@ export interface ComponentStyleConfig {
  */
 export const componentStyles: Record<ComponentStyle, ComponentStyleConfig> = {
   default: {
-    name: "Default",
-    description: "Standard shadcn/ui components",
+    name: "shadcn/ui",
+    description: "Official shadcn/ui components with class-variance-authority",
     category: "Standard",
   },
   enhanced: {
-    name: "Enhanced",
-    description: "Origin UI enhanced components with improved styling",
-    category: "Advanced",
+    name: "Origin UI",
+    description: "Real Origin UI components from originui.com",
+    category: "Enhanced",
   },
   minimal: {
-    name: "Minimal",
-    description: "Clean, minimal component styling",
-    category: "Simple",
+    name: "Plain HTML",
+    description: "Pure HTML/CSS without any component libraries",
+    category: "Minimal",
   },
   professional: {
-    name: "Professional",
-    description: "Business-focused component styling",
-    category: "Business",
+    name: "TweakCN",
+    description: "TweakCN methodology with CSS custom properties",
+    category: "Professional",
   },
 };
 

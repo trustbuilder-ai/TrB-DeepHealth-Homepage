@@ -40,6 +40,14 @@
     --cs-badge-radius: 0.375rem;
     --cs-primary-intensity: 1;
     --cs-animation-duration: 200ms;
+
+    /* TweakCN methodology CSS custom properties */
+    --tweakcn-button-radius: var(--radius);
+    --tweakcn-button-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --tweakcn-button-transition: all 200ms ease;
+    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-sm:
+      0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   }
 
   .dark {
@@ -742,4 +750,14 @@ pre,
 /* Shadow 3xl utility */
 .shadow-3xl {
   box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Plain button spin animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,45 +1,36 @@
 import * as React from "react";
-import {
-  DefaultButton,
-  EnhancedButton,
-  MinimalButton,
-  ProfessionalButton,
-  ButtonProps,
-} from "./button-variants";
+import { ShadcnButton, ShadcnButtonProps } from "./shadcn-button";
+import { OriginUIButton, OriginUIButtonProps } from "./origin-ui-button";
+import { PlainButton, PlainButtonProps } from "./plain-button";
+import { TweakCNButton, TweakCNButtonProps } from "./tweakcn-button";
 import { useComponentStyle } from "@/hooks/useComponentStyle";
+
+// Union type for all possible button props
+type AdaptiveButtonProps = ShadcnButtonProps &
+  OriginUIButtonProps &
+  PlainButtonProps &
+  TweakCNButtonProps;
 
 /**
  * Adaptive Button Component
- * Automatically renders the appropriate button variant based on current component style setting.
- * This provides a seamless way to switch between Default, Enhanced, Minimal, and Professional styles.
+ * Automatically renders the appropriate button component based on current style setting.
+ * Now uses real components: shadcn/ui, Origin UI, Plain HTML, and TweakCN.
  */
-const AdaptiveButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const AdaptiveButton = React.forwardRef<HTMLButtonElement, AdaptiveButtonProps>(
   (props, ref) => {
     const { currentStyle } = useComponentStyle();
 
-    // Select the appropriate button component based on style
+    // Select the appropriate real button component based on style
     switch (currentStyle) {
       case "enhanced":
-        return (
-          <EnhancedButton ref={ref} {...props} componentStyle={currentStyle} />
-        );
+        return <OriginUIButton ref={ref} {...props} />;
       case "minimal":
-        return (
-          <MinimalButton ref={ref} {...props} componentStyle={currentStyle} />
-        );
+        return <PlainButton ref={ref} {...props} />;
       case "professional":
-        return (
-          <ProfessionalButton
-            ref={ref}
-            {...props}
-            componentStyle={currentStyle}
-          />
-        );
+        return <TweakCNButton ref={ref} {...props} />;
       case "default":
       default:
-        return (
-          <DefaultButton ref={ref} {...props} componentStyle={currentStyle} />
-        );
+        return <ShadcnButton ref={ref} {...props} />;
     }
   },
 );

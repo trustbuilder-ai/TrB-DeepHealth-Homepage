@@ -121,3 +121,117 @@ The streamlined Origin UI + TweakCN integration is now live! Users can switch be
 - **Persistence**: localStorage for user preferences
 - **Performance**: CSS variables are native and fast
 - **Accessibility**: Maintains all existing ARIA attributes and focus management
+
+## 2025-09-14 - Investigation Results: Component Style System Issues
+
+### CRITICAL ISSUES IDENTIFIED
+
+#### 1. Component Style Switcher - Limited Implementation
+
+**ISSUE**: Component style switcher claims to provide "Real Origin UI components", "TweakCN methodology", etc., but ONLY affects Button components.
+
+**Current Reality**  
+
+- ✅ Buttons: Full implementation (shadcn/ui, Origin UI, Plain HTML, TweakCN variants)
+- ✅ Cards: Partial implementation (CSS-based enhanced styling via data-component-style)
+- ✅ Badges: Partial implementation (CSS-based enhanced styling via data-component-style)
+- ❌ Inputs: No adaptive variants
+- ❌ Alerts: No adaptive variants
+- ❌ Progress: No adaptive variants
+- ❌ Modals: No adaptive variants
+- ❌ Other UI components: No adaptive variants
+
+**CORRECTION DISCOVERED**: Cards and Badges DO have some component style implementation using CSS selectors like `[body[data-component-style='enhanced']_&]`, but this is a different approach than the adaptive button system.
+
+**Tasks Needed**:
+
+- [ ] Decide on approach: Expand CSS-based system OR create adaptive component variants like buttons
+- [ ] Complete Card component variants (currently only has enhanced styling)
+- [ ] Complete Badge component variants (currently only has enhanced styling)
+- [ ] Create adaptive variants for Input component (4 styles)
+- [ ] Create adaptive variants for Alert component (4 styles)
+- [ ] Create adaptive variants for Progress component (4 styles)
+- [ ] Create adaptive variants for Modal component (4 styles)
+- [ ] Standardize approach across all components (CSS-based vs adaptive components)
+- [ ] Update claims in componentStyles descriptions to match actual implementation scope
+- [ ] OR implement full component library variants as claimed
+
+**ARCHITECTURAL INCONSISTENCY**: We have two different approaches:
+
+1. **Buttons**: Adaptive component approach (different component files)
+2. **Cards/Badges**: CSS selector approach (single component with conditional styling)
+
+#### 2. Theme Switcher - No Real-time Updates
+
+**ISSUE**: Theme switcher requires page refresh/reload to see changes, despite having reactive implementation.
+
+**Root Cause Analysis**:
+
+- ✅ useTheme hook has proper useState and localStorage integration
+- ✅ CSS classes and data attributes update immediately
+- ❌ Theme objects use Tailwind classes (bg-teal-700, text-gray-900) instead of CSS custom properties
+- ❌ Components don't re-render when theme context changes because themes aren't CSS variables
+
+**Tasks Needed**:
+
+- [ ] Convert theme system from Tailwind classes to CSS custom properties
+- [ ] Update themes.ts to use CSS variables: `--primary`, `--text`, `--surface`, etc.
+- [ ] Update globals.css with theme-specific CSS custom property definitions
+- [ ] Update all components to use CSS custom properties instead of theme class props
+- [ ] Test theme switching without page refresh across all components
+- [ ] Ensure backward compatibility during migration
+
+#### 3. Component Theme Integration - Incomplete
+
+**ISSUE**: Some UI components may not properly integrate with theme system.
+
+**Status Check**:
+
+- ✅ Button: Full theme integration (all 4 variants)
+- ✅ Most existing components: Use CSS custom properties (should work)
+- ❌ Alert, Progress: Use hardcoded Tailwind classes (need investigation)
+- ❌ Future adaptive components: Will need theme integration
+
+**Tasks Needed**:
+
+- [ ] Audit Alert component for proper theme integration
+- [ ] Audit Progress component for proper theme integration
+- [ ] Audit Avatar component for proper theme integration
+- [ ] Create theme integration pattern for future adaptive components
+- [ ] Test all components with theme switching
+
+### PRIORITY ORDER
+
+1. **HIGH**: Fix theme switcher real-time updates (affects user experience)
+2. **MEDIUM**: Implement remaining adaptive component variants (affects feature claims)
+3. **LOW**: Complete component theme integration audit (maintenance)
+
+### ESTIMATED EFFORT
+
+- Theme switcher fix: 2-3 hours (CSS variables migration)
+- Component variants: 1-2 hours per component type (6 components × 1.5h = 9 hours)
+- Theme integration audit: 1 hour (testing and fixes)
+
+**Total: ~12-13 hours for complete implementation**  
+
+#### 4. Unused React Context - Code Waste
+
+**ISSUE**: ComponentStyleContext is created and provided but never consumed.
+
+**Analysis**  
+
+- ✅ ComponentStyleProvider wraps entire app in App.tsx
+- ✅ ComponentStyleContext is properly created
+- ❌ No components use useContext(ComponentStyleContext)
+- ❌ All components use useComponentStyle() hook directly instead
+
+**Impact**: Unnecessary React Context Provider overhead with no benefit.
+
+**Tasks Needed**  
+
+- [ ] Remove ComponentStyleProvider from App.tsx
+- [ ] Remove ComponentStyleContext.tsx file entirely
+- [ ] OR implement useComponentStyleContext hook and migrate components to use it
+- [ ] Clean up imports and unused code
+
+**ARCHITECTURAL ISSUE**: The Context pattern was set up but abandoned in favor of direct hook usage, leaving dead code.
