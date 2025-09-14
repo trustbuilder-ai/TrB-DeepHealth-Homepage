@@ -1,16 +1,13 @@
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { themes, type Theme } from "@/styles/themes";
 
 export const useTheme = () => {
   const [currentTheme, setCurrentTheme] = useState("coastalBreeze");
   const [isLoading, setIsLoading] = useState(false);
 
-  const theme = useMemo(
-    () => themes[currentTheme] || themes.coastalBreeze,
-    [currentTheme],
-  );
+  const theme = themes[currentTheme] || themes.coastalBreeze;
 
-  const updateCSSVariables = useCallback((theme: Theme, themeName: string) => {
+  const updateCSSVariables = (theme: Theme, themeName: string) => {
     const root = document.documentElement;
 
     // Clear all previous theme classes
@@ -22,32 +19,29 @@ export const useTheme = () => {
     // Set data attributes for CSS selectors
     root.setAttribute("data-theme", theme.name);
     root.setAttribute("data-theme-dark", theme.isDark ? "true" : "false");
-  }, []);
+  };
 
-  const changeTheme = useCallback(
-    async (newTheme: string) => {
-      if (newTheme === currentTheme || !themes[newTheme]) return;
-      setIsLoading(true);
+  const changeTheme = async (newTheme: string) => {
+    if (newTheme === currentTheme || !themes[newTheme]) return;
+    setIsLoading(true);
 
-      // Update immediately without waiting
-      setCurrentTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
+    // Update immediately without waiting
+    setCurrentTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
 
-      // Update CSS attributes
-      const root = document.documentElement;
-      root.className = root.className.replace(/theme-\S+/g, "").trim();
-      root.classList.add(`theme-${newTheme}`);
-      root.setAttribute("data-theme", themes[newTheme].name);
-      root.setAttribute(
-        "data-theme-dark",
-        themes[newTheme].isDark ? "true" : "false",
-      );
+    // Update CSS attributes
+    const root = document.documentElement;
+    root.className = root.className.replace(/theme-\S+/g, "").trim();
+    root.classList.add(`theme-${newTheme}`);
+    root.setAttribute("data-theme", themes[newTheme].name);
+    root.setAttribute(
+      "data-theme-dark",
+      themes[newTheme].isDark ? "true" : "false",
+    );
 
-      await new Promise((resolve) => setTimeout(resolve, 150));
-      setIsLoading(false);
-    },
-    [currentTheme],
-  );
+    await new Promise((resolve) => setTimeout(resolve, 150));
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -57,7 +51,7 @@ export const useTheme = () => {
     } else {
       updateCSSVariables(themes.coastalBreeze, "coastalBreeze");
     }
-  }, [updateCSSVariables]);
+  }, []); // Only run on mount
 
   return { theme, currentTheme, changeTheme, isLoading };
 };

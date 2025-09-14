@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import type {
   ModelComparison,
   Recommendation,
@@ -90,12 +90,36 @@ export default function App() {
   const [tourStep, setTourStep] = useState(0);
   const [batchQueue] = useState(mockBatchQueue);
 
+  const [expandedFooterSections, setExpandedFooterSections] = useLocalStorage(
+    "expandedFooterSections",
+    {},
+  );
+
   /**
    * Navigates to a section with smooth scrolling and accessibility focus.
-   * Combines scrollToSection and navigateToSection functionality.
+   * Used by HeroSection component.
    */
-  const navigateToSection = useCallback(
-    (sectionId: string) => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      const heading = element.querySelector("h2, h3");
+      if (heading) {
+        (heading as HTMLElement).focus();
+        announceToScreenReader(`Navigated to ${heading.textContent}`);
+      }
+    }
+  };
+
+  /**
+   * Consolidated keyboard shortcuts for navigation and modal management.
+   */
+  useEffect(() => {
+    /**
+     * Navigates to a section with smooth scrolling and accessibility focus.
+     * Combines scrollToSection and navigateToSection functionality.
+     */
+    const navigateToSection = (sectionId: string) => {
       const element = document.getElementById(sectionId);
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -105,19 +129,7 @@ export default function App() {
           announceToScreenReader(`Navigated to ${heading.textContent}`);
         }
       }
-    },
-    [announceToScreenReader],
-  );
-
-  const [expandedFooterSections, setExpandedFooterSections] = useLocalStorage(
-    "expandedFooterSections",
-    {},
-  );
-
-  /**
-   * Consolidated keyboard shortcuts for navigation and modal management.
-   */
-  useEffect(() => {
+    };
     const handleKeyDown = (e: KeyboardEvent) => {
       // ESC: Close modals
       if (e.key === "Escape") {
@@ -173,7 +185,7 @@ export default function App() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [closeAllModals, navigateToSection, announceToScreenReader, modals]);
+  }, [closeAllModals, announceToScreenReader, modals]);
 
   return (
     <div
@@ -218,7 +230,7 @@ export default function App() {
           </div>
         }
       >
-        <HeroSection scrollToSection={navigateToSection} />
+        <HeroSection scrollToSection={scrollToSection} />
       </Suspense>
 
       {/* Main Content */}

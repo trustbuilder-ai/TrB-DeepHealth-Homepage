@@ -54,7 +54,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: ["../src/test-setup.ts"],
+    setupFiles: [path.resolve(__dirname, "../src/__tests__/setup.ts")],
+    include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    exclude: ["src/__tests__/setup.ts", "src/__tests__/utils/**"],
     alias: {
       "@": path.resolve(__dirname, "../src"),
     },

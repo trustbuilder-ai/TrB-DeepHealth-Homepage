@@ -62,3 +62,9 @@
 - [x] **CSS Accessibility Rules** - Fixed global styles applying enhanced accessibility by default (now only with .spacing-comfortable)
 - [x] **Modal Components** - Updated both EnhancedDialog and Dialog components with conditional accessibility
 - [x] **Heart Icon Removal** - Removed heart icon from crisis banner per user request
+
+## 2025-09-14 - React 19 Migration & Testing
+
+### PostCSS/Tailwind Configuration Issue
+
+- [x] **Tailwind CSS Color Palette Issue** - FIXED 2025-09-14 - Downgraded from Tailwind CSS v4 to stable v3.4.0 to restore full color palette support (bg-green-100, bg-blue-100, etc.). CSS bundle now generates properly (58KB vs 0KB before)
