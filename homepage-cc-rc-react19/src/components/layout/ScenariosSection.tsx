@@ -40,7 +40,7 @@ interface ScenariosSectionProps {
   isOnline: boolean;
 }
 
-export const ScenariosSection = ({
+const ScenariosSection = ({
   searchQuery,
   setSearchQuery,
   filteredScenarios,
@@ -274,3 +274,5 @@ export const ScenariosSection = ({
     </section>
   );
 };
+
+export default ScenariosSection;

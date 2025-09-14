@@ -92,7 +92,7 @@ export const EnhancedDialog = React.memo<EnhancedDialogProps>(
             "transform transition-all duration-200 ease-out",
             "animate-in fade-in-0 zoom-in-95",
             getSizeClasses(),
-            theme ? getModalStyles(theme) : "bg-background border-border",
+            theme ? getModalStyles(theme) : "bg-background border",
             size === "sidebar-left" || size === "sidebar-right"
               ? "flex flex-col"
               : "",

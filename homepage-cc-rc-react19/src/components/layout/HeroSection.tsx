@@ -6,7 +6,7 @@ interface HeroSectionProps {
   scrollToSection: (sectionId: string) => void;
 }
 
-export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
+const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
   const { theme } = useTheme();
 
   return (
@@ -62,3 +62,5 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
     </section>
   );
 };
+
+export default HeroSection;

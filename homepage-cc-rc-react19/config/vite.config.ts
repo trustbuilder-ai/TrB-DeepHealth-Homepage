@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
+/// <reference types="vitest" />
+
 export default defineConfig({
   plugins: [react()],
   css: {
@@ -20,13 +22,9 @@ export default defineConfig({
           // Vendor libraries
           vendor: ["react", "react-dom"],
           // UI components
-          ui: [
-            "lucide-react",
-            "@radix-ui/react-dialog",
-            "@radix-ui/react-select",
-          ],
+          ui: ["lucide-react"],
           // Utilities
-          utils: ["clsx", "tailwind-merge", "class-variance-authority"],
+          utils: ["clsx", "tailwind-merge"],
         },
       },
     },
@@ -50,12 +48,15 @@ export default defineConfig({
   },
   // Optimize dependencies
   optimizeDeps: {
-    include: [
-      "react",
-      "react-dom",
-      "lucide-react",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-select",
-    ],
+    include: ["react", "react-dom", "lucide-react"],
+  },
+  // Test configuration
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["../src/test-setup.ts"],
+    alias: {
+      "@": path.resolve(__dirname, "../src"),
+    },
   },
 });

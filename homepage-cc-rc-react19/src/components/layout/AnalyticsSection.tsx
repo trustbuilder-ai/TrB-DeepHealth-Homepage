@@ -23,7 +23,7 @@ interface AnalyticsSectionProps {
   mockAnalytics: AnalyticsData;
 }
 
-export const AnalyticsSection = ({ mockAnalytics }: AnalyticsSectionProps) => {
+const AnalyticsSection = ({ mockAnalytics }: AnalyticsSectionProps) => {
   const { theme } = useTheme();
 
   return (
@@ -109,3 +109,5 @@ export const AnalyticsSection = ({ mockAnalytics }: AnalyticsSectionProps) => {
     </section>
   );
 };
+
+export default AnalyticsSection;

@@ -1,4 +1,10 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, Suspense, lazy } from "react";
+import type {
+  ModelComparison,
+  Recommendation,
+  BatchQueueItem,
+} from "@/data/mockData";
+import type { NotificationItem } from "@/hooks/useNotificationManager";
 import { Loader2, Brain, TrendingUp, Lightbulb } from "lucide-react";
 
 import { useTheme } from "@/hooks/useTheme";
@@ -25,15 +31,23 @@ import { EnhancedDialog } from "@/components/ui/modal";
 import { Notification } from "@/components/ui/notification";
 
 import { Navigation } from "@/components/layout/Navigation";
-import { Features } from "@/components/layout/Features";
-import { HeroSection } from "@/components/layout/HeroSection";
-import { FooterSection } from "@/components/layout/FooterSection";
-import { ScenariosSection } from "@/components/layout/ScenariosSection";
-import { AnalyticsSection } from "@/components/layout/AnalyticsSection";
-import { ConversationsSection } from "@/components/layout/ConversationsSection";
 import { SkipLinksWithShortcuts } from "@/components/ui/skip-links";
 import { HumanOversightBanner } from "@/components/ui/human-oversight-banner";
 import { useFocusManagement } from "@/hooks/useFocusManagement";
+
+// Code splitting with React.lazy()
+const Features = lazy(() => import("@/components/layout/Features"));
+const HeroSection = lazy(() => import("@/components/layout/HeroSection"));
+const FooterSection = lazy(() => import("@/components/layout/FooterSection"));
+const ScenariosSection = lazy(
+  () => import("@/components/layout/ScenariosSection"),
+);
+const AnalyticsSection = lazy(
+  () => import("@/components/layout/AnalyticsSection"),
+);
+const ConversationsSection = lazy(
+  () => import("@/components/layout/ConversationsSection"),
+);
 
 /**
  * Main component for testing LLMs for mental health capabilities.
@@ -197,7 +211,15 @@ export default function App() {
       </header>
 
       {/* Hero Section */}
-      <HeroSection scrollToSection={navigateToSection} />
+      <Suspense
+        fallback={
+          <div className="min-h-[70vh] flex items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin" />
+          </div>
+        }
+      >
+        <HeroSection scrollToSection={navigateToSection} />
+      </Suspense>
 
       {/* Main Content */}
       <main
@@ -207,22 +229,46 @@ export default function App() {
         role="main"
       >
         {/* Features Section */}
-        <Features />
+        <Suspense
+          fallback={
+            <div className="min-h-[40vh] flex items-center justify-center">
+              <Loader2 className="w-6 h-6 animate-spin" />
+            </div>
+          }
+        >
+          <Features />
+        </Suspense>
 
         {/* Testing Scenarios Section */}
-        <ScenariosSection
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          filteredScenarios={filteredScenarios}
-          selectedScenario={selectedScenario}
-          setSelectedScenario={setSelectedScenario}
-          testingStates={testingStates}
-          handleRunTest={handleRunTest}
-          isOnline={isOnline}
-        />
+        <Suspense
+          fallback={
+            <div className="min-h-[50vh] flex items-center justify-center">
+              <Loader2 className="w-6 h-6 animate-spin" />
+            </div>
+          }
+        >
+          <ScenariosSection
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            filteredScenarios={filteredScenarios}
+            selectedScenario={selectedScenario}
+            setSelectedScenario={setSelectedScenario}
+            testingStates={testingStates}
+            handleRunTest={handleRunTest}
+            isOnline={isOnline}
+          />
+        </Suspense>
 
         {/* Analytics Overview */}
-        <AnalyticsSection mockAnalytics={mockAnalytics} />
+        <Suspense
+          fallback={
+            <div className="min-h-[40vh] flex items-center justify-center">
+              <Loader2 className="w-6 h-6 animate-spin" />
+            </div>
+          }
+        >
+          <AnalyticsSection mockAnalytics={mockAnalytics} />
+        </Suspense>
 
         {/* Human Oversight Notice */}
         <aside
@@ -237,18 +283,34 @@ export default function App() {
         </aside>
 
         {/* Conversations Section */}
-        <ConversationsSection conversations={mockConversations} />
+        <Suspense
+          fallback={
+            <div className="min-h-[40vh] flex items-center justify-center">
+              <Loader2 className="w-6 h-6 animate-spin" />
+            </div>
+          }
+        >
+          <ConversationsSection conversations={mockConversations} />
+        </Suspense>
 
         {/* Footer Section */}
-        <FooterSection
-          isOnline={isOnline}
-          expandedFooterSections={expandedFooterSections}
-          setExpandedFooterSections={setExpandedFooterSections}
-        />
+        <Suspense
+          fallback={
+            <div className="min-h-[30vh] flex items-center justify-center">
+              <Loader2 className="w-6 h-6 animate-spin" />
+            </div>
+          }
+        >
+          <FooterSection
+            isOnline={isOnline}
+            expandedFooterSections={expandedFooterSections}
+            setExpandedFooterSections={setExpandedFooterSections}
+          />
+        </Suspense>
       </main>
 
       {/* Notifications */}
-      {notifications.map((notification) => (
+      {notifications.map((notification: NotificationItem) => (
         <Notification
           key={notification.id}
           notification={notification}
@@ -394,36 +456,38 @@ export default function App() {
               Model Comparison
             </h4>
             <div className="space-y-3">
-              {mockAnalytics.modelComparison.map((model, i) => (
-                <div
-                  key={i}
-                  className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
-                >
-                  <div className={`font-medium ${theme.text} mb-2`}>
-                    {model.model}
+              {mockAnalytics.modelComparison.map(
+                (model: ModelComparison, i: number) => (
+                  <div
+                    key={i}
+                    className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
+                  >
+                    <div className={`font-medium ${theme.text} mb-2`}>
+                      {model.model}
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-xs">
+                      <div>
+                        <div className={`${theme.textSecondary}`}>Safety</div>
+                        <div className="text-green-600 font-medium">
+                          {model.safety}%
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`${theme.textSecondary}`}>Empathy</div>
+                        <div className="text-blue-600 font-medium">
+                          {model.empathy}%
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`${theme.textSecondary}`}>Bias</div>
+                        <div className="text-purple-600 font-medium">
+                          {model.bias}%
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div>
-                      <div className={`${theme.textSecondary}`}>Safety</div>
-                      <div className="text-green-600 font-medium">
-                        {model.safety}%
-                      </div>
-                    </div>
-                    <div>
-                      <div className={`${theme.textSecondary}`}>Empathy</div>
-                      <div className="text-blue-600 font-medium">
-                        {model.empathy}%
-                      </div>
-                    </div>
-                    <div>
-                      <div className={`${theme.textSecondary}`}>Bias</div>
-                      <div className="text-purple-600 font-medium">
-                        {model.bias}%
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                ),
+              )}
             </div>
           </div>
         </div>
@@ -438,7 +502,7 @@ export default function App() {
         theme={theme}
       >
         <div className="space-y-4">
-          {mockRecommendations.map((rec) => (
+          {mockRecommendations.map((rec: Recommendation) => (
             <div
               key={rec.id}
               className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
@@ -484,8 +548,9 @@ export default function App() {
               <Loader2 className="w-5 h-5 animate-spin icon-dynamic" />
               <span className={`font-medium ${theme.text}`}>
                 Running{" "}
-                {batchQueue?.filter((item) => item.status === "running")
-                  .length || 0}{" "}
+                {batchQueue?.filter(
+                  (item: BatchQueueItem) => item.status === "running",
+                ).length || 0}{" "}
                 of {batchQueue?.length || 0} tests
               </span>
             </div>
@@ -493,7 +558,7 @@ export default function App() {
             <div className="space-y-3">
               <h4 className={`font-medium ${theme.text}`}>Test Queue Status</h4>
               {batchQueue && batchQueue.length > 0 ? (
-                batchQueue.map((item) => (
+                batchQueue.map((item: BatchQueueItem) => (
                   <div
                     key={item.id}
                     className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}

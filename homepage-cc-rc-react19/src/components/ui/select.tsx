@@ -159,7 +159,7 @@ export const SelectContent = ({
         "absolute top-full z-50 min-w-[8rem] overflow-hidden rounded-md p-1 shadow-lg border",
         theme
           ? `${theme.surface} ${theme.border} ${theme.text}`
-          : "bg-popover text-popover-foreground border-border",
+          : "bg-popover text-popover-foreground border",
         className,
       )}
       role="listbox"

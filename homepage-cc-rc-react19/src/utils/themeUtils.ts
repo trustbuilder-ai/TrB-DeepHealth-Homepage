@@ -38,7 +38,7 @@ export const getButtonStyles = (theme: Theme, variant: string) => {
  * @returns CSS class string for card styling
  */
 export const getCardStyles = (theme: Theme) => {
-  if (!theme) return "bg-card text-card-foreground border-border";
+  if (!theme) return "bg-card text-card-foreground border";
 
   return `${theme.surface} ${theme.text} ${theme.border} transition-colors`;
 };
@@ -85,7 +85,7 @@ export const getSelectStyles = (theme: Theme) => {
  * @returns CSS class string for modal styling
  */
 export const getModalStyles = (theme: Theme) => {
-  if (!theme) return "bg-background border-border text-foreground";
+  if (!theme) return "bg-background border text-foreground";
 
   return theme.isDark
     ? `${theme.surface} ${theme.border} ${theme.text}`

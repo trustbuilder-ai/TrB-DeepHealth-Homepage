@@ -1,78 +1,45 @@
 {
-  "timestamp": "2025-09-14T15:23:40.097Z",
+  "timestamp": "2025-09-14T19:52:20.832Z",
   "bundle": {
-    "total": 1716436,
-    "js": 320311,
-    "css": 58088,
-    "files": [
-      {
-        "name": "index-CZ5VZYi1.js.map",
-        "size": 1147558,
-        "type": "map",
-        "formatted": "1.09 MB"
-      },
-      {
-        "name": "index-CZ5VZYi1.js",
-        "size": 271485,
-        "type": "js",
-        "formatted": "265.12 KB"
-      },
-      {
-        "name": "utils-ncXYd3jY.js.map",
-        "size": 107011,
-        "type": "map",
-        "formatted": "104.5 KB"
-      },
-      {
-        "name": "index-BbbOV5oy.css",
-        "size": 58088,
-        "type": "css",
-        "formatted": "56.73 KB"
-      },
-      {
-        "name": "vendor-gH-7aFTg.js.map",
-        "size": 42092,
-        "type": "map",
-        "formatted": "41.11 KB"
-      },
-      {
-        "name": "ui-CKwJiv1H.js.map",
-        "size": 41376,
-        "type": "map",
-        "formatted": "40.41 KB"
-      },
-      {
-        "name": "utils-ncXYd3jY.js",
-        "size": 20573,
-        "type": "js",
-        "formatted": "20.09 KB"
-      },
-      {
-        "name": "ui-CKwJiv1H.js",
-        "size": 16382,
-        "type": "js",
-        "formatted": "16 KB"
-      },
-      {
-        "name": "vendor-gH-7aFTg.js",
-        "size": 11871,
-        "type": "js",
-        "formatted": "11.59 KB"
-      }
-    ]
+    "js": 325127,
+    "css": 0
   },
   "features": {
     "react19": {
       "useActionState": 10,
-      "useOptimistic": 2
+      "useOptimistic": 2,
+      "useFormStatus": 2,
+      "useTransition": 3
     },
-    "legacy": {}
+    "deprecated": {},
+    "bestPractices": {
+      "ref=\\{": 32,
+      "action=\\{": 2,
+      "ErrorBoundary": 7,
+      "preload\\(": 5,
+      "preinit\\(": 1
+    },
+    "manualOptimizations": {
+      "useCallback": 38,
+      "React\\.memo": 6,
+      "useMemo": 6
+    }
   },
   "recommendations": [
     {
       "type": "bundle",
-      "priority": "high",
-      "message": "Bundle size is large. Consider code splitting with React.lazy()"
+      "priority": "medium",
+      "message": "JS bundle could benefit from splitting"
+    },
+    {
+      "type": "optimization",
+      "priority": "medium",
+      "message": "50 manual optimizations - React 19 compiler handles these"
+    },
+    {
+      "type": "success",
+      "priority": "low",
+      "message": "Great! Using 47 React 19 best practices"
     }
   ]
 }

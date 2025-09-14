@@ -48,7 +48,7 @@ const features = [
   },
 ];
 
-export const Features = () => {
+const Features = () => {
   const { theme } = useTheme();
 
   return (
@@ -115,3 +115,5 @@ export const Features = () => {
     </section>
   );
 };
+
+export default Features;

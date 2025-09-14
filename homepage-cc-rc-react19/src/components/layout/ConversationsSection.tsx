@@ -8,9 +8,7 @@ interface ConversationsSectionProps {
   conversations: Conversation[];
 }
 
-export const ConversationsSection = ({
-  conversations,
-}: ConversationsSectionProps) => {
+const ConversationsSection = ({ conversations }: ConversationsSectionProps) => {
   const { theme } = useTheme();
 
   return (
@@ -170,3 +168,5 @@ export const ConversationsSection = ({
     </section>
   );
 };
+
+export default ConversationsSection;

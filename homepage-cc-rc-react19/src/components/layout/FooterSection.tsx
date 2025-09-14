@@ -13,7 +13,7 @@ interface FooterSectionProps {
   ) => void;
 }
 
-export const FooterSection = ({
+const FooterSection = ({
   isOnline,
   expandedFooterSections,
   setExpandedFooterSections,
@@ -247,3 +247,5 @@ export const FooterSection = ({
     </footer>
   );
 };
+
+export default FooterSection;
