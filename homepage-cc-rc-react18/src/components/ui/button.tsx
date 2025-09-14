@@ -34,18 +34,54 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       "contrast-[1.1] dark:contrast-[1.2]",
       // Enhanced focus indicators for accessibility
       "focus-visible:ring-blue-600 focus-visible:ring-offset-2",
+      // Component Style System - Apply CSS variables
+      "[box-shadow:var(--cs-button-shadow)]",
+      "transition-[all,transform] duration-[var(--cs-animation-duration)]",
     );
 
     const themeStyles = theme ? getButtonStyles(theme, variant) : "";
 
     const fallbackVariants = {
-      default: "bg-primary text-primary-foreground hover:bg-primary/90",
-      outline:
+      default: cn(
+        "bg-primary text-primary-foreground hover:bg-primary/90",
+        // Enhanced style - Origin UI patterns
+        "[body[data-component-style='enhanced']_&]:bg-gradient-to-r",
+        "[body[data-component-style='enhanced']_&]:from-blue-500",
+        "[body[data-component-style='enhanced']_&]:to-purple-600",
+        "[body[data-component-style='enhanced']_&]:hover:from-blue-600",
+        "[body[data-component-style='enhanced']_&]:hover:to-purple-700",
+        "[body[data-component-style='enhanced']_&]:hover:scale-105",
+        "[body[data-component-style='enhanced']_&]:active:scale-95",
+      ),
+      outline: cn(
         "border border-input hover:bg-accent hover:text-accent-foreground",
-      ghost: "hover:bg-accent hover:text-accent-foreground",
-      destructive:
+        // Enhanced style - glassmorphism effect
+        "[body[data-component-style='enhanced']_&]:bg-white/10",
+        "[body[data-component-style='enhanced']_&]:backdrop-blur-sm",
+        "[body[data-component-style='enhanced']_&]:border-white/20",
+        "[body[data-component-style='enhanced']_&]:hover:bg-white/20",
+      ),
+      ghost: cn(
+        "hover:bg-accent hover:text-accent-foreground",
+        "[body[data-component-style='enhanced']_&]:hover:bg-gradient-to-r",
+        "[body[data-component-style='enhanced']_&]:hover:from-blue-50",
+        "[body[data-component-style='enhanced']_&]:hover:to-purple-50",
+        "[body[data-component-style='enhanced']_&]:hover:text-blue-700",
+      ),
+      destructive: cn(
         "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        "[body[data-component-style='enhanced']_&]:bg-gradient-to-r",
+        "[body[data-component-style='enhanced']_&]:from-red-500",
+        "[body[data-component-style='enhanced']_&]:to-pink-600",
+      ),
+      secondary: cn(
+        "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        "[body[data-component-style='enhanced']_&]:bg-gradient-to-r",
+        "[body[data-component-style='enhanced']_&]:from-gray-100",
+        "[body[data-component-style='enhanced']_&]:to-gray-200",
+        "[body[data-component-style='enhanced']_&]:hover:from-gray-200",
+        "[body[data-component-style='enhanced']_&]:hover:to-gray-300",
+      ),
     };
 
     const variantStyle = theme ? themeStyles : fallbackVariants[variant];

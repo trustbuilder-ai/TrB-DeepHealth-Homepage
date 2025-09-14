@@ -45,7 +45,27 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
       <div
         ref={ref}
         className={cn(
-          "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors",
+          "inline-flex items-center px-2.5 py-0.5 text-xs font-semibold transition-[all,transform] duration-[var(--cs-animation-duration)]",
+          // Component Style System - Apply CSS variables for border radius
+          "rounded-[var(--cs-badge-radius)]",
+          // Enhanced style - Origin UI pill variant with animated borders
+          "[body[data-component-style='enhanced']_&]:rounded-full",
+          "[body[data-component-style='enhanced']_&]:px-3",
+          "[body[data-component-style='enhanced']_&]:py-1.5",
+          "[body[data-component-style='enhanced']_&]:border-2",
+          "[body[data-component-style='enhanced']_&]:border-transparent",
+          "[body[data-component-style='enhanced']_&]:bg-gradient-to-r",
+          "[body[data-component-style='enhanced']_&]:from-blue-100",
+          "[body[data-component-style='enhanced']_&]:to-purple-100",
+          "[body[data-component-style='enhanced']_&]:hover:from-blue-200",
+          "[body[data-component-style='enhanced']_&]:hover:to-purple-200",
+          "[body[data-component-style='enhanced']_&]:hover:scale-110",
+          "[body[data-component-style='enhanced']_&]:shadow-lg",
+          // Dark mode enhanced
+          "dark:[body[data-component-style='enhanced']_&]:from-blue-900/50",
+          "dark:[body[data-component-style='enhanced']_&]:to-purple-900/50",
+          "dark:[body[data-component-style='enhanced']_&]:hover:from-blue-800/50",
+          "dark:[body[data-component-style='enhanced']_&]:hover:to-purple-800/50",
           variants[variant],
           className,
         )}

@@ -33,7 +33,9 @@ export const FooterSection = ({
               >
                 <Brain className="w-5 h-5 text-white" />
               </div>
-              <span className={`text-xl font-semibold ${theme.text}`}>Astra Labs</span>
+              <span className={`text-xl font-semibold ${theme.text}`}>
+                Astra Labs
+              </span>
             </div>
             <p className={`text-sm ${theme.textSecondary} mb-6`}>
               Building safer AI for mental health with research-backed design.

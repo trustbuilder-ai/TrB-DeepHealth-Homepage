@@ -4,11 +4,13 @@ import { useTheme } from "@/hooks/useTheme";
 import { useFont } from "@/hooks/useFont";
 import { useIcon } from "@/hooks/useIcon";
 import { useAccessibility } from "@/hooks/useAccessibility";
+import { useComponentStyle } from "@/hooks/useComponentStyle";
 import { useModalClose } from "@/hooks/useModalClose";
 import { cn } from "@/utils/cn";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { FontSwitcher } from "./FontSwitcher";
 import { IconSwitcher } from "./IconSwitcher";
+import { ComponentStyleSwitcher } from "./ComponentStyleSwitcher";
 
 /**
  * Settings dropdown component that organizes all customization options
@@ -26,6 +28,8 @@ export const SettingsDropdown = () => {
   const { currentFont, changeFont, fontLoading, loadedFonts } = useFont();
   const { currentIconSet, changeIconSet, iconLoading, loadedIconSets } =
     useIcon();
+  const { currentStyle, changeComponentStyle, styleLoading } =
+    useComponentStyle();
   const {
     settings,
     toggleEnhancedReadability,
@@ -152,6 +156,7 @@ export const SettingsDropdown = () => {
             className={cn(
               "absolute right-0 top-full mt-2 w-80 rounded-lg shadow-lg z-50",
               "border backdrop-blur-sm transition-all duration-200",
+              "max-h-[80vh] overflow-y-auto overscroll-contain",
               theme.isDark
                 ? `${theme.surface} ${theme.border} shadow-black/20`
                 : `bg-white ${theme.border} shadow-gray-200/50`,
@@ -291,6 +296,19 @@ export const SettingsDropdown = () => {
                   onIconSetChange={changeIconSet}
                   isLoading={iconLoading}
                   loadedIconSets={loadedIconSets}
+                  theme={theme}
+                />
+              </div>
+
+              {/* Component Style Section */}
+              <div>
+                <h3 className={cn("text-sm font-semibold mb-1", theme.text)}>
+                  Component Style
+                </h3>
+                <ComponentStyleSwitcher
+                  currentStyle={currentStyle}
+                  onStyleChange={changeComponentStyle}
+                  isLoading={styleLoading}
                   theme={theme}
                 />
               </div>

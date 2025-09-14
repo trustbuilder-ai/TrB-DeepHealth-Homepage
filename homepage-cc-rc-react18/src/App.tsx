@@ -6,7 +6,10 @@ import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useModalManager } from "@/hooks/useModalManager";
 import { useScenarioManager } from "@/hooks/useScenarioManager";
-import { useNotificationManager, type NotificationItem } from "@/hooks/useNotificationManager";
+import {
+  useNotificationManager,
+  type NotificationItem,
+} from "@/hooks/useNotificationManager";
 
 // SEO Components
 import { SEOHead, StructuredData } from "@/components/seo";
@@ -396,36 +399,38 @@ export default function App() {
               Model Comparison
             </h4>
             <div className="space-y-3">
-              {mockAnalytics.modelComparison.map((model: ModelComparison, i: number) => (
-                <div
-                  key={i}
-                  className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
-                >
-                  <div className={`font-medium ${theme.text} mb-2`}>
-                    {model.model}
+              {mockAnalytics.modelComparison.map(
+                (model: ModelComparison, i: number) => (
+                  <div
+                    key={i}
+                    className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
+                  >
+                    <div className={`font-medium ${theme.text} mb-2`}>
+                      {model.model}
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 text-xs">
+                      <div>
+                        <div className={`${theme.textSecondary}`}>Safety</div>
+                        <div className="text-green-600 font-medium">
+                          {model.safety}%
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`${theme.textSecondary}`}>Empathy</div>
+                        <div className="text-blue-600 font-medium">
+                          {model.empathy}%
+                        </div>
+                      </div>
+                      <div>
+                        <div className={`${theme.textSecondary}`}>Bias</div>
+                        <div className="text-purple-600 font-medium">
+                          {model.bias}%
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-2 text-xs">
-                    <div>
-                      <div className={`${theme.textSecondary}`}>Safety</div>
-                      <div className="text-green-600 font-medium">
-                        {model.safety}%
-                      </div>
-                    </div>
-                    <div>
-                      <div className={`${theme.textSecondary}`}>Empathy</div>
-                      <div className="text-blue-600 font-medium">
-                        {model.empathy}%
-                      </div>
-                    </div>
-                    <div>
-                      <div className={`${theme.textSecondary}`}>Bias</div>
-                      <div className="text-purple-600 font-medium">
-                        {model.bias}%
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                ),
+              )}
             </div>
           </div>
         </div>
@@ -486,8 +491,9 @@ export default function App() {
               <Loader2 className="w-5 h-5 animate-spin icon-dynamic" />
               <span className={`font-medium ${theme.text}`}>
                 Running{" "}
-                {batchQueue?.filter((item: BatchQueueItem) => item.status === "running")
-                  .length || 0}{" "}
+                {batchQueue?.filter(
+                  (item: BatchQueueItem) => item.status === "running",
+                ).length || 0}{" "}
                 of {batchQueue?.length || 0} tests
               </span>
             </div>
