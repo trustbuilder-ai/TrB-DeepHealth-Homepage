@@ -5,8 +5,8 @@ This guide provides concise item  hot to approach working on different branches 
 ## Create worktree folders
 
 ```sh
-new_folder="<path-to-new-folder>"
 new_branch="<branch-name>"
+new_folder="<path-to-new-folder>"  # ../folder (!)
 git worktree add -B ${new_branch} ${new_folder}  # [<base-branch|commit-ish>]
 git worktree list
 cd "../${new_folder}"

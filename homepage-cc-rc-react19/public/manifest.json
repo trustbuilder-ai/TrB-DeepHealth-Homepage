@@ -1,0 +1,86 @@
+{
+  "name": "TrB DeepHealth - AI Safety for Mental Health",
+  "short_name": "TrB DeepHealth",
+  "description": "Research-backed AI testing platform for mental health applications with comprehensive safety protocols and empathy evaluation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "categories": ["health", "medical", "productivity", "education"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Testing Scenarios",
+      "short_name": "Scenarios",
+      "description": "Access AI testing scenarios",
+      "url": "/#scenarios",
+      "icons": [
+        {
+          "src": "/icons/scenarios-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Research Analytics",
+      "short_name": "Analytics",
+      "description": "View performance analytics",
+      "url": "/#analytics",
+      "icons": [
+        {
+          "src": "/icons/analytics-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "TrB DeepHealth homepage showing AI testing platform features"
+    },
+    {
+      "src": "/screenshots/mobile-scenarios.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile view of AI testing scenarios interface"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+trb-deephealth",
+      "url": "/?handler=%s"
+    }
+  ]
+}

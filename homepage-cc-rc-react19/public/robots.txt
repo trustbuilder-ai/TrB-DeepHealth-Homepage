@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+
+# Healthcare AI Platform - Mental Health Testing
+# For research and professional use only
+Crawl-delay: 1
+
+Sitemap: https://trb-deephealth.com/sitemap.xml
+
+# Block access to sensitive paths
+Disallow: /api/
+Disallow: /test-results/
+Disallow: /user-data/
