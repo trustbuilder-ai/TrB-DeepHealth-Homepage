@@ -72,7 +72,7 @@ export const FontSwitcher = React.memo<FontSwitcherProps>(
           <div
             ref={modalRef as React.RefObject<HTMLDivElement>}
             className={cn(
-              "absolute top-full right-0 mt-2 w-80 rounded-md shadow-xl z-50 border max-h-96 overflow-y-auto p-4",
+              "absolute top-full right-0 mt-2 w-80 rounded-md shadow-xl z-[9999] border max-h-96 overflow-y-auto p-4",
               theme.isDark
                 ? "bg-slate-800 border-slate-700 shadow-black/30"
                 : "bg-white border-slate-200 shadow-gray-900/20",

@@ -139,7 +139,7 @@ export const ComponentStyleSwitcher: React.FC<ComponentStyleSwitcherProps> = ({
           role="listbox"
           aria-label="Component style options"
           className={cn(
-            "absolute z-10 w-full bottom-full mb-1 rounded-md shadow-lg border",
+            "absolute z-[60] w-full bottom-full mb-1 rounded-md shadow-lg border",
             "max-h-60 overflow-auto py-1",
             theme.isDark
               ? `${theme.surface} ${theme.border} shadow-black/20`
