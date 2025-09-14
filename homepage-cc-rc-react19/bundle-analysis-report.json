@@ -1,0 +1,78 @@
+{
+  "timestamp": "2025-09-14T15:23:40.097Z",
+  "bundle": {
+    "total": 1716436,
+    "js": 320311,
+    "css": 58088,
+    "files": [
+      {
+        "name": "index-CZ5VZYi1.js.map",
+        "size": 1147558,
+        "type": "map",
+        "formatted": "1.09 MB"
+      },
+      {
+        "name": "index-CZ5VZYi1.js",
+        "size": 271485,
+        "type": "js",
+        "formatted": "265.12 KB"
+      },
+      {
+        "name": "utils-ncXYd3jY.js.map",
+        "size": 107011,
+        "type": "map",
+        "formatted": "104.5 KB"
+      },
+      {
+        "name": "index-BbbOV5oy.css",
+        "size": 58088,
+        "type": "css",
+        "formatted": "56.73 KB"
+      },
+      {
+        "name": "vendor-gH-7aFTg.js.map",
+        "size": 42092,
+        "type": "map",
+        "formatted": "41.11 KB"
+      },
+      {
+        "name": "ui-CKwJiv1H.js.map",
+        "size": 41376,
+        "type": "map",
+        "formatted": "40.41 KB"
+      },
+      {
+        "name": "utils-ncXYd3jY.js",
+        "size": 20573,
+        "type": "js",
+        "formatted": "20.09 KB"
+      },
+      {
+        "name": "ui-CKwJiv1H.js",
+        "size": 16382,
+        "type": "js",
+        "formatted": "16 KB"
+      },
+      {
+        "name": "vendor-gH-7aFTg.js",
+        "size": 11871,
+        "type": "js",
+        "formatted": "11.59 KB"
+      }
+    ]
+  },
+  "features": {
+    "react19": {
+      "useActionState": 10,
+      "useOptimistic": 2
+    },
+    "legacy": {}
+  },
+  "recommendations": [
+    {
+      "type": "bundle",
+      "priority": "high",
+      "message": "Bundle size is large. Consider code splitting with React.lazy()"
+    }
+  ]
+}

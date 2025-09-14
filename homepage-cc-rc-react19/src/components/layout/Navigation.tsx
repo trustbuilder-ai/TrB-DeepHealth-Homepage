@@ -18,6 +18,12 @@ import { SettingsDropdown } from "@/components/features";
 import { useModalClose } from "@/hooks/useModalClose";
 import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useTheme } from "@/hooks/useTheme";
+import {
+  useActionState,
+  newsletterAction,
+  loginAction,
+  type FormActionResult,
+} from "@/hooks/useActionState";
 import { cn } from "@/utils/cn";
 
 const navigationItems = [
@@ -32,14 +38,26 @@ export const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [newsletterModalOpen, setNewsletterModalOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
-  const [email, setEmail] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isLoggingIn, setIsLoggingIn] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [loginEmailError, setLoginEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+
+  // React 19 useActionState for newsletter form
+  const [newsletterState, submitNewsletter] = useActionState(newsletterAction, {
+    success: false,
+    data: null,
+    error: null,
+  } as FormActionResult<{
+    message: string;
+    email: string;
+  }>);
+
+  // React 19 useActionState for login form
+  const [loginState, submitLogin] = useActionState(loginAction, {
+    success: false,
+    data: null,
+    error: null,
+  } as FormActionResult<{
+    message: string;
+    user: { email: string };
+  }>);
 
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
   const mobileMenuRef = useModalClose(
@@ -48,85 +66,25 @@ export const Navigation = () => {
     mobileMenuTriggerRef,
   );
 
-  const validateEmail = (email: string) => {
-    if (!email.trim()) return "Email is required";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-      return "Please enter a valid email address";
-    return "";
-  };
-
-  const validatePassword = (password: string) => {
-    if (!password.trim()) return "Password is required";
-    if (password.length < 6) return "Password must be at least 6 characters";
-    return "";
-  };
-
-  const handleNewsletterSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      const error = validateEmail(email);
-      if (error) {
-        setEmailError(error);
-        document.getElementById("newsletter-email")?.focus();
-        return;
-      }
-      setEmailError("");
-      setIsSubmitting(true);
-
-      try {
-        // Simulate newsletter signup
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // Reset form
-        setEmail("");
+  // React 19 form handlers using native form actions
+  const handleNewsletterAction = useCallback(
+    (formData: FormData) => {
+      submitNewsletter(formData);
+      if (newsletterState.data?.success) {
         setNewsletterModalOpen(false);
-        console.log("Newsletter signup successful for:", email);
-      } catch {
-        setEmailError("Failed to subscribe. Please try again.");
-      } finally {
-        setIsSubmitting(false);
       }
     },
-    [email],
+    [submitNewsletter, newsletterState.data?.success],
   );
 
-  const handleLoginSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      const emailError = validateEmail(loginEmail);
-      const passError = validatePassword(password);
-
-      if (emailError || passError) {
-        setLoginEmailError(emailError);
-        setPasswordError(passError);
-        if (emailError) {
-          document.getElementById("login-email")?.focus();
-        } else if (passError) {
-          document.getElementById("login-password")?.focus();
-        }
-        return;
-      }
-
-      setLoginEmailError("");
-      setPasswordError("");
-      setIsLoggingIn(true);
-
-      try {
-        // Simulate login
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // Reset form
-        setLoginEmail("");
-        setPassword("");
+  const handleLoginAction = useCallback(
+    (formData: FormData) => {
+      submitLogin(formData);
+      if (loginState.data?.success) {
         setLoginModalOpen(false);
-        console.log("Login successful for:", loginEmail);
-      } catch {
-        setLoginEmailError("Login failed. Please check your credentials.");
-      } finally {
-        setIsLoggingIn(false);
       }
     },
-    [loginEmail, password],
+    [submitLogin, loginState.data?.success],
   );
 
   const scrollToSection = useCallback((id: string) => {
@@ -340,7 +298,7 @@ export const Navigation = () => {
             </div>
           </div>
 
-          <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+          <form action={handleNewsletterAction} className="space-y-4">
             <div>
               <label
                 htmlFor="newsletter-email"
@@ -350,30 +308,32 @@ export const Navigation = () => {
               </label>
               <Input
                 id="newsletter-email"
+                name="email"
                 type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (emailError) setEmailError("");
-                }}
                 placeholder="Enter your email address"
                 required
                 theme={theme}
                 className="w-full"
                 aria-describedby={
-                  emailError ? "newsletter-email-error" : undefined
+                  newsletterState.error ? "newsletter-email-error" : undefined
                 }
-                aria-invalid={emailError ? "true" : "false"}
+                aria-invalid={newsletterState.error ? "true" : "false"}
               />
-              {emailError && (
+              {newsletterState.error && (
                 <div
                   id="newsletter-email-error"
                   role="alert"
                   className="text-red-600 text-sm mt-1"
                 >
-                  {emailError}
+                  {newsletterState.error}
                 </div>
               )}
+              {newsletterState.data?.success &&
+                newsletterState.data?.data?.message && (
+                  <div role="status" className="text-green-600 text-sm mt-1">
+                    {newsletterState.data.data?.message}
+                  </div>
+                )}
             </div>
 
             <div className={`text-xs ${theme.textMuted}`}>
@@ -388,7 +348,7 @@ export const Navigation = () => {
                 variant="outline"
                 onClick={() => setNewsletterModalOpen(false)}
                 theme={theme}
-                disabled={isSubmitting}
+                disabled={newsletterState.pending}
                 className="flex-1"
               >
                 Cancel
@@ -396,8 +356,8 @@ export const Navigation = () => {
               <Button
                 type="submit"
                 theme={theme}
-                disabled={isSubmitting || !email.trim()}
-                loading={isSubmitting}
+                disabled={newsletterState.pending}
+                loading={newsletterState.pending}
                 className={`flex-1 bg-gradient-to-r ${theme.primary} text-white border-0`}
               >
                 Subscribe
@@ -426,7 +386,7 @@ export const Navigation = () => {
             </div>
           </div>
 
-          <form onSubmit={handleLoginSubmit} className="space-y-4">
+          <form action={handleLoginAction} className="space-y-4">
             <div>
               <label
                 htmlFor="login-email"
@@ -436,28 +396,24 @@ export const Navigation = () => {
               </label>
               <Input
                 id="login-email"
+                name="email"
                 type="email"
-                value={loginEmail}
-                onChange={(e) => {
-                  setLoginEmail(e.target.value);
-                  if (loginEmailError) setLoginEmailError("");
-                }}
                 placeholder="Enter your email address"
                 required
                 theme={theme}
                 className="w-full"
                 aria-describedby={
-                  loginEmailError ? "login-email-error" : undefined
+                  loginState.error ? "login-email-error" : undefined
                 }
-                aria-invalid={loginEmailError ? "true" : "false"}
+                aria-invalid={loginState.error ? "true" : "false"}
               />
-              {loginEmailError && (
+              {loginState.error && (
                 <div
                   id="login-email-error"
                   role="alert"
                   className="text-red-600 text-sm mt-1"
                 >
-                  {loginEmailError}
+                  {loginState.error}
                 </div>
               )}
             </div>
@@ -475,29 +431,17 @@ export const Navigation = () => {
                 />
                 <Input
                   id="login-password"
+                  name="password"
                   type="password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    if (passwordError) setPasswordError("");
-                  }}
                   placeholder="Enter your password"
                   required
                   theme={theme}
                   className="w-full pl-10"
-                  aria-describedby={
-                    passwordError ? "login-password-error" : undefined
-                  }
-                  aria-invalid={passwordError ? "true" : "false"}
                 />
               </div>
-              {passwordError && (
-                <div
-                  id="login-password-error"
-                  role="alert"
-                  className="text-red-600 text-sm mt-1"
-                >
-                  {passwordError}
+              {loginState.data?.success && loginState.data?.data?.message && (
+                <div role="status" className="text-green-600 text-sm mt-1">
+                  {loginState.data.data?.message}
                 </div>
               )}
             </div>
@@ -513,7 +457,7 @@ export const Navigation = () => {
                 variant="outline"
                 onClick={() => setLoginModalOpen(false)}
                 theme={theme}
-                disabled={isLoggingIn}
+                disabled={loginState.pending}
                 className="flex-1"
               >
                 Cancel
@@ -521,8 +465,8 @@ export const Navigation = () => {
               <Button
                 type="submit"
                 theme={theme}
-                disabled={isLoggingIn || !loginEmail.trim() || !password.trim()}
-                loading={isLoggingIn}
+                disabled={loginState.pending}
+                loading={loginState.pending}
                 className={`flex-1 bg-gradient-to-r ${theme.primary} text-white border-0`}
               >
                 Sign In
