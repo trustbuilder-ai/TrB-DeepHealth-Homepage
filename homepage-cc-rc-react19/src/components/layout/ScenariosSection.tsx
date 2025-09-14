@@ -37,7 +37,7 @@ interface ScenariosSectionProps {
   setSelectedScenario: (id: number | null) => void;
   testingStates: Record<string, string>;
   handleRunTest: (scenarioId: number) => void;
-  isOnline: boolean;
+  // isOnline: boolean;
 }
 
 const ScenariosSection = ({
@@ -48,7 +48,7 @@ const ScenariosSection = ({
   setSelectedScenario,
   testingStates,
   handleRunTest,
-  isOnline,
+  // isOnline,
 }: ScenariosSectionProps) => {
   const { theme } = useTheme();
 
@@ -257,7 +257,7 @@ const ScenariosSection = ({
                             e.stopPropagation();
                             handleRunTest(scenario.id);
                           }}
-                          disabled={testState === "running" || !isOnline}
+                          // disabled={testState === "running" || !isOnline}
                         >
                           <Play className="w-4 h-4 mr-2" />
                           {testState === "running" ? "Running..." : "Run Test"}

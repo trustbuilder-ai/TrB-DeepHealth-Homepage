@@ -7,7 +7,7 @@ describe("App", () => {
     render(<App />);
 
     // Check if the main heading is present (wait for lazy loading)
-    expect(await screen.findByText(/Mental Wellness/i)).toBeInTheDocument();
+    expect(await screen.findAllByText(/Mental Wellness/i)).toHaveLength(2);
   });
 
   it("has proper accessibility structure", () => {

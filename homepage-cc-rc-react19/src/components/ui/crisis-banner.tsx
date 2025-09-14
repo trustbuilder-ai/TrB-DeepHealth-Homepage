@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, ExternalLink } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/utils/cn";
 
@@ -43,11 +43,11 @@ export const CrisisBanner = () => {
       role="complementary"
       aria-label="Crisis support resources"
     >
-      <div className="flex items-start gap-3">
-        <div className="flex-1">
+      <div className="flex items-start gap-3 w-full">
+        <div className="flex-1 w-full">
           <h3
             className={cn(
-              "text-lg font-semibold mb-2",
+              "text-lg font-semibold mt-2 mb-6 px-3 py-0",
               theme.isDark ? "text-red-300" : "text-red-800",
             )}
           >
@@ -134,34 +134,21 @@ export const CrisisBanner = () => {
             ))}
           </div>
 
-          <div
-            className={cn(
-              "mt-3 pt-3 border-t",
-              theme.isDark ? "border-slate-600" : "border-gray-200",
-            )}
-          >
-            <p
-              className={cn(
-                "text-sm flex items-center gap-2",
-                theme.textSecondary,
-              )}
-            >
-              <ExternalLink className="w-4 h-4" />
-              <span>
-                If you're in immediate danger, call 911 or go to your nearest
-                emergency room. For more resources, visit{" "}
-                <a
-                  href="https://988lifeline.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "font-medium underline hover:no-underline",
-                    theme.isDark ? "text-blue-400" : "text-blue-600",
-                  )}
-                >
-                  988lifeline.org
-                </a>
-              </span>
+          <div className={cn("mt-6 mb-2 px-3 py-0 w-full")}>
+            <p className={cn("text-sm w-full", theme.textSecondary)}>
+              If you're in immediate danger, call 911 or go to your nearest
+              emergency room. For more resources, visit{" "}
+              <a
+                href="https://988lifeline.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "font-medium underline hover:no-underline",
+                  theme.isDark ? "text-blue-400" : "text-blue-600",
+                )}
+              >
+                988lifeline.org
+              </a>
             </p>
           </div>
         </div>

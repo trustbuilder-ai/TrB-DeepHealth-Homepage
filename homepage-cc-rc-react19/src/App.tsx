@@ -8,7 +8,6 @@ import type { NotificationItem } from "@/hooks/useNotificationManager";
 import { Loader2, Brain, TrendingUp, Lightbulb } from "lucide-react";
 
 import { useTheme } from "@/hooks/useTheme";
-import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useModalManager } from "@/hooks/useModalManager";
 import { useScenarioManager } from "@/hooks/useScenarioManager";
@@ -63,7 +62,6 @@ const ConversationsSection = lazy(
  */
 export default function App() {
   const { theme } = useTheme();
-  const isOnline = useOnlineStatus();
   const { announceToScreenReader } = useFocusManagement();
 
   // Use custom hooks for state management
@@ -267,7 +265,6 @@ export default function App() {
             setSelectedScenario={setSelectedScenario}
             testingStates={testingStates}
             handleRunTest={handleRunTest}
-            isOnline={isOnline}
           />
         </Suspense>
 
@@ -314,7 +311,6 @@ export default function App() {
           }
         >
           <FooterSection
-            isOnline={isOnline}
             expandedFooterSections={expandedFooterSections}
             setExpandedFooterSections={setExpandedFooterSections}
           />

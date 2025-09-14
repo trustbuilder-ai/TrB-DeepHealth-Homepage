@@ -68,3 +68,31 @@
 ### PostCSS/Tailwind Configuration Issue
 
 - [x] **Tailwind CSS Color Palette Issue** - FIXED 2025-09-14 - Downgraded from Tailwind CSS v4 to stable v3.4.0 to restore full color palette support (bg-green-100, bg-blue-100, etc.). CSS bundle now generates properly (58KB vs 0KB before)
+
+### React 19 Bundle Analysis Optimization
+
+- [x] **Test Structure Best Practices** - FIXED 2025-09-14 - Moved App.test.tsx to proper `src/__tests__/` directory structure with comprehensive Vitest configuration
+- [x] **React 19 Manual Optimization Removal** - FIXED 2025-09-14 - Reduced manual optimizations from 50 to 30 (40% improvement) by removing unnecessary `React.memo`, `useCallback`, `useMemo` that React 19 compiler handles automatically
+- [x] **TypeScript Lazy Loading Fixes** - FIXED 2025-09-14 - Fixed prop type errors by converting lazy-loaded components to default exports
+- [x] **Development CSS Loading** - FIXED 2025-09-14 - Resolved CSS styling issues in development server, all Tailwind classes now working properly
+
+### Crisis Banner Styling Refinements
+
+- [x] **Crisis Banner Layout Updates** - FIXED 2025-09-14 - Updated spacing: h3 (mt-2 mb-6 px-3 py-0), bottom div (mt-6 mb-2 px-3 py-0), removed border-top and ExternalLink icon
+- [ ] **Text Width Issue** - Crisis banner text still breaking between "emergency" and "room" despite full-width container attempts - may need container width investigation
+
+## Testing Priority Tasks
+
+### Critical Tests (High Priority)
+
+- [ ] **Theme System Integration Tests** - Test theme switching functionality, CSS variable application, and persistence across page reloads for all 12+ theme variants
+- [ ] **Modal Functionality Tests** - Comprehensive testing of all modals (signin, newsletter, ai insights, analytics) including ESC key handling, overlay clicks, and focus management
+- [ ] **Accessibility Feature Tests** - Test optional accessibility features (enhanced readability, dyslexia fonts, high contrast, reduced motion) including settings persistence and conditional rendering
+- [ ] **Navigation and Skip Links Tests** - Test keyboard navigation, skip links functionality (Ctrl+M, Alt+1/2/3), focus management, and ARIA landmark structure
+- [ ] **Crisis Banner Integration Tests** - Test crisis support banner rendering, emergency contact links, human oversight messaging, and responsive layout behavior
+
+## Known Issues
+
+- Crisis banner text wrapping: "emergency room" breaks across lines despite w-full classes on all containers
+- Modals 'ai insights' and 'analytics' use more distance to the bottom than to the top of the page
+- Hamburger menu in mobile mode not scrollable
