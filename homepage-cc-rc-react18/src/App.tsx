@@ -6,7 +6,7 @@ import { useOnlineStatus } from "@/hooks/useOnlineStatus";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useModalManager } from "@/hooks/useModalManager";
 import { useScenarioManager } from "@/hooks/useScenarioManager";
-import { useNotificationManager } from "@/hooks/useNotificationManager";
+import { useNotificationManager, type NotificationItem } from "@/hooks/useNotificationManager";
 
 // SEO Components
 import { SEOHead, StructuredData } from "@/components/seo";
@@ -18,6 +18,9 @@ import {
   mockTourSteps,
   mockRecommendations,
   mockBatchQueue,
+  type ModelComparison,
+  type Recommendation,
+  type BatchQueueItem,
 } from "@/data/mockData";
 
 import { Button } from "@/components/ui/button";
@@ -241,14 +244,13 @@ export default function App() {
 
         {/* Footer Section */}
         <FooterSection
-          isOnline={isOnline}
           expandedFooterSections={expandedFooterSections}
           setExpandedFooterSections={setExpandedFooterSections}
         />
       </main>
 
       {/* Notifications */}
-      {notifications.map((notification) => (
+      {notifications.map((notification: NotificationItem) => (
         <Notification
           key={notification.id}
           notification={notification}
@@ -394,7 +396,7 @@ export default function App() {
               Model Comparison
             </h4>
             <div className="space-y-3">
-              {mockAnalytics.modelComparison.map((model, i) => (
+              {mockAnalytics.modelComparison.map((model: ModelComparison, i: number) => (
                 <div
                   key={i}
                   className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
@@ -438,7 +440,7 @@ export default function App() {
         theme={theme}
       >
         <div className="space-y-4">
-          {mockRecommendations.map((rec) => (
+          {mockRecommendations.map((rec: Recommendation) => (
             <div
               key={rec.id}
               className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}
@@ -484,7 +486,7 @@ export default function App() {
               <Loader2 className="w-5 h-5 animate-spin icon-dynamic" />
               <span className={`font-medium ${theme.text}`}>
                 Running{" "}
-                {batchQueue?.filter((item) => item.status === "running")
+                {batchQueue?.filter((item: BatchQueueItem) => item.status === "running")
                   .length || 0}{" "}
                 of {batchQueue?.length || 0} tests
               </span>
@@ -493,7 +495,7 @@ export default function App() {
             <div className="space-y-3">
               <h4 className={`font-medium ${theme.text}`}>Test Queue Status</h4>
               {batchQueue && batchQueue.length > 0 ? (
-                batchQueue.map((item) => (
+                batchQueue.map((item: BatchQueueItem) => (
                   <div
                     key={item.id}
                     className={`p-3 rounded border ${theme.surface} ${theme.border} transition-colors`}

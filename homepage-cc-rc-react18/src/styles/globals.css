@@ -70,8 +70,15 @@
   * {
     @apply border-border;
   }
+  html,
   body {
-    @apply bg-background text-foreground;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  body {
+    @apply text-foreground;
   }
 }
 
@@ -259,7 +266,7 @@
 
 .form-input:focus {
   outline: none;
-  ring: 2px solid var(--ring);
+  box-shadow: 0 0 0 2px var(--ring);
   border-color: var(--ring);
 }
 
@@ -291,6 +298,7 @@
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -550,11 +558,6 @@ li {
 .spacing-comfortable .text-xs {
   line-height: 1.6;
   letter-spacing: 0.025em;
-}
-
-/* Enhanced modal spacing when accessibility is enabled */
-.spacing-comfortable {
-  padding: 1.5rem !important; /* Override p-3 with more generous padding */
 }
 
 .spacing-comfortable h2 {

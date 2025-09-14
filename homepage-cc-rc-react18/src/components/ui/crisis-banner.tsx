@@ -1,4 +1,4 @@
-import { Phone, MessageCircle, ExternalLink } from "lucide-react";
+import { Phone, MessageCircle } from "lucide-react";
 import { useTheme } from "@/hooks/useTheme";
 import { cn } from "@/utils/cn";
 
@@ -47,7 +47,7 @@ export const CrisisBanner = () => {
         <div className="flex-1">
           <h3
             className={cn(
-              "text-lg font-semibold mb-2",
+              "text-lg font-semibold mt-2 mb-6 py-0 mx-3",
               theme.isDark ? "text-red-300" : "text-red-800",
             )}
           >
@@ -136,7 +136,7 @@ export const CrisisBanner = () => {
 
           <div
             className={cn(
-              "mt-3 pt-3 border-t",
+              "mt-6 mb-2 py-0 mx-3",
               theme.isDark ? "border-slate-600" : "border-gray-200",
             )}
           >
@@ -146,7 +146,6 @@ export const CrisisBanner = () => {
                 theme.textSecondary,
               )}
             >
-              <ExternalLink className="w-4 h-4" />
               <span>
                 If you're in immediate danger, call 911 or go to your nearest
                 emergency room. For more resources, visit{" "}
