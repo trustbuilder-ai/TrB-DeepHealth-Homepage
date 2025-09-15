@@ -1,0 +1,64 @@
+# https://github.blog/changelog/2023-01-18-code-scanning-codeql-action-v1-is-now-deprecated/
+name: "CodeQL"
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron: '27 11 * * 0'
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    name: Analyze (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript', 'typescript' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        queries: security-extended,security-and-quality
+
+    - name: Setup Node.js
+      if: matrix.language == 'javascript' || matrix.language == 'typescript'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+
+    - name: Install dependencies (React 18)
+      if: matrix.language == 'javascript' || matrix.language == 'typescript'
+      run: |
+        cd homepage-cc-rc-react18
+        npm ci
+
+    - name: Install dependencies (React 19)
+      if: matrix.language == 'javascript' || matrix.language == 'typescript'
+      run: |
+        cd homepage-cc-rc-react19
+        npm ci
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
